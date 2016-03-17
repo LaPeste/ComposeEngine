@@ -13,6 +13,17 @@
 		1E0519BB1C996C31008CC160 /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 1E0519BA1C996C31008CC160 /* nice_music.ogg */; };
 		1E0519BD1C996C31008CC160 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E0519BC1C996C31008CC160 /* sansation.ttf */; };
 		1E0519BF1C996C31008CC160 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0519BE1C996C31008CC160 /* icon.png */; };
+		1EA479B81C9985B2004696A5 /* Animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479A51C9985B2004696A5 /* Animator.cpp */; };
+		1EA479B91C9985B2004696A5 /* Constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479A81C9985B2004696A5 /* Constants.cpp */; };
+		1EA479BA1C9985B2004696A5 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479A91C9985B2004696A5 /* Engine.cpp */; };
+		1EA479BB1C9985B2004696A5 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479AB1C9985B2004696A5 /* Event.cpp */; };
+		1EA479BC1C9985B2004696A5 /* FPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479AD1C9985B2004696A5 /* FPS.cpp */; };
+		1EA479BD1C9985B2004696A5 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479AF1C9985B2004696A5 /* GameObject.cpp */; };
+		1EA479BE1C9985B2004696A5 /* GameObjectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479B11C9985B2004696A5 /* GameObjectManager.cpp */; };
+		1EA479BF1C9985B2004696A5 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479B31C9985B2004696A5 /* Player.cpp */; };
+		1EA479C01C9985B2004696A5 /* smb2-heroes_sheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */; };
+		1EA479C11C9985B2004696A5 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479B61C9985B2004696A5 /* stdafx.cpp */; };
+		1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EC00EAA1C9B345E003EEB24 /* Utils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +36,27 @@
 		1E0519BA1C996C31008CC160 /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = nice_music.ogg; sourceTree = "<group>"; };
 		1E0519BC1C996C31008CC160 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		1E0519BE1C996C31008CC160 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		1EA479A51C9985B2004696A5 /* Animator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animator.cpp; sourceTree = "<group>"; };
+		1EA479A61C9985B2004696A5 /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animator.h; sourceTree = "<group>"; };
+		1EA479A71C9985B2004696A5 /* Constans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constans.h; sourceTree = "<group>"; };
+		1EA479A81C9985B2004696A5 /* Constants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Constants.cpp; sourceTree = "<group>"; };
+		1EA479A91C9985B2004696A5 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
+		1EA479AA1C9985B2004696A5 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
+		1EA479AB1C9985B2004696A5 /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Event.cpp; sourceTree = "<group>"; };
+		1EA479AC1C9985B2004696A5 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		1EA479AD1C9985B2004696A5 /* FPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FPS.cpp; sourceTree = "<group>"; };
+		1EA479AE1C9985B2004696A5 /* FPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPS.h; sourceTree = "<group>"; };
+		1EA479AF1C9985B2004696A5 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
+		1EA479B01C9985B2004696A5 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		1EA479B11C9985B2004696A5 /* GameObjectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjectManager.cpp; sourceTree = "<group>"; };
+		1EA479B21C9985B2004696A5 /* GameObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectManager.h; sourceTree = "<group>"; };
+		1EA479B31C9985B2004696A5 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		1EA479B41C9985B2004696A5 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smb2-heroes_sheet.png"; sourceTree = "<group>"; };
+		1EA479B61C9985B2004696A5 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		1EA479B71C9985B2004696A5 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		1EC00EA91C9B31F0003EEB24 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		1EC00EAA1C9B345E003EEB24 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +89,8 @@
 		1E0519AF1C996C31008CC160 /* Game Engine 2D */ = {
 			isa = PBXGroup;
 			children = (
+				1EA479C51C99881B004696A5 /* Source */,
+				1EA479C41C998813004696A5 /* Headers */,
 				1E0519B21C996C31008CC160 /* ResourcePath.mm */,
 				1E0519B41C996C31008CC160 /* ResourcePath.hpp */,
 				1E0519B51C996C31008CC160 /* main.cpp */,
@@ -77,12 +111,47 @@
 		1E0519B71C996C31008CC160 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */,
 				1E0519B81C996C31008CC160 /* cute_image.jpg */,
 				1E0519BA1C996C31008CC160 /* nice_music.ogg */,
 				1E0519BC1C996C31008CC160 /* sansation.ttf */,
 				1E0519BE1C996C31008CC160 /* icon.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		1EA479C41C998813004696A5 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				1EA479A61C9985B2004696A5 /* Animator.h */,
+				1EA479A71C9985B2004696A5 /* Constans.h */,
+				1EA479AA1C9985B2004696A5 /* Engine.h */,
+				1EA479AC1C9985B2004696A5 /* Event.h */,
+				1EA479AE1C9985B2004696A5 /* FPS.h */,
+				1EA479B01C9985B2004696A5 /* GameObject.h */,
+				1EA479B21C9985B2004696A5 /* GameObjectManager.h */,
+				1EA479B41C9985B2004696A5 /* Player.h */,
+				1EA479B71C9985B2004696A5 /* stdafx.h */,
+				1EC00EA91C9B31F0003EEB24 /* Utils.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		1EA479C51C99881B004696A5 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				1EA479A51C9985B2004696A5 /* Animator.cpp */,
+				1EA479A81C9985B2004696A5 /* Constants.cpp */,
+				1EA479A91C9985B2004696A5 /* Engine.cpp */,
+				1EA479AB1C9985B2004696A5 /* Event.cpp */,
+				1EA479AD1C9985B2004696A5 /* FPS.cpp */,
+				1EA479AF1C9985B2004696A5 /* GameObject.cpp */,
+				1EA479B11C9985B2004696A5 /* GameObjectManager.cpp */,
+				1EA479B31C9985B2004696A5 /* Player.cpp */,
+				1EA479B61C9985B2004696A5 /* stdafx.cpp */,
+				1EC00EAA1C9B345E003EEB24 /* Utils.cpp */,
+			);
+			name = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E0519BF1C996C31008CC160 /* icon.png in Resources */,
+				1EA479C01C9985B2004696A5 /* smb2-heroes_sheet.png in Resources */,
 				1E0519BD1C996C31008CC160 /* sansation.ttf in Resources */,
 				1E0519BB1C996C31008CC160 /* nice_music.ogg in Resources */,
 				1E0519B91C996C31008CC160 /* cute_image.jpg in Resources */,
@@ -172,8 +242,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EA479BD1C9985B2004696A5 /* GameObject.cpp in Sources */,
+				1EA479BC1C9985B2004696A5 /* FPS.cpp in Sources */,
+				1EA479BB1C9985B2004696A5 /* Event.cpp in Sources */,
+				1EA479B81C9985B2004696A5 /* Animator.cpp in Sources */,
+				1EA479BF1C9985B2004696A5 /* Player.cpp in Sources */,
 				1E0519B61C996C31008CC160 /* main.cpp in Sources */,
 				1E0519B31C996C31008CC160 /* ResourcePath.mm in Sources */,
+				1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */,
+				1EA479B91C9985B2004696A5 /* Constants.cpp in Sources */,
+				1EA479C11C9985B2004696A5 /* stdafx.cpp in Sources */,
+				1EA479BA1C9985B2004696A5 /* Engine.cpp in Sources */,
+				1EA479BE1C9985B2004696A5 /* GameObjectManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,18 +357,32 @@
 		1E0519C31C996C31008CC160 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = "Game Engine 2D/Game Engine 2D-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = all;
 			};
 			name = Debug;
 		};
 		1E0519C41C996C31008CC160 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				INFOPLIST_FILE = "Game Engine 2D/Game Engine 2D-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = all;
 			};
 			name = Release;
 		};
@@ -311,6 +405,7 @@
 				1E0519C41C996C31008CC160 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
