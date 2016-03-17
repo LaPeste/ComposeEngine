@@ -24,6 +24,7 @@
 		1EA479C01C9985B2004696A5 /* smb2-heroes_sheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */; };
 		1EA479C11C9985B2004696A5 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479B61C9985B2004696A5 /* stdafx.cpp */; };
 		1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EC00EAA1C9B345E003EEB24 /* Utils.cpp */; };
+		1EC00EAD1C9B4673003EEB24 /* mariosheet.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		1EA479B71C9985B2004696A5 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
 		1EC00EA91C9B31F0003EEB24 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		1EC00EAA1C9B345E003EEB24 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = mariosheet.gif; path = Resources/mariosheet.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		1E0519B71C996C31008CC160 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */,
 				1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */,
 				1E0519B81C996C31008CC160 /* cute_image.jpg */,
 				1E0519BA1C996C31008CC160 /* nice_music.ogg */,
@@ -214,6 +217,7 @@
 				1E0519BF1C996C31008CC160 /* icon.png in Resources */,
 				1EA479C01C9985B2004696A5 /* smb2-heroes_sheet.png in Resources */,
 				1E0519BD1C996C31008CC160 /* sansation.ttf in Resources */,
+				1EC00EAD1C9B4673003EEB24 /* mariosheet.gif in Resources */,
 				1E0519BB1C996C31008CC160 /* nice_music.ogg in Resources */,
 				1E0519B91C996C31008CC160 /* cute_image.jpg in Resources */,
 			);
@@ -360,7 +364,10 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"FRAME_RATE=0",
+				);
 				INFOPLIST_FILE = "Game Engine 2D/Game Engine 2D-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "";

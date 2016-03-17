@@ -12,7 +12,19 @@ public:
 	static const unsigned int SCREEN_HEIGHT;
 	static const unsigned int SCREEN_DEPTH;
 	static const float SPEED;
-
+    
+    
+    //************************
+    //* Player data
+    //************************
+    
+    //Sprite info
+    static const std::string PLAYER_SPRITE_NAME;
+    static const unsigned int PLAYER_SPRITE_STARTING_X;
+    static const unsigned int PLAYER_SPRITE_STARTING_Y;
+    static const unsigned int PLAYER_WIDTH;
+    static const unsigned int PLAYER_HEIGHT;
+    
 	static const unsigned int FRAMERATE_TARGET;
 
 	static const std::string GAME_NAME;

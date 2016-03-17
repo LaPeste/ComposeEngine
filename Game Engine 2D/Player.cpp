@@ -17,13 +17,13 @@ Player::Player() :
 {
 
 #ifdef _WIN32
-    std::string loadPath = "images/smb2-heroes_sheet.png";
+    std::string loadPath = "images/" + Constants::PLAYER_SPRITE_NAME;
 #elif __APPLE__ && __MACH__
-    std::string loadPath = resourcePath() + "smb2-heroes_sheet.png";
+    std::string loadPath = resourcePath() + Constants::PLAYER_SPRITE_NAME;
 //#should do the linux version
 #endif
     
-    GameObject::Load(loadPath, 90, 0, 15, 27);
+    GameObject::Load(loadPath, Constants::PLAYER_SPRITE_STARTING_X, Constants::PLAYER_SPRITE_STARTING_Y, Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT);
     assert(IsLoaded()); //you do this because you can't return a value from a constructor!!
 	GetSprite().setPosition(60, 768/2);
 }
