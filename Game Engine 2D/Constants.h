@@ -20,12 +20,17 @@ public:
     
     //Sprite info
     static const std::string PLAYER_SPRITE_NAME;
-    static const unsigned int PLAYER_SPRITE_STARTING_X;
-    static const unsigned int PLAYER_SPRITE_STARTING_Y;
-    static const unsigned int PLAYER_WIDTH;
-    static const unsigned int PLAYER_HEIGHT;
+    static const int PLAYER_SPRITE_STARTING_X;
+    static const int PLAYER_SPRITE_STARTING_Y;
+    static const int PLAYER_WIDTH;
+    static const int PLAYER_HEIGHT;
+    static const int SPACE_BETWEEN_SPRITE_X;
+    static const int SPACE_BETWEEN_SPRITE_Y;
+    static const int PLAYER_SPRITE_MAX_FRAME;
+    static const int ANIMATION_FRAMERATE;
+    static const bool REVERSE_ANIMATION;
     
-	static const unsigned int FRAMERATE_TARGET;
+	static const int GAME_FRAMERATE_TARGET;
 
 	static const std::string GAME_NAME;
 

@@ -1,7 +1,6 @@
 #include "Engine.h"
 #include "GameObjectManager.h"
 #include "Player.h"
-#include "Constans.h"
 #include "FPS.h"
 
 Engine::~Engine(){}
@@ -41,7 +40,7 @@ bool Engine::Init()
 		return false;
 
 	//init gameobjects
-	Player* player = new Player;
+	Player* player = new Player(true);
 	gameObjectManager.Add(GameObjectManager::GameObjectType::player, player);
 
 	return true;

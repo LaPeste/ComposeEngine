@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "Constans.h"
 #include "Engine.h"
 
 // Here is a small helper for you ! Have a look.
@@ -8,14 +7,15 @@
 
 #define elapsedTime()(Engine::GetInstance().Clock().getElapsedTime - timeSinceLastDrawnFrame)
 
-Player::Player() :
+Player::Player(bool toAnimate) :
 	velocity(0),
 	maxVelocity(60),
 	speed(Constants::SPEED),
 	MoveLeft(false),
-	MoveRight(false)
+	MoveRight(false),
+GameObject(toAnimate, Constants::PLAYER_SPRITE_MAX_FRAME, Constants::ANIMATION_FRAMERATE, Constants::REVERSE_ANIMATION)
 {
-
+    
 #ifdef _WIN32
     std::string loadPath = "images/" + Constants::PLAYER_SPRITE_NAME;
 #elif __APPLE__ && __MACH__

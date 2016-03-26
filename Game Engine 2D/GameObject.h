@@ -3,12 +3,13 @@
 
 #include "stdafx.h"
 #include "Event.h"
+#include "Animator.h"
 
 class GameObject : public Event
 {
 
 public:
-	GameObject();
+	explicit GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation);
 	virtual ~GameObject();
 
 	virtual void Load(std::string filename);
@@ -23,12 +24,16 @@ public:
 protected:
 	sf::Sprite& GetSprite();
 	float timeSinceLastDrawnFrame; //in seconds
+    bool toAnimate;
 
 private:
 	sf::Sprite sprite;
 	sf::Texture texture;
 	std::string filename;
+    Animator animator;
 	bool isLoaded;
+    
+    void SetSubTexture(int startingLeft, int startingTop, int width, int height);
 
 };
 

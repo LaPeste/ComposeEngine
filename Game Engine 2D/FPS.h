@@ -14,10 +14,10 @@ public:
 	static void Update();
 
 private:
-	static unsigned int frameRate;
-	static unsigned int frames;
+	static int frameRate;
+	static int frames;
 	static float speedFactor;
-	static unsigned int lastTime;
+	static int lastTime;
 	static sf::Clock clock;
 };
 #endif

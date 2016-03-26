@@ -1,10 +1,9 @@
 #include "FPS.h"
-#include "Constans.h"
 
-unsigned int FPS::frameRate(0);
-unsigned int FPS::lastTime(0);
+int FPS::frameRate(0);
+int FPS::lastTime(0);
 float FPS::speedFactor(0);
-unsigned int FPS::frames(0);
+int FPS::frames(0);
 sf::Clock FPS::clock;
 
 FPS::FPS() {}
@@ -26,8 +25,8 @@ void FPS::Update()
 	if (clock.getElapsedTime().asMilliseconds() < 1000)
 	{
 		frames++;
-		unsigned int timeFrame = clock.getElapsedTime().asMilliseconds() - lastTime;
-		speedFactor = timeFrame / 1000 * Constants::FRAMERATE_TARGET;
+		int timeFrame = clock.getElapsedTime().asMilliseconds() - lastTime;
+		speedFactor = timeFrame / 1000 * Constants::GAME_FRAMERATE_TARGET;
 		lastTime = clock.getElapsedTime().asMilliseconds();
 	}
 	else
@@ -37,7 +36,7 @@ void FPS::Update()
 		frames = 0;
 		lastTime = 0;
 #ifdef FRAME_RATE
-        std::cout << "The frame rate is : " << frameRate << "\n";
+        std::cout << "FPS --> " << frameRate << "\n";
 #endif
 	}
 }

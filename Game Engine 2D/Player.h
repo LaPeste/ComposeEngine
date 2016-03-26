@@ -3,10 +3,11 @@
 
 #include "GameObject.h"
 
-class Player : public GameObject 
+class Player : public GameObject
 {
 public:
-	Player();
+    using GameObject::GameObject;
+    Player(bool toAnimate);
 	~Player();
 
 	void Update();

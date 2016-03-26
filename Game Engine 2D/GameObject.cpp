@@ -1,9 +1,12 @@
 #include "GameObject.h"
 #include "Engine.h"
 
-GameObject::GameObject() : isLoaded (false)
+GameObject::GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation) :
+    isLoaded (false),
+    toAnimate(false),
+    animator(spriteMaxFrame, animationFrameRate, reverseAnimation)
 {
-
+    GameObject::toAnimate = toAnimate;
 }
 
 GameObject::~GameObject()
@@ -37,9 +40,10 @@ void GameObject::Load(std::string filename, int startingLeft, int startingTop, i
 	else
 	{
 		GameObject::filename = filename;
-		sf::Rect<int> subTextureRect(startingLeft, startingTop, width, height);
         sprite.setTexture(texture);
-		sprite.setTextureRect(subTextureRect);
+//		sf::Rect<int> subTextureRect(startingLeft, startingTop, width, height);
+//		sprite.setTextureRect(subTextureRect);
+        SetSubTexture(startingLeft, startingTop, width, height);
         if(sprite.getTexture() != nullptr)
         {
             isLoaded = true;
@@ -62,32 +66,25 @@ void GameObject::Draw(sf::RenderWindow& window)
 {
 	if (isLoaded)
 	{
-		window.draw(sprite);
-		sf::Time actualTime = Engine::GetInstance().Clock().getElapsedTime();
-		timeSinceLastDrawnFrame = actualTime.asSeconds();
+        if(toAnimate)
+        {
+            sprite.setTextureRect(animator.Animate());
+        }
+        window.draw(sprite);
+//		sf::Time actualTime = Engine::GetInstance().Clock().getElapsedTime();
+//		timeSinceLastDrawnFrame = actualTime.asSeconds();
 	}
+}
+
+void GameObject::SetSubTexture(int startingLeft, int startingTop, int width, int height)
+{
+    sf::Rect<int> subTextureRect(startingLeft, startingTop, width, height);
+    sprite.setTextureRect(subTextureRect);
 }
 
 void GameObject::Update()
 {
 
-}
-
-sf::Vector2f GameObject::GetPosition() const
-{
-	if (isLoaded)
-	{
-		return sprite.getPosition();
-	}
-	return sf::Vector2f();
-}
-
-void GameObject::SetPosition(float x, float y)
-{
-	if (isLoaded)
-	{
-		sprite.setPosition(x, y);
-	}
 }
 
 void GameObject::Cleanup()
@@ -102,7 +99,30 @@ bool GameObject::IsLoaded() const
 	return false;
 }
 
+
+//*************
+//Getters and Setters
+//*************
+
 sf::Sprite& GameObject::GetSprite()
 {
 	return sprite;
+}
+
+
+sf::Vector2f GameObject::GetPosition() const
+{
+    if (isLoaded)
+    {
+        return sprite.getPosition();
+    }
+    return sf::Vector2f();
+}
+
+void GameObject::SetPosition(float x, float y)
+{
+    if (isLoaded)
+    {
+        sprite.setPosition(x, y);
+    }
 }

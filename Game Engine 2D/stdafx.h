@@ -26,6 +26,7 @@
 #include <string>
 
 #include "Utils.h"
+#include "Constants.h"
 
 #if __APPLE__ && __MACH__
 // Here is a small helper for you ! Have a look.
