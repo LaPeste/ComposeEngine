@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
 #include "Event.h"
+#include "MapLoader.h"
 
 class Engine : public Event
 {
@@ -30,7 +31,7 @@ public:
 	sf::RenderWindow* Window() const;
 
 private:
-	Engine() {};
+	Engine();
 	enum GameState
 	{
 		Uninitialized, ShowingSplash, Paused,
@@ -42,6 +43,7 @@ private:
 	GameState gameState;
 	GameObjectManager gameObjectManager;
 	sf::Clock clock;
+    tmx::MapLoader ml;
 
 	//methods
 	bool Init(); //Initializes the engine

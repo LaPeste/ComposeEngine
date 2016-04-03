@@ -12,10 +12,11 @@ public:
 	static const unsigned int SCREEN_HEIGHT;
 	static const unsigned int SCREEN_DEPTH;
 	static const float SPEED;
-    
+    static const int GAME_FRAMERATE_TARGET;
+    static const std::string GAME_NAME;
     
     //************************
-    //* Player data
+    // Player data
     //************************
     
     //Sprite info
@@ -30,10 +31,10 @@ public:
     static const int ANIMATION_FRAMERATE;
     static const bool REVERSE_ANIMATION;
     
-	static const int GAME_FRAMERATE_TARGET;
-
-	static const std::string GAME_NAME;
-
+    //************************
+    // Map data
+    //************************
+    
 
 };
 

@@ -10,6 +10,18 @@
 		1E0519B31C996C31008CC160 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0519B21C996C31008CC160 /* ResourcePath.mm */; };
 		1E0519B61C996C31008CC160 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E0519B51C996C31008CC160 /* main.cpp */; };
 		1E0519BD1C996C31008CC160 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E0519BC1C996C31008CC160 /* sansation.ttf */; };
+		1E12A7BD1CB1912F0085208A /* sewer_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E12A7BB1CB1912F0085208A /* sewer_tileset.png */; };
+		1E12A7BE1CB1912F0085208A /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E12A7BC1CB1912F0085208A /* tmw_desert_spacing.png */; };
+		1E3E9B031CA9AC8900159DCB /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3E9B011CA9A94600159DCB /* libz.1.2.5.tbd */; };
+		1E3E9B321CA9D1BA00159DCB /* DebugShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E9B2A1CA9D1BA00159DCB /* DebugShape.cpp */; };
+		1E3E9B331CA9D1BA00159DCB /* MapLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E9B2B1CA9D1BA00159DCB /* MapLayer.cpp */; };
+		1E3E9B341CA9D1BA00159DCB /* MapLoaderPrivate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E9B2C1CA9D1BA00159DCB /* MapLoaderPrivate.cpp */; };
+		1E3E9B351CA9D1BA00159DCB /* MapLoaderPublic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E9B2D1CA9D1BA00159DCB /* MapLoaderPublic.cpp */; };
+		1E3E9B361CA9D1BA00159DCB /* MapObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E9B2E1CA9D1BA00159DCB /* MapObject.cpp */; };
+		1E3E9B381CA9D1BA00159DCB /* QuadTreeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E9B301CA9D1BA00159DCB /* QuadTreeNode.cpp */; };
+		1E3E9B3B1CA9D2D100159DCB /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E9B3A1CA9D2D100159DCB /* pugixml.cpp */; };
+		1E3E9B431CA9D4A700159DCB /* desert.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 1E3E9B411CA9D4A700159DCB /* desert.tmx */; };
+		1E3E9B441CA9D4A700159DCB /* desert.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 1E3E9B421CA9D4A700159DCB /* desert.tsx */; };
 		1EA479B81C9985B2004696A5 /* Animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479A51C9985B2004696A5 /* Animator.cpp */; };
 		1EA479B91C9985B2004696A5 /* Constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479A81C9985B2004696A5 /* Constants.cpp */; };
 		1EA479BA1C9985B2004696A5 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479A91C9985B2004696A5 /* Engine.cpp */; };
@@ -31,6 +43,25 @@
 		1E0519B41C996C31008CC160 /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		1E0519B51C996C31008CC160 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1E0519BC1C996C31008CC160 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
+		1E12A7BB1CB1912F0085208A /* sewer_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sewer_tileset.png; path = resources/maps/sewer_tileset.png; sourceTree = "<group>"; };
+		1E12A7BC1CB1912F0085208A /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tmw_desert_spacing.png; path = resources/maps/tmw_desert_spacing.png; sourceTree = "<group>"; };
+		1E3E9B011CA9A94600159DCB /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		1E3E9B221CA9D1AA00159DCB /* DebugShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugShape.h; path = "Game Engine 2D/lib/sfml-tmxloader/include/tmx/DebugShape.h"; sourceTree = "<group>"; };
+		1E3E9B231CA9D1AA00159DCB /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Helpers.h; path = "Game Engine 2D/lib/sfml-tmxloader/include/tmx/Helpers.h"; sourceTree = "<group>"; };
+		1E3E9B241CA9D1AA00159DCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Log.h; path = "Game Engine 2D/lib/sfml-tmxloader/include/tmx/Log.h"; sourceTree = "<group>"; };
+		1E3E9B251CA9D1AA00159DCB /* MapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapLayer.h; path = "Game Engine 2D/lib/sfml-tmxloader/include/tmx/MapLayer.h"; sourceTree = "<group>"; };
+		1E3E9B261CA9D1AA00159DCB /* MapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapLoader.h; path = "Game Engine 2D/lib/sfml-tmxloader/include/tmx/MapLoader.h"; sourceTree = "<group>"; };
+		1E3E9B271CA9D1AA00159DCB /* MapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapObject.h; path = "Game Engine 2D/lib/sfml-tmxloader/include/tmx/MapObject.h"; sourceTree = "<group>"; };
+		1E3E9B281CA9D1AA00159DCB /* QuadTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuadTreeNode.h; path = "Game Engine 2D/lib/sfml-tmxloader/include/tmx/QuadTreeNode.h"; sourceTree = "<group>"; };
+		1E3E9B2A1CA9D1BA00159DCB /* DebugShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DebugShape.cpp; path = "Game Engine 2D/lib/sfml-tmxloader/src/DebugShape.cpp"; sourceTree = "<group>"; };
+		1E3E9B2B1CA9D1BA00159DCB /* MapLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MapLayer.cpp; path = "Game Engine 2D/lib/sfml-tmxloader/src/MapLayer.cpp"; sourceTree = "<group>"; };
+		1E3E9B2C1CA9D1BA00159DCB /* MapLoaderPrivate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MapLoaderPrivate.cpp; path = "Game Engine 2D/lib/sfml-tmxloader/src/MapLoaderPrivate.cpp"; sourceTree = "<group>"; };
+		1E3E9B2D1CA9D1BA00159DCB /* MapLoaderPublic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MapLoaderPublic.cpp; path = "Game Engine 2D/lib/sfml-tmxloader/src/MapLoaderPublic.cpp"; sourceTree = "<group>"; };
+		1E3E9B2E1CA9D1BA00159DCB /* MapObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MapObject.cpp; path = "Game Engine 2D/lib/sfml-tmxloader/src/MapObject.cpp"; sourceTree = "<group>"; };
+		1E3E9B301CA9D1BA00159DCB /* QuadTreeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QuadTreeNode.cpp; path = "Game Engine 2D/lib/sfml-tmxloader/src/QuadTreeNode.cpp"; sourceTree = "<group>"; };
+		1E3E9B3A1CA9D2D100159DCB /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pugixml.cpp; path = "Game Engine 2D/lib/sfml-tmxloader/src/pugixml/pugixml.cpp"; sourceTree = "<group>"; };
+		1E3E9B411CA9D4A700159DCB /* desert.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = desert.tmx; path = resources/maps/desert.tmx; sourceTree = "<group>"; };
+		1E3E9B421CA9D4A700159DCB /* desert.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = desert.tsx; path = resources/maps/desert.tsx; sourceTree = "<group>"; };
 		1EA479A51C9985B2004696A5 /* Animator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animator.cpp; sourceTree = "<group>"; };
 		1EA479A61C9985B2004696A5 /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animator.h; sourceTree = "<group>"; };
 		1EA479A71C9985B2004696A5 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -60,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E3E9B031CA9AC8900159DCB /* libz.1.2.5.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +101,8 @@
 		1E0519A31C996C31008CC160 = {
 			isa = PBXGroup;
 			children = (
+				1E3E9B3C1CA9D2F900159DCB /* tmxLoader */,
+				1E3E9B011CA9A94600159DCB /* libz.1.2.5.tbd */,
 				1E0519AF1C996C31008CC160 /* Game Engine 2D */,
 				1E0519AE1C996C31008CC160 /* Products */,
 			);
@@ -107,11 +141,52 @@
 		1E0519B71C996C31008CC160 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1E12A7BB1CB1912F0085208A /* sewer_tileset.png */,
+				1E12A7BC1CB1912F0085208A /* tmw_desert_spacing.png */,
+				1E3E9B411CA9D4A700159DCB /* desert.tmx */,
+				1E3E9B421CA9D4A700159DCB /* desert.tsx */,
 				1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */,
 				1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */,
 				1E0519BC1C996C31008CC160 /* sansation.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		1E3E9B3C1CA9D2F900159DCB /* tmxLoader */ = {
+			isa = PBXGroup;
+			children = (
+				1E3E9B3E1CA9D31B00159DCB /* headers */,
+				1E3E9B3D1CA9D30F00159DCB /* src */,
+			);
+			name = tmxLoader;
+			sourceTree = "<group>";
+		};
+		1E3E9B3D1CA9D30F00159DCB /* src */ = {
+			isa = PBXGroup;
+			children = (
+				1E3E9B3A1CA9D2D100159DCB /* pugixml.cpp */,
+				1E3E9B2A1CA9D1BA00159DCB /* DebugShape.cpp */,
+				1E3E9B2B1CA9D1BA00159DCB /* MapLayer.cpp */,
+				1E3E9B2C1CA9D1BA00159DCB /* MapLoaderPrivate.cpp */,
+				1E3E9B2D1CA9D1BA00159DCB /* MapLoaderPublic.cpp */,
+				1E3E9B2E1CA9D1BA00159DCB /* MapObject.cpp */,
+				1E3E9B301CA9D1BA00159DCB /* QuadTreeNode.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		1E3E9B3E1CA9D31B00159DCB /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				1E3E9B221CA9D1AA00159DCB /* DebugShape.h */,
+				1E3E9B231CA9D1AA00159DCB /* Helpers.h */,
+				1E3E9B241CA9D1AA00159DCB /* Log.h */,
+				1E3E9B251CA9D1AA00159DCB /* MapLayer.h */,
+				1E3E9B261CA9D1AA00159DCB /* MapLoader.h */,
+				1E3E9B271CA9D1AA00159DCB /* MapObject.h */,
+				1E3E9B281CA9D1AA00159DCB /* QuadTreeNode.h */,
+			);
+			name = headers;
 			sourceTree = "<group>";
 		};
 		1EA479C41C998813004696A5 /* Headers */ = {
@@ -205,9 +280,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E3E9B431CA9D4A700159DCB /* desert.tmx in Resources */,
 				1EA479C01C9985B2004696A5 /* smb2-heroes_sheet.png in Resources */,
+				1E12A7BE1CB1912F0085208A /* tmw_desert_spacing.png in Resources */,
+				1E3E9B441CA9D4A700159DCB /* desert.tsx in Resources */,
 				1E0519BD1C996C31008CC160 /* sansation.ttf in Resources */,
 				1EC00EAD1C9B4673003EEB24 /* mariosheet.gif in Resources */,
+				1E12A7BD1CB1912F0085208A /* sewer_tileset.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,10 +315,17 @@
 			files = (
 				1EA479BD1C9985B2004696A5 /* GameObject.cpp in Sources */,
 				1EA479BC1C9985B2004696A5 /* FPS.cpp in Sources */,
+				1E3E9B361CA9D1BA00159DCB /* MapObject.cpp in Sources */,
+				1E3E9B331CA9D1BA00159DCB /* MapLayer.cpp in Sources */,
 				1EA479BB1C9985B2004696A5 /* Event.cpp in Sources */,
+				1E3E9B3B1CA9D2D100159DCB /* pugixml.cpp in Sources */,
 				1EA479B81C9985B2004696A5 /* Animator.cpp in Sources */,
+				1E3E9B341CA9D1BA00159DCB /* MapLoaderPrivate.cpp in Sources */,
 				1EA479BF1C9985B2004696A5 /* Player.cpp in Sources */,
+				1E3E9B381CA9D1BA00159DCB /* QuadTreeNode.cpp in Sources */,
 				1E0519B61C996C31008CC160 /* main.cpp in Sources */,
+				1E3E9B351CA9D1BA00159DCB /* MapLoaderPublic.cpp in Sources */,
+				1E3E9B321CA9D1BA00159DCB /* DebugShape.cpp in Sources */,
 				1E0519B31C996C31008CC160 /* ResourcePath.mm in Sources */,
 				1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */,
 				1EA479B91C9985B2004696A5 /* Constants.cpp in Sources */,
@@ -355,13 +441,27 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"FRAME_RATE=0",
+					"LOG_OUTPUT_CONSOLE=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Game Engine 2D/Game Engine 2D-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SFML_SYSTEM)",
+					"$(SFML_WINDOW)",
+					"$(SFML_GRAPHICS)",
+					"$(SFML_AUDIO)",
+					"$(SFML_NETWORK)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_STYLE = all;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Game\\ Engine\\ 2D/lib/sfml-tmxloader/include/";
 			};
 			name = Debug;
 		};
@@ -372,12 +472,25 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "Game Engine 2D/Game Engine 2D-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SFML_SYSTEM)",
+					"$(SFML_WINDOW)",
+					"$(SFML_GRAPHICS)",
+					"$(SFML_AUDIO)",
+					"$(SFML_NETWORK)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_STYLE = all;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Game\\ Engine\\ 2D/lib/sfml-tmxloader/include/";
 			};
 			name = Release;
 		};

@@ -5,6 +5,11 @@
 
 Engine::~Engine(){}
 
+Engine::Engine() : ml(resourcePath())
+{
+    
+}
+
 void Engine::Launch(sf::RenderWindow* createdWindow)
 {
 	if (gameState != Uninitialized)
@@ -39,10 +44,11 @@ bool Engine::Init()
 	if (!mainWindow->isOpen())
 		return false;
 
-	//init gameobjects
+	//init gameobject manager and its objects
 	Player* player = new Player(true);
 	gameObjectManager.Add(GameObjectManager::GameObjectType::player, player);
-
+    
+    ml.Load("desert.tmx");
 	return true;
 
 }
@@ -64,7 +70,8 @@ void Engine::MainLoop()
 void Engine::RenderFrame()
 {
 	mainWindow->clear();
-	gameObjectManager.DrawAll(*mainWindow);
+    mainWindow->draw(ml); //draw map
+    gameObjectManager.DrawAll(*mainWindow);
 	mainWindow->display();
 }
 
@@ -80,7 +87,6 @@ void Engine::ProcessInput()
 void Engine::Update()
 {
 	FPS::Update();
-	//std::cout << FPS::GetFPS();
 }
 
 bool Engine::IsExiting()
