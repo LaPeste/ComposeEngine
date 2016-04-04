@@ -10,12 +10,12 @@ FPS::FPS() {}
 
 FPS::~FPS() {}
 
-const unsigned int FPS::GetFPS()
+unsigned int FPS::GetFPS()
 {
 	return frameRate;
 }
 
-const float FPS::GetSpeedFactor()
+float FPS::GetSpeedFactor()
 {
 	return speedFactor;
 }

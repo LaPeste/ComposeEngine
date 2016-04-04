@@ -10,6 +10,7 @@
 		1E0519B31C996C31008CC160 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E0519B21C996C31008CC160 /* ResourcePath.mm */; };
 		1E0519B61C996C31008CC160 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E0519B51C996C31008CC160 /* main.cpp */; };
 		1E0519BD1C996C31008CC160 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E0519BC1C996C31008CC160 /* sansation.ttf */; };
+		1E07BFB01CB2B3F600B410CD /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E07BFAE1CB2B3F600B410CD /* Camera.cpp */; };
 		1E12A7BD1CB1912F0085208A /* sewer_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E12A7BB1CB1912F0085208A /* sewer_tileset.png */; };
 		1E12A7BE1CB1912F0085208A /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E12A7BC1CB1912F0085208A /* tmw_desert_spacing.png */; };
 		1E3E9B031CA9AC8900159DCB /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3E9B011CA9A94600159DCB /* libz.1.2.5.tbd */; };
@@ -43,6 +44,8 @@
 		1E0519B41C996C31008CC160 /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		1E0519B51C996C31008CC160 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1E0519BC1C996C31008CC160 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
+		1E07BFAE1CB2B3F600B410CD /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		1E07BFAF1CB2B3F600B410CD /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		1E12A7BB1CB1912F0085208A /* sewer_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sewer_tileset.png; path = resources/maps/sewer_tileset.png; sourceTree = "<group>"; };
 		1E12A7BC1CB1912F0085208A /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tmw_desert_spacing.png; path = resources/maps/tmw_desert_spacing.png; sourceTree = "<group>"; };
 		1E3E9B011CA9A94600159DCB /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
@@ -193,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				1EA479A61C9985B2004696A5 /* Animator.h */,
+				1E07BFAF1CB2B3F600B410CD /* Camera.h */,
 				1EA479A71C9985B2004696A5 /* Constants.h */,
 				1EA479AA1C9985B2004696A5 /* Engine.h */,
 				1EA479AC1C9985B2004696A5 /* Event.h */,
@@ -210,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				1EA479A51C9985B2004696A5 /* Animator.cpp */,
+				1E07BFAE1CB2B3F600B410CD /* Camera.cpp */,
 				1EA479A81C9985B2004696A5 /* Constants.cpp */,
 				1EA479A91C9985B2004696A5 /* Engine.cpp */,
 				1EA479AB1C9985B2004696A5 /* Event.cpp */,
@@ -325,6 +330,7 @@
 				1E3E9B381CA9D1BA00159DCB /* QuadTreeNode.cpp in Sources */,
 				1E0519B61C996C31008CC160 /* main.cpp in Sources */,
 				1E3E9B351CA9D1BA00159DCB /* MapLoaderPublic.cpp in Sources */,
+				1E07BFB01CB2B3F600B410CD /* Camera.cpp in Sources */,
 				1E3E9B321CA9D1BA00159DCB /* DebugShape.cpp in Sources */,
 				1E0519B31C996C31008CC160 /* ResourcePath.mm in Sources */,
 				1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */,

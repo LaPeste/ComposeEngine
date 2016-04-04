@@ -14,11 +14,11 @@ GameObject::~GameObject()
 
 }
 
-void GameObject::Load(std::string filename)
+void GameObject::Load(const std::string& filename)
 {
 	if (texture.loadFromFile(filename) == false)
 	{
-		filename = "";
+//		filename = "";
 		isLoaded = false;
 	}
 	else
@@ -30,11 +30,11 @@ void GameObject::Load(std::string filename)
 }
 
 ///Loads only a part of the texture
-void GameObject::Load(std::string filename, int startingLeft, int startingTop, int width, int height)
+void GameObject::Load(const std::string& filename, int startingLeft, int startingTop, int width, int height)
 {
 	if (texture.loadFromFile(filename) == false)
 	{
-		filename = "";
+//		filename = "";
 		isLoaded = false;
 	}
 	else
@@ -104,13 +104,13 @@ bool GameObject::IsLoaded() const
 //Getters and Setters
 //*************
 
-sf::Sprite& GameObject::GetSprite()
+sf::Sprite GameObject::GetSprite() const
 {
-	return sprite;
+    return sprite;
 }
 
 
-sf::Vector2f GameObject::GetPosition() const
+const sf::Vector2f GameObject::GetPosition() const
 {
     if (isLoaded)
     {

@@ -14,7 +14,7 @@ Animator::~Animator()
     
 }
 
-int Animator::GetCurrentFrame()
+int Animator::GetCurrentFrame() const
 {
     return currentFrame;
 }

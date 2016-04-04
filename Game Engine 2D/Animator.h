@@ -12,7 +12,7 @@ public:
     Animator(int spriteMaxFrame, int animationFrameRate, bool reverseAnimation);
     ~Animator();
     
-    int GetCurrentFrame();
+    int GetCurrentFrame() const;
     const sf::Rect<int> Animate();
     
 private:

@@ -5,7 +5,7 @@ int main(int argc, char* argv[])
 {
 
 	sf::RenderWindow window;
-	Engine& e = Engine::GetInstance();// .Launch(&window);
+	Engine& e = Engine::GetInstance();
 	e.Launch(&window);
 	return 0;
 }

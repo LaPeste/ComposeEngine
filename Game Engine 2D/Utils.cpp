@@ -9,7 +9,7 @@
 #include "Utils.h"
 #include "stdafx.h"
 
-void Utils::PrintDebug(std::string methodName,std::string message)
+void Utils::PrintDebug(const std::string& methodName, const std::string& message)
 {
     std::cout << methodName << " : " << message << "\n";
 }

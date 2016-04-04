@@ -26,21 +26,21 @@ void Engine::Launch(sf::RenderWindow* createdWindow)
 	}
 }
 
-sf::RenderWindow* Engine::Window() const
+const sf::RenderWindow* Engine::GetWindow() const
 {
 	return mainWindow;
 }
 
-sf::Clock const& Engine::Clock()
-{
-	return clock;
-}
+//const sf::Clock& Engine::Clock() const
+//{
+//	return clock;
+//}
 
 bool Engine::Init()
 {
 	mainWindow->create(sf::VideoMode(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT, Constants::SCREEN_DEPTH), Constants::GAME_NAME);
 	gameState = Playing;
-	clock;
+//	clock;
 	if (!mainWindow->isOpen())
 		return false;
 
@@ -97,12 +97,13 @@ bool Engine::IsExiting()
 	return true;
 }
 
-void Engine::OnKeyDown(sf::Event::KeyEvent input)
+void Engine::OnKeyDown(const sf::Event::KeyEvent& input)
 {
 	switch (input.code)
 	{
 	case sf::Keyboard::Key::A:
 		gameObjectManager.GetPlayer()->MoveLeft = true;
+        std::cout << "test fuck the A button!\n";
 		break;
 	case sf::Keyboard::Key::D:
 		gameObjectManager.GetPlayer()->MoveRight = true;
@@ -119,7 +120,7 @@ void Engine::OnKeyDown(sf::Event::KeyEvent input)
 	}
 }
 
-void Engine::OnKeyUp(sf::Event::KeyEvent input)
+void Engine::OnKeyUp(const sf::Event::KeyEvent& input)
 {
 	switch (input.code)
 	{

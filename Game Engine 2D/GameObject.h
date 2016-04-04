@@ -5,24 +5,24 @@
 #include "Event.h"
 #include "Animator.h"
 
-class GameObject : public Event
+class GameObject// : public Event
 {
 
 public:
 	explicit GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation);
 	virtual ~GameObject();
 
-	virtual void Load(std::string filename);
-	virtual void Load(std::string filename, int startingLeft, int startingTop, int width, int height);
-	virtual void Draw(sf::RenderWindow &window);
+	virtual void Load(const std::string& filename);
+	virtual void Load(const std::string& filename, int startingLeft, int startingTop, int width, int height);
+	virtual void Draw(sf::RenderWindow& window);
 	virtual void Update();
-	virtual sf::Vector2f GetPosition() const;
+	virtual const sf::Vector2f GetPosition() const;
 	virtual void SetPosition(float x, float y);
 	virtual void Cleanup();
 	virtual bool IsLoaded() const;
 
 protected:
-	sf::Sprite& GetSprite();
+	sf::Sprite GetSprite() const;
 	float timeSinceLastDrawnFrame; //in seconds
     bool toAnimate;
 

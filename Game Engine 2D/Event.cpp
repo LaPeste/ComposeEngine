@@ -10,7 +10,7 @@ Event::~Event()
 
 }
 
-void Event::OnEvent(sf::Event& e)
+void Event::OnEvent(const sf::Event& e)
 {
 	switch (e.type)
 	{
@@ -46,12 +46,12 @@ void Event::OnExit()
 
 }
 
-void Event::OnKeyDown(sf::Event::KeyEvent input)
+void Event::OnKeyDown(const sf::Event::KeyEvent& input)
 {
 	
 }
 
-void Event::OnKeyUp(sf::Event::KeyEvent input)
+void Event::OnKeyUp(const sf::Event::KeyEvent& input)
 {
 	
 }

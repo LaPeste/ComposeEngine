@@ -43,15 +43,15 @@ void Player::Draw(sf::RenderWindow& rw)
 	GameObject::Draw(rw);
 }
 
-float Player::GetVelocity()
+float Player::GetVelocity() const
 {
 	return velocity;
 }
 
-void Player::OnKeyDown(sf::Event::KeyEvent input)
-{
-	
-}
+//void Player::OnKeyDown(const sf::Event::KeyEvent& input)
+//{
+//	
+//}
 
 //void Player::Crouch()
 //{

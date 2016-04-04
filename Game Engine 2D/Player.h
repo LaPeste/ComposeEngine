@@ -12,7 +12,7 @@ public:
 
 	void Update();
 	void Draw(sf::RenderWindow& rw);
-	float GetVelocity();
+	float GetVelocity() const;
 	bool MoveLeft;
 	bool MoveRight;
 	bool Crouch;
@@ -21,7 +21,7 @@ public:
 
 	//plus all the method needed for the engine, based on your needs
 protected:
-	void OnKeyDown(sf::Event::KeyEvent input);
+//	void OnKeyDown(const sf::Event::KeyEvent& input);
 
 private:
 	float velocity; //--left ++right

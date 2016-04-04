@@ -8,11 +8,11 @@ class Event
 public:
 	Event();
 	virtual ~Event();
-	virtual void OnEvent(sf::Event& e);
+	virtual void OnEvent(const sf::Event& e);
 
 protected:
-	virtual void OnKeyDown(sf::Event::KeyEvent input);
-	virtual void OnKeyUp(sf::Event::KeyEvent input);
+	virtual void OnKeyDown(const sf::Event::KeyEvent& input);
+	virtual void OnKeyUp(const sf::Event::KeyEvent& input);
 
 	virtual void OnMinimize();
 	virtual void OnRestore();

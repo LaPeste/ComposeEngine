@@ -9,8 +9,8 @@ public:
 	FPS();
 	~FPS();
 
-	static const unsigned int GetFPS();
-	static const float GetSpeedFactor();
+	static unsigned int GetFPS();
+	static float GetSpeedFactor();
 	static void Update();
 
 private:

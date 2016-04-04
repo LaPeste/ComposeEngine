@@ -14,7 +14,7 @@
 class Utils
 {
 public:
-    static void PrintDebug(std::string methodName, std::string message);
+    static void PrintDebug(const std::string& methodName, const std::string& message);
 private:
 };
 

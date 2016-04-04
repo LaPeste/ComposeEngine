@@ -18,10 +18,10 @@ public:
 	};
 	void Add(GameObjectType Type, GameObject* gameObject);
 	void Remove(GameObjectType type);
-	GameObject* Get(GameObjectType type) const;
+	GameObject* GetGameObject(GameObjectType type) const;
 	Player* GetPlayer() const;
 	int Count() const;
-	void DrawAll(sf::RenderWindow& window);
+	void DrawAll(sf::RenderWindow& window) const;
 	void UpdateAll();
 	//void ProcessAllInput();
 

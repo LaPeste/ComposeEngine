@@ -23,12 +23,12 @@ public:
 	void operator=(Engine const&) = delete; //copy assignment operator
 
 	void Launch(sf::RenderWindow* createdWindow); //Starts the engine
-	void OnKeyDown(sf::Event::KeyEvent input) override;
-	void OnKeyUp(sf::Event::KeyEvent input) override;
-	sf::Clock const& Clock(); //TODO I'd like to make this function constant so that no one sets the clock
+	void OnKeyDown(const sf::Event::KeyEvent& input) override;
+	void OnKeyUp(const sf::Event::KeyEvent& input) override;
+//	const sf::Clock& Clock() const; //TODO I'd like to make this function constant so that no one sets the clock
 
 	//Utils
-	sf::RenderWindow* Window() const;
+	const sf::RenderWindow* GetWindow() const;
 
 private:
 	Engine();
@@ -42,7 +42,7 @@ private:
 	sf::RenderWindow* mainWindow; //SFML Render Window
 	GameState gameState;
 	GameObjectManager gameObjectManager;
-	sf::Clock clock;
+//	sf::Clock clock;
     tmx::MapLoader ml;
 
 	//methods
