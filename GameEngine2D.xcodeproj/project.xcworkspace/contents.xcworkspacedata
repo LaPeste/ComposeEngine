@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Game Engine 2D.xcodeproj">
+      location = "self:/Users/andreacatalini/Documents/SideFolder/Game Engine 2D/GameEngine2D.xcodeproj">
    </FileRef>
 </Workspace>

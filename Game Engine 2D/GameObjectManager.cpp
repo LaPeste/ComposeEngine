@@ -49,7 +49,7 @@ Player* GameObjectManager::GetPlayer() const
 	return (Player* const)results->second;
 }
 
-int GameObjectManager::Count() const
+u_long GameObjectManager::Count() const
 {
 	return gameObjects.size();
 }

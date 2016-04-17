@@ -2,6 +2,7 @@
 #include "GameObjectManager.h"
 #include "Player.h"
 #include "FPS.h"
+#include <tmx/Log.h>
 
 Engine::~Engine(){}
 
@@ -31,19 +32,16 @@ const sf::RenderWindow* Engine::GetWindow() const
 	return mainWindow;
 }
 
-//const sf::Clock& Engine::Clock() const
-//{
-//	return clock;
-//}
-
 bool Engine::Init()
 {
 	mainWindow->create(sf::VideoMode(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT, Constants::SCREEN_DEPTH), Constants::GAME_NAME);
 	gameState = Playing;
-//	clock;
+    
 	if (!mainWindow->isOpen())
 		return false;
-
+    
+    tmx::Logger::SetLogLevel(tmx::Logger::Warning | tmx::Logger::Error);
+    
 	//init gameobject manager and its objects
 	Player* player = new Player(true);
 	gameObjectManager.Add(GameObjectManager::GameObjectType::player, player);
@@ -70,7 +68,8 @@ void Engine::MainLoop()
 void Engine::RenderFrame()
 {
 	mainWindow->clear();
-    mainWindow->draw(ml); //draw map
+    mainWindow->draw(ml); //draw map loaded in mapLoader
+    mainWindow->setView( sf::View { sf::FloatRect { testPosX, testPosY, 300, 400 } } );
     gameObjectManager.DrawAll(*mainWindow);
 	mainWindow->display();
 }
@@ -103,14 +102,20 @@ void Engine::OnKeyDown(const sf::Event::KeyEvent& input)
 	{
 	case sf::Keyboard::Key::A:
 		gameObjectManager.GetPlayer()->MoveLeft = true;
-        std::cout << "test fuck the A button!\n";
+            testPosX -= 5;
 		break;
 	case sf::Keyboard::Key::D:
 		gameObjectManager.GetPlayer()->MoveRight = true;
+            testPosX += 5;
 		break;
 	case sf::Keyboard::Key::S:
 		gameObjectManager.GetPlayer()->Crouch = true;
+            testPosY += 5;
 		break;
+    case sf::Keyboard::Key::W:
+        gameObjectManager.GetPlayer()->Crouch = true;
+        testPosY -= 5;
+        break;
 	case sf::Keyboard::Key::Space:
 		gameObjectManager.GetPlayer()->Jump = true;
 		break;

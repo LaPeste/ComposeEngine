@@ -20,7 +20,7 @@ public:
 	void Remove(GameObjectType type);
 	GameObject* GetGameObject(GameObjectType type) const;
 	Player* GetPlayer() const;
-	int Count() const;
+	u_long Count() const;
 	void DrawAll(sf::RenderWindow& window) const;
 	void UpdateAll();
 	//void ProcessAllInput();

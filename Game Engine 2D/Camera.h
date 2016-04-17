@@ -11,11 +11,12 @@
 
 #include "stdafx.h"
 
-enum CameraMode
+enum class CameraMode
 {
     TARGET_MODE_NORMAL,
     TARGET_MODE_CENTRAL
 };
+
 
 class Camera
 {
@@ -33,6 +34,7 @@ public:
     
     const sf::Vector2<int> GetPos() const;
     void SetPos(int x, int y);
+    void SetTargetPos(int* const x, int* const y);
     
     
 private:
@@ -40,6 +42,7 @@ private:
     static Camera instance;
     
     int x, y;
+    int* targetX, targetY;
 };
 
 #endif

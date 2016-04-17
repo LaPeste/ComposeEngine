@@ -2,12 +2,17 @@
 #define _CONSTANTS_H_
 
 #include "stdafx.h"
+#include "Camera.h"
 
 //Since only the primitive types can be instantiated in the source file, I decided to move all initializations directly in the source file.
 
 class Constants
 {
 public:
+    //************************
+    // General game data
+    //************************
+    
 	static const unsigned int SCREEN_WIDTH;
 	static const unsigned int SCREEN_HEIGHT;
 	static const unsigned int SCREEN_DEPTH;
@@ -35,7 +40,7 @@ public:
     // Map data
     //************************
     
-
+    //static const CameraMode CAMERA_MODE;
 };
 
 

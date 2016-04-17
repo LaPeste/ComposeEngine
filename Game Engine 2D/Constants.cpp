@@ -1,12 +1,20 @@
 #include "Constants.h"
 
+//************************
+// General game data
+//************************
+
 const unsigned int Constants::SCREEN_WIDTH = 1024;
 const unsigned int Constants::SCREEN_HEIGHT = 768;
 const unsigned int Constants::SCREEN_DEPTH = 32;
 const float Constants::SPEED = 3;
+const std::string Constants::GAME_NAME = "Mario Clone";
 
 
-//player data
+//************************
+// Player data
+//************************
+
 //Sprite variables --> animation assumes that the sprite-set is horizontally developed
 const std::string Constants::PLAYER_SPRITE_NAME = "mariosheet.gif";
 const int Constants::PLAYER_SPRITE_STARTING_X = 39;
@@ -21,4 +29,9 @@ const bool Constants::REVERSE_ANIMATION = true;
 
 const int Constants::GAME_FRAMERATE_TARGET = 32;
 
-const std::string Constants::GAME_NAME = "Mario Clone";
+//************************
+// Map data
+//************************
+
+//const CameraMode CAMERA_MODE = CameraMode::TARGET_MODE_NORMAL;
+

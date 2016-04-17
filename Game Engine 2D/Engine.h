@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
 #include "Event.h"
-#include "MapLoader.h"
+#include <tmx/MapLoader.h>
 
 class Engine : public Event
 {
@@ -37,6 +37,8 @@ private:
 		Uninitialized, ShowingSplash, Paused,
 		ShowingMenu, Playing, Exiting
 	};
+    
+    float testPosX, testPosY;
 
 	//variables
 	sf::RenderWindow* mainWindow; //SFML Render Window

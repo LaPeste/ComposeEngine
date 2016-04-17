@@ -8,3 +8,13 @@
 
 #include "Camera.h"
 
+Camera::Camera() :
+    x (0), y (0),
+    targetX (0), targetY (0),
+    TargetMode (CameraMode::TARGET_MODE_NORMAL)//(Constants::CAMERA_MODE)
+{}
+
+void Camera::CreateInstance()
+{
+    
+}
