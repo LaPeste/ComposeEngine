@@ -31,6 +31,8 @@ private:
 	//void GoRight();
 	//void Jump();
 	//void Crouch();
+    
+    void UpdatePosition();
 };
 
 //*** THEORY ***

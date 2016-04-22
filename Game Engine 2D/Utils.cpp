@@ -9,7 +9,17 @@
 #include "Utils.h"
 #include "stdafx.h"
 
-void Utils::PrintDebug(const std::string& methodName, const std::string& message)
+void Utils::PrintDebugLog(const std::string& methodName, const std::string& message)
 {
-    std::cout << methodName << " : " << message << "\n";
+    std::cout << "LOG - " << methodName << " : " << message << "\n";
+}
+
+void Utils::PrintDebugWarning(const std::string& methodName, const std::string& message)
+{
+    std::cout << "WARNING - " << methodName << " : " << message << "\n";
+}
+
+void Utils::PrintDebugError(const std::string& methodName, const std::string& message)
+{
+    std::cout << "ERROR - " << methodName << " : " << message << "\n";
 }

@@ -13,24 +13,25 @@
 
 enum class CameraMode
 {
-    TARGET_MODE_NORMAL,
-    TARGET_MODE_CENTRAL
+    FREE,
+    FOLLOW_PLAYER
 };
 
 
-class Camera
+class Camera 
 {
     
 public:
-    static void CreateInstance();
+    static void CreateInstance(); //singleton lazy initialization
     ~Camera();
-    static const Camera& GetInstance();
+    static Camera* GetInstance();
     
     //delete methods that you don't want. The following methods could create duplicates of the singleton instance!!
     Camera(Camera const&) = delete; //copy constructor
     void operator=(Camera const&) = delete; //copy assignment operator
     
-    CameraMode TargetMode;
+    void SetCameraMode(CameraMode mode);
+    const CameraMode& GetCameraMode() const;
     
     const sf::Vector2<int> GetPos() const;
     void SetPos(int x, int y);
@@ -39,10 +40,13 @@ public:
     
 private:
     Camera();
-    static Camera instance;
+    static Camera* instance;
     
-    int x, y;
-    int* targetX, targetY;
+    int posX, posY;
+    int* targetX;
+    int* targetY;
+    
+    CameraMode mode;
 };
 
 #endif

@@ -1,10 +1,12 @@
 #include "GameObject.h"
 #include "Engine.h"
 
-GameObject::GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation) :
+GameObject::GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation, float startingPosX, float startingPosY) :
     isLoaded (false),
     toAnimate(false),
-    animator(spriteMaxFrame, animationFrameRate, reverseAnimation)
+    animator(spriteMaxFrame, animationFrameRate, reverseAnimation),
+    posX(startingPosX),
+    posY(startingPosY)
 {
     GameObject::toAnimate = toAnimate;
 }
@@ -48,14 +50,14 @@ void GameObject::Load(const std::string& filename, int startingLeft, int startin
         {
             isLoaded = true;
 #ifdef DEBUG
-            Utils::PrintDebug("GameObject::Load(...)", "texture correctly loaded!");
+            Utils::PrintDebugLog("GameObject::Load(...)", "texture correctly loaded!");
 #endif
         }
         else
         {
             isLoaded = false;
 #ifdef DEBUG
-            Utils::PrintDebug("GameObject::Load(...)", "texture not correctly loaded!");
+            Utils::PrintDebugError("GameObject::Load(...)", "texture not correctly loaded!");
 #endif
 
         }
@@ -70,9 +72,8 @@ void GameObject::Draw(sf::RenderWindow& window)
         {
             sprite.setTextureRect(animator.Animate());
         }
+        sprite.setPosition(posX, posY);
         window.draw(sprite);
-//		sf::Time actualTime = Engine::GetInstance().Clock().getElapsedTime();
-//		timeSinceLastDrawnFrame = actualTime.asSeconds();
 	}
 }
 

@@ -4,13 +4,13 @@
 #include "stdafx.h"
 #include "Camera.h"
 
-//Since only the primitive types can be instantiated in the source file, I decided to move all initializations directly in the source file.
+//NOTE: Since only the primitive types can be instantiated in the source file, I decided to move all initializations directly in the source file.
 
 class Constants
 {
 public:
     //************************
-    // General game data
+    // General game settings
     //************************
     
 	static const unsigned int SCREEN_WIDTH;
@@ -21,10 +21,17 @@ public:
     static const std::string GAME_NAME;
     
     //************************
+    // Camera settings
+    //************************
+    
+    static const float CAMERA_ZOOM_WIDTH;  // I think this is in pixel of the map file (tmx)
+    static const float CAMERA_ZOOM_HEIGHT;
+    
+    //************************
     // Player data
     //************************
     
-    //Sprite info
+    //Sprite settings
     static const std::string PLAYER_SPRITE_NAME;
     static const int PLAYER_SPRITE_STARTING_X;
     static const int PLAYER_SPRITE_STARTING_Y;
@@ -35,6 +42,11 @@ public:
     static const int PLAYER_SPRITE_MAX_FRAME;
     static const int ANIMATION_FRAMERATE;
     static const bool REVERSE_ANIMATION;
+    
+    //Movement settings
+    static const float PLAYER_STEP_SIZE;
+    static const int PLAYER_PHYSICAL_STARTING_X;
+    static const int PLAYER_PHYSICAL_STARTING_Y;
     
     //************************
     // Map data

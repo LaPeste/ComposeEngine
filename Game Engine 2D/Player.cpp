@@ -13,7 +13,7 @@ Player::Player(bool toAnimate) :
 	speed(Constants::SPEED),
 	MoveLeft(false),
 	MoveRight(false),
-GameObject(toAnimate, Constants::PLAYER_SPRITE_MAX_FRAME, Constants::ANIMATION_FRAMERATE, Constants::REVERSE_ANIMATION)
+    GameObject(toAnimate, Constants::PLAYER_SPRITE_MAX_FRAME, Constants::ANIMATION_FRAMERATE, Constants::REVERSE_ANIMATION, Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y)
 {
     
 #ifdef _WIN32
@@ -35,7 +35,7 @@ Player::~Player()
 
 void Player::Update()
 {
-
+    UpdatePosition(); //base on inputs
 }
 
 void Player::Draw(sf::RenderWindow& rw)
@@ -48,68 +48,36 @@ float Player::GetVelocity() const
 	return velocity;
 }
 
-//void Player::OnKeyDown(const sf::Event::KeyEvent& input)
-//{
-//	
-//}
-
-//void Player::Crouch()
-//{
-//
-//}
-//
-//void Player::GoLeft()
-//{
-//	if (velocity > 0)
-//	{
-//		velocity -= speed;
-//	}
-//	else
-//	{
-//		velocity = 0;
-//	}
-//
-//
-//	sf::Vector2f pos = GetPosition();
-//	float halfSprite = GetSprite().getTextureRect().width / 2;
-//	if (pos.x < 0 || pos.x + halfSprite < 0)
-//	{
-//		velocity = 0;
-//	}
-//	GetSprite().move(velocity * elapsedTime(), 0);
-//}
-//
-//void Player::OnMove(float xMove, float yMove)
-//{
-//	
-//}
-//
-//void Player::GoRight()
-//{
-//	if (velocity < maxVelocity)
-//	{
-//		velocity += speed;
-//	}
-//	else
-//	{
-//		velocity = maxVelocity;
-//	}
-//
-//	sf::Vector2f pos = GetPosition();
-//	float halfSprite = GetSprite().getTextureRect().width / 2;
-//	if (pos.x > Constants::SCREEN_WIDTH || pos.x + halfSprite > Constants::SCREEN_WIDTH)
-//	{
-//		velocity = 0;
-//	}
-//	GetSprite().move(velocity * elapsedTime(), 0);
-//}
-//
-//void Player::Jump()
-//{
-//
-//}
-
-
+void Player::UpdatePosition()
+{
+    if(MoveLeft)
+    {
+        MoveLeft = false;
+        if((posX - Constants::PLAYER_STEP_SIZE - Constants::PLAYER_WIDTH / 2) >= 0)
+        {
+            posX -= Constants::PLAYER_STEP_SIZE;
+        }
+    }
+    else if(MoveRight)
+    {
+        MoveRight = false;
+        if((posX + Constants::PLAYER_STEP_SIZE + Constants::PLAYER_WIDTH / 2) <= Constants::SCREEN_WIDTH)
+        {
+            posX += Constants::PLAYER_STEP_SIZE;
+        }
+    }
+    else if(Jump)
+    {
+        Jump = false;
+        //TODO
+    }
+    else if(Crouch)
+    {
+        Crouch = false;
+        //TODO
+    }
+        
+}
 
 
 /*** THEORY ****

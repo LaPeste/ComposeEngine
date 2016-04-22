@@ -5,11 +5,11 @@
 #include "Event.h"
 #include "Animator.h"
 
-class GameObject// : public Event
+class GameObject
 {
 
 public:
-	explicit GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation);
+	explicit GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation, float startingPosX, float startingPosY);
 	virtual ~GameObject();
 
 	virtual void Load(const std::string& filename);
@@ -25,6 +25,8 @@ protected:
 	sf::Sprite GetSprite() const;
 	float timeSinceLastDrawnFrame; //in seconds
     bool toAnimate;
+    float posX;
+    float posY;
 
 private:
 	sf::Sprite sprite;
@@ -38,3 +40,9 @@ private:
 };
 
 #endif
+
+
+/*
+THEORY: explicit constructor TODO...
+
+*/

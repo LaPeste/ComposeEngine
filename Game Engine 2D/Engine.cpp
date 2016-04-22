@@ -4,7 +4,9 @@
 #include "FPS.h"
 #include <tmx/Log.h>
 
-Engine::~Engine(){}
+Engine::~Engine()
+{
+}
 
 Engine::Engine() : ml(resourcePath())
 {
@@ -43,7 +45,7 @@ bool Engine::Init()
     tmx::Logger::SetLogLevel(tmx::Logger::Warning | tmx::Logger::Error);
     
 	//init gameobject manager and its objects
-	Player* player = new Player(true);
+	Player* player = new Player(false);
 	gameObjectManager.Add(GameObjectManager::GameObjectType::player, player);
     
     ml.Load("desert.tmx");
@@ -69,7 +71,8 @@ void Engine::RenderFrame()
 {
 	mainWindow->clear();
     mainWindow->draw(ml); //draw map loaded in mapLoader
-    mainWindow->setView( sf::View { sf::FloatRect { testPosX, testPosY, 300, 400 } } );
+    sf::Vector2<int> cameraPos = Camera::GetInstance()->GetPos();
+    mainWindow->setView( sf::View { sf::FloatRect { (float)cameraPos.x, (float)cameraPos.y, Constants::CAMERA_ZOOM_WIDTH, Constants::CAMERA_ZOOM_HEIGHT } } );
     gameObjectManager.DrawAll(*mainWindow);
 	mainWindow->display();
 }
@@ -86,6 +89,7 @@ void Engine::ProcessInput()
 void Engine::Update()
 {
 	FPS::Update();
+    gameObjectManager.UpdateAll();
 }
 
 bool Engine::IsExiting()
@@ -98,23 +102,36 @@ bool Engine::IsExiting()
 
 void Engine::OnKeyDown(const sf::Event::KeyEvent& input)
 {
+    sf::Vector2<int> cameraPos = Camera::GetInstance()->GetPos();
 	switch (input.code)
 	{
 	case sf::Keyboard::Key::A:
-		gameObjectManager.GetPlayer()->MoveLeft = true;
-            testPosX -= 5;
+        gameObjectManager.GetPlayer()->MoveLeft = true;
+        if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
+        {
+            Camera::GetInstance()->SetPos(cameraPos.x - 5, cameraPos.y);
+        }
 		break;
 	case sf::Keyboard::Key::D:
 		gameObjectManager.GetPlayer()->MoveRight = true;
-            testPosX += 5;
+        if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
+        {
+            Camera::GetInstance()->SetPos(cameraPos.x + 5, cameraPos.y);
+        }
 		break;
 	case sf::Keyboard::Key::S:
 		gameObjectManager.GetPlayer()->Crouch = true;
-            testPosY += 5;
+        if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
+        {
+            Camera::GetInstance()->SetPos(cameraPos.x, cameraPos.y + 5);
+        }
 		break;
     case sf::Keyboard::Key::W:
         gameObjectManager.GetPlayer()->Crouch = true;
-        testPosY -= 5;
+        if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
+        {
+            Camera::GetInstance()->SetPos(cameraPos.x, cameraPos.y - 5);
+        }
         break;
 	case sf::Keyboard::Key::Space:
 		gameObjectManager.GetPlayer()->Jump = true;
