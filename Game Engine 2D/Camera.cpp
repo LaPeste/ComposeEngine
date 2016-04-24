@@ -23,10 +23,10 @@ Camera::Camera() :
 
 Camera::~Camera()
 {
-//#ifdef LOG_OUTPUT_CONSOLE
-    Utils::PrintDebugLog("~Camera()", "Destroying camera instance");
-//#endif
-    delete instance;
+#ifdef LOG_OUTPUT_CONSOLE
+    Utils::PrintDebugLog("~Camera()", "dctr called");
+#endif
+    //delete instance;
 }
 
 void Camera::CreateInstance()

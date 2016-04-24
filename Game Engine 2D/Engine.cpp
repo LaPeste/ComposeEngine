@@ -2,10 +2,15 @@
 #include "GameObjectManager.h"
 #include "Player.h"
 #include "FPS.h"
+#include "Camera.h"
 #include <tmx/Log.h>
 
 Engine::~Engine()
 {
+#ifdef LOG_OUTPUT_CONSOLE
+    Utils::PrintDebugLog("~Engine()", "dctr called");
+#endif
+    delete Camera::GetInstance();
 }
 
 Engine::Engine() : ml(resourcePath())

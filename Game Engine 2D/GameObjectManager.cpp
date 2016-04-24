@@ -9,6 +9,9 @@ GameObjectManager::GameObjectManager()
 
 GameObjectManager::~GameObjectManager()
 {
+#ifdef LOG_OUTPUT_CONSOLE
+    Utils::PrintDebugLog("~GameObjectManager()", "dctr called");
+#endif
 	std::for_each(gameObjects.begin(), gameObjects.end(), GameObjectDeallocator());
 }
 

@@ -29,7 +29,9 @@ Player::Player(bool toAnimate) :
 
 Player::~Player()
 {
-
+#ifdef LOG_OUTPUT_CONSOLE
+    Utils::PrintDebugLog("~Player()", "dctr called");
+#endif
 }
 
 void Player::Update()
