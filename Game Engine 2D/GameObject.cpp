@@ -68,10 +68,8 @@ void GameObject::Draw(sf::RenderWindow& window)
 {
 	if (isLoaded)
 	{
-        if(toAnimate)
-        {
-            sprite.setTextureRect(animator.Animate());
-        }
+        if(toAnimate) animator.Animate(sprite);
+        
         sprite.setPosition(posX, posY);
         window.draw(sprite);
 	}

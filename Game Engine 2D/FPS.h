@@ -16,7 +16,7 @@ public:
 private:
 	static int frameRate;
 	static int frames;
-	static float speedFactor;
+	static double speedFactor;
 	static int lastTime;
 	static sf::Clock clock;
 };

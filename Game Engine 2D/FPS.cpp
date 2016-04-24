@@ -2,7 +2,7 @@
 
 int FPS::frameRate(0);
 int FPS::lastTime(0);
-float FPS::speedFactor(0);
+double FPS::speedFactor(0);
 int FPS::frames(0);
 sf::Clock FPS::clock;
 
@@ -25,7 +25,7 @@ void FPS::Update()
 	if (clock.getElapsedTime().asMilliseconds() < 1000)
 	{
 		frames++;
-		int timeFrame = clock.getElapsedTime().asMilliseconds() - lastTime;
+		double timeFrame = clock.getElapsedTime().asMilliseconds() - lastTime;
 		speedFactor = timeFrame / 1000 * Constants::GAME_FRAMERATE_TARGET;
 		lastTime = clock.getElapsedTime().asMilliseconds();
 	}
@@ -36,7 +36,7 @@ void FPS::Update()
 		frames = 0;
 		lastTime = 0;
 #ifdef FRAME_RATE
-//        std::cout << "FPS --> " << frameRate << "\n";
+        std::cout << "FPS --> " << frameRate << "\n";
 #endif
 	}
 }

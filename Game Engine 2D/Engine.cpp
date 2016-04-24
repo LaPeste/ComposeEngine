@@ -45,7 +45,7 @@ bool Engine::Init()
     tmx::Logger::SetLogLevel(tmx::Logger::Warning | tmx::Logger::Error);
     
 	//init gameobject manager and its objects
-	Player* player = new Player(false);
+	Player* player = new Player(true);
 	gameObjectManager.Add(GameObjectManager::GameObjectType::player, player);
     
     ml.Load("desert.tmx");

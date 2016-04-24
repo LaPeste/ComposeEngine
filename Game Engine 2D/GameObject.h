@@ -25,6 +25,7 @@ protected:
 	sf::Sprite GetSprite() const;
 	float timeSinceLastDrawnFrame; //in seconds
     bool toAnimate;
+    Animator animator;
     float posX;
     float posY;
 
@@ -32,7 +33,6 @@ private:
 	sf::Sprite sprite;
 	sf::Texture texture;
 	std::string filename;
-    Animator animator;
 	bool isLoaded;
     
     void SetSubTexture(int startingLeft, int startingTop, int width, int height);

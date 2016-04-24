@@ -25,12 +25,12 @@ const int Constants::PLAYER_HEIGHT = 16;
 const int Constants::SPACE_BETWEEN_SPRITE_X = 15;
 const int Constants::SPACE_BETWEEN_SPRITE_Y = 0;
 const int Constants::PLAYER_SPRITE_MAX_FRAME = 4;
-const int Constants::ANIMATION_FRAMERATE = 500; //in millisecond
-const bool Constants::REVERSE_ANIMATION = true;
+const int Constants::ANIMATION_FRAMERATE = 200; //in millisecond
+const bool Constants::REVERSE_ANIMATION = false;
 const int Constants::GAME_FRAMERATE_TARGET = 32;
 
 //Movement settings
-const float Constants::PLAYER_STEP_SIZE = 4;
+const float Constants::PLAYER_STEP_SIZE = 3;
 const int Constants::PLAYER_PHYSICAL_STARTING_X = 40;
 const int Constants::PLAYER_PHYSICAL_STARTING_Y = 50;
 

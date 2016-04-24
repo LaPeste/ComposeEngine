@@ -13,7 +13,9 @@ public:
     ~Animator();
     
     int GetCurrentFrame() const;
-    const sf::Rect<int> Animate();
+    void Animate(sf::Sprite& sprite);
+    void FlipSprite(bool toFlip); //to similate walk right or left
+    void AnimateSprite(bool toAnimate);
     
 private:
     int currentFrame;
@@ -22,6 +24,8 @@ private:
     bool reverseAnimation;
     bool ahead;
     sf::Clock clock;
+    bool flipSprite; //orientation for the movements
+    bool toAnimate; //when to animate if pressed a direction
 };
 
 #endif

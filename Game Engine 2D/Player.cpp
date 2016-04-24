@@ -1,9 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Engine.h"
-
-// Here is a small helper for you ! Have a look.
-#include "ResourcePath.hpp"
+#include "FPS.h"
+#include "ResourcePath.hpp" // Here is a small helper for you ! Have a look.
 
 #define elapsedTime()(Engine::GetInstance().Clock().getElapsedTime - timeSinceLastDrawnFrame)
 
@@ -52,29 +51,39 @@ void Player::UpdatePosition()
 {
     if(MoveLeft)
     {
-        MoveLeft = false;
-        if((posX - Constants::PLAYER_STEP_SIZE - Constants::PLAYER_WIDTH / 2) >= 0)
+        if(toAnimate)
         {
-            posX -= Constants::PLAYER_STEP_SIZE;
+            animator.FlipSprite(true);
+            animator.AnimateSprite(true);
+        }
+        if((posX - Constants::PLAYER_STEP_SIZE) >= 0)
+        {
+            posX -= Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor();
         }
     }
     else if(MoveRight)
     {
-        MoveRight = false;
-        if((posX + Constants::PLAYER_STEP_SIZE + Constants::PLAYER_WIDTH / 2) <= Constants::SCREEN_WIDTH)
+        if(toAnimate)
         {
-            posX += Constants::PLAYER_STEP_SIZE;
+            animator.FlipSprite(false);
+            animator.AnimateSprite(true);
+        }
+        if((posX + Constants::PLAYER_STEP_SIZE + Constants::PLAYER_WIDTH) <= Constants::SCREEN_WIDTH)
+        {
+            posX += Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor();
         }
     }
     else if(Jump)
     {
-        Jump = false;
         //TODO
     }
     else if(Crouch)
     {
-        Crouch = false;
         //TODO
+    }
+    else
+    {
+        animator.AnimateSprite(false);
     }
         
 }

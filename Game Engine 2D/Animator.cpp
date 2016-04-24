@@ -2,7 +2,8 @@
 
 Animator::Animator(int spriteMaxFrame, int animationFrameRate, bool reverseAnimation) :
     currentFrame(0),
-    ahead(true)
+    ahead(true),
+    flipSprite(false)
 {
     Animator::maxFrame = spriteMaxFrame;
     Animator::animationFrameRate = animationFrameRate;
@@ -19,45 +20,70 @@ int Animator::GetCurrentFrame() const
     return currentFrame;
 }
 
-const sf::Rect<int> Animator::Animate()
+void Animator::Animate(sf::Sprite& sprite)
 {
-    sf::Rect<int> finalRect(Constants::PLAYER_SPRITE_STARTING_X + currentFrame * (Constants::PLAYER_WIDTH + Constants::SPACE_BETWEEN_SPRITE_X),
-                            Constants::PLAYER_SPRITE_STARTING_Y,
-                            Constants::PLAYER_WIDTH,
-                            Constants::PLAYER_HEIGHT);
-    if(clock.getElapsedTime().asMilliseconds() > animationFrameRate)
+    if(toAnimate)
     {
-        clock.restart();
-        
-        if(reverseAnimation)
+        sf::Rect<int> finalRect(Constants::PLAYER_SPRITE_STARTING_X + currentFrame * (Constants::PLAYER_WIDTH + Constants::SPACE_BETWEEN_SPRITE_X),
+                                Constants::PLAYER_SPRITE_STARTING_Y,
+                                Constants::PLAYER_WIDTH,
+                                Constants::PLAYER_HEIGHT);
+        if(clock.getElapsedTime().asMilliseconds() > animationFrameRate)
         {
-            if(ahead)
+            clock.restart();
+            
+            if(reverseAnimation)
+            {
+                if(ahead)
+                {
+                    currentFrame++;
+                    if(currentFrame >= maxFrame)
+                    {
+                        currentFrame = maxFrame - 1;
+                        ahead = false;
+                    }
+                }
+                if(!ahead)
+                {
+                    currentFrame--;
+                    if(currentFrame < 0)
+                    {
+                        currentFrame = 1;
+                        ahead = true;
+                    }
+                }
+            }
+            else
             {
                 currentFrame++;
                 if(currentFrame >= maxFrame)
                 {
-                    currentFrame = maxFrame - 1;
-                    ahead = false;
+                    currentFrame = 0;
                 }
             }
-            if(!ahead)
-            {
-                currentFrame--;
-                if(currentFrame < 0)
-                {
-                    currentFrame = 1;
-                    ahead = true;
-                }
-            }
+        }
+        
+        sprite.setTextureRect(finalRect);
+        
+        if(flipSprite)
+        {
+            sprite.setOrigin({ sprite.getLocalBounds().width, 0 });
+            sprite.setScale({-1, 1 });
         }
         else
         {
-            currentFrame++;
-            if(currentFrame >= maxFrame)
-            {
-                currentFrame = 0;
-            }
+            sprite.setOrigin({ 0, 0 });
+            sprite.setScale(1, 1);
         }
     }
-    return finalRect;
+}
+
+void Animator::FlipSprite(bool toFlip)
+{
+    Animator::flipSprite = toFlip;
+}
+
+void Animator::AnimateSprite(bool toAnimate)
+{
+    Animator::toAnimate = toAnimate;
 }
