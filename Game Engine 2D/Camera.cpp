@@ -54,8 +54,21 @@ void Camera::Update()
     if(mode == CameraMode::FOLLOW_PLAYER)
     {
         Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
-        cameraTargetPos.x = playerPos.x - Constants::CAMERA_ZOOM_WIDTH/2 + Constants::PLAYER_WIDTH/2;
-        cameraTargetPos.y = playerPos.y - Constants::CAMERA_ZOOM_HEIGHT/2 + Constants::PLAYER_HEIGHT/2;
+        float newPosX = playerPos.x - Constants::CAMERA_ZOOM_WIDTH/2 + Constants::PLAYER_WIDTH/2;
+        float newPosY = playerPos.y - Constants::CAMERA_ZOOM_HEIGHT/2 + Constants::PLAYER_HEIGHT/2;
+
+        //if the camera doesn't reach the left or right limit of the map
+        if( ( playerPos.x - Constants::PLAYER_WIDTH/2 > Constants::CAMERA_ZOOM_WIDTH/2 - Constants::PLAYER_WIDTH/2 ) &&
+            ( playerPos.x + Constants::PLAYER_WIDTH/2 + Constants::CAMERA_ZOOM_WIDTH/2 < Constants::SCREEN_WIDTH ) )
+        {
+            cameraTargetPos.x = newPosX;
+        }
+        
+        if( ( playerPos.y - Constants::PLAYER_HEIGHT/2 > Constants::CAMERA_ZOOM_HEIGHT/2 - Constants::PLAYER_HEIGHT/2 ) &&
+           ( playerPos.y + Constants::PLAYER_WIDTH/2 + Constants::CAMERA_ZOOM_HEIGHT/2 < Constants::SCREEN_HEIGHT ) )
+        {
+            cameraTargetPos.y = newPosY;
+        }
     }
     else
     {
