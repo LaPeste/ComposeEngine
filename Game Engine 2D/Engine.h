@@ -27,7 +27,7 @@ public:
 	void OnKeyUp(const sf::Event::KeyEvent& input) override;
 
 	//Utils
-	const sf::RenderWindow* GetWindow() const;
+	sf::RenderWindow* GetWindow() const;
 
 private:
 	Engine();
@@ -42,7 +42,7 @@ private:
 	//variables
 	sf::RenderWindow* mainWindow; //SFML Render Window
 	GameState gameState;
-	GameObjectManager gameObjectManager;
+//	GameObjectManager gameObjectManager;
     tmx::MapLoader ml;
 
 	//methods

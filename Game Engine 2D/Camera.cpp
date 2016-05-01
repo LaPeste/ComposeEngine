@@ -7,18 +7,19 @@
 //
 
 #include "Camera.h"
+#include "GameObjectManager.h"
+#include "Engine.h"
 
-Camera* Camera::instance(new Camera());
+using namespace sf;
+
+Camera* Camera::instance;
 
 Camera::Camera() :
-    posX (0), posY (0),
-    targetX (0), targetY (0),
+    cameraTargetPos(0.0f, 0.0f),
+    cameraFreePos(0.0f, 0.0f),
     mode (CameraMode::FOLLOW_PLAYER) //(Constants::CAMERA_MODE) how to achieve this? I can't get it in the constants
 {
-    if(mode == CameraMode::FOLLOW_PLAYER)
-    {
-        //SetTargetPos(/*make it point to the player's position which I'm trying to get from a static gameobject manager*/)
-    }
+
 }
 
 Camera::~Camera()
@@ -26,45 +27,74 @@ Camera::~Camera()
 #ifdef LOG_OUTPUT_CONSOLE
     Utils::PrintDebugLog("~Camera()", "dctr called");
 #endif
-    //delete instance;
 }
 
 void Camera::CreateInstance()
 {
+    if(instance != nullptr)
+    {
+        Utils::PrintDebugError("Camera::CreateInstance()", "You're trying to instantiate the camera twice!");
+        return;
+    }
     instance = new Camera;
 }
 
-Camera* Camera::GetInstance()
+Camera * Camera::GetInstance()
 {
-    if(instance != nullptr)
-    {
-        return instance;
-    }
-    else
+    if(instance == nullptr)
     {
         Utils::PrintDebugError( "Camera::GetInstance", "Trying to get camera, but an instance is not created yet!");
         return nullptr;
     }
+    return instance;
 }
 
-const sf::Vector2<int> Camera::GetPos() const
+void Camera::Update()
 {
-    return sf::Vector2<int>(posX, posY);
+    if(mode == CameraMode::FOLLOW_PLAYER)
+    {
+        Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
+        cameraTargetPos.x = playerPos.x - Constants::CAMERA_ZOOM_WIDTH/2 + Constants::PLAYER_WIDTH/2;
+        cameraTargetPos.y = playerPos.y - Constants::CAMERA_ZOOM_HEIGHT/2 + Constants::PLAYER_HEIGHT/2;
+    }
+    else
+    {
+        //...TODO when we introduce a proper free camera mode
+    }
 }
 
-void Camera::SetPos(int x, int y)
+void Camera::Draw()
 {
-    posX = x;
-    posY = y;
+    Engine::GetInstance().GetWindow()->setView(
+                                sf::View {
+                                    sf::FloatRect { Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Constants::CAMERA_ZOOM_WIDTH, Constants::CAMERA_ZOOM_HEIGHT
+                                    }
+                                } );
 }
 
-void Camera::SetTargetPos(int* const x, int* const y)
+const Vector2f & Camera::GetPosition() const
 {
-    targetX = x;
-    targetY = y;
+    if(mode == CameraMode::FOLLOW_PLAYER) return cameraTargetPos;
+    
+    else return cameraFreePos;
 }
 
-const CameraMode& Camera::GetCameraMode() const
+
+void Camera::SetPosition(float x, float y)
+{
+    if(mode == CameraMode::FOLLOW_PLAYER)
+    {
+        cameraTargetPos.x = x - Constants::SCREEN_WIDTH/2;
+        cameraTargetPos.y = y - Constants::SCREEN_HEIGHT/2;
+    }
+    else
+    {
+        cameraFreePos.x = x;
+        cameraFreePos.y = y;
+    }
+}
+
+const CameraMode & Camera::GetCameraMode() const
 {
     return mode;
 }
@@ -72,4 +102,25 @@ const CameraMode& Camera::GetCameraMode() const
 void Camera::SetCameraMode(CameraMode mode)
 {
     Camera::mode = mode;
+}
+
+const Vector2f & Camera::GetModePosition(CameraMode whichPositionToSet) const
+{
+    if(whichPositionToSet == CameraMode::FREE) return cameraFreePos;
+    
+    else return cameraTargetPos;
+}
+
+void Camera::SetModePosition(float x, float y, CameraMode whichPositionToSet)
+{
+    if(whichPositionToSet == CameraMode::FREE)
+    {
+        cameraFreePos.x = x;
+        cameraFreePos.y = y;
+    }
+    else
+    {
+        cameraTargetPos.x = x;
+        cameraTargetPos.y = y;
+    }
 }

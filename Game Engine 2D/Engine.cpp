@@ -34,7 +34,7 @@ void Engine::Launch(sf::RenderWindow* createdWindow)
 	}
 }
 
-const sf::RenderWindow* Engine::GetWindow() const
+sf::RenderWindow* Engine::GetWindow() const
 {
 	return mainWindow;
 }
@@ -48,13 +48,14 @@ bool Engine::Init()
 		return false;
     
     tmx::Logger::SetLogLevel(tmx::Logger::Warning | tmx::Logger::Error);
+    ml.Load("desert.tmx");
     
 	//init gameobject manager and its objects
 	Player* player = new Player(true);
-	gameObjectManager.Add(GameObjectManager::GameObjectType::player, player);
+    GameObjectManager::Add(GameObjectManager::GameObjectType::player, player);
+    Camera::CreateInstance();
     
-    ml.Load("desert.tmx");
-	return true;
+    return true;
 
 }
 
@@ -72,13 +73,19 @@ void Engine::MainLoop()
 	}
 }
 
+void Engine::Update()
+{
+    FPS::Update();
+    Camera::GetInstance()->Update();
+    GameObjectManager::UpdateAll();
+}
+
 void Engine::RenderFrame()
 {
 	mainWindow->clear();
     mainWindow->draw(ml); //draw map loaded in mapLoader
-    sf::Vector2<int> cameraPos = Camera::GetInstance()->GetPos();
-    mainWindow->setView( sf::View { sf::FloatRect { (float)cameraPos.x, (float)cameraPos.y, Constants::CAMERA_ZOOM_WIDTH, Constants::CAMERA_ZOOM_HEIGHT } } );
-    gameObjectManager.DrawAll(*mainWindow);
+    Camera::GetInstance()->Draw();
+    GameObjectManager::DrawAll(*mainWindow);
 	mainWindow->display();
 }
 
@@ -91,12 +98,6 @@ void Engine::ProcessInput()
 	}
 }
 
-void Engine::Update()
-{
-	FPS::Update();
-    gameObjectManager.UpdateAll();
-}
-
 bool Engine::IsExiting()
 {
 	if (gameState != Exiting)
@@ -107,39 +108,45 @@ bool Engine::IsExiting()
 
 void Engine::OnKeyDown(const sf::Event::KeyEvent& input)
 {
-    sf::Vector2<int> cameraPos = Camera::GetInstance()->GetPos();
+    sf::Vector2<float> cameraPos = Camera::GetInstance()->GetPosition();
+    sf::Vector2<float> cameraPosNoTarget = Camera::GetInstance()->GetPosition();
+    sf::Vector2<float> playerPos = GameObjectManager::GetPlayer()->GetPosition();
 	switch (input.code)
 	{
 	case sf::Keyboard::Key::A:
-        gameObjectManager.GetPlayer()->MoveLeft = true;
+        GameObjectManager::GetPlayer()->MoveLeft = true;
+//            std::cout << "targetX " << cameraPos.x << " ,  targetY " << cameraPos.y << std::endl;
+//            std::cout << "playerX " << playerPos.x << " ,  playery " << playerPos.y << std::endl;
         if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
         {
-            Camera::GetInstance()->SetPos(cameraPos.x - 5, cameraPos.y);
+            Camera::GetInstance()->SetPosition(cameraPosNoTarget.x - 5.0f, cameraPosNoTarget.y);
         }
 		break;
 	case sf::Keyboard::Key::D:
-		gameObjectManager.GetPlayer()->MoveRight = true;
+		GameObjectManager::GetPlayer()->MoveRight = true;
+//            std::cout << "targetX " << cameraPos.x << " ,  targetY " << cameraPos.y << std::endl;
+//            std::cout << "playerX " << playerPos.x << " ,  playery " << playerPos.y << std::endl;
         if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
         {
-            Camera::GetInstance()->SetPos(cameraPos.x + 5, cameraPos.y);
+            Camera::GetInstance()->SetPosition(cameraPosNoTarget.x + 5.0f, cameraPosNoTarget.y);
         }
 		break;
 	case sf::Keyboard::Key::S:
-		gameObjectManager.GetPlayer()->Crouch = true;
+		GameObjectManager::GetPlayer()->Crouch = true;
         if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
         {
-            Camera::GetInstance()->SetPos(cameraPos.x, cameraPos.y + 5);
+            Camera::GetInstance()->SetPosition(cameraPosNoTarget.x, cameraPosNoTarget.y + 5.0f);
         }
 		break;
     case sf::Keyboard::Key::W:
-        gameObjectManager.GetPlayer()->Crouch = true;
+        GameObjectManager::GetPlayer()->Crouch = true;
         if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
         {
-            Camera::GetInstance()->SetPos(cameraPos.x, cameraPos.y - 5);
+            Camera::GetInstance()->SetPosition(cameraPosNoTarget.x, cameraPosNoTarget.y - 5.0f);
         }
         break;
 	case sf::Keyboard::Key::Space:
-		gameObjectManager.GetPlayer()->Jump = true;
+		GameObjectManager::GetPlayer()->Jump = true;
 		break;
 		//Add the cases that you need
 	default:
@@ -152,16 +159,16 @@ void Engine::OnKeyUp(const sf::Event::KeyEvent& input)
 	switch (input.code)
 	{
 	case sf::Keyboard::Key::A:
-		gameObjectManager.GetPlayer()->MoveLeft = false;
+		GameObjectManager::GetPlayer()->MoveLeft = false;
 		break;
 	case sf::Keyboard::Key::D:
-		gameObjectManager.GetPlayer()->MoveRight = false;
+		GameObjectManager::GetPlayer()->MoveRight = false;
 		break;
 	case sf::Keyboard::Key::S:
-		gameObjectManager.GetPlayer()->Crouch = false;
+		GameObjectManager::GetPlayer()->Crouch = false;
 		break;
 	case sf::Keyboard::Key::Space:
-		gameObjectManager.GetPlayer()->Jump = false;
+		GameObjectManager::GetPlayer()->Jump = false;
 		break;
 		//Add the cases that you need
 	default:

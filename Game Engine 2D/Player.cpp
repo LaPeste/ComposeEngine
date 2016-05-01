@@ -24,7 +24,7 @@ Player::Player(bool toAnimate) :
     
     GameObject::Load(loadPath, Constants::PLAYER_SPRITE_STARTING_X, Constants::PLAYER_SPRITE_STARTING_Y, Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT);
     assert(IsLoaded()); //you do this because you can't return a value from a constructor!!
-	GetSprite().setPosition(60, 768/2);
+    SetPosition(60.0f, (float)Constants::SCREEN_HEIGHT/2);
 }
 
 Player::~Player()
@@ -58,9 +58,11 @@ void Player::UpdatePosition()
             animator.FlipSprite(true);
             animator.AnimateSprite(true);
         }
-        if((posX - Constants::PLAYER_STEP_SIZE) >= 0)
+        if((GetPosition().x - Constants::PLAYER_STEP_SIZE) >= 0)
         {
-            posX -= Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor();
+            sf::Vector2<float> pos = GetPosition();
+            SetPosition(pos.x - Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor(), pos.y);
+//            posX -= Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor();
         }
     }
     else if(MoveRight)
@@ -70,9 +72,11 @@ void Player::UpdatePosition()
             animator.FlipSprite(false);
             animator.AnimateSprite(true);
         }
-        if((posX + Constants::PLAYER_STEP_SIZE + Constants::PLAYER_WIDTH) <= Constants::SCREEN_WIDTH)
+        if((GetPosition().x + Constants::PLAYER_STEP_SIZE + Constants::PLAYER_WIDTH) <= Constants::SCREEN_WIDTH)
         {
-            posX += Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor();
+            sf::Vector2<float> pos = GetPosition();
+            SetPosition(pos.x + Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor(), pos.y);
+//            posX += Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor();
         }
     }
     else if(Jump)

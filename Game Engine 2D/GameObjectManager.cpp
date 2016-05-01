@@ -2,10 +2,12 @@
 #include "GameObjectManager.h"
 #include "Engine.h"
 
-GameObjectManager::GameObjectManager()
-{
+std::map<GameObjectManager::GameObjectType, GameObject*> GameObjectManager::gameObjects{};
 
-}
+//GameObjectManager::GameObjectManager()
+//{
+//
+//}
 
 GameObjectManager::~GameObjectManager()
 {
@@ -30,7 +32,7 @@ void GameObjectManager::Remove(GameObjectType type)
 	}
 }
 
-GameObject* GameObjectManager::GetGameObject(GameObjectType type) const
+GameObject* GameObjectManager::GetGameObject(GameObjectType type)
 {
 	std::map<GameObjectType, GameObject*>::const_iterator results = gameObjects.find(type);
 	if (results == gameObjects.end())
@@ -41,7 +43,7 @@ GameObject* GameObjectManager::GetGameObject(GameObjectType type) const
 	return results->second;
 }
 
-Player* GameObjectManager::GetPlayer() const
+Player* GameObjectManager::GetPlayer()
 {
 	std::map<GameObjectType, GameObject*>::const_iterator results = gameObjects.find(GameObjectType::player);
 	if (results == gameObjects.end())
@@ -52,12 +54,12 @@ Player* GameObjectManager::GetPlayer() const
 	return (Player* const)results->second;
 }
 
-u_long GameObjectManager::Count() const
+u_long GameObjectManager::Count()
 {
 	return gameObjects.size();
 }
 
-void GameObjectManager::DrawAll(sf::RenderWindow& window) const
+void GameObjectManager::DrawAll(sf::RenderWindow& window)
 {
 	std::map<GameObjectType, GameObject*>::const_iterator itr = gameObjects.begin(); // a const_iterator doesn't allow you to change the values that they point to, regular iterators do.
 

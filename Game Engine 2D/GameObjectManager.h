@@ -9,24 +9,24 @@ class GameObjectManager
 {
 
 public:
-	GameObjectManager();
-	~GameObjectManager();
+//	GameObjectManager();
+    ~GameObjectManager();
 
 	enum GameObjectType
 	{
 		player, enemy
 	};
-	void Add(GameObjectType Type, GameObject* gameObject);
-	void Remove(GameObjectType type);
-	GameObject* GetGameObject(GameObjectType type) const;
-	Player* GetPlayer() const;
-	u_long Count() const;
-	void DrawAll(sf::RenderWindow& window) const;
-	void UpdateAll();
+	static void Add(GameObjectType Type, GameObject* gameObject);
+	static void Remove(GameObjectType type);
+	static GameObject* GetGameObject(GameObjectType type);
+	static Player* GetPlayer();
+	static u_long Count();
+	static void DrawAll(sf::RenderWindow& window);
+	static void UpdateAll();
 	//void ProcessAllInput();
 
 private:
-	std::map<GameObjectType, GameObject*> gameObjects;
+	static std::map<GameObjectType, GameObject*> gameObjects;
 	struct GameObjectDeallocator
 	{
 		void operator()(const std::pair<GameObjectType, GameObject*>& p) const

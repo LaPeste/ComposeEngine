@@ -26,6 +26,7 @@ public:
     
     static const float CAMERA_ZOOM_WIDTH;  // I think this is in pixel of the map file (tmx)
     static const float CAMERA_ZOOM_HEIGHT;
+//    static const CameraMode CAMERA_MODE; // TODO I cannot get this to work! fix it!
     
     //************************
     // Player data

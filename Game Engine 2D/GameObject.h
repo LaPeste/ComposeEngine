@@ -20,14 +20,13 @@ public:
 	virtual void SetPosition(float x, float y);
 	virtual void Cleanup();
 	virtual bool IsLoaded() const;
+    sf::Sprite GetSprite() const;
 
 protected:
-	sf::Sprite GetSprite() const;
+	
 	float timeSinceLastDrawnFrame; //in seconds
     bool toAnimate;
     Animator animator;
-    float posX;
-    float posY;
 
 private:
 	sf::Sprite sprite;

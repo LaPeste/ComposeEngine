@@ -30,21 +30,23 @@ public:
     Camera(Camera const&) = delete; //copy constructor
     void operator=(Camera const&) = delete; //copy assignment operator
     
+    void Update();
+    void Draw();
+    
     void SetCameraMode(CameraMode mode);
     const CameraMode& GetCameraMode() const;
     
-    const sf::Vector2<int> GetPos() const;
-    void SetPos(int x, int y);
-    void SetTargetPos(int* const x, int* const y);
-    
+    const sf::Vector2f & GetPosition() const;
+    void SetPosition(float x, float y);
+    const sf::Vector2f & GetModePosition(CameraMode whichPositionToSet) const; // whichPositionToSet decides if to read the free camera pos or the target camera pos
+    void SetModePosition(float x, float y, CameraMode whichPositionToSet); // whichPositionToSet decides if to change the free camera pos or the target camera pos
     
 private:
     Camera();
     static Camera* instance;
     
-    int posX, posY;
-    int* targetX;
-    int* targetY;
+    sf::Vector2f cameraFreePos;
+    sf::Vector2f cameraTargetPos;
     
     CameraMode mode;
 };

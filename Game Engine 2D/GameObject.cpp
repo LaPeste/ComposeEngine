@@ -4,9 +4,7 @@
 GameObject::GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation, float startingPosX, float startingPosY) :
     isLoaded (false),
     toAnimate(false),
-    animator(spriteMaxFrame, animationFrameRate, reverseAnimation),
-    posX(startingPosX),
-    posY(startingPosY)
+    animator(spriteMaxFrame, animationFrameRate, reverseAnimation)
 {
     GameObject::toAnimate = toAnimate;
 }
@@ -70,7 +68,6 @@ void GameObject::Draw(sf::RenderWindow& window)
 	{
         if(toAnimate) animator.Animate(sprite);
         
-        sprite.setPosition(posX, posY);
         window.draw(sprite);
 	}
 }
@@ -115,6 +112,7 @@ const sf::Vector2f GameObject::GetPosition() const
     {
         return sprite.getPosition();
     }
+    Utils::PrintDebugError("GameObject::GetPosition()", "the gameObject doesn't have the sprite loaded!");
     return sf::Vector2f();
 }
 
