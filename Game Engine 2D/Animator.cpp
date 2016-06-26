@@ -1,4 +1,4 @@
-#include "Animator.h"
+#include "Animator.hpp"
 
 Animator::Animator(int spriteMaxFrame, int animationFrameRate, bool reverseAnimation) :
     currentFrame(0),

@@ -1,9 +1,9 @@
-#ifndef _ENGINE_H_
-#define _ENGINE_H_
+#ifndef _ENGINE_HPP_
+#define _ENGINE_HPP_
 
 #include "stdafx.h"
-#include "GameObjectManager.h"
-#include "Event.h"
+#include "GameObjectManager.hpp"
+#include "Event.hpp"
 #include <tmx/MapLoader.h>
 
 class Engine : public Event
@@ -28,6 +28,7 @@ public:
 
 	//Utils
 	sf::RenderWindow* GetWindow() const;
+    tmx::MapLoader & GetMapLoader();
 
 private:
 	Engine();
@@ -43,6 +44,7 @@ private:
 	sf::RenderWindow* mainWindow; //SFML Render Window
 	GameState gameState;
 //	GameObjectManager gameObjectManager;
+    
     tmx::MapLoader ml;
 
 	//methods

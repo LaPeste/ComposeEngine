@@ -6,8 +6,8 @@
 //  Copyright © 2016 Andrea Catalini. All rights reserved.
 //
 
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
+#ifndef _CAMERA_HPP_
+#define _CAMERA_HPP_
 
 #include "stdafx.h"
 
@@ -22,7 +22,7 @@ class Camera
 {
     
 public:
-    static void CreateInstance(); //singleton lazy initialization
+    static void CreateInstance(float cameraZoomWidth, float cameraZoonHeight); //singleton lazy initialization
     ~Camera();
     static Camera* GetInstance();
     
@@ -36,17 +36,20 @@ public:
     void SetCameraMode(CameraMode mode);
     const CameraMode& GetCameraMode() const;
     
-    const sf::Vector2f & GetPosition() const;
+    const sf::Vector2f& GetPosition() const;
     void SetPosition(float x, float y);
-    const sf::Vector2f & GetModePosition(CameraMode whichPositionToSet) const; // whichPositionToSet decides if to read the free camera pos or the target camera pos
+    const float GetWidth() const;
+    const float GetHeight() const;
+    const sf::Vector2f& GetModePosition(CameraMode whichPositionToSet) const; // whichPositionToSet decides if to read the free camera pos or the target camera pos
     void SetModePosition(float x, float y, CameraMode whichPositionToSet); // whichPositionToSet decides if to change the free camera pos or the target camera pos
     
 private:
-    Camera();
+    Camera(float cameraZoomWidth, float cameraZoomHeight);
     static Camera* instance;
     
     sf::Vector2f cameraFreePos;
     sf::Vector2f cameraTargetPos;
+    float width, height;
     
     CameraMode mode;
 };

@@ -1,8 +1,8 @@
-#include "Engine.h"
-#include "GameObjectManager.h"
-#include "Player.h"
-#include "FPS.h"
-#include "Camera.h"
+#include "Engine.hpp"
+#include "GameObjectManager.hpp"
+#include "Player.hpp"
+#include "FPS.hpp"
+#include "Camera.hpp"
 #include <tmx/Log.h>
 
 Engine::~Engine()
@@ -50,11 +50,11 @@ bool Engine::Init()
     tmx::Logger::SetLogLevel(tmx::Logger::Warning | tmx::Logger::Error);
     ml.Load("desert.tmx");
     
-	//init gameobject manager and its objects
-	Player* player = new Player(true);
-    GameObjectManager::Add(GameObjectManager::GameObjectType::player, player);
-    Camera::CreateInstance();
-    
+    //init gameobject manager and its objects
+    GameObjectManager::Init();
+    Player* player = new Player(true, Constants::PLAYER_NAME);
+    GameObjectManager::Add(player);
+    Camera::CreateInstance(Constants::CAMERA_ZOOM_WIDTH ,Constants::CAMERA_ZOOM_HEIGHT);
     return true;
 
 }
@@ -73,8 +73,19 @@ void Engine::MainLoop()
 	}
 }
 
+void Engine::ProcessInput()
+{
+    sf::Event event;
+    while (mainWindow->pollEvent(event))
+    {
+        OnEvent(event);
+    }
+}
+
 void Engine::Update()
 {
+//    sf::FloatRect rootNode(Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Camera::GetInstance()->GetWidth(), Camera::GetInstance()->GetHeight());
+//    ml.UpdateQuadTree(rootNode); //update quadtree's rootnode to what's visible in the screen
     FPS::Update();
     Camera::GetInstance()->Update();
     GameObjectManager::UpdateAll();
@@ -89,14 +100,7 @@ void Engine::RenderFrame()
 	mainWindow->display();
 }
 
-void Engine::ProcessInput()
-{
-	sf::Event event;
-	while (mainWindow->pollEvent(event))
-	{
-		OnEvent(event);
-	}
-}
+
 
 bool Engine::IsExiting()
 {
@@ -182,3 +186,17 @@ void Engine::OnExit()
 	//maybe here you hava to call all the needed destructor
 	gameState = GameState::Exiting;
 }
+
+//*****************
+//Getter and Setter
+//*****************
+tmx::MapLoader & Engine::GetMapLoader() //this doesn't fucking work!!! I hate when it doesn't work >:(
+{
+    return ml;
+}
+
+
+
+
+
+

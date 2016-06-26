@@ -1,4 +1,4 @@
-#include "Event.h"
+#include "Event.hpp"
 
 Event::Event()
 {
@@ -20,7 +20,7 @@ void Event::OnEvent(const sf::Event& e)
 		case sf::Event::KeyReleased:
 			OnKeyUp(e.key);
 			break;
-		case sf::Event::JoystickButtonPressed:
+		case sf::Event::JoystickButtonPressed: //this is wrong, it should be arranged like above
 			switch (e.JoystickButtonPressed)
 			{
 				case sf::Joystick::Axis::X :

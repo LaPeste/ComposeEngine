@@ -1,5 +1,5 @@
-#ifndef _FPS_H_
-#define _FPS_H_
+#ifndef _FPS_HPP_
+#define _FPS_HPP_
 
 #include "stdafx.h"
 

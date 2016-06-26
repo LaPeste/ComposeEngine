@@ -1,4 +1,4 @@
-#include "FPS.h"
+#include "FPS.hpp"
 
 int FPS::frameRate(0);
 int FPS::lastTime(0);

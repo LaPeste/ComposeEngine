@@ -6,8 +6,8 @@
 //  Copyright © 2016 Andrea Catalini. All rights reserved.
 //
 
-#ifndef _UTILS_H_
-#define _UTILS_H_
+#ifndef _UTILS_HPP_
+#define _UTILS_HPP_
 
 #include "stdafx.h"
 

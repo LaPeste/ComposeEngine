@@ -28,6 +28,7 @@
 		1EA479BF1C9985B2004696A5 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479B31C9985B2004696A5 /* Player.cpp */; };
 		1EA479C01C9985B2004696A5 /* smb2-heroes_sheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */; };
 		1EA479C11C9985B2004696A5 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479B61C9985B2004696A5 /* stdafx.cpp */; };
+		1EB9AE5C1D07132D00BBC42A /* CollisionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9AE5A1D07132D00BBC42A /* CollisionEvent.cpp */; };
 		1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EC00EAA1C9B345E003EEB24 /* Utils.cpp */; };
 		1EC00EAD1C9B4673003EEB24 /* mariosheet.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */; };
 /* End PBXBuildFile section */
@@ -40,7 +41,7 @@
 		1E0519B51C996C31008CC160 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1E0519BC1C996C31008CC160 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		1E07BFAE1CB2B3F600B410CD /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
-		1E07BFAF1CB2B3F600B410CD /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		1E07BFAF1CB2B3F600B410CD /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		1E12A7BB1CB1912F0085208A /* sewer_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sewer_tileset.png; path = resources/maps/sewer_tileset.png; sourceTree = "<group>"; };
 		1E12A7BC1CB1912F0085208A /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tmw_desert_spacing.png; path = resources/maps/tmw_desert_spacing.png; sourceTree = "<group>"; };
 		1E38D05A1CC3DF6700BD9BE5 /* libpugi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpugi.dylib; path = "Game Engine 2D/lib/libpugi.dylib"; sourceTree = "<group>"; };
@@ -49,27 +50,30 @@
 		1E3E9B411CA9D4A700159DCB /* desert.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = desert.tmx; path = resources/maps/desert.tmx; sourceTree = "<group>"; };
 		1E3E9B421CA9D4A700159DCB /* desert.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = desert.tsx; path = resources/maps/desert.tsx; sourceTree = "<group>"; };
 		1EA479A51C9985B2004696A5 /* Animator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animator.cpp; sourceTree = "<group>"; };
-		1EA479A61C9985B2004696A5 /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animator.h; sourceTree = "<group>"; };
-		1EA479A71C9985B2004696A5 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		1EA479A61C9985B2004696A5 /* Animator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Animator.hpp; sourceTree = "<group>"; };
+		1EA479A71C9985B2004696A5 /* Constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Constants.hpp; sourceTree = "<group>"; };
 		1EA479A81C9985B2004696A5 /* Constants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Constants.cpp; sourceTree = "<group>"; };
 		1EA479A91C9985B2004696A5 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
-		1EA479AA1C9985B2004696A5 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
+		1EA479AA1C9985B2004696A5 /* Engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Engine.hpp; sourceTree = "<group>"; };
 		1EA479AB1C9985B2004696A5 /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Event.cpp; sourceTree = "<group>"; };
-		1EA479AC1C9985B2004696A5 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		1EA479AC1C9985B2004696A5 /* Event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Event.hpp; sourceTree = "<group>"; };
 		1EA479AD1C9985B2004696A5 /* FPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FPS.cpp; sourceTree = "<group>"; };
-		1EA479AE1C9985B2004696A5 /* FPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPS.h; sourceTree = "<group>"; };
+		1EA479AE1C9985B2004696A5 /* FPS.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FPS.hpp; sourceTree = "<group>"; };
 		1EA479AF1C9985B2004696A5 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
-		1EA479B01C9985B2004696A5 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		1EA479B01C9985B2004696A5 /* GameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
 		1EA479B11C9985B2004696A5 /* GameObjectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjectManager.cpp; sourceTree = "<group>"; };
-		1EA479B21C9985B2004696A5 /* GameObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectManager.h; sourceTree = "<group>"; };
+		1EA479B21C9985B2004696A5 /* GameObjectManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObjectManager.hpp; sourceTree = "<group>"; };
 		1EA479B31C9985B2004696A5 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
-		1EA479B41C9985B2004696A5 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		1EA479B41C9985B2004696A5 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smb2-heroes_sheet.png"; sourceTree = "<group>"; };
 		1EA479B61C9985B2004696A5 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
 		1EA479B71C9985B2004696A5 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
-		1EC00EA91C9B31F0003EEB24 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		1EB9AE5A1D07132D00BBC42A /* CollisionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionEvent.cpp; sourceTree = "<group>"; };
+		1EB9AE5B1D07132D00BBC42A /* CollisionEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionEvent.hpp; sourceTree = "<group>"; };
+		1EC00EA91C9B31F0003EEB24 /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		1EC00EAA1C9B345E003EEB24 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = mariosheet.gif; path = Resources/mariosheet.gif; sourceTree = "<group>"; };
+		1EE625C11D0ED274000B91B9 /* GameObjectType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameObjectType.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,17 +148,19 @@
 		1EA479C41C998813004696A5 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				1EA479A61C9985B2004696A5 /* Animator.h */,
-				1E07BFAF1CB2B3F600B410CD /* Camera.h */,
-				1EA479A71C9985B2004696A5 /* Constants.h */,
-				1EA479AA1C9985B2004696A5 /* Engine.h */,
-				1EA479AC1C9985B2004696A5 /* Event.h */,
-				1EA479AE1C9985B2004696A5 /* FPS.h */,
-				1EA479B01C9985B2004696A5 /* GameObject.h */,
-				1EA479B21C9985B2004696A5 /* GameObjectManager.h */,
-				1EA479B41C9985B2004696A5 /* Player.h */,
+				1EA479A61C9985B2004696A5 /* Animator.hpp */,
+				1E07BFAF1CB2B3F600B410CD /* Camera.hpp */,
+				1EB9AE5B1D07132D00BBC42A /* CollisionEvent.hpp */,
+				1EA479A71C9985B2004696A5 /* Constants.hpp */,
+				1EA479AA1C9985B2004696A5 /* Engine.hpp */,
+				1EA479AC1C9985B2004696A5 /* Event.hpp */,
+				1EA479AE1C9985B2004696A5 /* FPS.hpp */,
+				1EA479B01C9985B2004696A5 /* GameObject.hpp */,
+				1EA479B21C9985B2004696A5 /* GameObjectManager.hpp */,
+				1EA479B41C9985B2004696A5 /* Player.hpp */,
 				1EA479B71C9985B2004696A5 /* stdafx.h */,
-				1EC00EA91C9B31F0003EEB24 /* Utils.h */,
+				1EC00EA91C9B31F0003EEB24 /* Utils.hpp */,
+				1EE625C11D0ED274000B91B9 /* GameObjectType.hpp */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -164,6 +170,7 @@
 			children = (
 				1EA479A51C9985B2004696A5 /* Animator.cpp */,
 				1E07BFAE1CB2B3F600B410CD /* Camera.cpp */,
+				1EB9AE5A1D07132D00BBC42A /* CollisionEvent.cpp */,
 				1EA479A81C9985B2004696A5 /* Constants.cpp */,
 				1EA479A91C9985B2004696A5 /* Engine.cpp */,
 				1EA479AB1C9985B2004696A5 /* Event.cpp */,
@@ -274,6 +281,7 @@
 				1EA479BF1C9985B2004696A5 /* Player.cpp in Sources */,
 				1E0519B61C996C31008CC160 /* main.cpp in Sources */,
 				1E07BFB01CB2B3F600B410CD /* Camera.cpp in Sources */,
+				1EB9AE5C1D07132D00BBC42A /* CollisionEvent.cpp in Sources */,
 				1E0519B31C996C31008CC160 /* ResourcePath.mm in Sources */,
 				1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */,
 				1EA479B91C9985B2004696A5 /* Constants.cpp in Sources */,
@@ -450,7 +458,11 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"FRAME_RATE=0",
+					"LOG_OUTPUT_CONSOLE=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include/,
 					"$(inherited)",

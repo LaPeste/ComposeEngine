@@ -24,9 +24,10 @@
 #include <iostream>
 #include <cassert>
 #include <string>
+#include <vector>
 
-#include "Utils.h"
-#include "Constants.h"
+#include "Utils.hpp"
+#include "Constants.hpp"
 
 #if __APPLE__ && __MACH__
 // Here is a small helper for you ! Have a look.

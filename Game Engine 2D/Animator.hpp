@@ -1,5 +1,5 @@
-#ifndef _ANIMATOR_H_
-#define _ANIMATOR_H_
+#ifndef _ANIMATOR_HPP_
+#define _ANIMATOR_HPP_
 
 #include "stdafx.h"
 

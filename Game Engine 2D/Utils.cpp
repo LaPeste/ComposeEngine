@@ -6,7 +6,7 @@
 //  Copyright © 2016 Andrea Catalini. All rights reserved.
 //
 
-#include "Utils.h"
+#include "Utils.hpp"
 #include "stdafx.h"
 
 void Utils::PrintDebugLog(const std::string& methodName, const std::string& message)

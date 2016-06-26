@@ -6,18 +6,19 @@
 //  Copyright © 2016 Andrea Catalini. All rights reserved.
 //
 
-#include "Camera.h"
-#include "GameObjectManager.h"
-#include "Engine.h"
+#include "Camera.hpp"
+#include "GameObjectManager.hpp"
+#include "Engine.hpp"
 
 using namespace sf;
 
 Camera* Camera::instance;
 
-Camera::Camera() :
+Camera::Camera(float cameraZoomWidth, float cameraZoomHeight) :
     cameraTargetPos(0.0f, 0.0f),
     cameraFreePos(0.0f, 0.0f),
-    mode (CameraMode::FOLLOW_PLAYER) //(Constants::CAMERA_MODE) how to achieve this? I can't get it in the constants
+    mode (CameraMode::FOLLOW_PLAYER),//(Constants::CAMERA_MODE) how to achieve this? I can't get it in the constants
+    width(cameraZoomWidth), height(cameraZoomHeight)
 {
 
 }
@@ -29,14 +30,14 @@ Camera::~Camera()
 #endif
 }
 
-void Camera::CreateInstance()
+void Camera::CreateInstance(float cameraZoomWidth, float cameraZoomHeight)
 {
     if(instance != nullptr)
     {
         Utils::PrintDebugError("Camera::CreateInstance()", "You're trying to instantiate the camera twice!");
         return;
     }
-    instance = new Camera;
+    instance = new Camera(cameraZoomWidth, cameraZoomHeight);
 }
 
 Camera * Camera::GetInstance()
@@ -54,18 +55,18 @@ void Camera::Update()
     if(mode == CameraMode::FOLLOW_PLAYER)
     {
         Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
-        float newPosX = playerPos.x - Constants::CAMERA_ZOOM_WIDTH/2 + Constants::PLAYER_WIDTH/2;
-        float newPosY = playerPos.y - Constants::CAMERA_ZOOM_HEIGHT/2 + Constants::PLAYER_HEIGHT/2;
+        float newPosX = playerPos.x - GetWidth()/2 + Constants::PLAYER_WIDTH/2;
+        float newPosY = playerPos.y - GetHeight()/2 + Constants::PLAYER_HEIGHT/2;
 
         //if the camera doesn't reach the left or right limit of the map
-        if( ( playerPos.x - Constants::PLAYER_WIDTH/2 > Constants::CAMERA_ZOOM_WIDTH/2 - Constants::PLAYER_WIDTH/2 ) &&
-            ( playerPos.x + Constants::PLAYER_WIDTH/2 + Constants::CAMERA_ZOOM_WIDTH/2 < Constants::SCREEN_WIDTH ) )
+        if( ( playerPos.x - Constants::PLAYER_WIDTH/2 > GetWidth()/2 - Constants::PLAYER_WIDTH/2 ) &&
+           ( playerPos.x + Constants::PLAYER_WIDTH/2 + GetWidth()/2 < Engine::GetInstance().GetWindow()->getSize().x ) )
         {
             cameraTargetPos.x = newPosX;
         }
         
-        if( ( playerPos.y - Constants::PLAYER_HEIGHT/2 > Constants::CAMERA_ZOOM_HEIGHT/2 - Constants::PLAYER_HEIGHT/2 ) &&
-           ( playerPos.y + Constants::PLAYER_WIDTH/2 + Constants::CAMERA_ZOOM_HEIGHT/2 < Constants::SCREEN_HEIGHT ) )
+        if( ( playerPos.y - Constants::PLAYER_HEIGHT/2 > GetHeight()/2 - Constants::PLAYER_HEIGHT/2 ) &&
+           ( playerPos.y + Constants::PLAYER_WIDTH/2 + GetHeight()/2 < Engine::GetInstance().GetWindow()->getSize().y ) )
         {
             cameraTargetPos.y = newPosY;
         }
@@ -84,6 +85,10 @@ void Camera::Draw()
                                     }
                                 } );
 }
+
+//******************
+// GETTERS AND SETTERS
+//******************
 
 const Vector2f & Camera::GetPosition() const
 {
@@ -105,6 +110,16 @@ void Camera::SetPosition(float x, float y)
         cameraFreePos.x = x;
         cameraFreePos.y = y;
     }
+}
+
+const float Camera::GetWidth() const
+{
+    return width;
+}
+
+const float Camera::GetHeight() const
+{
+    return height;
 }
 
 const CameraMode & Camera::GetCameraMode() const

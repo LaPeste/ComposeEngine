@@ -1,18 +1,24 @@
 #include "stdafx.h"
-#include "Player.h"
-#include "Engine.h"
-#include "FPS.h"
+#include "Player.hpp"
+#include "Engine.hpp"
+#include "FPS.hpp"
 #include "ResourcePath.hpp" // Here is a small helper for you ! Have a look.
 
-#define elapsedTime()(Engine::GetInstance().Clock().getElapsedTime - timeSinceLastDrawnFrame)
+inline GameObjectFlags operator|(GameObjectFlags a, GameObjectFlags b)
+{return static_cast<GameObjectFlags>(static_cast<int>(a) | static_cast<int>(b));}
 
-Player::Player(bool toAnimate) :
-	velocity(0),
-	maxVelocity(60),
-	speed(Constants::SPEED),
-	MoveLeft(false),
-	MoveRight(false),
-    GameObject(toAnimate, Constants::PLAYER_SPRITE_MAX_FRAME, Constants::ANIMATION_FRAMERATE, Constants::REVERSE_ANIMATION, Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y)
+inline GameObjectFlags operator&(GameObjectFlags a, GameObjectFlags b)
+{return static_cast<GameObjectFlags>(static_cast<int>(a) & static_cast<int>(b));}
+
+Player::Player(bool toAnimate, std::string name) :
+    GameObject(toAnimate, Constants::PLAYER_SPRITE_MAX_FRAME, Constants::ANIMATION_FRAMERATE, Constants::REVERSE_ANIMATION,
+               Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y,
+                Constants::PLAYER_MAXSPEED_X, Constants::PLAYER_MAXSPEED_Y,
+               0.5f, 0.5f,
+               Constants::OFFSET_COL_X, Constants::OFFSET_COL_Y,
+               (GameObjectFlags::GRAVITY),
+               name,
+               GameObjectType::UserPlayer)
 {
     
 #ifdef _WIN32
@@ -33,67 +39,6 @@ Player::~Player()
     Utils::PrintDebugLog("~Player()", "dctr called");
 #endif
 }
-
-void Player::Update()
-{
-    UpdatePosition(); //base on inputs
-}
-
-void Player::Draw(sf::RenderWindow& rw)
-{
-	GameObject::Draw(rw);
-}
-
-float Player::GetVelocity() const
-{
-	return velocity;
-}
-
-void Player::UpdatePosition()
-{
-    if(MoveLeft)
-    {
-        if(toAnimate)
-        {
-            animator.FlipSprite(true);
-            animator.AnimateSprite(true);
-        }
-        if((GetPosition().x - Constants::PLAYER_STEP_SIZE) >= 0)
-        {
-            sf::Vector2<float> pos = GetPosition();
-            SetPosition(pos.x - Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor(), pos.y);
-//            posX -= Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor();
-        }
-    }
-    else if(MoveRight)
-    {
-        if(toAnimate)
-        {
-            animator.FlipSprite(false);
-            animator.AnimateSprite(true);
-        }
-        if((GetPosition().x + Constants::PLAYER_STEP_SIZE + Constants::PLAYER_WIDTH) <= Constants::SCREEN_WIDTH)
-        {
-            sf::Vector2<float> pos = GetPosition();
-            SetPosition(pos.x + Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor(), pos.y);
-//            posX += Constants::PLAYER_STEP_SIZE * FPS::GetSpeedFactor();
-        }
-    }
-    else if(Jump)
-    {
-        //TODO
-    }
-    else if(Crouch)
-    {
-        //TODO
-    }
-    else
-    {
-        animator.AnimateSprite(false);
-    }
-        
-}
-
 
 /*** THEORY ****
 
