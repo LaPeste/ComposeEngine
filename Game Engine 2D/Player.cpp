@@ -25,7 +25,7 @@ Player::Player(bool toAnimate, std::string name) :
     std::string loadPath = "images/" + Constants::PLAYER_SPRITE_NAME;
 #elif __APPLE__ && __MACH__
     std::string loadPath = resourcePath() + Constants::PLAYER_SPRITE_NAME;
-//#should do the linux version
+//TODO #should do the linux version
 #endif
     
     GameObject::Load(loadPath, Constants::PLAYER_SPRITE_STARTING_X, Constants::PLAYER_SPRITE_STARTING_Y, Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT);

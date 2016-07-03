@@ -23,7 +23,7 @@ GameObject::GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRat
                        std::string name,
                        const GameObjectType& type) :
     isLoaded (false),
-    MoveLeft(false), MoveRight(false),
+    MoveLeft(false), MoveRight(false), canJump(false),
     toAnimate(toAnimate),
     dead(false),
     animator(spriteMaxFrame, animationFrameRate, reverseAnimation),
@@ -183,13 +183,13 @@ void GameObject::Update()
     }
     else if(MoveRight)
     {
-        accelerationX = customAccelerationY;
+        accelerationX = customAccelerationX;
     }
     
-//    if((Flags & GameObjectFlags::GRAVITY) == GameObjectFlags::GRAVITY) //TODO fix gravity! Create a floor below which the player won't go
-//    {
-//        accelerationY = Constants::IN_GAME_GRAVITY;
-//    }
+    if((Flags & GameObjectFlags::GRAVITY) == GameObjectFlags::GRAVITY) //TODO fix gravity! Create a floor below which the player won't go
+    {
+        accelerationY = Constants::IN_GAME_GRAVITY;
+    }
     
     speedX += accelerationX * FPS::GetSpeedFactor();
     speedY += accelerationY * FPS::GetSpeedFactor();
@@ -296,9 +296,17 @@ void GameObject::StopMove()
     }
 }
 
+bool GameObject::Jump()
+{
+    if(!canJump) return false;
+    
+    speedY = -maxSpeedY;
+    return true;
+}
+
 void GameObject::MoveTo(float x, float y)
 {
-    if(x > 2344){
+    if(x > 2344){ //Debug TODO to remove!
         std::cout << "It's a big mess";
     }
     if(x == 0 && y == 0) return;
@@ -343,6 +351,7 @@ void GameObject::MoveTo(float x, float y)
         }
         else
         {
+            // movement on X axis
             if(PosValid(GetPosition().x + stepX, GetPosition().y))
             {
                 SetPosition(GetPosition().x + stepX, GetPosition().y);
@@ -352,6 +361,7 @@ void GameObject::MoveTo(float x, float y)
                 speedX = 0;
             }
             
+            // movement on Y axis
             if(PosValid(GetPosition().x, GetPosition().y + stepY))
             {
                 SetPosition(GetPosition().x, GetPosition().y + stepY);
@@ -360,6 +370,7 @@ void GameObject::MoveTo(float x, float y)
             {
                 speedY = 0;
             }
+            canJump = speedY == 0;
         }
         
         x -= stepX;
@@ -408,9 +419,10 @@ bool GameObject::Collides()//float originX, float originY, float width, float he
         return false;
     }
     bool collision = false;
+
     for(auto object = objects.begin(); object != objects.end(); ++object)
     {
-        if((*object)->GetParent() == "Collision Objects")
+        if((*object)->GetParent() == Constants::COLLISION_LAYER)// || (*object)->GetParent() == Constants::GROUND_LAYER )
         {
             for(int i = 0; i < 4; i++) //where 4 is the amount of collisionPoints we have. Those are the 4 corners of the sprite of a gameObject.
             {

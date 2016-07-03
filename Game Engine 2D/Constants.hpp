@@ -60,11 +60,17 @@ public:
     
     
     //************************
-    // Map data
+    // Maps
     //************************
+    static const std::string TEST_MAP;
     
-    static const std::string COLLISION_LAYER;
     //static const CameraMode CAMERA_MODE;
+    
+    //************************
+    // Map Layers
+    //************************
+    static const std::string COLLISION_LAYER;
+    static const std::string GROUND_LAYER;
 };
 
 

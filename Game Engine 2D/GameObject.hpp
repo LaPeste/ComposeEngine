@@ -71,7 +71,7 @@ public:
     bool MoveLeft;
     bool MoveRight;
     bool Crouch;
-    bool Jump;
+    bool Jump();
     void MoveTo(float x, float y);
     const bool IsDead() const;
     void SetDeath(bool dead);
@@ -84,9 +84,10 @@ protected:
     Animator animator;
     
     float accelerationX, accelerationY; //++left , --right
-    float customAccelerationX, customAccelerationY;
+    float customAccelerationX, customAccelerationY; //custom quantity for each step on X to move left and right on Y to jump
     float speedX, speedY; //instantaneous velocity
     float maxSpeedX, maxSpeedY;
+    bool canJump;
     
     void UpdatePosition();
     void StopMove();

@@ -15,14 +15,14 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp> // to enable assert
+#include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 
 //STD libraries
 //#include <tchar.h>
 #include <map>
 #include <iostream>
-#include <cassert>
+#include <cassert> //to enable assert
 #include <string>
 #include <vector>
 

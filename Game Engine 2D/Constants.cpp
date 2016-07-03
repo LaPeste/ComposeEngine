@@ -18,14 +18,14 @@ const float Constants::CAMERA_ZOOM_HEIGHT = 400;
 const std::string Constants::PLAYER_NAME = "Mario";
 
 //Sprite variables --> animation assumes that the sprite-set is horizontally developed
-const std::string Constants::PLAYER_SPRITE_NAME = "mariosheet.gif";
-const int Constants::PLAYER_SPRITE_STARTING_X = 39;
-const int Constants::PLAYER_SPRITE_STARTING_Y = 57;
-const int Constants::PLAYER_WIDTH = 15;
-const int Constants::PLAYER_HEIGHT = 16;
-const int Constants::SPACE_BETWEEN_SPRITE_X = 15;
+const std::string Constants::PLAYER_SPRITE_NAME = "SNES - Super Mario World - Mario.png";
+const int Constants::PLAYER_SPRITE_STARTING_X = 14;
+const int Constants::PLAYER_SPRITE_STARTING_Y = 10;
+const int Constants::PLAYER_WIDTH = 14;
+const int Constants::PLAYER_HEIGHT = 20;
+const int Constants::SPACE_BETWEEN_SPRITE_X = 3;
 const int Constants::SPACE_BETWEEN_SPRITE_Y = 0;
-const int Constants::PLAYER_SPRITE_MAX_FRAME = 4;
+const int Constants::PLAYER_SPRITE_MAX_FRAME = 2;
 const int Constants::ANIMATION_FRAMERATE = 200; //in millisecond
 const bool Constants::REVERSE_ANIMATION = false;
 const int Constants::GAME_FRAMERATE_TARGET = 32;
@@ -45,8 +45,18 @@ const int Constants::PLAYER_PHYSICAL_STARTING_Y = 60;
 const float Constants::IN_GAME_GRAVITY = 0.75f;
 
 //************************
-// Map data
+// Maps
 //************************
-const std::string Constants::COLLISION_LAYER = "Collision Objects";
-//const CameraMode CAMERA_MODE = CameraMode::TARGET_MODE_NORMAL;
+//const std::string Constants::TEST_MAP;
+#ifdef _WIN32
+const std::string  Constants::TEST_MAP = "maps/" + Constants::PLAYER_SPRITE_NAME;
+#elif __APPLE__ && __MACH__
+const std::string  Constants::TEST_MAP = resourcePath() + "Test_Level.tmx";
+#endif
 
+//************************
+// Map Layers
+//************************
+const std::string Constants::COLLISION_LAYER = "Collision Layer";
+const std::string Constants::GROUND_LAYER = "Ground Layer";
+//const CameraMode CAMERA_MODE = CameraMode::TARGET_MODE_NORMAL;

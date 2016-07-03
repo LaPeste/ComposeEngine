@@ -48,7 +48,7 @@ bool Engine::Init()
 		return false;
     
     tmx::Logger::SetLogLevel(tmx::Logger::Warning | tmx::Logger::Error);
-    ml.Load("desert.tmx");
+    ml.Load(Constants::TEST_MAP);
     
     //init gameobject manager and its objects
     GameObjectManager::Init();
@@ -150,7 +150,7 @@ void Engine::OnKeyDown(const sf::Event::KeyEvent& input)
         }
         break;
 	case sf::Keyboard::Key::Space:
-		GameObjectManager::GetPlayer()->Jump = true;
+		GameObjectManager::GetPlayer()->Jump();
 		break;
 		//Add the cases that you need
 	default:
@@ -172,7 +172,7 @@ void Engine::OnKeyUp(const sf::Event::KeyEvent& input)
 		GameObjectManager::GetPlayer()->Crouch = false;
 		break;
 	case sf::Keyboard::Key::Space:
-		GameObjectManager::GetPlayer()->Jump = false;
+//		GameObjectManager::GetPlayer()->CanJump = false;
 		break;
 		//Add the cases that you need
 	default:
