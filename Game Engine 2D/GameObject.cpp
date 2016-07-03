@@ -140,14 +140,14 @@ void GameObject::Load(const std::string& filename, int startingLeft, int startin
         {
             isLoaded = true;
 #ifdef DEBUG
-            Utils::PrintDebugLog("GameObject::Load(...)", "texture correctly loaded!");
+            Utils::PrintDebugLog("GameObject::Load", "texture correctly loaded!");
 #endif
         }
         else
         {
             isLoaded = false;
 #ifdef DEBUG
-            Utils::PrintDebugError("GameObject::Load(...)", "texture not correctly loaded!");
+            Utils::PrintDebugError("GameObject::Load", "texture not correctly loaded!");
 #endif
 
         }
@@ -415,14 +415,14 @@ bool GameObject::Collides()//float originX, float originY, float width, float he
     std::vector<MapObject*> objects = Engine::GetInstance().GetMapLoader().QueryQuadTree(sprite.getGlobalBounds()); // grab all the MapObjects contained in the quads intersected by the bounds of sprite
     if(!Engine::GetInstance().GetMapLoader().QuadTreeAvailable())
     {
-        Utils::PrintDebugError("Collides()", "No MapTree is available");
+        Utils::PrintDebugError("Collides()", "No MapTree to query is available");
         return false;
     }
     bool collision = false;
 
     for(auto object = objects.begin(); object != objects.end(); ++object)
     {
-        if((*object)->GetParent() == Constants::COLLISION_LAYER)// || (*object)->GetParent() == Constants::GROUND_LAYER )
+        if((*object)->GetParent() == Constants::COLLISION_LAYER)
         {
             for(int i = 0; i < 4; i++) //where 4 is the amount of collisionPoints we have. Those are the 4 corners of the sprite of a gameObject.
             {
@@ -516,7 +516,18 @@ bool GameObject::PosValid(float x, float y)
 {
     Vector2f originalPosition = this->GetPosition();
     this->SetPosition(x, y);
-    bool posValid = Collides() ? false : true;
+    bool posValid = false;
+    
+    //prevent player from falling from map's limits
+    if(GetPosition().x <= 0 || GetPosition().x + GetSprite().getLocalBounds().width >= Engine::GetInstance().GetMapLoader().GetMapSize().x)
+    {
+        this->SetPosition(originalPosition);
+        posValid = false;
+    }
+    else
+    {
+        posValid = Collides() ? false : true;
+    }
     this->SetPosition(originalPosition);
     return posValid;
 }

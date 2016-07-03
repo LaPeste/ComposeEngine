@@ -32,7 +32,7 @@
 </data>
  </layer>
  <objectgroup name="Collision Layer">
-  <object id="6" name="Ground" x="-6.06061" y="608" width="2563.64" height="25"/>
+  <object id="6" name="Ground" x="-56" y="607.667" width="2671.15" height="22.303"/>
   <object id="17" name="Box5" x="1055" y="353" width="225" height="29"/>
   <object id="19" name="Box4" x="962" y="352" width="29" height="29"/>
   <object id="21" name="Box3" x="896" y="386" width="29" height="29"/>

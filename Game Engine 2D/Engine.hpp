@@ -23,8 +23,8 @@ public:
 	void operator=(Engine const&) = delete; //copy assignment operator
 
 	void Launch(sf::RenderWindow* createdWindow); //Starts the engine
-	void OnKeyDown(const sf::Event::KeyEvent& input) override;
-	void OnKeyUp(const sf::Event::KeyEvent& input) override;
+//	void OnKeyDown(const sf::Event::KeyEvent& input) override;
+//	void OnKeyUp(const sf::Event::KeyEvent& input) override;
 
 	//Utils
 	sf::RenderWindow* GetWindow() const;

@@ -17,7 +17,7 @@ Camera* Camera::instance;
 Camera::Camera(float cameraZoomWidth, float cameraZoomHeight) :
     cameraTargetPos(0.0f, 0.0f),
     cameraFreePos(0.0f, 0.0f),
-    mode (CameraMode::FOLLOW_PLAYER),//(Constants::CAMERA_MODE) how to achieve this? I can't get it in the constants
+    mode (CameraMode::FOLLOW_PLAYER),//TODO (Constants::CAMERA_MODE) how to achieve this? I can't get it in the constants
     width(cameraZoomWidth), height(cameraZoomHeight)
 {
 
@@ -59,14 +59,14 @@ void Camera::Update()
         float newPosY = playerPos.y - GetHeight()/2 + Constants::PLAYER_HEIGHT/2;
 
         //if the camera doesn't reach the left or right limit of the map
-        if( ( playerPos.x - Constants::PLAYER_WIDTH/2 > GetWidth()/2 - Constants::PLAYER_WIDTH/2 ) &&
-           ( playerPos.x + Constants::PLAYER_WIDTH/2 + GetWidth()/2 < Engine::GetInstance().GetWindow()->getSize().x ) )
+        if( ( playerPos.x + Constants::PLAYER_WIDTH/2 > GetWidth()/2 /*- Constants::PLAYER_WIDTH/2*/ ) &&
+           ( playerPos.x + Constants::PLAYER_WIDTH/2 + GetWidth()/2 < Engine::GetInstance().GetMapLoader().GetMapSize().x ) )
         {
             cameraTargetPos.x = newPosX;
         }
         
-        if( ( playerPos.y - Constants::PLAYER_HEIGHT/2 > GetHeight()/2 - Constants::PLAYER_HEIGHT/2 ) &&
-           ( playerPos.y + Constants::PLAYER_WIDTH/2 + GetHeight()/2 < Engine::GetInstance().GetWindow()->getSize().y ) )
+        if( ( playerPos.y + Constants::PLAYER_HEIGHT/2 > GetHeight()/2 /*- Constants::PLAYER_HEIGHT/2*/ ) &&
+           ( playerPos.y + Constants::PLAYER_WIDTH/2 + GetHeight()/2 < Engine::GetInstance().GetMapLoader().GetMapSize().y ) )
         {
             cameraTargetPos.y = newPosY;
         }
