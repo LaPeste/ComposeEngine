@@ -14,7 +14,8 @@ inline GameObjectFlags operator|(GameObjectFlags a, GameObjectFlags b)
 inline GameObjectFlags operator&(GameObjectFlags a, GameObjectFlags b)
 {return static_cast<GameObjectFlags>(static_cast<int>(a) & static_cast<int>(b));}
 
-GameObject::GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation,
+GameObject::GameObject(bool toAnimate, std::string spritePath, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation,
+                       int spriteBeginningX, int spriteBeginningY, int spriteWidth, int spriteHeight,
                        float startingPosX, float startingPosY,
                        float maxSpeedX, float maxSpeedY,
                        float customAccelerationX, float customAccelerationY,
@@ -37,11 +38,23 @@ GameObject::GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRat
     name(name),
     gameObjectType(type)
 {
+#ifdef _WIN32
+    std::string loadPath = "images/" + spritePath;
+#elif __APPLE__ && __MACH__
+    std::string loadPath = resourcePath() + spritePath;
+    //TODO #should do the linux version
+#endif
+    
+    GameObject::Load(loadPath, spriteBeginningX, spriteBeginningY, spriteWidth, spriteHeight);
+    assert(IsLoaded()); //you do this because you can't return a value from a constructor!!
+   
     collisionPoints[0] = Vector2f{0, 0};
-    collisionPoints[1] = Vector2f{sprite.getLocalBounds().width, 0};
-    collisionPoints[2] = Vector2f{0, sprite.getLocalBounds().height};
-    collisionPoints[3] = Vector2f{sprite.getLocalBounds().width, sprite.getLocalBounds().height};
+    collisionPoints[1] = Vector2f{sprite.getGlobalBounds().width, 0};
+    collisionPoints[2] = Vector2f{0, sprite.getGlobalBounds().height};
+    collisionPoints[3] = Vector2f{sprite.getGlobalBounds().width, sprite.getGlobalBounds().height};
     id = GameObjectManager::GetUniqueID();
+    
+    SetPosition(startingPosX, startingPosY);
 }
 
 GameObject::GameObject(tmx::MapObject* mapObject,
@@ -428,10 +441,7 @@ bool GameObject::Collides()//float originX, float originY, float width, float he
             {
                 collision = (*object)->Contains(GetPosition() + collisionPoints[i]);
                 
-                if(collision)
-                {
-                    break;
-                }
+                if(collision) break;
             }
         }
         if(collision)
@@ -519,12 +529,7 @@ bool GameObject::PosValid(float x, float y)
     bool posValid = false;
     
     //prevent player from falling from map's limits
-    if(GetPosition().x <= 0 || GetPosition().x + GetSprite().getLocalBounds().width >= Engine::GetInstance().GetMapLoader().GetMapSize().x)
-    {
-        this->SetPosition(originalPosition);
-        posValid = false;
-    }
-    else
+    if( !(GetPosition().x <= 0 || GetPosition().x + GetSprite().getLocalBounds().width >= Engine::GetInstance().GetMapLoader().GetMapSize().x) )
     {
         posValid = Collides() ? false : true;
     }

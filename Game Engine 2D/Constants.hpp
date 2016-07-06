@@ -34,11 +34,12 @@ public:
     static const std::string PLAYER_NAME;
     
     //Sprite settings
-    static const std::string PLAYER_SPRITE_NAME;
+    static const std::string PLAYER_SPRITE_PATH;
     static const int PLAYER_SPRITE_STARTING_X;
     static const int PLAYER_SPRITE_STARTING_Y;
     static const int PLAYER_WIDTH;
     static const int PLAYER_HEIGHT;
+    static const bool PLAYER_TO_ANIMATE;
     static const int SPACE_BETWEEN_SPRITE_X; //space between every frame in the frames set
     static const int SPACE_BETWEEN_SPRITE_Y;
     static const int PLAYER_SPRITE_MAX_FRAME;

@@ -52,7 +52,7 @@ bool Engine::Init()
     
     //init gameobject manager and its objects
     GameObjectManager::Init();
-    Player* player = new Player(true, Constants::PLAYER_NAME);
+    Player* player = new Player();
     GameObjectManager::Add(player);
     Camera::CreateInstance(Constants::CAMERA_ZOOM_WIDTH ,Constants::CAMERA_ZOOM_HEIGHT);
     return true;

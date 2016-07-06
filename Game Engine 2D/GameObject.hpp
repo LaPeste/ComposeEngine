@@ -16,7 +16,8 @@ public:
     // Summary:
     // Constructor thought for gameobjects that can perform actions
     ////////////////
-    GameObject(bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation,
+    GameObject(bool toAnimate, std::string spritePath, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation,
+               int spriteBeginningX, int spriteBeginningY, int spriteWidth, int spriteHeight,
                         float startingPosX, float startingPosY,
                         float maxSpeedX, float maxSpeedY,
                         float customAccelerationX, float customAccelerationY,

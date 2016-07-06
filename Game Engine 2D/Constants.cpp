@@ -18,11 +18,12 @@ const float Constants::CAMERA_ZOOM_HEIGHT = 400;
 const std::string Constants::PLAYER_NAME = "Mario";
 
 //Sprite variables --> animation assumes that the sprite-set is horizontally developed
-const std::string Constants::PLAYER_SPRITE_NAME = "SNES - Super Mario World - Mario.png";
+const std::string Constants::PLAYER_SPRITE_PATH = "SNES - Super Mario World - Mario.png";
 const int Constants::PLAYER_SPRITE_STARTING_X = 14;
 const int Constants::PLAYER_SPRITE_STARTING_Y = 10;
 const int Constants::PLAYER_WIDTH = 14;
 const int Constants::PLAYER_HEIGHT = 20;
+const bool Constants::PLAYER_TO_ANIMATE = true;
 const int Constants::SPACE_BETWEEN_SPRITE_X = 3;
 const int Constants::SPACE_BETWEEN_SPRITE_Y = 0;
 const int Constants::PLAYER_SPRITE_MAX_FRAME = 2;

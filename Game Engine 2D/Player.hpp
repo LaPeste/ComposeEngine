@@ -7,7 +7,7 @@ class Player : public GameObject
 {
 public:
 //    using GameObject::GameObject;
-    Player(bool toAnimate, std::string name);
+    Player();
 	~Player();
 
 //	void Update() override;
