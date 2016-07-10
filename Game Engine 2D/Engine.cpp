@@ -79,6 +79,7 @@ void Engine::ProcessInput()
     while (mainWindow->pollEvent(event))
     {
         OnEvent(event);
+        GameObjectManager::ProcessAllInput(event);
     }
 }
 

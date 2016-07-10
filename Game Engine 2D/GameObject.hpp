@@ -9,7 +9,7 @@
 
 //TODO arrange all the methods to support the fact that now a gameObject can contain a mapObject, hence a draw for example, if it's a mapObject, may not be necessary
 
-class GameObject
+class GameObject : public Event
 {
 public:
     /////////////////
@@ -61,13 +61,19 @@ public:
     long GetID() const;
     void SetID(const long id);
     std::string GetName() const;
-    virtual void Cleanup();
 	virtual bool IsLoaded() const;
     bool IsMapObject() const;
-    virtual bool OnCollision(GameObject* otherEntity);
     sf::Sprite GetSprite() const;
 //    virtual bool Collides(sf::Sprite sprite);
     virtual bool Collides();//float originX, float originY, float width, float height);
+    
+    //Interface for adding scripts
+    virtual void OnStart();
+    virtual void OnInput();
+    virtual void OnUpdate();
+    virtual void OnRender();
+    virtual bool OnCollision(GameObject* otherEntity);
+    virtual void OnExit();
     
     bool MoveLeft;
     bool MoveRight;
@@ -111,6 +117,9 @@ private:
     std::string name; //GameObject's name
     
     void SetSubTexture(int startingLeft, int startingTop, int width, int height);
+    
+    void OnKeyUp(const sf::Event::KeyEvent& input) override;
+    void OnKeyDown(const sf::Event::KeyEvent& input) override;
     
 };
 

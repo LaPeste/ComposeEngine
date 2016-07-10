@@ -26,6 +26,8 @@ public:
     static std::vector<CollisionEvent> collisionEvents; //TODO change back to private and find a way to use the getter
     static const std::string TmxIdStringField;
     static void ProcessAllCollisions();
+    static void ProcessAllInput(sf::Event event);
+    static void ProcessAllExit();
     
 private:
     static std::map<long, GameObject*> gameObjects;

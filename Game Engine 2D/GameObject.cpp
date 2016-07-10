@@ -55,6 +55,8 @@ GameObject::GameObject(bool toAnimate, std::string spritePath, int spriteMaxFram
     id = GameObjectManager::GetUniqueID();
     
     SetPosition(startingPosX, startingPosY);
+    
+    OnStart();
 }
 
 GameObject::GameObject(tmx::MapObject* mapObject,
@@ -174,6 +176,8 @@ void GameObject::Draw(sf::RenderWindow& window)
         if(toAnimate) animator.Animate(sprite);
         
         window.draw(sprite);
+        
+        OnRender();
 	}
 }
 
@@ -215,12 +219,7 @@ void GameObject::Update()
     Animate();
     MoveTo(speedX, speedY);
     
-    //UpdatePosition();
-}
-
-void GameObject::Cleanup()
-{
-
+    OnUpdate();
 }
 
 bool GameObject::IsLoaded() const
@@ -401,21 +400,6 @@ void GameObject::MoveTo(float x, float y)
     
 }
 
-bool GameObject::OnCollision(GameObject* otherEntity)
-{
-    Utils::PrintDebugLog("GameObject::OnCollision", name + " collided with " + otherEntity->GetName());
-    return true; //for now
-//    switch(/*collision type*/)
-//    {
-//        case /*enemy*/:
-//            //die;
-//            break;
-//        case /*solid object*/:
-//            //don't walk anymore;
-//            break;
-//    }
-}
-
 //bool GameObject::Collides(sf::Sprite sprite)
 //{
 //    return Collides(sprite.getPosition().x, sprite.getPosition().y, sprite.getLocalBounds().width, sprite.getLocalBounds().height);
@@ -538,6 +522,40 @@ bool GameObject::PosValid(float x, float y)
 }
 
 //*************
+//Interface for additional scripting
+//*************
+void GameObject::OnStart()
+{
+    
+}
+
+void GameObject::OnInput()
+{
+    
+}
+
+void GameObject::OnUpdate()
+{
+    
+}
+
+void GameObject::OnRender()
+{
+    
+}
+
+bool GameObject::OnCollision(GameObject* otherEntity)
+{
+    Utils::PrintDebugLog("GameObject::OnCollision", name + " collided with " + otherEntity->GetName());
+    return true;
+}
+
+void GameObject::OnExit()
+{
+    
+}
+
+//*************
 //Getters and Setters
 //*************
 
@@ -625,7 +643,77 @@ void GameObject::SetDeath(bool dead)
 }
 
 
-/* 
+void GameObject::OnKeyDown(const sf::Event::KeyEvent& input)
+{
+    sf::Vector2<float> cameraPos = Camera::GetInstance()->GetPosition();
+    sf::Vector2<float> cameraPosNoTarget = Camera::GetInstance()->GetPosition();
+    sf::Vector2<float> playerPos = GameObjectManager::GetPlayer()->GetPosition();
+    switch (input.code)
+    {
+        case sf::Keyboard::Key::A:
+            GameObjectManager::GetPlayer()->MoveLeft = true;
+            //            std::cout << "targetX " << cameraPos.x << " ,  targetY " << cameraPos.y << std::endl;
+            //            std::cout << "playerX " << playerPos.x << " ,  playery " << playerPos.y << std::endl;
+            if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
+            {
+                Camera::GetInstance()->SetPosition(cameraPosNoTarget.x - 5.0f, cameraPosNoTarget.y);
+            }
+            break;
+        case sf::Keyboard::Key::D:
+            GameObjectManager::GetPlayer()->MoveRight = true;
+            //            std::cout << "targetX " << cameraPos.x << " ,  targetY " << cameraPos.y << std::endl;
+            //            std::cout << "playerX " << playerPos.x << " ,  playery " << playerPos.y << std::endl;
+            if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
+            {
+                Camera::GetInstance()->SetPosition(cameraPosNoTarget.x + 5.0f, cameraPosNoTarget.y);
+            }
+            break;
+        case sf::Keyboard::Key::S:
+            GameObjectManager::GetPlayer()->Crouch = true;
+            if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
+            {
+                Camera::GetInstance()->SetPosition(cameraPosNoTarget.x, cameraPosNoTarget.y + 5.0f);
+            }
+            break;
+        case sf::Keyboard::Key::W:
+            GameObjectManager::GetPlayer()->Crouch = true;
+            if(Camera::GetInstance()->GetCameraMode() == CameraMode::FREE)
+            {
+                Camera::GetInstance()->SetPosition(cameraPosNoTarget.x, cameraPosNoTarget.y - 5.0f);
+            }
+            break;
+        case sf::Keyboard::Key::Space:
+            GameObjectManager::GetPlayer()->Jump();
+            break;
+            //Add the cases that you need
+        default:
+            break;
+    }
+}
+
+void GameObject::OnKeyUp(const sf::Event::KeyEvent& input)
+{
+    switch (input.code)
+    {
+        case sf::Keyboard::Key::A:
+            GameObjectManager::GetPlayer()->MoveLeft = false;
+            break;
+        case sf::Keyboard::Key::D:
+            GameObjectManager::GetPlayer()->MoveRight = false;
+            break;
+        case sf::Keyboard::Key::S:
+            GameObjectManager::GetPlayer()->Crouch = false;
+            break;
+        case sf::Keyboard::Key::Space:
+            //		GameObjectManager::GetPlayer()->CanJump = false;
+            break;
+            //Add the cases that you need
+        default:
+            break;
+    }
+}
+
+/*
  THEORY:
  STATIC CAST ==> is used for cases where you want to reverse an implicit conversion, with a few restrictions and additions. static_cast performs no runtime checks. This should be used if you know that you refer to an object of a specific type, and thus a check would be unnecessary.
  */

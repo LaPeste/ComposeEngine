@@ -43,6 +43,12 @@ GameObjectManager::~GameObjectManager()
 #ifdef LOG_OUTPUT_CONSOLE
     Utils::PrintDebugLog("~GameObjectManager()", "dctr called");
 #endif
+    
+    for(std::map<long, GameObject*>::iterator mapItem = gameObjects.begin(); mapItem != gameObjects.end(); ++mapItem)
+    {
+        mapItem->second->OnExit();
+    }
+    
 	std::for_each(gameObjects.begin(), gameObjects.end(), GameObjectDeallocator());
 }
 
@@ -77,6 +83,14 @@ void GameObjectManager::ProcessAllCollisions()
         }
     }
     collisionEvents.clear();
+}
+
+void GameObjectManager::ProcessAllInput(sf::Event event)
+{
+    for(std::map<long, GameObject*>::iterator mapItem = gameObjects.begin(); mapItem != gameObjects.end(); ++mapItem)
+    {
+        mapItem->second->OnEvent(event);
+    }
 }
 
 GameObject* GameObjectManager::GetGameObject(long id)
