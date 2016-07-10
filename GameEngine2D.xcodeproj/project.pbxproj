@@ -34,6 +34,7 @@
 		1EB9AE5C1D07132D00BBC42A /* CollisionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9AE5A1D07132D00BBC42A /* CollisionEvent.cpp */; };
 		1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EC00EAA1C9B345E003EEB24 /* Utils.cpp */; };
 		1EC00EAD1C9B4673003EEB24 /* mariosheet.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */; };
+		1EC792951D32AD6D00FAF8FD /* GameObjectComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EC792931D32AD6D00FAF8FD /* GameObjectComponent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,8 @@
 		1EC00EA91C9B31F0003EEB24 /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		1EC00EAA1C9B345E003EEB24 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = mariosheet.gif; path = Resources/mariosheet.gif; sourceTree = "<group>"; };
+		1EC792931D32AD6D00FAF8FD /* GameObjectComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjectComponent.cpp; sourceTree = "<group>"; };
+		1EC792941D32AD6D00FAF8FD /* GameObjectComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObjectComponent.hpp; sourceTree = "<group>"; };
 		1EE625C11D0ED274000B91B9 /* GameObjectType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameObjectType.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,6 +184,7 @@
 				1EA479AC1C9985B2004696A5 /* Event.hpp */,
 				1EA479AE1C9985B2004696A5 /* FPS.hpp */,
 				1EA479B01C9985B2004696A5 /* GameObject.hpp */,
+				1EC792941D32AD6D00FAF8FD /* GameObjectComponent.hpp */,
 				1EA479B21C9985B2004696A5 /* GameObjectManager.hpp */,
 				1EA479B41C9985B2004696A5 /* Player.hpp */,
 				1EA479B71C9985B2004696A5 /* stdafx.h */,
@@ -205,6 +209,7 @@
 				1EA479B31C9985B2004696A5 /* Player.cpp */,
 				1EA479B61C9985B2004696A5 /* stdafx.cpp */,
 				1EC00EAA1C9B345E003EEB24 /* Utils.cpp */,
+				1EC792931D32AD6D00FAF8FD /* GameObjectComponent.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				1EA479B91C9985B2004696A5 /* Constants.cpp in Sources */,
 				1EA479C11C9985B2004696A5 /* stdafx.cpp in Sources */,
 				1EA479BA1C9985B2004696A5 /* Engine.cpp in Sources */,
+				1EC792951D32AD6D00FAF8FD /* GameObjectComponent.cpp in Sources */,
 				1EA479BE1C9985B2004696A5 /* GameObjectManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -50,9 +50,9 @@ private:
 	//methods
 	bool Init(); //Initializes the engine
 	void MainLoop(); //Main Game Loop
-	void RenderFrame(); //Renders one frame
 	void ProcessInput(); //Processes user input
 	void Update(); //Updates all Engine internals
+    void RenderFrame(); //Renders one frame
 	void OnExit() override;
 	bool IsExiting();
 };
