@@ -22,7 +22,7 @@ public:
                         float maxSpeedX, float maxSpeedY,
                         float customAccelerationX, float customAccelerationY,
                         float offsetColX, float offsetColY,
-                        GameObjectFlags flags,
+                        GameObjectFlag flags,
                         std::string name,
                         const GameObjectType& type);
     /////////////////
@@ -32,7 +32,7 @@ public:
     GameObject(tmx::MapObject* mapObject,
                bool toAnimate, int spriteMaxFrame, int animationFrameRate, bool reverseAnimation,
                float offsetColX, float offsetColY,
-               GameObjectFlags flags);
+               GameObjectFlag flags);
     
     /////////////////
     // Summary:
@@ -40,7 +40,7 @@ public:
     ////////////////
     GameObject(tmx::MapObject* mapObject,
                float offsetColX, float offsetColY,
-               GameObjectFlags flags);
+               GameObjectFlag flags);
     
 	virtual ~GameObject();
 
@@ -83,7 +83,7 @@ public:
     const bool IsDead() const;
     void SetDeath(bool dead);
     
-    GameObjectFlags Flags;
+    GameObjectFlag Flags;
 
 protected:
 	float timeSinceLastDrawnFrame; //in seconds

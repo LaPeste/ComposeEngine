@@ -5,6 +5,7 @@
 #include "GameObjectManager.hpp"
 #include "Event.hpp"
 #include <tmx/MapLoader.h>
+#include "World.hpp"
 
 class Engine : public Event
 {
@@ -29,6 +30,8 @@ public:
 	//Utils
 	sf::RenderWindow* GetWindow() const;
     tmx::MapLoader & GetMapLoader();
+    
+    World World; //TODO maybe getter and setter?
 
 private:
 	Engine();
@@ -38,8 +41,6 @@ private:
 		ShowingMenu, Playing, Exiting
 	};
     
-    float testPosX, testPosY;
-
 	//variables
 	sf::RenderWindow* mainWindow; //SFML Render Window
 	GameState gameState;
@@ -53,7 +54,8 @@ private:
 	void ProcessInput(); //Processes user input
 	void Update(); //Updates all Engine internals
     void RenderFrame(); //Renders one frame
-	void OnExit() override;
+	void OnExit() override; //from events
+    void Terminate();
 	bool IsExiting();
 };
 

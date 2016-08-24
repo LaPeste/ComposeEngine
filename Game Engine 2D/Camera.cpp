@@ -9,6 +9,7 @@
 #include "Camera.hpp"
 #include "GameObjectManager.hpp"
 #include "Engine.hpp"
+#include "EntityManager.hpp"
 
 using namespace sf;
 
@@ -44,7 +45,7 @@ Camera * Camera::GetInstance()
 {
     if(instance == nullptr)
     {
-        Utils::PrintDebugError( "Camera::GetInstance", "Trying to get camera, but an instance is not created yet!");
+        Utils::PrintDebugError( "Camera::GetInstance", "Trying to get a camera, but an instance is not created yet!");
         return nullptr;
     }
     return instance;
@@ -52,9 +53,12 @@ Camera * Camera::GetInstance()
 
 void Camera::Update()
 {
-    if(mode == CameraMode::FOLLOW_PLAYER)
+    if(mode == CameraMode::FOLLOW_PLAYER && EntityManager::GetPlayerId() > -1)
     {
-        Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
+//        Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
+        World& world = Engine::GetInstance().World;
+        Position* position = world.Position[EntityManager::GetPlayerId()];
+        Vector2f playerPos = position->GetPosition();
         float newPosX = playerPos.x - GetWidth()/2 + Constants::PLAYER_WIDTH/2;
         float newPosY = playerPos.y - GetHeight()/2 + Constants::PLAYER_HEIGHT/2;
 

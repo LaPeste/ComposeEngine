@@ -4,6 +4,8 @@
 #include "FPS.hpp"
 #include "Camera.hpp"
 #include <tmx/Log.h>
+#include "SystemManager.hpp"
+
 
 Engine::~Engine()
 {
@@ -32,6 +34,7 @@ void Engine::Launch(sf::RenderWindow* createdWindow)
 	{
 		MainLoop();
 	}
+    Terminate();
 }
 
 sf::RenderWindow* Engine::GetWindow() const
@@ -43,6 +46,7 @@ bool Engine::Init()
 {
 	mainWindow->create(sf::VideoMode(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT, Constants::SCREEN_DEPTH), Constants::GAME_NAME);
 	gameState = Playing;
+//    world; // trying to initialize the object world, not sure though
     
 	if (!mainWindow->isOpen())
 		return false;
@@ -51,9 +55,13 @@ bool Engine::Init()
     ml.Load(Constants::TEST_MAP);
     
     //init gameobject manager and its objects
-    GameObjectManager::Init();
-    Player* player = new Player();
-    GameObjectManager::Add(player);
+//    GameObjectManager::Init();
+//    Player* player = new Player();
+//    GameObjectManager::Add(player);
+    
+    SystemManager::Init();
+    
+    Player();
     Camera::CreateInstance(Constants::CAMERA_ZOOM_WIDTH ,Constants::CAMERA_ZOOM_HEIGHT);
     return true;
 
@@ -63,13 +71,11 @@ void Engine::MainLoop()
 {
 	switch (gameState)
 	{
-		case  Playing:
-			{
-				ProcessInput();
-				Update();
-				RenderFrame();
-				break;
-			}
+		case GameState::Playing:
+            ProcessInput();
+            Update();
+            RenderFrame();
+            break;
 	}
 }
 
@@ -79,7 +85,8 @@ void Engine::ProcessInput()
     while (mainWindow->pollEvent(event))
     {
         OnEvent(event);
-        GameObjectManager::ProcessAllInput(event);
+//        GameObjectManager::ProcessAllInput(event);
+        SystemManager::ProcessAllInput();
     }
 }
 
@@ -89,15 +96,17 @@ void Engine::Update()
 //    ml.UpdateQuadTree(rootNode); //update quadtree's rootnode to what's visible in the screen
     FPS::Update();
     Camera::GetInstance()->Update();
-    GameObjectManager::UpdateAll();
+//    GameObjectManager::UpdateAll();
+    SystemManager::UpdateAll();
 }
 
 void Engine::RenderFrame()
 {
 	mainWindow->clear();
     mainWindow->draw(ml); //draw map loaded in mapLoader
-    Camera::GetInstance()->Draw();
-    GameObjectManager::DrawAll(*mainWindow);
+    Camera::GetInstance()->Draw(); //draw only the camera view
+//    GameObjectManager::DrawAll(*mainWindow);
+    SystemManager::RenderAll(); //draw all entities
 	mainWindow->display();
 }
 
@@ -113,9 +122,16 @@ bool Engine::IsExiting()
 
 void Engine::OnExit()
 {
-	mainWindow->close();
-	//maybe here you hava to call all the needed destructor
-	gameState = GameState::Exiting;
+    gameState = GameState::Exiting;
+}
+
+void Engine::Terminate()
+{
+#ifdef LOG_OUTPUT_CONSOLE
+    Utils::PrintDebugLog("Engine::Terminate", "terminating the engine and taking care of freeing the allocated memory");
+#endif
+    SystemManager::ExitAll();
+    mainWindow->close();
 }
 
 //*****************
