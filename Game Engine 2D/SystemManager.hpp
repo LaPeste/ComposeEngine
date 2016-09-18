@@ -22,7 +22,7 @@ public:
     static void Terminate();
     
     static void StartAll();
-    static void ProcessAllInput();
+    static void ProcessAllInput(const sf::Event& event);
     static void UpdateAll();
     static void RenderAll();
     static void ExitAll();

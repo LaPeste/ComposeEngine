@@ -1,15 +1,20 @@
-////
-////  CollisionEvent.cpp
-////  GameEngine2D
-////
-////  Created by Andrea Catalini on 07/06/16.
-////  Copyright © 2016 Andrea Catalini. All rights reserved.
-////
 //
-//#include "CollisionEvent.hpp"
-//#include "GameObject.hpp"
+//  Collision.cpp
+//  GameEngine2D
 //
-//CollisionEvent::CollisionEvent(GameObject* a, GameObject* b) : entityA(a), entityB(b)
-//{
-//    
-//}
+//  Created by Andrea Catalini on 04/09/16.
+//  Copyright © 2016 Andrea Catalini. All rights reserved.
+//
+
+#include "CollisionEvent.hpp"
+
+CollisionEvent::CollisionEvent(unsigned long indexEntityA, unsigned long indexEntityB)
+{
+    indexCollidingEntities.x = indexEntityA;
+    indexCollidingEntities.y = indexEntityB;
+}
+
+const sf::Vector2<unsigned long>& CollisionEvent::GetCollidingEntities() const
+{
+    return indexCollidingEntities;
+}

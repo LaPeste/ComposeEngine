@@ -2,7 +2,7 @@
 //  Controller.hpp
 //  GameEngine2D
 //
-//  Created by Andrea Catalini on 22/07/16.
+//  Created by Andrea Catalini on 18/09/16.
 //  Copyright © 2016 Andrea Catalini. All rights reserved.
 //
 
@@ -16,12 +16,9 @@ class Controller
 public:
     Controller();
     
-    bool MoveLeft;
     bool MoveRight;
+    bool MoveLeft;
     bool Crouch;
-    bool Jump();
-
-private:
 };
 
 #endif /* _CONTROLLER_HPP_ */

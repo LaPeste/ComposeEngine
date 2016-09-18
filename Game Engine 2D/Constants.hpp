@@ -50,6 +50,7 @@ public:
     
     //Movement settings
     static const float PLAYER_MAXSPEED_X, PLAYER_MAXSPEED_Y;
+    static const float PLAYER_MAX_ACCELERATION_X, PLAYER_MAX_ACCELERATION_Y;
     static const float PLAYER_STEP_SIZE;
     static const int PLAYER_PHYSICAL_STARTING_X;
     static const int PLAYER_PHYSICAL_STARTING_Y;
@@ -72,6 +73,7 @@ public:
     //************************
     static const std::string COLLISION_LAYER;
     static const std::string GROUND_LAYER;
+    static const std::string ENTITY_INDEX_PROPERTY;
 };
 
 

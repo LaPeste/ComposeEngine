@@ -22,6 +22,7 @@ enum class Components
     POSITION = 1 << 3,
     VELOCITY = 1 << 4,
     FLAG = 1 << 5
+//    COLLISION = 1 << 6
 };
 
 inline Components operator| (Components a, Components b) //I can't make this work when it comes to chain more components, like the case right below

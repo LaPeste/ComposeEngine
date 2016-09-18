@@ -18,7 +18,7 @@ public:
     SystemBase();
     
     virtual void OnStart();
-    virtual void OnInput();
+    virtual void OnInput(const sf::Event& event);
     virtual void OnUpdate();
     virtual void OnRender();
     virtual void OnExit();

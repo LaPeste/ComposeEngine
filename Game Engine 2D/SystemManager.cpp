@@ -10,6 +10,7 @@
 #include "SystemBase.hpp"
 #include "Movement.hpp"
 #include "Renderer.hpp"
+#include "Input.hpp"
 
 void SystemManager::Init()
 {
@@ -17,6 +18,8 @@ void SystemManager::Init()
     systems.push_back(m);
     Renderer* r = new Renderer;
     systems.push_back(r);
+    Input* i = new Input;
+    systems.push_back(i);
 }
 
 std::vector<SystemBase*> SystemManager::systems;
@@ -29,11 +32,11 @@ void SystemManager::StartAll()
     }
 }
 
-void SystemManager::ProcessAllInput()
+void SystemManager::ProcessAllInput(const sf::Event& event)
 {
     for(std::vector<SystemBase*>::iterator system = systems.begin(); system != systems.end(); ++system)
     {
-        (*system)->OnInput();
+        (*system)->OnInput(event);
     }
 }
 

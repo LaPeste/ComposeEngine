@@ -16,6 +16,7 @@ class EntityFlag
 {
 public:
     EntityFlag();
+    EntityFlag(GameObjectFlag flags);
     
     const GameObjectFlag& GetEntityFlag() const;
     void SetNewEntityFlag(const GameObjectFlag& flag);

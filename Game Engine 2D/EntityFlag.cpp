@@ -13,6 +13,11 @@ EntityFlag::EntityFlag()
     
 }
 
+EntityFlag::EntityFlag(GameObjectFlag flags) : flag(flags)
+{
+    
+}
+
 const GameObjectFlag& EntityFlag::GetEntityFlag() const
 {
     return flag;

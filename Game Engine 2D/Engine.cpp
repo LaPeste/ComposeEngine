@@ -84,9 +84,8 @@ void Engine::ProcessInput()
     sf::Event event;
     while (mainWindow->pollEvent(event))
     {
-        OnEvent(event);
-//        GameObjectManager::ProcessAllInput(event);
-        SystemManager::ProcessAllInput();
+        OnEvent(event, World, 0);
+        SystemManager::ProcessAllInput(event);
     }
 }
 

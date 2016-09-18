@@ -36,6 +36,8 @@ const float Constants::OFFSET_COL_Y = 2;
 //Movement settings
 const float Constants::PLAYER_MAXSPEED_X = 4;
 const float Constants::PLAYER_MAXSPEED_Y = 6;
+const float Constants::PLAYER_MAX_ACCELERATION_X = 0.5f;
+const float Constants::PLAYER_MAX_ACCELERATION_Y = 0.5f;
 const float Constants::PLAYER_STEP_SIZE = 3;
 const int Constants::PLAYER_PHYSICAL_STARTING_X = 40;
 const int Constants::PLAYER_PHYSICAL_STARTING_Y = 60;
@@ -61,3 +63,4 @@ const std::string  Constants::TEST_MAP = resourcePath() + "Test_Level.tmx";
 const std::string Constants::COLLISION_LAYER = "Collision Layer";
 const std::string Constants::GROUND_LAYER = "Ground Layer";
 //const CameraMode CAMERA_MODE = CameraMode::TARGET_MODE_NORMAL;
+const std::string Constants::ENTITY_INDEX_PROPERTY = "Entity Index";

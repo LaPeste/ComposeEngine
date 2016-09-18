@@ -8,7 +8,10 @@
 
 #include "Appearance.hpp"
 
-Appearance::Appearance(){}
+Appearance::Appearance(sf::Sprite* const sprite) : sprite(sprite)
+{
+    
+}
 
 Appearance::Appearance(std::string spritePath, int spriteMaxFrame, float animationFrameRate, bool reverseAnimation,
                        float spriteBeginningX, float spriteBeginningY, float spriteWidth, float spriteHeight) :
@@ -56,19 +59,24 @@ Appearance::Appearance(std::string spritePath, int spriteMaxFrame, float animati
             
         }
     }
+    
+    collisionPoints[0] = sf::Vector2f{0, 0};
+    collisionPoints[1] = sf::Vector2f{sprite->getGlobalBounds().width, 0};
+    collisionPoints[2] = sf::Vector2f{0, sprite->getGlobalBounds().height};
+    collisionPoints[3] = sf::Vector2f{sprite->getGlobalBounds().width, sprite->getGlobalBounds().height};
 }
 
 Appearance::~Appearance()
 {
-    delete sprite;
     delete texture;
+    delete sprite;
     
 #if DEBUG
     Utils::PrintDebugLog("~Appearance", "sprite and texture memory freed");
 #endif
 }
 
-const sf::Sprite* const Appearance::GetSprite() const
+sf::Sprite* const Appearance::GetSprite() const
 {
     if(IsSpriteLoaded())
     {
@@ -76,6 +84,11 @@ const sf::Sprite* const Appearance::GetSprite() const
     }
     Utils::PrintDebugError("Appearance::GetSprite", "you are trying to get the sprite, but it is not loaded yet!");
     return nullptr;
+}
+
+void Appearance::SetSprite(sf::Sprite* const sprite)
+{
+    Appearance::sprite = sprite;
 }
 
 bool Appearance::IsSpriteLoaded() const

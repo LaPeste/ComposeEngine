@@ -34,7 +34,10 @@
 		1EA479BF1C9985B2004696A5 /* PlayerOLD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479B31C9985B2004696A5 /* PlayerOLD.cpp */; };
 		1EA479C01C9985B2004696A5 /* smb2-heroes_sheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */; };
 		1EA479C11C9985B2004696A5 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EA479B61C9985B2004696A5 /* stdafx.cpp */; };
-		1EB9AE5C1D07132D00BBC42A /* CollisionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9AE5A1D07132D00BBC42A /* CollisionEvent.cpp */; };
+		1EB699491D8EE09900FC8ECA /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EB699471D8EE09900FC8ECA /* Controller.cpp */; };
+		1EB9AE5C1D07132D00BBC42A /* CollisionEventOLD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EB9AE5A1D07132D00BBC42A /* CollisionEventOLD.cpp */; };
+		1EBB06321D7C3FA4006E630D /* CollisionDetection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB06301D7C3FA4006E630D /* CollisionDetection.cpp */; };
+		1EBB06351D7C7D19006E630D /* CollisionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EBB06331D7C7D19006E630D /* CollisionEvent.cpp */; };
 		1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EC00EAA1C9B345E003EEB24 /* Utils.cpp */; };
 		1EC00EAD1C9B4673003EEB24 /* mariosheet.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */; };
 		1EDCED2C1D3FB8DA00804252 /* Components.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCED2A1D3FB8DA00804252 /* Components.cpp */; };
@@ -47,7 +50,7 @@
 		1EDCED4B1D42294900804252 /* Appearance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCED491D42294900804252 /* Appearance.cpp */; };
 		1EDCED4E1D422EAB00804252 /* Acceleration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCED4C1D422EAB00804252 /* Acceleration.cpp */; };
 		1EDCED521D42466600804252 /* SystemBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCED501D42466600804252 /* SystemBase.cpp */; };
-		1EDCED551D424D1C00804252 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCED531D424D1C00804252 /* Controller.cpp */; };
+		1EDCED551D424D1C00804252 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCED531D424D1C00804252 /* Input.cpp */; };
 		1EE552831D65FD0400CB6CA2 /* ManagerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EE552811D65FD0400CB6CA2 /* ManagerBase.cpp */; };
 /* End PBXBuildFile section */
 
@@ -95,8 +98,14 @@
 		1EA479B51C9985B2004696A5 /* smb2-heroes_sheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smb2-heroes_sheet.png"; sourceTree = "<group>"; };
 		1EA479B61C9985B2004696A5 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
 		1EA479B71C9985B2004696A5 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
-		1EB9AE5A1D07132D00BBC42A /* CollisionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionEvent.cpp; sourceTree = "<group>"; };
-		1EB9AE5B1D07132D00BBC42A /* CollisionEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionEvent.hpp; sourceTree = "<group>"; };
+		1EB699471D8EE09900FC8ECA /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
+		1EB699481D8EE09900FC8ECA /* Controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Controller.hpp; sourceTree = "<group>"; };
+		1EB9AE5A1D07132D00BBC42A /* CollisionEventOLD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionEventOLD.cpp; sourceTree = "<group>"; };
+		1EB9AE5B1D07132D00BBC42A /* CollisionEventOLD.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionEventOLD.hpp; sourceTree = "<group>"; };
+		1EBB06301D7C3FA4006E630D /* CollisionDetection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionDetection.cpp; sourceTree = "<group>"; };
+		1EBB06311D7C3FA4006E630D /* CollisionDetection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionDetection.hpp; sourceTree = "<group>"; };
+		1EBB06331D7C7D19006E630D /* CollisionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionEvent.cpp; sourceTree = "<group>"; };
+		1EBB06341D7C7D19006E630D /* CollisionEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionEvent.hpp; sourceTree = "<group>"; };
 		1EC00EA91C9B31F0003EEB24 /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		1EC00EAA1C9B345E003EEB24 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		1EC00EAC1C9B4673003EEB24 /* mariosheet.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = mariosheet.gif; path = Resources/mariosheet.gif; sourceTree = "<group>"; };
@@ -120,8 +129,8 @@
 		1EDCED4D1D422EAB00804252 /* Acceleration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Acceleration.hpp; sourceTree = "<group>"; };
 		1EDCED501D42466600804252 /* SystemBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SystemBase.cpp; sourceTree = "<group>"; };
 		1EDCED511D42466600804252 /* SystemBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SystemBase.hpp; sourceTree = "<group>"; };
-		1EDCED531D424D1C00804252 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
-		1EDCED541D424D1C00804252 /* Controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Controller.hpp; sourceTree = "<group>"; };
+		1EDCED531D424D1C00804252 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
+		1EDCED541D424D1C00804252 /* Input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
 		1EE552811D65FD0400CB6CA2 /* ManagerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ManagerBase.cpp; sourceTree = "<group>"; };
 		1EE552821D65FD0400CB6CA2 /* ManagerBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ManagerBase.hpp; sourceTree = "<group>"; };
 		1EE625C11D0ED274000B91B9 /* GameObjectType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameObjectType.hpp; sourceTree = "<group>"; };
@@ -237,7 +246,8 @@
 				1EDCED291D3FB8BE00804252 /* GameObjects */,
 				1EA479A61C9985B2004696A5 /* Animator.hpp */,
 				1E07BFAF1CB2B3F600B410CD /* Camera.hpp */,
-				1EB9AE5B1D07132D00BBC42A /* CollisionEvent.hpp */,
+				1EBB06341D7C7D19006E630D /* CollisionEvent.hpp */,
+				1EB9AE5B1D07132D00BBC42A /* CollisionEventOLD.hpp */,
 				1EA479A71C9985B2004696A5 /* Constants.hpp */,
 				1EA479AA1C9985B2004696A5 /* Engine.hpp */,
 				1EA479AC1C9985B2004696A5 /* Event.hpp */,
@@ -258,7 +268,8 @@
 				1EDCED251D3FB86A00804252 /* GameObjects */,
 				1EA479A51C9985B2004696A5 /* Animator.cpp */,
 				1E07BFAE1CB2B3F600B410CD /* Camera.cpp */,
-				1EB9AE5A1D07132D00BBC42A /* CollisionEvent.cpp */,
+				1EBB06331D7C7D19006E630D /* CollisionEvent.cpp */,
+				1EB9AE5A1D07132D00BBC42A /* CollisionEventOLD.cpp */,
 				1EA479A81C9985B2004696A5 /* Constants.cpp */,
 				1EA479A91C9985B2004696A5 /* Engine.cpp */,
 				1EA479AB1C9985B2004696A5 /* Event.cpp */,
@@ -305,6 +316,8 @@
 		1EDCED331D3FD9AE00804252 /* Systems */ = {
 			isa = PBXGroup;
 			children = (
+				1EBB06301D7C3FA4006E630D /* CollisionDetection.cpp */,
+				1EDCED531D424D1C00804252 /* Input.cpp */,
 				1EDCED401D3FE7EB00804252 /* Movement.cpp */,
 				1E397B3B1D43DA56000731DF /* Renderer.cpp */,
 				1EDCED501D42466600804252 /* SystemBase.cpp */,
@@ -315,6 +328,8 @@
 		1EDCED341D3FD9B600804252 /* Systems */ = {
 			isa = PBXGroup;
 			children = (
+				1EBB06311D7C3FA4006E630D /* CollisionDetection.hpp */,
+				1EDCED541D424D1C00804252 /* Input.hpp */,
 				1EDCED421D3FE7F500804252 /* Movement.hpp */,
 				1E397B3C1D43DA56000731DF /* Renderer.hpp */,
 				1EDCED511D42466600804252 /* SystemBase.hpp */,
@@ -327,7 +342,7 @@
 			children = (
 				1EDCED4C1D422EAB00804252 /* Acceleration.cpp */,
 				1EDCED491D42294900804252 /* Appearance.cpp */,
-				1EDCED531D424D1C00804252 /* Controller.cpp */,
+				1EB699471D8EE09900FC8ECA /* Controller.cpp */,
 				1E06F7161D43AC1300BAB626 /* EntityFlag.cpp */,
 				1EDCED3A1D3FE29D00804252 /* Position.cpp */,
 				1EDCED431D3FE97500804252 /* Velocity.cpp */,
@@ -340,7 +355,7 @@
 			children = (
 				1EDCED4D1D422EAB00804252 /* Acceleration.hpp */,
 				1EDCED4A1D42294900804252 /* Appearance.hpp */,
-				1EDCED541D424D1C00804252 /* Controller.hpp */,
+				1EB699481D8EE09900FC8ECA /* Controller.hpp */,
 				1E06F7171D43AC1300BAB626 /* EntityFlag.hpp */,
 				1EDCED3B1D3FE29D00804252 /* Position.hpp */,
 				1EDCED441D3FE97500804252 /* Velocity.hpp */,
@@ -444,6 +459,7 @@
 				1EDCED451D3FE97500804252 /* Velocity.cpp in Sources */,
 				1EA479BD1C9985B2004696A5 /* GameObject.cpp in Sources */,
 				1E397B381D43D792000731DF /* Player.cpp in Sources */,
+				1EB699491D8EE09900FC8ECA /* Controller.cpp in Sources */,
 				1EDCED411D3FE7EB00804252 /* Movement.cpp in Sources */,
 				1E397B3D1D43DA56000731DF /* Renderer.cpp in Sources */,
 				1EA479BC1C9985B2004696A5 /* FPS.cpp in Sources */,
@@ -456,18 +472,20 @@
 				1E07BFB01CB2B3F600B410CD /* Camera.cpp in Sources */,
 				1EDCED4B1D42294900804252 /* Appearance.cpp in Sources */,
 				1E06F7181D43AC1300BAB626 /* EntityFlag.cpp in Sources */,
-				1EB9AE5C1D07132D00BBC42A /* CollisionEvent.cpp in Sources */,
+				1EB9AE5C1D07132D00BBC42A /* CollisionEventOLD.cpp in Sources */,
 				1E0519B31C996C31008CC160 /* ResourcePath.mm in Sources */,
 				1EC00EAB1C9B345E003EEB24 /* Utils.cpp in Sources */,
 				1EA479B91C9985B2004696A5 /* Constants.cpp in Sources */,
 				1EA479C11C9985B2004696A5 /* stdafx.cpp in Sources */,
 				1EE552831D65FD0400CB6CA2 /* ManagerBase.cpp in Sources */,
 				1EA479BA1C9985B2004696A5 /* Engine.cpp in Sources */,
+				1EBB06351D7C7D19006E630D /* CollisionEvent.cpp in Sources */,
 				1EDCED2C1D3FB8DA00804252 /* Components.cpp in Sources */,
 				1EA479BE1C9985B2004696A5 /* GameObjectManager.cpp in Sources */,
+				1EBB06321D7C3FA4006E630D /* CollisionDetection.cpp in Sources */,
 				1EDCED481D3FEE9700804252 /* SystemManager.cpp in Sources */,
 				1EDCED321D3FD94600804252 /* EntityManager.cpp in Sources */,
-				1EDCED551D424D1C00804252 /* Controller.cpp in Sources */,
+				1EDCED551D424D1C00804252 /* Input.cpp in Sources */,
 				1EDCED4E1D422EAB00804252 /* Acceleration.cpp in Sources */,
 				1EDCED521D42466600804252 /* SystemBase.cpp in Sources */,
 			);

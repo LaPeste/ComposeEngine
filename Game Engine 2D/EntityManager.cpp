@@ -8,8 +8,35 @@
 
 #include "EntityManager.hpp"
 #include "Components.hpp"
+#include <tmx/MapLoader.h>
+#include "Engine.hpp"
+#include <cmath>
 
-unsigned long EntityManager::playerId(-1);
+unsigned long EntityManager::playerId(NAN);
+std::vector<CollisionEvent> EntityManager::collisionEvents;
+
+void EntityManager::Init(World& world)
+{
+    //populates the list of objects with objects coming from the map (tmx file)
+    std::vector<tmx::MapLayer>& layers = Engine::GetInstance().GetMapLoader().GetLayers();
+    for(std::vector<tmx::MapLayer>::iterator layer = layers.begin(); layer != layers.end(); ++layer)
+    {
+        if(layer->name == Constants::COLLISION_LAYER)
+        {
+            for(std::vector<tmx::MapObject>::iterator object = layer->objects.begin(); object != layer->objects.end(); ++object)
+            {
+                //TODO most likely here I need to do more checks, because I may not want to add all the objects in this layer
+                const unsigned long indexNewEntity = CreateEntity(world);
+                world.Position[indexNewEntity] = new Position(world, indexNewEntity, object->GetPosition().x, object->GetPosition().y, false);
+//                world.Collision[indexNewEntity] = new Collision;
+                world.Appearance[indexNewEntity] = new Appearance(nullptr); //TODO strange that I can't get the sprite from the mapObject
+                world.EntityFlag[indexNewEntity] = new EntityFlag(GameObjectFlag::MAP_OBJECT);
+                object->SetProperty(Constants::ENTITY_INDEX_PROPERTY, std::to_string(indexNewEntity));
+            }
+
+        }
+    }
+}
 
 const unsigned long EntityManager::CreateEntity(World& world)
 {
@@ -17,6 +44,7 @@ const unsigned long EntityManager::CreateEntity(World& world)
     {
         if(world.EntitiesMasks[i] == Components::NONE) //then a corrispondent position in the components array already exist
         {
+            FreeWorldFields(world, i);
             return i;
         }
     }
@@ -29,11 +57,12 @@ const unsigned long EntityManager::CreateEntity(World& world)
     
     world.EntitiesMasks.push_back(Components::NONE);
     world.Acceleration.push_back(new Acceleration(0,0));
-    world.Appearance.push_back(new Appearance);
+    world.Appearance.push_back(new Appearance(nullptr));
     world.Controller.push_back(new Controller);
     world.Position.push_back(new Position);
     world.Velocity.push_back(new Velocity);
     world.EntityFlag.push_back(new EntityFlag);
+//    world.Collision.push_back(new Collision);
     
     return world.EntitiesMasks.size() - 1; //return size because you want to return an index that points to a newer
 }
@@ -54,3 +83,29 @@ void EntityManager::SetPlayerId(const unsigned long index)
     playerId = index;
 }
 
+void EntityManager::FreeWorldFields(World& world, const int index)
+{
+    world.EntitiesMasks[index] = Components::NONE;
+//    for(int i = 0; i <= Utils::ComponentsString.size(); ++i) //TODO try to call free with the invoke
+//    {
+//        std::string component = Utils::ComponentsString[i];
+//        std::invoke(delete, "world." + Utils::ComponentsString[i]);
+//    }
+    delete world.Acceleration[index];
+    delete world.Appearance[index];
+    delete world.Controller[index];
+    delete world.EntityFlag[index];
+    delete world.Position[index];
+    delete world.Velocity[index];
+//    delete world.Collision[index];
+}
+
+const std::vector<CollisionEvent>& EntityManager::GetCollisionEvents()
+{
+    return collisionEvents;
+}
+
+void EntityManager::AddCollisionEvent(const CollisionEvent& event)
+{
+    collisionEvents.push_back(event);
+}

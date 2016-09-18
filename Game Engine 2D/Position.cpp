@@ -7,10 +7,16 @@
 //
 
 #include "Position.hpp"
+#include "Appearance.hpp"
 
-Position::Position() : x(500), y(500), CanJump(false)
+Position::Position() : CanJump(false)
 {
     
+}
+
+Position::Position(const World& world, unsigned const long entityIndex, float x, float y, bool canJump) : CanJump(canJump)
+{
+    SetPosition(world, entityIndex, sf::Vector2f(x, y));
 }
 
 Position::~Position()
@@ -18,13 +24,25 @@ Position::~Position()
     
 }
 
-const sf::Vector2f Position::GetPosition() const
+const sf::Vector2f& Position::GetPosition(const World& world, unsigned const long entityIndex) const
 {
-    return sf::Vector2f(x, y);
+    Appearance* appearance = world.Appearance[entityIndex];
+    
+    if(appearance == nullptr)
+    {
+        Utils::PrintDebugError("Position::GetPosition", "The component appearance for the entity " +  std::to_string(entityIndex) + " is null! Abort!");
+        std::exit(EXIT_FAILURE);
+    }
+    return appearance->GetSprite()->getPosition();
 }
 
-void Position::SetPosition(sf::Vector2f position)
+void Position::SetPosition(const World& world, unsigned const long entityIndex, sf::Vector2f position)
 {
-    x = position.x;
-    y = position.y;
+    Appearance* appearance = world.Appearance[entityIndex];
+    if(appearance == nullptr)
+    {
+        Utils::PrintDebugError("Position::GetPosition", "The component appearance for the entity " +  std::to_string(entityIndex) + " is null! Abort!");
+        std::exit(EXIT_FAILURE);
+    }
+    appearance->GetSprite()->setPosition(position.x, position.y);
 }

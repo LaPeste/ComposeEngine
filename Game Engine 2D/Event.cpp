@@ -12,15 +12,15 @@ Event::~Event()
 
 }
 
-void Event::OnEvent(const sf::Event& e)
+void Event::OnEvent(const sf::Event& e, const World& world, const unsigned long entityIndex)
 {
 	switch (e.type)
 	{
 		case sf::Event::KeyPressed:
-			OnKeyDown(e.key);
+			OnKeyDown(e.key, world, entityIndex);
 			break;
 		case sf::Event::KeyReleased:
-			OnKeyUp(e.key);
+			OnKeyUp(e.key, world, entityIndex);
 			break;
 		case sf::Event::JoystickButtonPressed: //this is wrong, it should be arranged like above
 			switch (e.JoystickButtonPressed)
@@ -48,12 +48,12 @@ void Event::OnExit()
 
 }
 
-void Event::OnKeyDown(const sf::Event::KeyEvent& input)
+void Event::OnKeyDown(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex)
 {
     
 }
 
-void Event::OnKeyUp(const sf::Event::KeyEvent& input)
+void Event::OnKeyUp(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex)
 {
     
 }

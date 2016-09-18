@@ -53,12 +53,12 @@ Camera * Camera::GetInstance()
 
 void Camera::Update()
 {
-    if(mode == CameraMode::FOLLOW_PLAYER && EntityManager::GetPlayerId() > -1)
+    if(mode == CameraMode::FOLLOW_PLAYER && !isnan(EntityManager::GetPlayerId()))
     {
 //        Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
         World& world = Engine::GetInstance().World;
         Position* position = world.Position[EntityManager::GetPlayerId()];
-        Vector2f playerPos = position->GetPosition();
+        Vector2f playerPos = position->GetPosition(world, EntityManager::GetPlayerId());
         float newPosX = playerPos.x - GetWidth()/2 + Constants::PLAYER_WIDTH/2;
         float newPosY = playerPos.y - GetHeight()/2 + Constants::PLAYER_HEIGHT/2;
 

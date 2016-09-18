@@ -22,9 +22,10 @@ enum class GameObjectType
 enum class GameObjectFlag
 {
     NONE = 0,
-    GHOST = 0x00000001,
-    GRAVITY = 0x00000002,
-    MAPONLY = 0x00000004
+    GHOST = 1 << 0,
+    GRAVITY = 1 << 1,
+    MAPONLY = 1 << 2,
+    MAP_OBJECT = 1 << 3
 };
 
 inline GameObjectFlag operator| (GameObjectFlag a, GameObjectFlag b)

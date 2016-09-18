@@ -12,6 +12,7 @@
 #include "World.hpp"
 #include "Engine.hpp"
 #include "FPS.hpp"
+#include "CollisionDetection.hpp"
 
 Movement::Movement() : SystemBase()
 {
@@ -27,7 +28,7 @@ void Movement::OnUpdate()
 {
     World& world = Engine::GetInstance().World;
 //    for(std::vector<int>::const_iterator entity = world.EntitiesMasks.begin(); entity != world.EntitiesMasks.end(); ++entity)
-    for(int i = 0; i <= world.EntitiesMasks.size(); ++i)
+    for(int i = 0; i < world.EntitiesMasks.size(); ++i)
     {
         if((world.EntitiesMasks[i] & MOVEMENT_MASK) == (MOVEMENT_MASK))
         {
@@ -98,21 +99,11 @@ void Movement::OnUpdate()
 //    }
 //}
 
-bool Movement::Jump(const World& world, const unsigned long entityIndex)
-{
-    Position& position = *world.Position[entityIndex];
-    Velocity& velocity = *world.Velocity[entityIndex];
-    if(!position.CanJump) return false;
-    
-    velocity.SpeedY = -velocity.MaxSpeedY;
-    return true;
-}
-
 void Movement::StopMove(const World& world, const unsigned long entityIndex)
 {
 //    World world = Engine::GetInstance()->world;
     Velocity& velocity = *world.Velocity[entityIndex];
-    Acceleration acceleration = *world.Acceleration[entityIndex];
+    Acceleration& acceleration = *world.Acceleration[entityIndex];
     if(velocity.SpeedX > 0) acceleration.AccelerationX = -2 * acceleration.AccelerationPerFrameX;
     if(velocity.SpeedX < 0) acceleration.AccelerationX = 2 * acceleration.AccelerationPerFrameX;
     
@@ -167,17 +158,17 @@ void Movement::MoveTo(const World& world, const unsigned long entityIndex, float
     {
         if((entityFlag.GetEntityFlag() & GameObjectFlag::GHOST) == GameObjectFlag::GHOST)
         {
-            if(PosValid(world, entityIndex, position.GetPosition().x + stepX, position.GetPosition().y + stepY))
+            if(PosValid(world, entityIndex, position.GetPosition(world, entityIndex).x + stepX, position.GetPosition(world, entityIndex).y + stepY))
             {
-                position.SetPosition(sf::Vector2f(position.GetPosition().x + stepX, position.GetPosition().y + stepY));
+                position.SetPosition(world, entityIndex, sf::Vector2f(position.GetPosition(world, entityIndex).x + stepX, position.GetPosition(world, entityIndex).y + stepY));
             }
         }
         else
         {
             // movement on X axis
-            if(PosValid(world, entityIndex, position.GetPosition().x + stepX, position.GetPosition().y))
+            if(PosValid(world, entityIndex, position.GetPosition(world, entityIndex).x + stepX, position.GetPosition(world, entityIndex).y))
             {
-                position.SetPosition(sf::Vector2f(position.GetPosition().x + stepX, position.GetPosition().y));
+                position.SetPosition(world, entityIndex, sf::Vector2f(position.GetPosition(world, entityIndex).x + stepX, position.GetPosition(world, entityIndex).y));
             }
             else
             {
@@ -185,9 +176,9 @@ void Movement::MoveTo(const World& world, const unsigned long entityIndex, float
             }
             
             // movement on Y axis
-            if(PosValid(world, entityIndex, position.GetPosition().x, position.GetPosition().y + stepY))
+            if(PosValid(world, entityIndex, position.GetPosition(world, entityIndex).x, position.GetPosition(world, entityIndex).y + stepY))
             {
-                position.SetPosition(sf::Vector2f(position.GetPosition().x, position.GetPosition().y + stepY));
+                position.SetPosition(world, entityIndex, sf::Vector2f(position.GetPosition(world, entityIndex).x, position.GetPosition(world, entityIndex).y + stepY));
             }
             else
             {
@@ -219,17 +210,17 @@ bool Movement::PosValid(const World& world, const unsigned long entityIndex, flo
     Velocity& velocity = *world.Velocity[entityIndex];
     Appearance& appearance = *world.Appearance[entityIndex];
     
-    sf::Vector2f originalPosition = position.GetPosition();
-    position.SetPosition(sf::Vector2f(x, y));
+    sf::Vector2f originalPosition = position.GetPosition(world, entityIndex);
+    position.SetPosition(world, entityIndex, sf::Vector2f(x, y));
     bool posValid = false;
     
     //prevent player from falling from map's limits
     if( appearance.IsSpriteLoaded() &&
-       !(position.GetPosition().x <= 0 ||
-         position.GetPosition().x + appearance.GetSprite()->getLocalBounds().width >= Engine::GetInstance().GetMapLoader().GetMapSize().x) )
+       !(position.GetPosition(world, entityIndex).x <= 0 ||
+         position.GetPosition(world, entityIndex).x + appearance.GetSprite()->getLocalBounds().width >= Engine::GetInstance().GetMapLoader().GetMapSize().x) )
     {
-//        posValid = Collides() ? false : true; TODO add collision detection
+        posValid = CollisionDetection::Collides(world, entityIndex) ? false : true; //TODO add collision detection
     }
-    position.SetPosition(originalPosition);
+    position.SetPosition(world, entityIndex, originalPosition);
     return posValid;
 }

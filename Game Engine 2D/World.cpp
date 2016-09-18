@@ -48,4 +48,12 @@ World::~World()
     {
         delete *elem_it;
     }
+//    for(std::vector<Collision::Collision*>::iterator elem_it = Collision.begin(); elem_it != Collision.end(); ++elem_it)
+//    {
+//        delete *elem_it;
+//    }
+    for(std::vector<EntityFlag::EntityFlag*>::iterator elem_it = EntityFlag.begin(); elem_it != EntityFlag.end(); ++elem_it)
+    {
+        delete *elem_it;
+    }
 }

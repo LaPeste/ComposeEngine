@@ -21,7 +21,7 @@ void SystemBase::OnStart()
     
 }
 
-void SystemBase::OnInput()
+void SystemBase::OnInput(const sf::Event& event)
 {
     
 }
