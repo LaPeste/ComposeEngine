@@ -7,11 +7,11 @@
 //
 
 #include "World.hpp"
-#include "Acceleration.hpp"
-#include "Appearance.hpp"
-#include "Controller.hpp"
-#include "Position.hpp"
-#include "Velocity.hpp"
+//#include "Acceleration.hpp"
+//#include "Appearance.hpp"
+//#include "Controller.hpp"
+//#include "Position.hpp"
+//#include "Velocity.hpp"
 
 
 World::World() /*:
@@ -53,6 +53,10 @@ World::~World()
 //        delete *elem_it;
 //    }
     for(std::vector<EntityFlag::EntityFlag*>::iterator elem_it = EntityFlag.begin(); elem_it != EntityFlag.end(); ++elem_it)
+    {
+        delete *elem_it;
+    }
+    for(std::vector<Animation::Animation*>::iterator elem_it = Animation.begin(); elem_it != Animation.end(); ++elem_it)
     {
         delete *elem_it;
     }

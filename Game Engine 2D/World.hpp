@@ -17,6 +17,7 @@
 #include "Controller.hpp"
 #include "EntityFlag.hpp"
 #include "Components.hpp"
+#include "Animation.hpp"
 //#include "Collision.hpp"
 
 //TODO I'm not sure if this class should be static... consider that. The question is: would you have more than 1 world per time? If so, then you don't want it static, if no
@@ -41,6 +42,7 @@ public:
     std::vector<Velocity*> Velocity;
     std::vector<EntityFlag*> EntityFlag;
 //    std::vector<Collision*> Collision;
+    std::vector<Animation*> Animation;
 };
 
 #endif /* _WORLD_HPP_ */

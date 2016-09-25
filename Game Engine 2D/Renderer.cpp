@@ -43,8 +43,6 @@ void Renderer::Draw(const World& world, const unsigned long entityIndex, sf::Ren
     
     if (appearance.IsSpriteLoaded())
     {
-//        if(toAnimate) animator.Animate(sprite); TODO add animator
-        
         window.draw(*appearance.GetSprite());
     }
 }

@@ -21,7 +21,8 @@ enum class Components
     APPEARANCE = 1 << 2,
     POSITION = 1 << 3,
     VELOCITY = 1 << 4,
-    FLAG = 1 << 5
+    FLAG = 1 << 5,
+    ANIMATION = 1 << 6
 //    COLLISION = 1 << 6
 };
 

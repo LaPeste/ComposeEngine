@@ -33,12 +33,21 @@ bool CollisionDetection::Collides(const World& world, const unsigned long index)
     {
         if((*object)->GetParent() == Constants::COLLISION_LAYER)
         {
+//            const std::vector<const sf::Vector2f&>* const collisionPoints = CalculateCollisionPoint(world, index);
+            
+            std::vector<sf::Vector2f> collisionPoints;
+            collisionPoints.push_back(sf::Vector2f{0, 0});
+            collisionPoints.push_back(sf::Vector2f{appearance.GetSprite()->getLocalBounds().width, 0});
+            collisionPoints.push_back(sf::Vector2f{0, appearance.GetSprite()->getLocalBounds().height});
+            collisionPoints.push_back(sf::Vector2f{appearance.GetSprite()->getLocalBounds().width, appearance.GetSprite()->getLocalBounds().height});
+            
             for(int i = 0; i < 4; i++) //where 4 is the amount of collisionPoints we have. Those are the 4 corners of the sprite of a gameObject.
             {
-                collision = (*object)->Contains(position.GetPosition(world, index) + appearance.collisionPoints[i]);
+                collision = (*object)->Contains(position.GetPosition(world, index) + collisionPoints[i]);
 
                 if(collision) break;
             }
+//            delete collisionPoints;
         }
         if(collision)
         {
@@ -66,3 +75,16 @@ bool CollisionDetection::Collides(const World& world, const unsigned long index)
 
     return collision;
 }
+
+//const std::vector<const sf::Vector2f&>* const CollisionDetection::CalculateCollisionPoint(const World& world, const unsigned long entityIndex)
+//{
+//    Appearance& appearance = *world.Appearance[entityIndex];
+//    
+//    std::vector<const sf::Vector2f&>* const collisionPoints = new std::vector<const sf::Vector2f&>;
+//    collisionPoints->push_back(sf::Vector2f{0, 0});
+//    collisionPoints->push_back(sf::Vector2f{appearance.GetSprite()->getGlobalBounds().width, 0});
+//    collisionPoints->push_back(sf::Vector2f{0, appearance.GetSprite()->getGlobalBounds().height});
+//    collisionPoints->push_back(sf::Vector2f{appearance.GetSprite()->getGlobalBounds().width, appearance.GetSprite()->getGlobalBounds().height});
+//    
+//    return collisionPoints;
+//}

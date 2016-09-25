@@ -19,7 +19,7 @@ const std::string Constants::PLAYER_NAME = "Mario";
 
 //Sprite variables --> animation assumes that the sprite-set is horizontally developed
 const std::string Constants::PLAYER_SPRITE_PATH = "SNES - Super Mario World - Mario.png";
-const int Constants::PLAYER_SPRITE_STARTING_X = 14;
+const int Constants::PLAYER_SPRITE_STARTING_X = 48;
 const int Constants::PLAYER_SPRITE_STARTING_Y = 10;
 const int Constants::PLAYER_WIDTH = 14;
 const int Constants::PLAYER_HEIGHT = 20;
@@ -30,8 +30,8 @@ const int Constants::PLAYER_SPRITE_MAX_FRAME = 2;
 const int Constants::ANIMATION_FRAMERATE = 200; //in millisecond
 const bool Constants::REVERSE_ANIMATION = false;
 const int Constants::GAME_FRAMERATE_TARGET = 32;
-const float Constants::OFFSET_COL_X = 2;
-const float Constants::OFFSET_COL_Y = 2;
+const float Constants::OFFSET_COL_X = 2; //this should be used for offsetting the bounding box collider on the x axis
+const float Constants::OFFSET_COL_Y = 2; //this is the same but for the y axis
 
 //Movement settings
 const float Constants::PLAYER_MAXSPEED_X = 4;
@@ -40,7 +40,7 @@ const float Constants::PLAYER_MAX_ACCELERATION_X = 0.5f;
 const float Constants::PLAYER_MAX_ACCELERATION_Y = 0.5f;
 const float Constants::PLAYER_STEP_SIZE = 3;
 const int Constants::PLAYER_PHYSICAL_STARTING_X = 40;
-const int Constants::PLAYER_PHYSICAL_STARTING_Y = 60;
+const int Constants::PLAYER_PHYSICAL_STARTING_Y = 500;
 
 //************************
 // In game settings

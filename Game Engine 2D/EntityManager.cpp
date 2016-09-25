@@ -10,7 +10,6 @@
 #include "Components.hpp"
 #include <tmx/MapLoader.h>
 #include "Engine.hpp"
-#include <cmath>
 
 unsigned long EntityManager::playerId(NAN);
 std::vector<CollisionEvent> EntityManager::collisionEvents;
@@ -63,6 +62,7 @@ const unsigned long EntityManager::CreateEntity(World& world)
     world.Velocity.push_back(new Velocity);
     world.EntityFlag.push_back(new EntityFlag);
 //    world.Collision.push_back(new Collision);
+    world.Animation.push_back(new Animation);
     
     return world.EntitiesMasks.size() - 1; //return size because you want to return an index that points to a newer
 }
@@ -98,6 +98,7 @@ void EntityManager::FreeWorldFields(World& world, const int index)
     delete world.Position[index];
     delete world.Velocity[index];
 //    delete world.Collision[index];
+    delete world.Animation[index];
 }
 
 const std::vector<CollisionEvent>& EntityManager::GetCollisionEvents()

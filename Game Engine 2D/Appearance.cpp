@@ -13,10 +13,7 @@ Appearance::Appearance(sf::Sprite* const sprite) : sprite(sprite)
     
 }
 
-Appearance::Appearance(std::string spritePath, int spriteMaxFrame, float animationFrameRate, bool reverseAnimation,
-                       float spriteBeginningX, float spriteBeginningY, float spriteWidth, float spriteHeight) :
-    spriteMaxFrame(spriteMaxFrame), animationFrameRate(animationFrameRate), reverseAnimation(reverseAnimation)
-//    spriteBeginningX(spriteBeginningX), spriteBeginningY(spriteBeginningY), spriteWidth(spriteWidth), spriteHeight(spriteHeight)
+Appearance::Appearance(std::string spritePath)
 {
 #ifdef _WIN32
         std::string loadPath = "images/" + spritePath;
@@ -24,11 +21,10 @@ Appearance::Appearance(std::string spritePath, int spriteMaxFrame, float animati
         std::string loadPath = resourcePath() + spritePath;
         //TODO #should do the linux version
 #endif
-    Appearance::spritePath = loadPath;
+    Appearance::SpritePath = loadPath;
     texture = new sf::Texture;
-    if (!texture->loadFromFile(Appearance::spritePath)) //TODO load only a subretangle of the whole sprite. Check method signature to see how
+    if (!texture->loadFromFile(Appearance::SpritePath)) //TODO load only a subretangle of the whole sprite. Check method signature to see how
     {
-//        isLoaded = false;
         Utils::PrintDebugError("Appearance::Appearance", "impossible to load texture from " + spritePath + "!");
         assert(IsSpriteLoaded()); //you do this because you can't return a value from a constructor!!
     }
@@ -36,14 +32,6 @@ Appearance::Appearance(std::string spritePath, int spriteMaxFrame, float animati
     {
         sprite = new sf::Sprite;
         sprite->setTexture(*texture);
-        
-        //set subTexture
-        if(texture->getSize().x > spriteWidth || texture->getSize().y > spriteHeight) //set subtexture only if needed, based on parameters
-        {
-            sf::Rect<int> subTextureRect(spriteBeginningX, spriteBeginningY, spriteWidth, spriteHeight);
-            sprite->setTextureRect(subTextureRect);
-//            SetSubTexture(startingLeft, startingTop, width, height);
-        }
         
         if(sprite->getTexture() != nullptr)
         {
@@ -59,11 +47,6 @@ Appearance::Appearance(std::string spritePath, int spriteMaxFrame, float animati
             
         }
     }
-    
-    collisionPoints[0] = sf::Vector2f{0, 0};
-    collisionPoints[1] = sf::Vector2f{sprite->getGlobalBounds().width, 0};
-    collisionPoints[2] = sf::Vector2f{0, sprite->getGlobalBounds().height};
-    collisionPoints[3] = sf::Vector2f{sprite->getGlobalBounds().width, sprite->getGlobalBounds().height};
 }
 
 Appearance::~Appearance()

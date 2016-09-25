@@ -11,6 +11,7 @@
 #include "Movement.hpp"
 #include "Renderer.hpp"
 #include "Input.hpp"
+#include "Animator.hpp"
 
 void SystemManager::Init()
 {
@@ -20,6 +21,8 @@ void SystemManager::Init()
     systems.push_back(r);
     Input* i = new Input;
     systems.push_back(i);
+    Animator* a = new Animator();
+    systems.push_back(a);
 }
 
 std::vector<SystemBase*> SystemManager::systems;

@@ -36,11 +36,9 @@ void Input::OnKeyUp(const sf::Event::KeyEvent& input, const World& world, const 
     {
         case sf::Keyboard::Key::A:
             controller.MoveLeft = false;
-            Utils::PrintDebugLog("Input::OnKeyUp", "released A");
             break;
         case sf::Keyboard::Key::D:
             controller.MoveRight = false;
-            Utils::PrintDebugLog("Input::OnKeyUp", "released D");
             break;
         case sf::Keyboard::Key::S:
             controller.Crouch = false;
@@ -62,11 +60,9 @@ void Input::OnKeyDown(const sf::Event::KeyEvent& input, const World& world, cons
     {
         case sf::Keyboard::Key::A:
             controller.MoveLeft = true;
-            Utils::PrintDebugLog("Input::OnKeyDown", "pressed A");
             break;
         case sf::Keyboard::Key::D:
             controller.MoveRight = true;
-            Utils::PrintDebugLog("Input::OnKeyUp", "pressed D");
             break;
         case sf::Keyboard::Key::S:
             controller.Crouch = true;

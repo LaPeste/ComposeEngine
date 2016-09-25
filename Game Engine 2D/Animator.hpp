@@ -1,31 +1,31 @@
+//
+//  Animator.hpp
+//  GameEngine2D
+//
+//  Created by Andrea Catalini on 18/09/16.
+//  Copyright © 2016 Andrea Catalini. All rights reserved.
+//
+
 #ifndef _ANIMATOR_HPP_
 #define _ANIMATOR_HPP_
 
 #include "stdafx.h"
+#include "SystemBase.hpp"
+
+#define ANIMATION_MASK Components::APPEARANCE | Components::ANIMATION | Components::CONTROLLER
 
 //This class assumes that the sprite set is horizontally developed
 
-class Animator
+class Animator : public SystemBase
 {
-    
 public:
-    Animator(int spriteMaxFrame, int animationFrameRate, bool reverseAnimation);
+    Animator();
     ~Animator();
     
-    int GetCurrentFrame() const;
-    void Animate(sf::Sprite& sprite);
-    void FlipSprite(bool toFlip); //to similate walk right or left
-    void AnimateSprite(bool toAnimate);
+    void OnUpdate() override;
     
 private:
-    int currentFrame;
-    int maxFrame;
-    int animationFrameRate;
-    bool reverseAnimation;
-    bool ahead;
-    sf::Clock clock;
-    bool flipSprite; //orientation for the movements
-    bool toAnimate; //when to animate if pressed a direction
+    void Animate(const World& world, const unsigned long entityIndex);
 };
 
-#endif
+#endif /* _ANIMATOR_HPP_ */

@@ -80,8 +80,6 @@ void Movement::OnUpdate()
             velocity.SpeedX = speedX;
             velocity.SpeedY = speedY;
             
-            //TODO
-//            Animate();
             MoveTo(world, i, speedX, speedY);
         }
     }
