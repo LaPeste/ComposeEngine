@@ -11,8 +11,10 @@
 #include "SystemManager.hpp"
 #include "World.hpp"
 #include "Engine.hpp"
+#include "Controller.hpp"
 #include "FPS.hpp"
-#include "CollisionDetection.hpp"
+#include "CollisionDetectionUtils.hpp"
+#include "TransforUtils.hpp"
 
 Movement::Movement() : SystemBase()
 {
@@ -102,6 +104,7 @@ void Movement::StopMove(const World& world, const unsigned long entityIndex)
 //    World world = Engine::GetInstance()->world;
     Velocity& velocity = *world.Velocity[entityIndex];
     Acceleration& acceleration = *world.Acceleration[entityIndex];
+    Controller& controller = *world.Controller[entityIndex];
     if(velocity.SpeedX > 0) acceleration.AccelerationX = -2 * acceleration.AccelerationPerFrameX;
     if(velocity.SpeedX < 0) acceleration.AccelerationX = 2 * acceleration.AccelerationPerFrameX;
     
@@ -114,7 +117,6 @@ void Movement::StopMove(const World& world, const unsigned long entityIndex)
 void Movement::MoveTo(const World& world, const unsigned long entityIndex, float x, float y)
 {
     EntityFlag& entityFlag = *world.EntityFlag[entityIndex];
-    Position& position = *world.Position[entityIndex];
     Controller& controller = *world.Controller[entityIndex];
     Velocity& velocity = *world.Velocity[entityIndex];
     
@@ -156,17 +158,17 @@ void Movement::MoveTo(const World& world, const unsigned long entityIndex, float
     {
         if((entityFlag.GetEntityFlag() & GameObjectFlag::GHOST) == GameObjectFlag::GHOST)
         {
-            if(PosValid(world, entityIndex, position.GetPosition(world, entityIndex).x + stepX, position.GetPosition(world, entityIndex).y + stepY))
+            if(PosValid(world, entityIndex, TransformUtils::GetPosition(world, entityIndex).x + stepX, TransformUtils::GetPosition(world, entityIndex).y + stepY))
             {
-                position.SetPosition(world, entityIndex, sf::Vector2f(position.GetPosition(world, entityIndex).x + stepX, position.GetPosition(world, entityIndex).y + stepY));
+                TransformUtils::SetPosition(world, entityIndex, sf::Vector2f(TransformUtils::GetPosition(world, entityIndex).x + stepX, TransformUtils::GetPosition(world, entityIndex).y + stepY));
             }
         }
         else
         {
             // movement on X axis
-            if(PosValid(world, entityIndex, position.GetPosition(world, entityIndex).x + stepX, position.GetPosition(world, entityIndex).y))
+            if(PosValid(world, entityIndex, TransformUtils::GetPosition(world, entityIndex).x + stepX, TransformUtils::GetPosition(world, entityIndex).y))
             {
-                position.SetPosition(world, entityIndex, sf::Vector2f(position.GetPosition(world, entityIndex).x + stepX, position.GetPosition(world, entityIndex).y));
+                TransformUtils::SetPosition(world, entityIndex, sf::Vector2f(TransformUtils::GetPosition(world, entityIndex).x + stepX, TransformUtils::GetPosition(world, entityIndex).y));
             }
             else
             {
@@ -174,15 +176,15 @@ void Movement::MoveTo(const World& world, const unsigned long entityIndex, float
             }
             
             // movement on Y axis
-            if(PosValid(world, entityIndex, position.GetPosition(world, entityIndex).x, position.GetPosition(world, entityIndex).y + stepY))
+            if(PosValid(world, entityIndex, TransformUtils::GetPosition(world, entityIndex).x, TransformUtils::GetPosition(world, entityIndex).y + stepY))
             {
-                position.SetPosition(world, entityIndex, sf::Vector2f(position.GetPosition(world, entityIndex).x, position.GetPosition(world, entityIndex).y + stepY));
+                TransformUtils::SetPosition(world, entityIndex, sf::Vector2f(TransformUtils::GetPosition(world, entityIndex).x, TransformUtils::GetPosition(world, entityIndex).y + stepY));
             }
             else
             {
                 velocity.SpeedY = 0;
             }
-            position.CanJump = velocity.SpeedY == 0;
+            controller.CanJump = velocity.SpeedY == 0;
         }
         
         x -= stepX;
@@ -202,23 +204,28 @@ void Movement::MoveTo(const World& world, const unsigned long entityIndex, float
 
 bool Movement::PosValid(const World& world, const unsigned long entityIndex, float x, float y)
 {
-    EntityFlag& entityFlag = *world.EntityFlag[entityIndex];
-    Position& position = *world.Position[entityIndex];
-    Controller& controller = *world.Controller[entityIndex];
-    Velocity& velocity = *world.Velocity[entityIndex];
+//    EntityFlag& entityFlag = *world.EntityFlag[entityIndex];
+//    Controller& controller = *world.Controller[entityIndex];
+//    Velocity& velocity = *world.Velocity[entityIndex];
     Appearance& appearance = *world.Appearance[entityIndex];
     
-    sf::Vector2f originalPosition = position.GetPosition(world, entityIndex);
-    position.SetPosition(world, entityIndex, sf::Vector2f(x, y));
+    sf::Vector2f originalPosition = TransformUtils::GetPosition(world, entityIndex);
+    TransformUtils::SetPosition(world, entityIndex, sf::Vector2f(x, y));
     bool posValid = false;
     
-    //prevent player from falling from map's limits
-    if( appearance.IsSpriteLoaded() &&
-       !(position.GetPosition(world, entityIndex).x <= 0 ||
-         position.GetPosition(world, entityIndex).x + appearance.GetSprite()->getLocalBounds().width >= Engine::GetInstance().GetMapLoader().GetMapSize().x) )
+    bool insideXLimitMap = !(TransformUtils::GetPosition(world, entityIndex).x <= 0 ||
+                             TransformUtils::GetPosition(world, entityIndex).x + appearance.GetSprite()->getLocalBounds().width >= Engine::GetInstance().GetMapLoader().GetMapSize().x);
+    bool insideYLimitMap = !(TransformUtils::GetPosition(world, entityIndex).y <= 0 ||
+                             TransformUtils::GetPosition(world, entityIndex).y + appearance.GetSprite()->getLocalBounds().height >= Engine::GetInstance().GetMapLoader().GetMapSize().y);
+    //prevent player from falling from map's limits, thanks to the posValid initialized to false
+    if( appearance.IsSpriteLoaded() && insideXLimitMap && insideYLimitMap)
     {
-        posValid = CollisionDetection::Collides(world, entityIndex) ? false : true; //TODO add collision detection
+        if( (world.EntitiesMasks[entityIndex] & Components::COLLIDER) == (Components::COLLIDER)) //only entities will collider will check against collisions
+        {
+            posValid = CollisionDetectionUtils::Collides(world, entityIndex) ? false : true; //TODO add collision detection
+        }
+        else posValid = true;
     }
-    position.SetPosition(world, entityIndex, originalPosition);
+    TransformUtils::SetPosition(world, entityIndex, originalPosition);
     return posValid;
 }

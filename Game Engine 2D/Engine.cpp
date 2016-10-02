@@ -5,6 +5,7 @@
 #include "Camera.hpp"
 #include <tmx/Log.h>
 #include "SystemManager.hpp"
+#include "EntityManager.hpp"
 
 
 Engine::~Engine()
@@ -60,6 +61,7 @@ bool Engine::Init()
 //    GameObjectManager::Add(player);
     
     SystemManager::Init();
+    EntityManager::Init(World);
     
     Player();
     Camera::CreateInstance(Constants::CAMERA_ZOOM_WIDTH ,Constants::CAMERA_ZOOM_HEIGHT);

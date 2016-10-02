@@ -22,16 +22,16 @@ enum class Components
     POSITION = 1 << 3,
     VELOCITY = 1 << 4,
     FLAG = 1 << 5,
-    ANIMATION = 1 << 6
-//    COLLISION = 1 << 6
+    ANIMATION = 1 << 6,
+    COLLIDER = 1 << 7
 };
 
-inline Components operator| (Components a, Components b) //I can't make this work when it comes to chain more components, like the case right below
+inline Components operator| (Components a, Components b)
 {
     return static_cast<Components>(static_cast<int>(a) | static_cast<int>(b));
 };
 
-inline Components operator& (Components a, Components b) //I can't make this work when it comes to chain more components, like the case right below
+inline Components operator& (Components a, Components b)
 {
     return static_cast<Components>(static_cast<int>(a) & static_cast<int>(b));
 };

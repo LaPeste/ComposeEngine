@@ -6,15 +6,13 @@
 //  Copyright © 2016 Andrea Catalini. All rights reserved.
 //
 
-#ifndef _COLLISION_DETECTION_HPP_
-#define _COLLISION_DETECTION_HPP_
+#ifndef _COLLISION_DETECTION_UTILS_HPP_
+#define _COLLISION_DETECTION_UTILS_HPP_
 
 #include "stdafx.h"
 #include "World.hpp"
 
-#define COLLISION_MASK Components::APPEARANCE | Components::POSITION | Components::FLAG
-
-class CollisionDetection
+class CollisionDetectionUtils
 {
 public:
     static bool Collides(const World& world, const unsigned long entityIndex);
@@ -22,4 +20,4 @@ private:
 //    static const std::vector<const sf::Vector2f&>* const CalculateCollisionPoint(const World& world, const unsigned long entityIndex);
 };
 
-#endif /* _COLLISION_DETECTION_HPP_ */
+#endif /* _COLLISION_DETECTION_UTILS_HPP_ */

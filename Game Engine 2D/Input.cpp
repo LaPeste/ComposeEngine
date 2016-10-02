@@ -78,9 +78,9 @@ void Input::OnKeyDown(const sf::Event::KeyEvent& input, const World& world, cons
 
 bool Input::Jump(const World& world, const unsigned long entityIndex)
 {
-    Position& position = *world.Position[entityIndex];
+    Controller& controller = *world.Controller[entityIndex];
     Velocity& velocity = *world.Velocity[entityIndex];
-    if(!position.CanJump) return false;
+    if(!controller.CanJump) return false;
     
     velocity.SpeedY = -velocity.MaxSpeedY;
     return true;

@@ -20,9 +20,9 @@ public:
     sf::Vector2f StartingPos;
     sf::Vector2f SpaceBetweenSprite;
     bool VerticalMovement; //if true the sprite sequence develops vertically, horizzontaly otherwise.
-    bool FlipSprite; //if true the sprite will be flipped. If false, it'll be left as it is.
+    bool FlipSprite; //if true the sprite will be flipped. If false, it'll be left as it is. Flipping a sprite is useful when an animation needs to be performed in opposite direction
     bool ReverseAnimation; //if true the animation follow this order 0,1,2...end and end...2,1,0. If false, 0,1,2...end and again 0,1,2...end
-    bool Ahead; //used by the animator to keep track what direction it has to follow on the sprite sheet
+    bool Ahead; //used by the animator during the reversal of the animation to keep track what direction it has to follow on the sprite sheet
     int CurrentFrame;
     float SpriteWidth, SpriteHeight;
     int MaxFrame, FrameRate;

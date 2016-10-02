@@ -25,7 +25,8 @@ enum class GameObjectFlag
     GHOST = 1 << 0,
     GRAVITY = 1 << 1,
     MAPONLY = 1 << 2,
-    MAP_OBJECT = 1 << 3
+    MAP_OBJECT = 1 << 3,
+    TRIGGER = 1 << 4
 };
 
 inline GameObjectFlag operator| (GameObjectFlag a, GameObjectFlag b)

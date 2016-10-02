@@ -19,6 +19,7 @@ public:
     bool MoveRight;
     bool MoveLeft;
     bool Crouch;
+    bool CanJump; //used to check conditions like: touching the ground etc etc
 };
 
 #endif /* _CONTROLLER_HPP_ */

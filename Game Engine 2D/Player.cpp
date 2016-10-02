@@ -9,6 +9,7 @@
 #include "Player.hpp"
 #include "EntityManager.hpp"
 #include "Engine.hpp"
+#include "TransforUtils.hpp"
 
 Player::Player()
 {
@@ -17,13 +18,14 @@ Player::Player()
     EntityManager::SetPlayerId(entityIndex); //TODO: this should be automated in the EntityManager...
     
     world.EntitiesMasks[entityIndex] = world.EntitiesMasks[entityIndex] | Components::APPEARANCE | Components::ACCELERATION | Components::CONTROLLER | Components::FLAG |
-    Components::POSITION | Components::VELOCITY | Components::ANIMATION;
+    Components::POSITION | Components::VELOCITY | Components::ANIMATION | Components::COLLIDER;
     world.Appearance[entityIndex] = new Appearance(Constants::PLAYER_SPRITE_PATH);
+    TransformUtils::SetPosition(world, entityIndex, sf::Vector2f(Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y));
     world.Acceleration[entityIndex] = new Acceleration(Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y);
     world.Controller[entityIndex] = new Controller;
     world.EntityFlag[entityIndex] = new EntityFlag(GameObjectFlag::GRAVITY);
-    world.Position[entityIndex] = new Position(world, entityIndex, Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y, true);
     world.Velocity[entityIndex] = new Velocity;
+    world.Collider[entityIndex] = new Collider(sf::Vector2f(0,0));
     
     std::map<AnimationState, AnimationData> animationMap;
     AnimationData animData(sf::Vector2f(Constants::PLAYER_SPRITE_STARTING_X, Constants::PLAYER_SPRITE_STARTING_Y),

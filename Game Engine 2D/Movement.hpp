@@ -13,7 +13,7 @@
 #include "Components.hpp"
 #include "SystemBase.hpp"
 
-#define MOVEMENT_MASK Components::POSITION | Components::VELOCITY | Components::ACCELERATION | Components::CONTROLLER | Components::FLAG | Components::APPEARANCE
+#define MOVEMENT_MASK Components::CONTROLLER | Components::VELOCITY | Components::ACCELERATION | Components::FLAG | Components::APPEARANCE
 
 class Movement : public SystemBase
 {

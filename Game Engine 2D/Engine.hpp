@@ -29,7 +29,7 @@ public:
 
 	//Utils
 	sf::RenderWindow* GetWindow() const;
-    tmx::MapLoader & GetMapLoader();
+    tmx::MapLoader& GetMapLoader();
     
     World World; //TODO maybe getter and setter?
 

@@ -41,12 +41,21 @@ void Animator::Animate(const World& world, const unsigned long entityIndex)
         else
         {
             AnimationData& currentAnimData = animation.AnimationMap[animation.CurrentAnimationState];
-            sf::Rect<int> finalRect(currentAnimData.StartingPos.x + currentAnimData.CurrentFrame * (appearance.GetSprite()->getLocalBounds().width + currentAnimData.SpaceBetweenSprite.x),
-                                    currentAnimData.StartingPos.y,
-                                    currentAnimData.SpriteWidth,
-                                    currentAnimData.SpriteHeight);
+            sf::Rect<int> finalSpriteRect;
+            if(currentAnimData.VerticalMovement)
+            {
+                finalSpriteRect.left = currentAnimData.StartingPos.x;
+                finalSpriteRect.top = currentAnimData.StartingPos.y + currentAnimData.CurrentFrame * (appearance.GetSprite()->getLocalBounds().height + currentAnimData.SpaceBetweenSprite.y);
+            }
+            else
+            {
+                finalSpriteRect.left = currentAnimData.StartingPos.x + currentAnimData.CurrentFrame * (appearance.GetSprite()->getLocalBounds().width + currentAnimData.SpaceBetweenSprite.x);
+                finalSpriteRect.top = currentAnimData.StartingPos.y;
+            }
+            finalSpriteRect.width = currentAnimData.SpriteWidth;
+            finalSpriteRect.height = currentAnimData.SpriteHeight;
             
-            appearance.GetSprite()->setTextureRect(finalRect); //this is the core of the whole method
+            appearance.GetSprite()->setTextureRect(finalSpriteRect); //this is the core of the whole method
             
             if(animation.Clock.getElapsedTime().asMilliseconds() > currentAnimData.FrameRate)
             {

@@ -9,6 +9,7 @@
 #include "Camera.hpp"
 #include "GameObjectManager.hpp"
 #include "Engine.hpp"
+#include "TransforUtils.hpp"
 #include "EntityManager.hpp"
 
 using namespace sf;
@@ -57,8 +58,7 @@ void Camera::Update()
     {
 //        Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
         World& world = Engine::GetInstance().World;
-        Position* position = world.Position[EntityManager::GetPlayerId()];
-        Vector2f playerPos = position->GetPosition(world, EntityManager::GetPlayerId());
+        Vector2f playerPos = TransformUtils::GetPosition(world, EntityManager::GetPlayerId());
         float newPosX = playerPos.x - GetWidth()/2 + Constants::PLAYER_WIDTH/2;
         float newPosY = playerPos.y - GetHeight()/2 + Constants::PLAYER_HEIGHT/2;
 

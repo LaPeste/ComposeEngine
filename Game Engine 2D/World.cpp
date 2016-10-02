@@ -40,18 +40,18 @@ World::~World()
     {
         delete *elem_it;
     }
-    for(std::vector<Position::Position*>::iterator elem_it = Position.begin(); elem_it != Position.end(); ++elem_it)
-    {
-        delete *elem_it;
-    }
+//    for(std::vector<Position::Position*>::iterator elem_it = Position.begin(); elem_it != Position.end(); ++elem_it)
+//    {
+//        delete *elem_it;
+//    }
     for(std::vector<Velocity::Velocity*>::iterator elem_it = Velocity.begin(); elem_it != Velocity.end(); ++elem_it)
     {
         delete *elem_it;
     }
-//    for(std::vector<Collision::Collision*>::iterator elem_it = Collision.begin(); elem_it != Collision.end(); ++elem_it)
-//    {
-//        delete *elem_it;
-//    }
+    for(std::vector<Collider::Collider*>::iterator elem_it = Collider.begin(); elem_it != Collider.end(); ++elem_it)
+    {
+        delete *elem_it;
+    }
     for(std::vector<EntityFlag::EntityFlag*>::iterator elem_it = EntityFlag.begin(); elem_it != EntityFlag.end(); ++elem_it)
     {
         delete *elem_it;

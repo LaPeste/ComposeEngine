@@ -6,25 +6,10 @@
 //  Copyright © 2016 Andrea Catalini. All rights reserved.
 //
 
-#include "Position.hpp"
+#include "TransforUtils.hpp"
 #include "Appearance.hpp"
 
-Position::Position() : CanJump(false)
-{
-    
-}
-
-Position::Position(const World& world, unsigned const long entityIndex, float x, float y, bool canJump) : CanJump(canJump)
-{
-    SetPosition(world, entityIndex, sf::Vector2f(x, y));
-}
-
-Position::~Position()
-{
-    
-}
-
-const sf::Vector2f& Position::GetPosition(const World& world, unsigned const long entityIndex) const
+const sf::Vector2f& TransformUtils::GetPosition(const World& world, unsigned const long entityIndex)
 {
     Appearance* appearance = world.Appearance[entityIndex];
     
@@ -36,7 +21,7 @@ const sf::Vector2f& Position::GetPosition(const World& world, unsigned const lon
     return appearance->GetSprite()->getPosition();
 }
 
-void Position::SetPosition(const World& world, unsigned const long entityIndex, sf::Vector2f position)
+void TransformUtils::SetPosition(const World& world, unsigned const long entityIndex, sf::Vector2f position)
 {
     Appearance* appearance = world.Appearance[entityIndex];
     if(appearance == nullptr)
