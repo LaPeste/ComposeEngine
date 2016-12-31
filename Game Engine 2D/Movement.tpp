@@ -11,54 +11,61 @@
 #include "SystemManager.hpp"
 #include "World.hpp"
 #include "Engine.hpp"
+#include "Appearance.hpp"
+#include "Acceleration.hpp"
 #include "Controller.hpp"
+#include "Collider.hpp"
+#include "Velocity.hpp"
+#include "EntityFlag.hpp"
 #include "FPS.hpp"
 #include "CollisionDetectionUtils.hpp"
 #include "TransforUtils.hpp"
 
-Movement::Movement() : SystemBase()
+template<typename First, typename Second, typename ...Rest>
+Movement<First, Second, Rest...>::Movement(World& world) : System<First, Second, Rest...>(world)
 {
 
 }
 
-Movement::~Movement()
+template<typename First, typename Second, typename ...Rest>
+Movement<First, Second, Rest...>::~Movement()
 {
     
 }
 
-void Movement::OnUpdate()
+template<typename First, typename Second, typename ...Rest>
+void Movement<First, Second, Rest...>::OnUpdate()
 {
     World& world = Engine::GetInstance().World;
-//    for(std::vector<int>::const_iterator entity = world.EntitiesMasks.begin(); entity != world.EntitiesMasks.end(); ++entity)
-    for(int i = 0; i < world.EntitiesMasks.size(); ++i)
+//    for(std::vector<int>::const_iterator entity = world.EntitiesComponentsMasks.begin(); entity != world.EntitiesComponentsMasks.end(); ++entity)
+    for(int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
     {
-        if((world.EntitiesMasks[i] & MOVEMENT_MASK) == (MOVEMENT_MASK))
+        if((world.EntitiesComponentsMasks[i] & this->GetComponentBitMask()) == this->GetComponentBitMask())
         {
-            //TODO I'd like to check if the Controller at that
-            Controller& controller = *world.Controller[i];
-            Acceleration& acceleration = *world.Acceleration[i];
-            Velocity& velocity = *world.Velocity[i];
-            EntityFlag& entityFlag = *world.EntityFlag[i];
-            
+            std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[i];
+            Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
+            Acceleration* acceleration = static_cast<Acceleration*>(entity[Component<Acceleration>::Id]);
+            Velocity* velocity = static_cast<Velocity*>(entity[Component<Velocity>::Id]);
+            EntityFlag* entityFlag = static_cast<EntityFlag*>(entity[Component<EntityFlag>::Id]);
+
         
-        
-            if(!controller.MoveLeft && !controller.MoveRight)
+            if(!controller->MoveLeft && !controller->MoveRight)
             {
                 StopMove(world, i);
             }
             
-            if(controller.MoveLeft)
+            if(controller->MoveLeft)
             {
-                acceleration.AccelerationX = -acceleration.AccelerationPerFrameX;
+                acceleration->AccelerationX = -acceleration->AccelerationPerFrameX;
             }
-            else if(controller.MoveRight)
+            else if(controller->MoveRight)
             {
-                acceleration.AccelerationX = acceleration.AccelerationPerFrameX;
+                acceleration->AccelerationX = acceleration->AccelerationPerFrameX;
             }
             
-            if((entityFlag.GetEntityFlag() & GameObjectFlag::GRAVITY) == GameObjectFlag::GRAVITY)
+            if((entityFlag->GetEntityFlag() & GameObjectFlag::GRAVITY) == GameObjectFlag::GRAVITY)
             {
-                acceleration.AccelerationY = Constants::IN_GAME_GRAVITY;
+                acceleration->AccelerationY = Constants::IN_GAME_GRAVITY;
             }
             
 //            float speedX = velocity.GetSpeedX();
@@ -66,21 +73,21 @@ void Movement::OnUpdate()
 //            float maxSpeedX = velocity.GetMaxSpeedX();
 //            float maxSpeedY = velocity.GetMaxSpeedY();
 
-            float speedX = velocity.SpeedX;
-            float speedY = velocity.SpeedY;
-            float maxSpeedX = velocity.MaxSpeedX;
-            float maxSpeedY = velocity.MaxSpeedY;
+            float speedX = velocity->SpeedX;
+            float speedY = velocity->SpeedY;
+            float maxSpeedX = velocity->MaxSpeedX;
+            float maxSpeedY = velocity->MaxSpeedY;
             
-            speedX += acceleration.AccelerationX * FPS::GetSpeedFactor();
-            speedY += acceleration.AccelerationY * FPS::GetSpeedFactor();
+            speedX += acceleration->AccelerationX * FPS::GetSpeedFactor();
+            speedY += acceleration->AccelerationY * FPS::GetSpeedFactor();
             
             if(speedX > maxSpeedX) speedX = maxSpeedX;
             if(speedX < -maxSpeedX) speedX = -maxSpeedX;
             if(speedY > maxSpeedY) speedY = maxSpeedY;
             if(speedY < -maxSpeedY) speedY = -maxSpeedY;
             
-            velocity.SpeedX = speedX;
-            velocity.SpeedY = speedY;
+            velocity->SpeedX = speedX;
+            velocity->SpeedY = speedY;
             
             MoveTo(world, i, speedX, speedY);
         }
@@ -90,7 +97,7 @@ void Movement::OnUpdate()
 //void Movement::MoveEntity(const World& world, const int entityIndex)
 //{
 ////    World world = Engine::GetInstance()->world;
-//    for(std::vector<int>::const_iterator entity = world.EntitiesMasks.begin(); entity != world.EntitiesMasks.end(); ++entity)
+//    for(std::vector<int>::const_iterator entity = world.EntitiesComponentsMasks.begin(); entity != world.EntitiesComponentsMasks.end(); ++entity)
 //    {
 //        if(*entity & MOVEMENT_MASK == MOVEMENT_MASK)
 //        {
@@ -99,27 +106,30 @@ void Movement::OnUpdate()
 //    }
 //}
 
-void Movement::StopMove(const World& world, const unsigned long entityIndex)
+template<typename First, typename Second, typename ...Rest>
+void Movement<First, Second, Rest...>::StopMove(const World& world, const unsigned long entityIndex)
 {
-//    World world = Engine::GetInstance()->world;
-    Velocity& velocity = *world.Velocity[entityIndex];
-    Acceleration& acceleration = *world.Acceleration[entityIndex];
-    Controller& controller = *world.Controller[entityIndex];
-    if(velocity.SpeedX > 0) acceleration.AccelerationX = -2 * acceleration.AccelerationPerFrameX;
-    if(velocity.SpeedX < 0) acceleration.AccelerationX = 2 * acceleration.AccelerationPerFrameX;
+    std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
+    Acceleration* acceleration = static_cast<Acceleration*>(entity[Component<Acceleration>::Id]);
+    Velocity* velocity = static_cast<Velocity*>(entity[Component<Velocity>::Id]);
+
+    if(velocity->SpeedX > 0) acceleration->AccelerationX = -2 * acceleration->AccelerationPerFrameX;
+    if(velocity->SpeedX < 0) acceleration->AccelerationX = 2 * acceleration->AccelerationPerFrameX;
     
-    if(velocity.SpeedX < 2.0f && velocity.SpeedX > -2.0f) {
-        acceleration.AccelerationX = 0;
-        velocity.SpeedX = 0;
+    if(velocity->SpeedX < 2.0f && velocity->SpeedX > -2.0f) {
+        acceleration->AccelerationX = 0;
+        velocity->SpeedX = 0;
     }
 }
 
-void Movement::MoveTo(const World& world, const unsigned long entityIndex, float x, float y)
+template<typename First, typename Second, typename ...Rest>
+void Movement<First, Second, Rest...>::MoveTo(const World& world, const unsigned long entityIndex, float x, float y)
 {
-    EntityFlag& entityFlag = *world.EntityFlag[entityIndex];
-    Controller& controller = *world.Controller[entityIndex];
-    Velocity& velocity = *world.Velocity[entityIndex];
-    
+    std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
+    Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
+    Velocity* velocity = static_cast<Velocity*>(entity[Component<Velocity>::Id]);
+    EntityFlag* entityFlag = static_cast<EntityFlag*>(entity[Component<EntityFlag>::Id]);
+
     if(x > 2344){ //Debug TODO remove this!
         std::cout << "It's a big mess";
     }
@@ -156,7 +166,7 @@ void Movement::MoveTo(const World& world, const unsigned long entityIndex, float
     
     while(true)
     {
-        if((entityFlag.GetEntityFlag() & GameObjectFlag::GHOST) == GameObjectFlag::GHOST)
+        if((entityFlag->GetEntityFlag() & GameObjectFlag::GHOST) == GameObjectFlag::GHOST)
         {
             if(PosValid(world, entityIndex, TransformUtils::GetPosition(world, entityIndex).x + stepX, TransformUtils::GetPosition(world, entityIndex).y + stepY))
             {
@@ -172,7 +182,7 @@ void Movement::MoveTo(const World& world, const unsigned long entityIndex, float
             }
             else
             {
-                velocity.SpeedX = 0;
+                velocity->SpeedX = 0;
             }
             
             // movement on Y axis
@@ -182,9 +192,9 @@ void Movement::MoveTo(const World& world, const unsigned long entityIndex, float
             }
             else
             {
-                velocity.SpeedY = 0;
+                velocity->SpeedY = 0;
             }
-            controller.CanJump = velocity.SpeedY == 0;
+            controller->CanJump = velocity->SpeedY == 0;
         }
         
         x -= stepX;
@@ -202,25 +212,27 @@ void Movement::MoveTo(const World& world, const unsigned long entityIndex, float
     
 }
 
-bool Movement::PosValid(const World& world, const unsigned long entityIndex, float x, float y)
+template<typename First, typename Second, typename ...Rest>
+bool Movement<First, Second, Rest...>::PosValid(const World& world, const unsigned long entityIndex, float x, float y)
 {
 //    EntityFlag& entityFlag = *world.EntityFlag[entityIndex];
 //    Controller& controller = *world.Controller[entityIndex];
 //    Velocity& velocity = *world.Velocity[entityIndex];
-    Appearance& appearance = *world.Appearance[entityIndex];
-    
+    std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
+    Appearance* appearance = static_cast<Appearance*>(entity[Component<Appearance>::Id]);
+
     sf::Vector2f originalPosition = TransformUtils::GetPosition(world, entityIndex);
     TransformUtils::SetPosition(world, entityIndex, sf::Vector2f(x, y));
     bool posValid = false;
     
     bool insideXLimitMap = !(TransformUtils::GetPosition(world, entityIndex).x <= 0 ||
-                             TransformUtils::GetPosition(world, entityIndex).x + appearance.GetSprite()->getLocalBounds().width >= Engine::GetInstance().GetMapLoader().GetMapSize().x);
+                             TransformUtils::GetPosition(world, entityIndex).x + appearance->GetSprite()->getLocalBounds().width >= Engine::GetInstance().GetMapLoader().GetMapSize().x);
     bool insideYLimitMap = !(TransformUtils::GetPosition(world, entityIndex).y <= 0 ||
-                             TransformUtils::GetPosition(world, entityIndex).y + appearance.GetSprite()->getLocalBounds().height >= Engine::GetInstance().GetMapLoader().GetMapSize().y);
+                             TransformUtils::GetPosition(world, entityIndex).y + appearance->GetSprite()->getLocalBounds().height >= Engine::GetInstance().GetMapLoader().GetMapSize().y);
     //prevent player from falling from map's limits, thanks to the posValid initialized to false
-    if( appearance.IsSpriteLoaded() && insideXLimitMap && insideYLimitMap)
+    if( appearance->IsSpriteLoaded() && insideXLimitMap && insideYLimitMap)
     {
-        if( (world.EntitiesMasks[entityIndex] & Components::COLLIDER) == (Components::COLLIDER)) //only entities will collider will check against collisions
+        if( (world.EntitiesComponentsMasks[entityIndex] & Component<Collider>::Id) == Component<Collider>::Id) //only entities will collider will check against collisions
         {
             posValid = CollisionDetectionUtils::Collides(world, entityIndex) ? false : true; //TODO add collision detection
         }

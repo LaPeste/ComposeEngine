@@ -11,31 +11,53 @@
 
 #include "stdafx.h"
 #include "World.hpp"
-#include "SystemBase.hpp"
+#include "System.hpp"
+#include <typeinfo> 
 
 class SystemManager
 {
 public:
 //    SystemManager();
 //    ~SystemManager();
-    static void Init();
-    static void Terminate();
+    static void Init(World& world);
+    static void Terminate(World& world);
     
-    static void StartAll();
-    static void ProcessAllInput(const sf::Event& event);
-    static void UpdateAll();
-    static void RenderAll();
-    static void ExitAll();
+    static void StartAll(World& world);
+    static void ProcessAllInput(World& world, const sf::Event& event);
+    static void UpdateAll(World& world);
+    static void RenderAll(World& world);
+    static void ExitAll(World& world); // TODO THIS SHOULD BE REMOVED, because the world should take care of deleting the refertences to the system objects
     
-    //not sure the AddSystem has to be kept
-    static void AddSystem(SystemBase* const system);
-    static const SystemBase* const GetSystemAtIndex(const int position);
-    static const std::vector<SystemBase*>& GetAllSystems();
+    template<typename First, typename Second, typename ...Rest>
+    static void AddSystem(World& world, System<First, Second, Rest...>* systemToAdd);
     
 private:
-    static std::vector<SystemBase*> systems;
-//    static void DeleteSystems();
-    
+        
 };
+
+
+template<typename First, typename Second, typename ...Rest>
+void SystemManager::AddSystem(World& world, System<First, Second, Rest...>* systemToAdd)
+{
+    if(world.Systems.find(systemToAdd->Id) == world.Systems.end())  //if system never added before
+    {
+        world.Systems.insert(std::make_pair(systemToAdd->Id, static_cast<SystemBase*>(systemToAdd)));
+        
+#ifdef LOG_OUTPUT_CONSOLE
+        std::stringstream ss;
+        ss << "System: " << typeid(systemToAdd).name() << " added!" << std::endl;
+        std::string s = ss.str();
+        Utils::PrintDebugLog(__PRETTY_FUNCTION__, s);
+#endif
+    }
+    else
+    {
+        std::stringstream ss;
+        ss << "system " << typeid(systemToAdd).name() << " already added to the selected world!";
+        std::string s = ss.str();
+        Utils::PrintDebugWarning(__PRETTY_FUNCTION__, s);
+    }
+    
+}
 
 #endif /* _SYSTEM_MANAGER_HPP_ */

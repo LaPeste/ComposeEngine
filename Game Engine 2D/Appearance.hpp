@@ -10,11 +10,12 @@
 #define _APPEARANCE_HPP_
 
 #include "stdafx.h"
+#include "Component.hpp"
 
-class Appearance
+class Appearance : public Component<Appearance>
 {
 public:
-    Appearance(sf::Sprite* const sprite); //dummy appearance, needed to make initialization of world faster
+//    Appearance(const World& world, const unsigned long int entityIndex, sf::Sprite* const sprite); //dummy appearance, needed to make initialization of world faster
     Appearance(std::string spritePath);
     ~Appearance();
     

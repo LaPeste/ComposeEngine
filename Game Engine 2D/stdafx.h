@@ -28,6 +28,7 @@
 
 #include "Utils.hpp"
 #include "Constants.hpp"
+#include "UtilConstants.hpp"
 
 #if __APPLE__ && __MACH__
 // Here is a small helper for you ! Have a look.

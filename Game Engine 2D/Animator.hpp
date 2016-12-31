@@ -10,16 +10,17 @@
 #define _ANIMATOR_HPP_
 
 #include "stdafx.h"
-#include "SystemBase.hpp"
+#include "System.hpp"
 
 #define ANIMATION_MASK Components::APPEARANCE | Components::ANIMATION | Components::CONTROLLER
 
 //This class assumes that the sprite set is horizontally developed
 
-class Animator : public SystemBase
+template<typename First, typename Second, typename ...Rest>
+class Animator : public System<First, Second, Rest...>
 {
 public:
-    Animator();
+    Animator(World& world);
     ~Animator();
     
     void OnUpdate() override;
@@ -27,5 +28,7 @@ public:
 private:
     void Animate(const World& world, const unsigned long entityIndex);
 };
+
+#include "Animator.tpp"
 
 #endif /* _ANIMATOR_HPP_ */

@@ -11,14 +11,15 @@
 
 #include "stdafx.h"
 #include "Components.hpp"
-#include "SystemBase.hpp"
+#include "System.hpp"
 
 #define MOVEMENT_MASK Components::CONTROLLER | Components::VELOCITY | Components::ACCELERATION | Components::FLAG | Components::APPEARANCE
 
-class Movement : public SystemBase
+template<typename First, typename Second, typename ...Rest>
+class Movement : public System<First, Second, Rest...>
 {
 public:
-    Movement();
+    Movement(World& world);
     ~Movement();
     
     void OnUpdate() override;
@@ -30,5 +31,7 @@ private:
     void MoveTo(const World& world, const unsigned long entityIndex, float x, float y);
     bool PosValid(const World& world, const unsigned long entityIndex, float x, float y);
 };
+
+#include "Movement.tpp"
 
 #endif /* _MOVEMENT_HPP_ */

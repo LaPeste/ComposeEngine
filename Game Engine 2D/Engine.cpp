@@ -7,13 +7,24 @@
 #include "SystemManager.hpp"
 #include "EntityManager.hpp"
 
+#include "Movement.hpp"
+#include "Renderer.hpp"
+#include "Animator.hpp"
+#include "Input.hpp"
+
+#include "Controller.hpp"
+#include "Velocity.hpp"
+#include "Acceleration.hpp"
+#include "EntityFlag.hpp"
+#include "Appearance.hpp"
+
 
 Engine::~Engine()
 {
 #ifdef LOG_OUTPUT_CONSOLE
     Utils::PrintDebugLog("~Engine()", "dctr called");
 #endif
-    delete Camera::GetInstance();
+    delete(Camera::GetInstance());
 }
 
 Engine::Engine() : ml(resourcePath())
@@ -60,10 +71,18 @@ bool Engine::Init()
 //    Player* player = new Player();
 //    GameObjectManager::Add(player);
     
-    SystemManager::Init();
+    SystemManager::Init(World);
+    
+    //introduce factories for characters and systems
+    Player();
+    
     EntityManager::Init(World);
     
-    Player();
+    SystemManager::AddSystem(World, new Movement<Controller, Velocity, Acceleration, EntityFlag, Appearance>(World));
+    SystemManager::AddSystem(World, new Renderer<Appearance>(World));
+    SystemManager::AddSystem(World, new Animator<Appearance, Animation, Controller>(World));
+    SystemManager::AddSystem(World, new Input<Controller, Velocity, Acceleration, Appearance>(World));
+    
     Camera::CreateInstance(Constants::CAMERA_ZOOM_WIDTH ,Constants::CAMERA_ZOOM_HEIGHT);
     return true;
 
@@ -87,7 +106,7 @@ void Engine::ProcessInput()
     while (mainWindow->pollEvent(event))
     {
         OnEvent(event, World, 0);
-        SystemManager::ProcessAllInput(event);
+        SystemManager::ProcessAllInput(World, event);
     }
 }
 
@@ -98,7 +117,7 @@ void Engine::Update()
     FPS::Update();
     Camera::GetInstance()->Update();
 //    GameObjectManager::UpdateAll();
-    SystemManager::UpdateAll();
+    SystemManager::UpdateAll(World);
 }
 
 void Engine::RenderFrame()
@@ -107,7 +126,7 @@ void Engine::RenderFrame()
     mainWindow->draw(ml); //draw map loaded in mapLoader
     Camera::GetInstance()->Draw(); //draw only the camera view
 //    GameObjectManager::DrawAll(*mainWindow);
-    SystemManager::RenderAll(); //draw all entities
+    SystemManager::RenderAll(World); //draw all entities
 	mainWindow->display();
 }
 
@@ -131,7 +150,7 @@ void Engine::Terminate()
 #ifdef LOG_OUTPUT_CONSOLE
     Utils::PrintDebugLog("Engine::Terminate", "terminating the engine and taking care of freeing the allocated memory");
 #endif
-    SystemManager::ExitAll();
+    SystemManager::ExitAll(World);
     mainWindow->close();
 }
 

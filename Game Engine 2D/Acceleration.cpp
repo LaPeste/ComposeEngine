@@ -10,7 +10,8 @@
 
 Acceleration::Acceleration(const float accelerationPerFrameX, const float accelerationPerFrameY) :
     AccelerationX(0), AccelerationY(0),
-    AccelerationPerFrameX(accelerationPerFrameX), AccelerationPerFrameY(accelerationPerFrameY)
+    AccelerationPerFrameX(accelerationPerFrameX), AccelerationPerFrameY(accelerationPerFrameY),
+    Component()
 {
     
 }

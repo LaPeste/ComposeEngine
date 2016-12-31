@@ -11,11 +11,12 @@
 
 #include "stdafx.h"
 #include "GameObjectType.hpp"
+#include "Component.hpp"
 
-class EntityFlag
+class EntityFlag : public Component<EntityFlag>
 {
 public:
-    EntityFlag();
+//    EntityFlag(const World& world, const unsigned long int entityIndex);
     EntityFlag(GameObjectFlag flags);
     
     const GameObjectFlag& GetEntityFlag() const;

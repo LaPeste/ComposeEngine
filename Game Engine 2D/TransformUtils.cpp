@@ -11,11 +11,14 @@
 
 const sf::Vector2f& TransformUtils::GetPosition(const World& world, unsigned const long entityIndex)
 {
-    Appearance* appearance = world.Appearance[entityIndex];
-    
+    std::map<unsigned long int, ComponentBase*> entityComponents = world.EntitiesComponentsMatrix[entityIndex];
+    Appearance* appearance = static_cast<Appearance*>(entityComponents[Component<Appearance>::Id]);
     if(appearance == nullptr)
     {
-        Utils::PrintDebugError("Position::GetPosition", "The component appearance for the entity " +  std::to_string(entityIndex) + " is null! Abort!");
+        std::stringstream ss;
+        ss << "The component " << typeid(appearance).name() << " for the entity " <<  std::to_string(entityIndex) << " is null! Abort!" << std::endl;
+        std::string s = ss.str();
+        Utils::PrintDebugError(__PRETTY_FUNCTION__, s);
         std::exit(EXIT_FAILURE);
     }
     return appearance->GetSprite()->getPosition();
@@ -23,10 +26,14 @@ const sf::Vector2f& TransformUtils::GetPosition(const World& world, unsigned con
 
 void TransformUtils::SetPosition(const World& world, unsigned const long entityIndex, sf::Vector2f position)
 {
-    Appearance* appearance = world.Appearance[entityIndex];
+    std::map<unsigned long int, ComponentBase*> entityComponents = world.EntitiesComponentsMatrix[entityIndex];
+    Appearance* appearance = static_cast<Appearance*>(entityComponents[Component<Appearance>::Id]);
     if(appearance == nullptr)
     {
-        Utils::PrintDebugError("Position::GetPosition", "The component appearance for the entity " +  std::to_string(entityIndex) + " is null! Abort!");
+        std::stringstream ss;
+        ss << "The component " << typeid(appearance).name() << " for the entity " <<  std::to_string(entityIndex) << " is null! Abort!" << std::endl;
+        std::string s = ss.str();
+        Utils::PrintDebugError(__PRETTY_FUNCTION__, s);
         std::exit(EXIT_FAILURE);
     }
     appearance->GetSprite()->setPosition(position.x, position.y);

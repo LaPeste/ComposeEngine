@@ -10,8 +10,9 @@
 #define _CONTROLLER_HPP_
 
 #include "stdafx.h"
+#include "Component.hpp"
 
-class Controller
+class Controller : public Component<Controller>
 {
 public:
     Controller();

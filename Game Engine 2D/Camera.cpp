@@ -54,7 +54,7 @@ Camera * Camera::GetInstance()
 
 void Camera::Update()
 {
-    if(mode == CameraMode::FOLLOW_PLAYER && !isnan(EntityManager::GetPlayerId()))
+    if(mode == CameraMode::FOLLOW_PLAYER && EntityManager::GetPlayerId() != 99999) //99999 is the defaulted value that I am using
     {
 //        Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
         World& world = Engine::GetInstance().World;

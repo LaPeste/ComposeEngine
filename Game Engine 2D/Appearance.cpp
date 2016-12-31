@@ -8,12 +8,7 @@
 
 #include "Appearance.hpp"
 
-Appearance::Appearance(sf::Sprite* const sprite) : sprite(sprite)
-{
-    
-}
-
-Appearance::Appearance(std::string spritePath)
+Appearance::Appearance(std::string spritePath) : Component()
 {
 #ifdef _WIN32
         std::string loadPath = "images/" + spritePath;

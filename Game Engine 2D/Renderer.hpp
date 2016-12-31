@@ -10,14 +10,16 @@
 #define _RENDERER_HPP_
 
 #include "stdafx.h"
-#include "SystemBase.hpp"
+#include "System.hpp"
 
 #define RENDERER_MASK Components::APPEARANCE
 
-class Renderer : public SystemBase
+template<typename First, typename Second, typename ...Rest>
+class Renderer : public System<First, Second, Rest...>
 {
 public:
-    Renderer();
+    Renderer(World& world);
+    ~Renderer();
     
     void OnStart() override;
     void OnRender() override;
@@ -27,5 +29,7 @@ private:
     void Draw(const World& world, const unsigned long entityIndex, sf::RenderWindow& window);
     
 };
+
+#include "Renderer.tpp"
 
 #endif /* _RENDERER_HPP_ */

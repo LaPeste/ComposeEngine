@@ -10,12 +10,13 @@
 #define _ANAMATION_HPP_
 
 #include "stdafx.h"
+#include "Component.hpp"
 
 //struct for POD C-style
 struct AnimationData
 {
 public:
-    AnimationData();
+//    AnimationData(const World& world, const unsigned long int entityIndex);
     AnimationData(const sf::Vector2f& startingPos, const sf::Vector2f& spaceBetweenSprite, bool verticalMovement, bool reverseAnimation, float spriteWidth, float spriteHeight, int maxFrame, int frameRate);
     sf::Vector2f StartingPos;
     sf::Vector2f SpaceBetweenSprite;
@@ -36,17 +37,22 @@ enum class AnimationState : char
     JUMPING,
     ATTACKING
 };
-
-class Animation
+    
+    
+    
+    
+//Holds all the info of the animation it represents
+    
+class Animation : public Component<AnimationData>
 {
 public:
-    Animation(); //dummy construnctor for World.cpp initialization
-    Animation(const AnimationState& intialAnimationState, std::map<AnimationState, AnimationData>& animationMap, bool toAnimate);
+    Animation(const AnimationState& intialAnimationState, std::map<AnimationState, AnimationData*>& animationMap, bool toAnimate);
+    ~Animation();
     
     sf::Clock Clock;
     bool ToAnimate; //when to animate if pressed a direction
     AnimationState CurrentAnimationState;
-    std::map<AnimationState, AnimationData> AnimationMap;
+    std::map<AnimationState, AnimationData*> AnimationMap;
     
 private:
     

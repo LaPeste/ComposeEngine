@@ -8,7 +8,8 @@
 
 #include "Controller.hpp"
 
-Controller::Controller() : MoveRight(false), MoveLeft(false), Crouch(false)
+Controller::Controller() : MoveRight(false), MoveLeft(false), Crouch(false),
+Component()
 {
     
 }

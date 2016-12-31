@@ -10,15 +10,17 @@
 #define _INPUT_HPP_
 
 #include "stdafx.h"
-#include "SystemBase.hpp"
+#include "System.hpp"
 #include "Event.hpp"
 
 #define INPUT_MASK Components::POSITION, Components::VELOCITY, Components::ACCELERATION, Components::CONTROLLER
 
-class Input : public SystemBase, public Event
+template<typename First, typename Second, typename ...Rest>
+class Input : public System<First, Second, Rest...>, public Event
 {
 public:
-    Input();
+    Input(World& world);
+    ~Input();
     
     void OnInput(const sf::Event& event) override;
     
@@ -28,5 +30,7 @@ public:
 private:
     bool Jump(const World& world, const unsigned long entityIndex);
 };
+
+#include "Input.tpp"
 
 #endif /* _INPUT_HPP_ */

@@ -2,7 +2,7 @@
 //  SystemBase.hpp
 //  GameEngine2D
 //
-//  Created by Andrea Catalini on 22/07/16.
+//  Created by Andrea Catalini on 20/11/16.
 //  Copyright © 2016 Andrea Catalini. All rights reserved.
 //
 
@@ -10,12 +10,13 @@
 #define _SYSTEM_BASE_HPP_
 
 #include "stdafx.h"
-#include "World.hpp"
 
 class SystemBase
 {
 public:
     SystemBase();
+    
+//    virtual SystemBase* GetSystem() const = 0;
     
     virtual void OnStart();
     virtual void OnInput(const sf::Event& event);
@@ -23,8 +24,8 @@ public:
     virtual void OnRender();
     virtual void OnExit();
     
-private:
-    
+protected:
+    static unsigned long int SystemCounter; //used for assigning a unique id to a system
 };
 
 #endif /* _SYSTEM_BASE_HPP_ */

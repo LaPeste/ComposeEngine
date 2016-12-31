@@ -10,19 +10,20 @@
 #include "Camera.hpp"
 #include "Engine.hpp"
 #include "Appearance.hpp"
+#include "Collider.hpp"
 #include "TransforUtils.hpp"
 #include <tmx/MapObject.h>
 #include "EntityManager.hpp"
 
 bool CollisionDetectionUtils::Collides(const World& world, const unsigned long index)
 {
-//    EntityFlag& entityFlag = *world.EntityFlag[index];
-    Appearance& appearance = *world.Appearance[index];
-    Collider& collider = *world.Collider[index];
+    std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[index];
+    Appearance* appearance = static_cast<Appearance*>(entity[Component<Appearance>::Id]);
+    Collider* collider = static_cast<Collider*>(entity[Component<Collider>::Id]);
     
     sf::FloatRect rootNode(Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Camera::GetInstance()->GetWidth(), Camera::GetInstance()->GetHeight());
     Engine::GetInstance().GetMapLoader().UpdateQuadTree(rootNode); //update quadtree's rootnode to what's visible in the screen
-    std::vector<tmx::MapObject*> objects = Engine::GetInstance().GetMapLoader().QueryQuadTree(appearance.GetSprite()->getGlobalBounds()); // grab all the MapObjects contained in the quads intersected by the bounds of sprite
+    std::vector<tmx::MapObject*> objects = Engine::GetInstance().GetMapLoader().QueryQuadTree(appearance->GetSprite()->getGlobalBounds()); // grab all the MapObjects contained in the quads intersected by the bounds of sprite
     if(!Engine::GetInstance().GetMapLoader().QuadTreeAvailable())
     {
         Utils::PrintDebugError("Collides()", "No MapTree to query is available");
@@ -31,20 +32,20 @@ bool CollisionDetectionUtils::Collides(const World& world, const unsigned long i
     bool collision = false;
 
     std::vector<sf::Vector2f> collisionPoints;
-    if((world.EntitiesMasks[index] & Components::APPEARANCE) == (Components::APPEARANCE) )
+    if((world.EntitiesComponentsMasks[index] & Component<Appearance>::Id) == Component<Appearance>::Id )
     {
-        collisionPoints = collider.GetCollisionPoints(appearance);
+        collisionPoints = collider->GetCollisionPoints(*appearance);
     }
     else
     {
-        collisionPoints = collider.GetCollisionPoints();
+        collisionPoints = collider->GetCollisionPoints();
     }
     
     unsigned long searchId;
     for(auto object = objects.begin(); object != objects.end(); ++object)
     {
         searchId = std::stol((*object)->GetPropertyString(Constants::ENTITY_INDEX_PROPERTY));
-        if((*object)->GetParent() == Constants::COLLISION_LAYER && (world.EntitiesMasks[searchId] & Components::COLLIDER) == Components::COLLIDER)
+        if((*object)->GetParent() == Constants::COLLISION_LAYER && (world.EntitiesComponentsMasks[searchId] & Component<Collider>::Id) == Component<Collider>::Id)
         {
             for(int i = 0; i < 4; i++) //where 4 is the amount of collisionPoints we have. Those are the 4 corners of the sprite of a gameObject.
             {
@@ -61,13 +62,13 @@ bool CollisionDetectionUtils::Collides(const World& world, const unsigned long i
             if((*object)->GetPropertyString(Constants::ENTITY_INDEX_PROPERTY) != "")
             {
                 
-//                Components entity = world.EntitiesMasks[searchId];
+//                Components entity = world.EntitiesComponentsMasks[searchId];
 //                if(mapGameObject != nullptr && mapGameObject->GetGameObjectType() == GameObjectType::MapCollisionObject)
 //                {
 //                    CollisionEvent coll(this, mapGameObject);
 //                    GameObjectManager::collisionEvents.push_back(coll); //TODO try to get this list through its getter
 //                }
-//                if((world.EntitiesMasks[index] & Components::COLLIDER) == (Components::COLLIDER) && (world.EntityFlag[searchId]->GetEntityFlag() & GameObjectFlag::MAP_OBJECT) == (GameObjectFlag::MAP_OBJECT))
+//                if((world.EntitiesComponentsMasks[index] & Components::COLLIDER) == (Components::COLLIDER) && (world.EntityFlag[searchId]->GetEntityFlag() & GameObjectFlag::MAP_OBJECT) == (GameObjectFlag::MAP_OBJECT))
 //                   )
 //                {
                     CollisionEvent coll(index, searchId);

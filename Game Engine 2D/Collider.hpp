@@ -11,8 +11,9 @@
 
 #include "stdafx.h"
 #include "Appearance.hpp"
+#include "Component.hpp"
 
-class Collider
+class Collider : public Component<Collider>
 {
 public:
     Collider(const sf::Vector2f& offset);

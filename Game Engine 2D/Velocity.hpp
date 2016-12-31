@@ -10,8 +10,9 @@
 #define _VELOCITY_HPP_
 
 #include "stdafx.h"
+#include "Component.hpp"
 
-class Velocity
+class Velocity : public Component<Velocity>
 {
 public:
     Velocity();

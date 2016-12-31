@@ -15,7 +15,7 @@
 
 
 World::World() /*:
-    EntitiesMasks(),
+    EntitiesComponentsMasks(),
     Acceleration(),
     Appearance(),
     Controller(),
@@ -23,41 +23,22 @@ World::World() /*:
     Velocity(),
     EntityFlag() */
 {
-    
+//    EntitiesComponentsMasks;
+//    EntitiesComponentsMatrix;
 }
 
 World::~World()
 {
-    for(std::vector<Acceleration::Acceleration*>::iterator elem_it = Acceleration.begin(); elem_it != Acceleration.end(); ++elem_it)
+    for(auto const & system : Systems)
     {
-        delete *elem_it;
+        delete system.second;
     }
-    for(std::vector<Appearance::Appearance*>::iterator elem_it = Appearance.begin(); elem_it != Appearance.end(); ++elem_it)
+    
+    for(std::map<unsigned long int, ComponentBase*>& entity : EntitiesComponentsMatrix)
     {
-        delete *elem_it;
-    }
-    for(std::vector<Controller::Controller*>::iterator elem_it = Controller.begin(); elem_it != Controller.end(); ++elem_it)
-    {
-        delete *elem_it;
-    }
-//    for(std::vector<Position::Position*>::iterator elem_it = Position.begin(); elem_it != Position.end(); ++elem_it)
-//    {
-//        delete *elem_it;
-//    }
-    for(std::vector<Velocity::Velocity*>::iterator elem_it = Velocity.begin(); elem_it != Velocity.end(); ++elem_it)
-    {
-        delete *elem_it;
-    }
-    for(std::vector<Collider::Collider*>::iterator elem_it = Collider.begin(); elem_it != Collider.end(); ++elem_it)
-    {
-        delete *elem_it;
-    }
-    for(std::vector<EntityFlag::EntityFlag*>::iterator elem_it = EntityFlag.begin(); elem_it != EntityFlag.end(); ++elem_it)
-    {
-        delete *elem_it;
-    }
-    for(std::vector<Animation::Animation*>::iterator elem_it = Animation.begin(); elem_it != Animation.end(); ++elem_it)
-    {
-        delete *elem_it;
+        for(auto& component : entity)
+        {
+            delete component.second;
+        }
     }
 }

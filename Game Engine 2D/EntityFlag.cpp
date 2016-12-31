@@ -1,4 +1,4 @@
-//
+ //
 //  EntityFlag.cpp
 //  GameEngine2D
 //
@@ -8,12 +8,8 @@
 
 #include "EntityFlag.hpp"
 
-EntityFlag::EntityFlag()
-{
-    
-}
-
-EntityFlag::EntityFlag(GameObjectFlag flags) : flag(flags)
+EntityFlag::EntityFlag(GameObjectFlag flags) : flag(flags), 
+Component()
 {
     
 }

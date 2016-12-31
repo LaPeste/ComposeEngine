@@ -9,20 +9,19 @@
 #include "Utils.hpp"
 #include "stdafx.h"
 
-std::vector<std::string> Utils::ComponentsString = {"Acceleration", "Appearance", "Controller", "EntityFlag", "Position",
-                    "Velocity"};
+//std::vector<std::string> Utils::ComponentsString = {"Acceleration", "Appearance", "Controller", "EntityFlag", "Position", "Velocity"};
 
 void Utils::PrintDebugLog(const std::string& methodName, const std::string& message)
 {
-    std::cout << "LOG - " << methodName << "(...)" << " : " << message << "\n";
+    std::cout << "LOG - " << methodName << " : " << message << "\n";
 }
 
 void Utils::PrintDebugWarning(const std::string& methodName, const std::string& message)
 {
-    std::cout << "WARNING - " << methodName << "(...)" << " : " << message << "\n";
+    std::cout << "WARNING - " << methodName << " : " << message << "\n";
 }
 
 void Utils::PrintDebugError(const std::string& methodName, const std::string& message)
 {
-    std::cout << "ERROR - " << methodName << "(...)" << " : " << message << "\n";
+    std::cout << "ERROR - " << methodName << " : " << message << "\n";
 }

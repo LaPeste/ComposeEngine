@@ -8,7 +8,8 @@
 
 #include "Collider.hpp"
 
-Collider::Collider(const sf::Vector2f& offset) : offset(offset)
+Collider::Collider(const sf::Vector2f& offset) : offset(offset), 
+Component()
 {
     
 }

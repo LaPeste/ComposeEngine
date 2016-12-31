@@ -10,8 +10,9 @@
 #define _ACCELERATION_HPP_
 
 #include "stdafx.h"
+#include "Component.hpp"
 
-class Acceleration
+class Acceleration : public Component<Acceleration>
 {
 public:
     Acceleration(const float accelerationPerFrameX, const float accelerationPerFrameY);
