@@ -16,8 +16,8 @@
 
 //This class assumes that the sprite set is horizontally developed
 
-template<typename First, typename Second, typename ...Rest>
-class Animator : public System<First, Second, Rest...>
+template<typename First, typename ...Rest>
+class Animator : public System<First,Rest...>
 {
 public:
     Animator(World& world);

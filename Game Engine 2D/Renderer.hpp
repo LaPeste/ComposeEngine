@@ -14,8 +14,8 @@
 
 #define RENDERER_MASK Components::APPEARANCE
 
-template<typename First, typename Second, typename ...Rest>
-class Renderer : public System<First, Second, Rest...>
+template<typename First, typename ...Rest>
+class Renderer : public System<First,Rest...>
 {
 public:
     Renderer(World& world);

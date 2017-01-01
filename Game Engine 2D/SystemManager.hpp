@@ -28,16 +28,16 @@ public:
     static void RenderAll(World& world);
     static void ExitAll(World& world); // TODO THIS SHOULD BE REMOVED, because the world should take care of deleting the refertences to the system objects
     
-    template<typename First, typename Second, typename ...Rest>
-    static void AddSystem(World& world, System<First, Second, Rest...>* systemToAdd);
+    template<typename First, typename ...Rest>
+    static void AddSystem(World& world, System<First,Rest...>* systemToAdd);
     
 private:
         
 };
 
 
-template<typename First, typename Second, typename ...Rest>
-void SystemManager::AddSystem(World& world, System<First, Second, Rest...>* systemToAdd)
+template<typename First, typename ...Rest>
+void SystemManager::AddSystem(World& world, System<First,Rest...>* systemToAdd)
 {
     if(world.Systems.find(systemToAdd->Id) == world.Systems.end())  //if system never added before
     {
@@ -45,7 +45,7 @@ void SystemManager::AddSystem(World& world, System<First, Second, Rest...>* syst
         
 #ifdef LOG_OUTPUT_CONSOLE
         std::stringstream ss;
-        ss << "System: " << typeid(systemToAdd).name() << " added!" << std::endl;
+        ss << "System: " << typeid(systemToAdd).name() << " added with Id: " << systemToAdd->Id << std::endl;
         std::string s = ss.str();
         Utils::PrintDebugLog(__PRETTY_FUNCTION__, s);
 #endif

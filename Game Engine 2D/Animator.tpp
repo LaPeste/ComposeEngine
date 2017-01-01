@@ -1,3 +1,4 @@
+
 //
 //  Animator.cpp
 //  GameEngine2D
@@ -10,30 +11,30 @@
 #include "Animation.hpp"
 #include "Engine.hpp"
 
-template<typename First, typename Second, typename ...Rest>
-Animator<First, Second, Rest...>::Animator(World& world) : System<First, Second, Rest...>(world){}
+template<typename First, typename ...Rest>
+Animator<First,Rest...>::Animator(World& world) : System<First,Rest...>(world){}
 
-template<typename First, typename Second, typename ...Rest>
-Animator<First, Second, Rest...>::~Animator(){}
+template<typename First, typename ...Rest>
+Animator<First,Rest...>::~Animator(){}
 
-template<typename First, typename Second, typename ...Rest>
-void Animator<First, Second, Rest...>::OnUpdate()
+template<typename First, typename ...Rest>
+void Animator<First,Rest...>::OnUpdate()
 {
     
     World& world = Engine::GetInstance().World;
     
     for(int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
     {
-        if((world.EntitiesComponentsMasks[i] & this->GetComponentBitMask()) == this->GetComponentBitMask())
+        unsigned long int filteredComponentsMask = world.EntitiesComponentsMasks[i] & this->GetComponentBitMask();
+        if(filteredComponentsMask == this->GetComponentBitMask())
         {
             Animate(world, i);
         }
-        
     }
 }
 
-template<typename First, typename Second, typename ...Rest>
-void Animator<First, Second, Rest...>::Animate(const World& world, const unsigned long entityIndex)
+template<typename First, typename ...Rest>
+void Animator<First,Rest...>::Animate(const World& world, const unsigned long entityIndex)
 {
     std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
     Animation* animation = static_cast<Animation*>(entity[Component<Animation>::Id]);

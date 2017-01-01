@@ -15,8 +15,8 @@
 
 #define INPUT_MASK Components::POSITION, Components::VELOCITY, Components::ACCELERATION, Components::CONTROLLER
 
-template<typename First, typename Second, typename ...Rest>
-class Input : public System<First, Second, Rest...>, public Event
+template<typename First, typename ...Rest>
+class Input : public System<First,Rest...>, public Event
 {
 public:
     Input(World& world);

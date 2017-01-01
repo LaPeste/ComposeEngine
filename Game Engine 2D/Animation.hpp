@@ -43,7 +43,7 @@ enum class AnimationState : char
     
 //Holds all the info of the animation it represents
     
-class Animation : public Component<AnimationData>
+class Animation : public Component<Animation>
 {
 public:
     Animation(const AnimationState& intialAnimationState, std::map<AnimationState, AnimationData*>& animationMap, bool toAnimate);

@@ -15,8 +15,8 @@
 
 #define MOVEMENT_MASK Components::CONTROLLER | Components::VELOCITY | Components::ACCELERATION | Components::FLAG | Components::APPEARANCE
 
-template<typename First, typename Second, typename ...Rest>
-class Movement : public System<First, Second, Rest...>
+template<typename First, typename ...Rest>
+class Movement : public System<First,Rest...>
 {
 public:
     Movement(World& world);

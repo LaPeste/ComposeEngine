@@ -13,7 +13,7 @@
 #include "World.hpp"
 #include "SystemBase.hpp"
 
-template<typename First, typename Second, typename ...Rest> //variadic template
+template<typename First, typename ...Rest> //variadic template
 class System : public SystemBase
 {
 public:

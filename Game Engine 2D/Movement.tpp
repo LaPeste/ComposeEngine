@@ -21,20 +21,20 @@
 #include "CollisionDetectionUtils.hpp"
 #include "TransforUtils.hpp"
 
-template<typename First, typename Second, typename ...Rest>
-Movement<First, Second, Rest...>::Movement(World& world) : System<First, Second, Rest...>(world)
+template<typename First, typename ...Rest>
+Movement<First,Rest...>::Movement(World& world) : System<First,Rest...>(world)
 {
 
 }
 
-template<typename First, typename Second, typename ...Rest>
-Movement<First, Second, Rest...>::~Movement()
+template<typename First, typename ...Rest>
+Movement<First,Rest...>::~Movement()
 {
     
 }
 
-template<typename First, typename Second, typename ...Rest>
-void Movement<First, Second, Rest...>::OnUpdate()
+template<typename First, typename ...Rest>
+void Movement<First,Rest...>::OnUpdate()
 {
     World& world = Engine::GetInstance().World;
 //    for(std::vector<int>::const_iterator entity = world.EntitiesComponentsMasks.begin(); entity != world.EntitiesComponentsMasks.end(); ++entity)
@@ -106,8 +106,8 @@ void Movement<First, Second, Rest...>::OnUpdate()
 //    }
 //}
 
-template<typename First, typename Second, typename ...Rest>
-void Movement<First, Second, Rest...>::StopMove(const World& world, const unsigned long entityIndex)
+template<typename First, typename ...Rest>
+void Movement<First,Rest...>::StopMove(const World& world, const unsigned long entityIndex)
 {
     std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
     Acceleration* acceleration = static_cast<Acceleration*>(entity[Component<Acceleration>::Id]);
@@ -122,8 +122,8 @@ void Movement<First, Second, Rest...>::StopMove(const World& world, const unsign
     }
 }
 
-template<typename First, typename Second, typename ...Rest>
-void Movement<First, Second, Rest...>::MoveTo(const World& world, const unsigned long entityIndex, float x, float y)
+template<typename First, typename ...Rest>
+void Movement<First,Rest...>::MoveTo(const World& world, const unsigned long entityIndex, float x, float y)
 {
     std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
     Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
@@ -212,8 +212,8 @@ void Movement<First, Second, Rest...>::MoveTo(const World& world, const unsigned
     
 }
 
-template<typename First, typename Second, typename ...Rest>
-bool Movement<First, Second, Rest...>::PosValid(const World& world, const unsigned long entityIndex, float x, float y)
+template<typename First, typename ...Rest>
+bool Movement<First,Rest...>::PosValid(const World& world, const unsigned long entityIndex, float x, float y)
 {
 //    EntityFlag& entityFlag = *world.EntityFlag[entityIndex];
 //    Controller& controller = *world.Controller[entityIndex];

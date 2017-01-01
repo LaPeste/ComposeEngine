@@ -10,31 +10,31 @@
 #include "Engine.hpp"
 #include "Input.hpp"
 
-template<typename First, typename Second, typename ...Rest>
-Input<First, Second, Rest...>::Input(World& world) : System<First, Second, Rest...>(world)
+template<typename First, typename ...Rest>
+Input<First,Rest...>::Input(World& world) : System<First,Rest...>(world)
 {
     
 }
 
-template<typename First, typename Second, typename ...Rest>
-Input<First, Second, Rest...>::~Input(){}
+template<typename First, typename ...Rest>
+Input<First,Rest...>::~Input(){}
 
-template<typename First, typename Second, typename ...Rest>
-void Input<First, Second, Rest...>::OnInput(const sf::Event &event)
+template<typename First, typename ...Rest>
+void Input<First,Rest...>::OnInput(const sf::Event &event)
 {
     World& world = Engine::GetInstance().World;
     //    for(std::vector<int>::const_iterator entity = world.EntitiesComponentsMasks.begin(); entity != world.EntitiesComponentsMasks.end(); ++entity)
     for(int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
     {
-if((world.EntitiesComponentsMasks[i] & Component<Input>::Id) == Component<Input>::Id)
+if((world.EntitiesComponentsMasks[i] & Component<Controller>::Id) == Component<Controller>::Id)
         {
             OnEvent(event, world, i);
         }
     }
 }
 
-template<typename First, typename Second, typename ...Rest>
-void Input<First, Second, Rest...>::OnKeyUp(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex)
+template<typename First, typename ...Rest>
+void Input<First,Rest...>::OnKeyUp(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex)
 {
     std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
     Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
@@ -59,10 +59,11 @@ void Input<First, Second, Rest...>::OnKeyUp(const sf::Event::KeyEvent& input, co
     }
 }
 
-template<typename First, typename Second, typename ...Rest>
-void Input<First, Second, Rest...>::OnKeyDown(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex)
+template<typename First, typename ...Rest>
+void Input<First,Rest...>::OnKeyDown(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex)
 {
     std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
+    std::cout << "id of controller= " << Component<Controller>::Id << std::endl;
     Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
 
     switch (input.code)
@@ -85,8 +86,8 @@ void Input<First, Second, Rest...>::OnKeyDown(const sf::Event::KeyEvent& input, 
     }
 }
 
-template<typename First, typename Second, typename ...Rest>
-bool Input<First, Second, Rest...>::Jump(const World& world, const unsigned long entityIndex)
+template<typename First, typename ...Rest>
+bool Input<First,Rest...>::Jump(const World& world, const unsigned long entityIndex)
 {
     std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
     Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);

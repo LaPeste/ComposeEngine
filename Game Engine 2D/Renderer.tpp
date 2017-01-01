@@ -10,23 +10,23 @@
 #include "Engine.hpp"
 #include "SystemManager.hpp"
 
-template<typename First, typename Second, typename ...Rest>
-Renderer<First, Second, Rest...>::Renderer(World& world) : System<First, Second, Rest...>(world)
+template<typename First, typename ...Rest>
+Renderer<First,Rest...>::Renderer(World& world) : System<First,Rest...>(world)
 {
 
 }
 
-template<typename First, typename Second, typename ...Rest>
-Renderer<First, Second, Rest...>::~Renderer(){}
+template<typename First, typename ...Rest>
+Renderer<First,Rest...>::~Renderer(){}
 
-template<typename First, typename Second, typename ...Rest>
-void Renderer<First, Second, Rest...>::OnStart()
+template<typename First, typename ...Rest>
+void Renderer<First,Rest...>::OnStart()
 {
     
 }
 
-template<typename First, typename Second, typename ...Rest>
-void Renderer<First, Second, Rest...>::OnRender()
+template<typename First, typename ...Rest>
+void Renderer<First,Rest...>::OnRender()
 {
     Engine& engine = Engine::GetInstance();
     for(int i = 0; i < engine.World.EntitiesComponentsMasks.size(); ++i)
@@ -38,14 +38,14 @@ void Renderer<First, Second, Rest...>::OnRender()
     }
 }
 
-template<typename First, typename Second, typename ...Rest>
-void Renderer<First, Second, Rest...>::OnExit()
+template<typename First, typename ...Rest>
+void Renderer<First,Rest...>::OnExit()
 {
     
 }
 
-template<typename First, typename Second, typename ...Rest>
-void Renderer<First, Second, Rest...>::Draw(const World& world, const unsigned long entityIndex, sf::RenderWindow& window)
+template<typename First, typename ...Rest>
+void Renderer<First,Rest...>::Draw(const World& world, const unsigned long entityIndex, sf::RenderWindow& window)
 {
     std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
     Appearance* appearance = static_cast<Appearance*>(entity[Component<Appearance>::Id]);
