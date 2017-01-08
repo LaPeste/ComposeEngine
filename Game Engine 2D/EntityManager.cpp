@@ -7,7 +7,6 @@
 //
 
 #include "EntityManager.hpp"
-#include "Components.hpp"
 #include <tmx/MapLoader.h>
 #include "Engine.hpp"
 #include "Collider.hpp"

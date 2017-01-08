@@ -2,7 +2,6 @@
 #define _ENGINE_HPP_
 
 #include "stdafx.h"
-#include "GameObjectManager.hpp"
 #include "Event.hpp"
 #include <tmx/MapLoader.h>
 #include "World.hpp"

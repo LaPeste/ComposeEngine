@@ -10,7 +10,6 @@
 #define _MOVEMENT_HPP_
 
 #include "stdafx.h"
-#include "Components.hpp"
 #include "System.hpp"
 
 #define MOVEMENT_MASK Components::CONTROLLER | Components::VELOCITY | Components::ACCELERATION | Components::FLAG | Components::APPEARANCE

@@ -7,7 +7,6 @@
 //
 
 #include "Movement.hpp"
-#include "Components.hpp"
 #include "SystemManager.hpp"
 #include "World.hpp"
 #include "Engine.hpp"

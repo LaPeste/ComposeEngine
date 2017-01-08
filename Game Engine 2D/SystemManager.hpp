@@ -17,8 +17,6 @@
 class SystemManager
 {
 public:
-//    SystemManager();
-//    ~SystemManager();
     static void Init(World& world);
     static void Terminate(World& world);
     

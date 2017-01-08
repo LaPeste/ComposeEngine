@@ -1,6 +1,5 @@
 #include "Event.hpp"
 #include "Camera.hpp"
-#include "GameObjectManager.hpp"
 
 Event::Event()
 {
