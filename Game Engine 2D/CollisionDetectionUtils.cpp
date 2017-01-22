@@ -11,8 +11,8 @@
 #include "Engine.hpp"
 #include "Appearance.hpp"
 #include "Collider.hpp"
-#include "TransforUtils.hpp"
-#include <tmx/MapObject.h>
+#include "TransformUtils.hpp"
+#include "tmx/MapObject.hpp"
 #include "EntityManager.hpp"
 
 bool CollisionDetectionUtils::Collides(const World& world, const unsigned long index)
@@ -22,11 +22,12 @@ bool CollisionDetectionUtils::Collides(const World& world, const unsigned long i
     Collider* collider = static_cast<Collider*>(entity[Component<Collider>::Id]);
     
     sf::FloatRect rootNode(Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Camera::GetInstance()->GetWidth(), Camera::GetInstance()->GetHeight());
-    Engine::GetInstance().GetMapLoader().UpdateQuadTree(rootNode); //update quadtree's rootnode to what's visible in the screen
-    std::vector<tmx::MapObject*> objects = Engine::GetInstance().GetMapLoader().QueryQuadTree(appearance->GetSprite()->getGlobalBounds()); // grab all the MapObjects contained in the quads intersected by the bounds of sprite
-    if(!Engine::GetInstance().GetMapLoader().QuadTreeAvailable())
+    Engine::GetInstance().GetMapLoader().updateQuadTree(rootNode); //update quadtree's rootnode to what's visible in the screen
+    std::vector<tmx::MapObject*> objects = Engine::GetInstance().GetMapLoader().queryQuadTree(appearance->GetSprite()->getGlobalBounds()); // grab all the MapObjects contained in the quads intersected by the bounds of sprite
+    if(!Engine::GetInstance().GetMapLoader().quadTreeAvailable())
     {
-        Utils::PrintDebugError("Collides()", "No MapTree to query is available");
+		std::string methodName = _FUNCION_NAME_;
+        Utils::PrintDebugError(methodName, "No MapTree to query is available");
         return false;
     }
     bool collision = false;
@@ -44,12 +45,12 @@ bool CollisionDetectionUtils::Collides(const World& world, const unsigned long i
     unsigned long searchId;
     for(auto object = objects.begin(); object != objects.end(); ++object)
     {
-        searchId = std::stol((*object)->GetPropertyString(Constants::ENTITY_INDEX_PROPERTY));
-        if((*object)->GetParent() == Constants::COLLISION_LAYER && (world.EntitiesComponentsMasks[searchId] & Component<Collider>::Id) == Component<Collider>::Id)
+        searchId = std::stol((*object)->getPropertyString(Constants::ENTITY_INDEX_PROPERTY));
+        if((*object)->getParent() == Constants::COLLISION_LAYER && (world.EntitiesComponentsMasks[searchId] & Component<Collider>::Id) == Component<Collider>::Id)
         {
             for(int i = 0; i < 4; i++) //where 4 is the amount of collisionPoints we have. Those are the 4 corners of the sprite of a gameObject.
             {
-                collision = (*object)->Contains(TransformUtils::GetPosition(world, index) + collisionPoints[i]);
+                collision = (*object)->contains(TransformUtils::GetPosition(world, index) + collisionPoints[i]);
 
                 if(collision) break;
             }
@@ -59,7 +60,7 @@ bool CollisionDetectionUtils::Collides(const World& world, const unsigned long i
 //            if((*object)->GetName() != "Ground")
 //            Utils::PrintDebugLog("Collides", "object " + (*object)->GetName() + " with " + Constants::ENTITY_INDEX_PROPERTY + ": " + (*object)->GetPropertyString(Constants::ENTITY_INDEX_PROPERTY));
             //TODO check how to treat objects coming from the tmx map
-            if((*object)->GetPropertyString(Constants::ENTITY_INDEX_PROPERTY) != "")
+            if((*object)->getPropertyString(Constants::ENTITY_INDEX_PROPERTY) != "")
             {
                 
 //                Components entity = world.EntitiesComponentsMasks[searchId];

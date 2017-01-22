@@ -26,36 +26,37 @@ public:
     static void RenderAll(World& world);
     static void ExitAll(World& world); // TODO THIS SHOULD BE REMOVED, because the world should take care of deleting the refertences to the system objects
     
-    template<typename First, typename ...Rest>
-    static void AddSystem(World& world, System<First,Rest...>* systemToAdd);
+	template<typename First, typename ...Rest>
+    static void AddSystem(World& world, System<First, Rest...>* systemToAdd);
     
 private:
         
 };
 
-
 template<typename First, typename ...Rest>
-void SystemManager::AddSystem(World& world, System<First,Rest...>* systemToAdd)
+void SystemManager::AddSystem(World& world, System<First, Rest...>* systemToAdd)
 {
-    if(world.Systems.find(systemToAdd->Id) == world.Systems.end())  //if system never added before
-    {
-        world.Systems.insert(std::make_pair(systemToAdd->Id, static_cast<SystemBase*>(systemToAdd)));
-        
+	if (world.Systems.find(systemToAdd->Id) == world.Systems.end())  //if system never added before
+	{
+		world.Systems.insert(std::make_pair(systemToAdd->Id, static_cast<SystemBase*>(systemToAdd)));
+
 #ifdef LOG_OUTPUT_CONSOLE
-        std::stringstream ss;
-        ss << "System: " << typeid(systemToAdd).name() << " added with Id: " << systemToAdd->Id << std::endl;
-        std::string s = ss.str();
-        Utils::PrintDebugLog(__PRETTY_FUNCTION__, s);
+		std::stringstream ss;
+		ss << "System: " << typeid(systemToAdd).name() << " added with Id: " << systemToAdd->Id << std::endl;
+		std::string s = ss.str();
+		std::string methodName = _FUNCION_NAME_;
+		Utils::PrintDebugLog(methodName, s);
 #endif
-    }
-    else
-    {
-        std::stringstream ss;
-        ss << "system " << typeid(systemToAdd).name() << " already added to the selected world!";
-        std::string s = ss.str();
-        Utils::PrintDebugWarning(__PRETTY_FUNCTION__, s);
-    }
-    
+	}
+	else
+	{
+		std::stringstream ss;
+		ss << "system " << typeid(systemToAdd).name() << " already added to the selected world!";
+		std::string s = ss.str();
+		std::string methodName = _FUNCION_NAME_;
+		Utils::PrintDebugWarning(methodName, s);
+	}
+
 }
 
 #endif /* _SYSTEM_MANAGER_HPP_ */

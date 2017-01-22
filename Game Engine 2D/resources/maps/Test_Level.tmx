@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="24" tilewidth="32" tileheight="32" nextobjectid="27">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="24" tilewidth="32" tileheight="32" nextobjectid="42">
  <tileset firstgid="1" name="smb3-cb47f744294" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
   <image source="smb3-cb47f744294.png" width="1024" height="1024"/>
+  <tile id="258">
+   <objectgroup draworder="index"/>
+   <animation>
+    <frame tileid="258" duration="250"/>
+    <frame tileid="295" duration="150"/>
+    <frame tileid="296" duration="150"/>
+   </animation>
+  </tile>
  </tileset>
  <layer name="Background Layer" width="80" height="24">
   <data encoding="csv">
@@ -38,7 +46,8 @@
   <object id="22" name="Box1" x="640" y="482" width="95" height="28"/>
   <object id="23" name="Box2" x="768" y="419" width="95" height="28"/>
   <object id="24" name="Ground" x="-56" y="607.667" width="2671.15" height="22.303"/>
-  <object id="25" name="BoxTest" gid="246" x="576" y="609" width="32" height="32"/>
+  <object id="38" name="FlowerRed" gid="259" x="447" y="608" width="32" height="32"/>
+  <object id="39" name="FlowerBlue" gid="296" x="575" y="605" width="32" height="32"/>
  </objectgroup>
  <layer name="Nature Layer" width="80" height="24">
   <data encoding="csv">

@@ -1,9 +1,11 @@
 #ifndef _ENGINE_HPP_
 #define _ENGINE_HPP_
 
+#define LOG_OUTPUT_ALL //all log for tmx
+
 #include "stdafx.h"
 #include "Event.hpp"
-#include <tmx/MapLoader.h>
+#include "tmx/MapLoader.hpp"
 #include "World.hpp"
 
 class Engine : public Event
@@ -46,6 +48,7 @@ private:
 //	GameObjectManager gameObjectManager;
     
     tmx::MapLoader ml;
+	//tmx::Logger logger;
 
 	//methods
 	bool Init(); //Initializes the engine

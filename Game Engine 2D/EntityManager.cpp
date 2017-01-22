@@ -7,7 +7,7 @@
 //
 
 #include "EntityManager.hpp"
-#include <tmx/MapLoader.h>
+#include "tmx/MapLoader.hpp"
 #include "Engine.hpp"
 #include "Collider.hpp"
 #include "EntityFlag.hpp"
@@ -18,7 +18,7 @@ std::vector<CollisionEvent> EntityManager::collisionEvents;
 void EntityManager::Init(World& world)
 {
     //populates the list of objects with objects coming from the map (tmx file)
-    std::vector<tmx::MapLayer>& layers = Engine::GetInstance().GetMapLoader().GetLayers();
+    std::vector<tmx::MapLayer>& layers = Engine::GetInstance().GetMapLoader().getLayers();
     for(std::vector<tmx::MapLayer>::iterator layer = layers.begin(); layer != layers.end(); ++layer)
     {
         if(layer->name == Constants::COLLISION_LAYER)
@@ -30,7 +30,7 @@ void EntityManager::Init(World& world)
                 AddComponent(world, indexNewEntity, new Collider(sf::Vector2f(0,0)));
 //                world.Appearance[indexNewEntity] = new Appearance(nullptr); //TODO strange that I can't get the sprite from the mapObject
                 AddComponent(world, indexNewEntity, new EntityFlag(GameObjectFlag::MAP_OBJECT));
-                object->SetProperty(Constants::ENTITY_INDEX_PROPERTY, std::to_string(indexNewEntity));
+                object->setProperty(Constants::ENTITY_INDEX_PROPERTY, std::to_string(indexNewEntity));
             }
 
         }

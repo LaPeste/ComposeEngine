@@ -16,8 +16,7 @@
 
 //This class assumes that the sprite set is horizontally developed
 
-template<typename First, typename ...Rest>
-class Animator : public System<First,Rest...>
+class Animator : public System<Appearance, Animation, Controller>
 {
 public:
     Animator(World& world);
@@ -28,7 +27,5 @@ public:
 private:
     void Animate(const World& world, const unsigned long entityIndex);
 };
-
-#include "Animator.tpp"
 
 #endif /* _ANIMATOR_HPP_ */

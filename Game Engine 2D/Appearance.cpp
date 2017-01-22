@@ -10,17 +10,12 @@
 
 Appearance::Appearance(std::string spritePath) : Component()
 {
-#ifdef _WIN32
-        std::string loadPath = "images/" + spritePath;
-#elif __APPLE__ && __MACH__
-        std::string loadPath = resourcePath() + spritePath;
-        //TODO #should do the linux version
-#endif
-    Appearance::SpritePath = loadPath;
+	std::string methodName = _FUNCION_NAME_;
+    Appearance::SpritePath = spritePath;
     texture = new sf::Texture;
     if (!texture->loadFromFile(Appearance::SpritePath)) //TODO load only a subretangle of the whole sprite. Check method signature to see how
     {
-        Utils::PrintDebugError("Appearance::Appearance", "impossible to load texture from " + spritePath + "!");
+        Utils::PrintDebugError(methodName, "impossible to load texture from " + spritePath + "!");
         assert(IsSpriteLoaded()); //you do this because you can't return a value from a constructor!!
     }
     else
@@ -32,13 +27,13 @@ Appearance::Appearance(std::string spritePath) : Component()
         {
 //            isLoaded = true;
 #ifdef DEBUG
-            Utils::PrintDebugLog("Appearance::Appearance", "texture correctly loaded!");
+            Utils::PrintDebugLog(methodName, "texture " + SpritePath + " correctly loaded!");
 #endif
         }
         else
         {
 //            isLoaded = false;
-            Utils::PrintDebugError("Appearance::Appearance", "texture not correctly loaded!");
+            Utils::PrintDebugError(methodName, "texture " + SpritePath + " not correctly loaded!");
             
         }
     }
@@ -50,7 +45,8 @@ Appearance::~Appearance()
     delete sprite;
     
 #if DEBUG
-    Utils::PrintDebugLog("~Appearance", "sprite and texture memory freed");
+	std::string methodName = _FUNCION_NAME_;
+    Utils::PrintDebugLog(methodName, "sprite and texture memory freed");
 #endif
 }
 
@@ -60,7 +56,8 @@ sf::Sprite* const Appearance::GetSprite() const
     {
         return sprite;
     }
-    Utils::PrintDebugError("Appearance::GetSprite", "you are trying to get the sprite, but it is not loaded yet!");
+	std::string methodName = _FUNCION_NAME_;
+    Utils::PrintDebugError(methodName, "you are trying to get the sprite, but it is not loaded yet!");
     return nullptr;
 }
 

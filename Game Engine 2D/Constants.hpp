@@ -9,15 +9,17 @@
 class Constants
 {
 public:
-    //************************
-    // General game settings
-    //************************
+	//************************
+	// Technical settings
+	//************************
+	//static const std::string SIGNATURE_METHOD_LOGS;
     
 	static const unsigned int SCREEN_WIDTH;
 	static const unsigned int SCREEN_HEIGHT;
 	static const unsigned int SCREEN_DEPTH;
     static const int GAME_FRAMERATE_TARGET;
     static const std::string GAME_NAME;
+	static const std::string RESOURCE_PATH;
     
     //************************
     // Camera settings
@@ -64,6 +66,7 @@ public:
     //************************
     // Maps
     //************************
+	static const std::string MAP_DIRECTORY;
     static const std::string TEST_MAP;
     
     //static const CameraMode CAMERA_MODE;

@@ -2,7 +2,7 @@
 #include "Player.hpp"
 #include "FPS.hpp"
 #include "Camera.hpp"
-#include <tmx/Log.h>
+#include "tmx/Log.hpp"
 #include "SystemManager.hpp"
 #include "EntityManager.hpp"
 
@@ -21,15 +21,13 @@
 Engine::~Engine()
 {
 #ifdef LOG_OUTPUT_CONSOLE
-    Utils::PrintDebugLog("~Engine()", "dctr called");
+	std::string methodName = _FUNCION_NAME_;
+    Utils::PrintDebugLog(methodName, "dctr called");
 #endif
     delete(Camera::GetInstance());
 }
 
-Engine::Engine() : ml(resourcePath())
-{
-    
-}
+Engine::Engine() : ml(Constants::RESOURCE_PATH + Constants::MAP_DIRECTORY) { }
 
 void Engine::Launch(sf::RenderWindow* createdWindow)
 {
@@ -62,8 +60,8 @@ bool Engine::Init()
 	if (!mainWindow->isOpen())
 		return false;
     
-    tmx::Logger::SetLogLevel(tmx::Logger::Warning | tmx::Logger::Error);
-    ml.Load(Constants::TEST_MAP);
+    //logger.setLogLevel(tmx::Logger::Warning | tmx::Logger::Error);
+    ml.load(Constants::TEST_MAP);
     
     //init gameobject manager and its objects
 //    GameObjectManager::Init();
@@ -77,10 +75,10 @@ bool Engine::Init()
     
     EntityManager::Init(World);
     
-    SystemManager::AddSystem(World, new Movement<Controller, Velocity, Acceleration, EntityFlag, Appearance>(World));
-    SystemManager::AddSystem(World, new Renderer<Appearance>(World));
-    SystemManager::AddSystem(World, new Animator<Appearance, Animation, Controller>(World));
-    SystemManager::AddSystem(World, new Input<Controller, Velocity, Acceleration, Appearance>(World));
+    SystemManager::AddSystem(World, new Movement(World));
+    SystemManager::AddSystem(World, new Renderer(World));
+    SystemManager::AddSystem(World, new Animator(World));
+    SystemManager::AddSystem(World, new Input(World));
     
     Camera::CreateInstance(Constants::CAMERA_ZOOM_WIDTH ,Constants::CAMERA_ZOOM_HEIGHT);
     return true;
@@ -147,7 +145,8 @@ void Engine::OnExit()
 void Engine::Terminate()
 {
 #ifdef LOG_OUTPUT_CONSOLE
-    Utils::PrintDebugLog("Engine::Terminate", "terminating the engine and taking care of freeing the allocated memory");
+	std::string methodName = _FUNCION_NAME_;
+    Utils::PrintDebugLog(methodName, "terminating the engine and taking care of freeing the allocated memory");
 #endif
     SystemManager::ExitAll(World);
     mainWindow->close();
@@ -156,7 +155,7 @@ void Engine::Terminate()
 //*****************
 //Getter and Setter
 //*****************
-tmx::MapLoader & Engine::GetMapLoader() //this doesn't fucking work!!! I hate when it doesn't work >:(
+tmx::MapLoader & Engine::GetMapLoader()
 {
     return ml;
 }

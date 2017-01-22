@@ -13,6 +13,15 @@
 #include "World.hpp"
 #include "SystemBase.hpp"
 
+//systems
+#include "Appearance.hpp"
+#include "Animation.hpp"
+#include "Appearance.hpp"
+#include "EntityFlag.hpp"
+#include "Acceleration.hpp"
+#include "Velocity.hpp"
+#include "Controller.hpp"
+
 template<typename First, typename ...Rest> //variadic template
 class System : public SystemBase
 {
@@ -23,8 +32,8 @@ public:
 //    static System* const Create();
     
     const unsigned long int GetComponentBitMask() const;
-    
-    static unsigned long int Id;
+
+	static unsigned long int Id;
     
 private:
     unsigned long int componentsBitMask;

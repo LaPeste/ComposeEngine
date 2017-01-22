@@ -6,7 +6,7 @@
 //  Copyright © 2016 Andrea Catalini. All rights reserved.
 //
 
-#include "TransforUtils.hpp"
+#include "TransformUtils.hpp"
 #include "Appearance.hpp"
 
 const sf::Vector2f& TransformUtils::GetPosition(const World& world, unsigned const long entityIndex)
@@ -18,7 +18,9 @@ const sf::Vector2f& TransformUtils::GetPosition(const World& world, unsigned con
         std::stringstream ss;
         ss << "The component " << typeid(appearance).name() << " for the entity " <<  std::to_string(entityIndex) << " is null! Abort!" << std::endl;
         std::string s = ss.str();
-        Utils::PrintDebugError(__PRETTY_FUNCTION__, s);
+		std::string methodName = _FUNCION_NAME_;
+        Utils::PrintDebugError(methodName, s);
+
         std::exit(EXIT_FAILURE);
     }
     return appearance->GetSprite()->getPosition();
@@ -33,7 +35,10 @@ void TransformUtils::SetPosition(const World& world, unsigned const long entityI
         std::stringstream ss;
         ss << "The component " << typeid(appearance).name() << " for the entity " <<  std::to_string(entityIndex) << " is null! Abort!" << std::endl;
         std::string s = ss.str();
-        Utils::PrintDebugError(__PRETTY_FUNCTION__, s);
+#ifdef __GNUC__
+		std::string methodName = _FUNCION_NAME_;
+        Utils::PrintDebugError(methodName, s);
+#endif
         std::exit(EXIT_FAILURE);
     }
     appearance->GetSprite()->setPosition(position.x, position.y);

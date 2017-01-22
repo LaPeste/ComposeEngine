@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="tmxLoader">
+      <UniqueIdentifier>{1780d598-ad6c-45fb-a3a5-bffba634ec6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tmxLoader\src">
+      <UniqueIdentifier>{3ca92fc4-ced1-46f5-96e8-08d4d27c12c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tmxLoader\src\pugixml">
+      <UniqueIdentifier>{0673d6b2-2218-44b1-92c1-43b8c99ee1bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tmxLoader\header">
+      <UniqueIdentifier>{9e505b78-0c15-4933-a9a7-4207fd30dc43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tmxLoader\header\tmx">
+      <UniqueIdentifier>{014cc710-631f-4719-9d9d-0f42c4147802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tmxLoader\header\pugixml">
+      <UniqueIdentifier>{06157dbe-0b8c-40c5-9d64-19e955c1d486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{fa40d5ee-3798-4c55-875e-e52090be4904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{028bcabb-5ba0-4bd9-9fdb-9b0b7b787b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Components">
+      <UniqueIdentifier>{62fd263b-bd3b-4fc0-b19d-b17bebcdea95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Systems">
+      <UniqueIdentifier>{83bd2132-b49f-41a3-b483-d14e638ddaad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Player">
+      <UniqueIdentifier>{905ec410-f38f-4c04-8d22-94d40ef2f339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{85d41c4c-58ea-4708-a05f-d4889ace103e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{6a791b69-32fc-4083-aa7c-d5b80c31c243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Components">
+      <UniqueIdentifier>{e6ce58d7-7e30-481b-bfe9-8f27542c936d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Systems">
+      <UniqueIdentifier>{491495fc-1955-4dec-b2f0-bc817f7c65c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Player">
+      <UniqueIdentifier>{058e8033-45e7-4f8c-89bb-027310c82374}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityFlag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FPS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\DebugShape.cpp">
+      <Filter>tmxLoader\src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\Log.cpp">
+      <Filter>tmxLoader\src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\MapLayer.cpp">
+      <Filter>tmxLoader\src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\MapLoaderPrivate.cpp">
+      <Filter>tmxLoader\src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\MapLoaderPublic.cpp">
+      <Filter>tmxLoader\src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\MapObject.cpp">
+      <Filter>tmxLoader\src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\miniz.c">
+      <Filter>tmxLoader\src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\QuadTreeNode.cpp">
+      <Filter>tmxLoader\src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\pugixml\pugixml.cpp">
+      <Filter>tmxLoader\src\pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="Acceleration.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Appearance.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentBase.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Velocity.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="UtilConstants.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManager.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemBase.cpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionDetectionUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FPS.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcePath.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\DebugShape.hpp">
+      <Filter>tmxLoader\header\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\Export.hpp">
+      <Filter>tmxLoader\header\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\Helpers.hpp">
+      <Filter>tmxLoader\header\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\Log.hpp">
+      <Filter>tmxLoader\header\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\MapLayer.hpp">
+      <Filter>tmxLoader\header\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\MapLoader.hpp">
+      <Filter>tmxLoader\header\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\MapObject.hpp">
+      <Filter>tmxLoader\header\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\miniz.h">
+      <Filter>tmxLoader\header\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\QuadTreeNode.hpp">
+      <Filter>tmxLoader\header\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\pugixml\pugixml.hpp">
+      <Filter>tmxLoader\header\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\pugixml\pugiconfig.hpp">
+      <Filter>tmxLoader\header\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="Acceleration.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Appearance.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentBase.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Velocity.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemBase.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="System.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectType.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.hpp">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilConstants.hpp">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityFlag.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="World.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Header Files\Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformUtils.hpp">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDetectionUtils.hpp">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Component.tpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </None>
+    <None Include="System.tpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </None>
+  </ItemGroup>
+</Project>

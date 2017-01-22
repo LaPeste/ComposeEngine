@@ -56,9 +56,10 @@ void EntityManager::AddComponent(World& world, const unsigned long int entityInd
     
 #ifdef LOG_OUTPUT_CONSOLE
     std::stringstream ss;
-    ss << "ComponentId: " << Component<T>::Id << " entityIndex: " << entityIndex << " component: " << typeid(T).name() << std::endl;
+    ss << "ComponentId: " << Component<T>::Id << " entityIndex: " << entityIndex << " component: " << typeid(T).name();
     std::string s = ss.str();
-    Utils::PrintDebugLog(__PRETTY_FUNCTION__, s);
+	std::string methodName = _FUNCION_NAME_;
+    Utils::PrintDebugLog(methodName, s);
 #endif
     
     if(entityComponentsMap.find(Component<T>::Id) == entityComponentsMap.end())    //if key found
@@ -70,7 +71,9 @@ void EntityManager::AddComponent(World& world, const unsigned long int entityInd
         std::stringstream ss;
         ss << "component " << typeid(T).name() << " already added to entity " << entityIndex << ".";
         std::string s = ss.str();
-        Utils::PrintDebugWarning(__PRETTY_FUNCTION__, s);
+		std::string methodName = _FUNCION_NAME_;
+        Utils::PrintDebugWarning(methodName, s);
+
     }
 }
 

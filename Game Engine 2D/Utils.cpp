@@ -9,8 +9,6 @@
 #include "Utils.hpp"
 #include "stdafx.h"
 
-//std::vector<std::string> Utils::ComponentsString = {"Acceleration", "Appearance", "Controller", "EntityFlag", "Position", "Velocity"};
-
 void Utils::PrintDebugLog(const std::string& methodName, const std::string& message)
 {
     std::cout << "LOG - " << methodName << " : " << message << "\n";

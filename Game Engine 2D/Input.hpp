@@ -15,8 +15,7 @@
 
 #define INPUT_MASK Components::POSITION, Components::VELOCITY, Components::ACCELERATION, Components::CONTROLLER
 
-template<typename First, typename ...Rest>
-class Input : public System<First,Rest...>, public Event
+class Input : public System<Controller, Velocity, Acceleration, Appearance>, public Event
 {
 public:
     Input(World& world);
@@ -30,7 +29,5 @@ public:
 private:
     bool Jump(const World& world, const unsigned long entityIndex);
 };
-
-#include "Input.tpp"
 
 #endif /* _INPUT_HPP_ */

@@ -8,7 +8,7 @@
 
 #include "Camera.hpp"
 #include "Engine.hpp"
-#include "TransforUtils.hpp"
+#include "TransformUtils.hpp"
 #include "EntityManager.hpp"
 
 using namespace sf;
@@ -27,7 +27,8 @@ Camera::Camera(float cameraZoomWidth, float cameraZoomHeight) :
 Camera::~Camera()
 {
 #ifdef LOG_OUTPUT_CONSOLE
-    Utils::PrintDebugLog("~Camera()", "dctr called");
+	std::string methodName = _FUNCION_NAME_;
+    Utils::PrintDebugLog(methodName, "dctr called");
 #endif
 }
 
@@ -35,7 +36,8 @@ void Camera::CreateInstance(float cameraZoomWidth, float cameraZoomHeight)
 {
     if(instance != nullptr)
     {
-        Utils::PrintDebugError("Camera::CreateInstance()", "You're trying to instantiate the camera twice!");
+		std::string methodName = _FUNCION_NAME_;
+        Utils::PrintDebugError(methodName, "You're trying to instantiate the camera twice!");
         return;
     }
     instance = new Camera(cameraZoomWidth, cameraZoomHeight);
@@ -45,7 +47,8 @@ Camera * Camera::GetInstance()
 {
     if(instance == nullptr)
     {
-        Utils::PrintDebugError( "Camera::GetInstance", "Trying to get a camera, but an instance is not created yet!");
+		std::string methodName = _FUNCION_NAME_;
+        Utils::PrintDebugError(methodName, "Trying to get a camera, but an instance is not created yet!");
         return nullptr;
     }
     return instance;
@@ -63,13 +66,13 @@ void Camera::Update()
 
         //if the camera doesn't reach the left or right limit of the map
         if( ( playerPos.x + Constants::PLAYER_WIDTH/2 > GetWidth()/2 /*- Constants::PLAYER_WIDTH/2*/ ) &&
-           ( playerPos.x + Constants::PLAYER_WIDTH/2 + GetWidth()/2 < Engine::GetInstance().GetMapLoader().GetMapSize().x ) )
+           ( playerPos.x + Constants::PLAYER_WIDTH/2 + GetWidth()/2 < Engine::GetInstance().GetMapLoader().getMapSize().x ) )
         {
             cameraTargetPos.x = newPosX;
         }
         
         if( ( playerPos.y + Constants::PLAYER_HEIGHT/2 > GetHeight()/2 /*- Constants::PLAYER_HEIGHT/2*/ ) &&
-           ( playerPos.y + Constants::PLAYER_WIDTH/2 + GetHeight()/2 < Engine::GetInstance().GetMapLoader().GetMapSize().y ) )
+           ( playerPos.y + Constants::PLAYER_WIDTH/2 + GetHeight()/2 < Engine::GetInstance().GetMapLoader().getMapSize().y ) )
         {
             cameraTargetPos.y = newPosY;
         }

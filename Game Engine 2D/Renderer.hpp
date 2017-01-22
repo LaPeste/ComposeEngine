@@ -14,8 +14,7 @@
 
 #define RENDERER_MASK Components::APPEARANCE
 
-template<typename First, typename ...Rest>
-class Renderer : public System<First,Rest...>
+class Renderer : public System<Appearance>
 {
 public:
     Renderer(World& world);
@@ -29,7 +28,5 @@ private:
     void Draw(const World& world, const unsigned long entityIndex, sf::RenderWindow& window);
     
 };
-
-#include "Renderer.tpp"
 
 #endif /* _RENDERER_HPP_ */

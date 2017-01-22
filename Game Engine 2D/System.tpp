@@ -10,7 +10,7 @@
 #include "Component.hpp"
 
 template<typename First, typename ...Rest>
-unsigned long int System<First,Rest...>::Id(0);
+unsigned long int System<First, Rest...>::Id(0);
 
 template<typename First, typename ...Rest>
 System<First,Rest...>::System(World& world) : componentsBitMask(0)

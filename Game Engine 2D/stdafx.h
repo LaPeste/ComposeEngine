@@ -34,3 +34,9 @@
 // Here is a small helper for you ! Have a look.
 #include "ResourcePath.hpp"
 #endif
+
+#ifdef __GNUC__ || __GNUG__
+#define _FUNCION_NAME_ __PRETTY_FUNCTION__;
+#else // _MSC_VER
+#define _FUNCION_NAME_ __FUNCSIG__;
+#endif

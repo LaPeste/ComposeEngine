@@ -23,7 +23,7 @@ public:
     virtual void OnUpdate();
     virtual void OnRender();
     virtual void OnExit();
-    
+
 protected:
     static unsigned long int SystemCounter; //used for assigning a unique id to a system
 };

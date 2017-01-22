@@ -11,11 +11,15 @@
 
 #include "stdafx.h"
 #include "System.hpp"
+#include "Controller.hpp"
+#include "Velocity.hpp"
+#include "Acceleration.hpp"
+#include "EntityFlag.hpp"
+#include "Appearance.hpp"
 
 #define MOVEMENT_MASK Components::CONTROLLER | Components::VELOCITY | Components::ACCELERATION | Components::FLAG | Components::APPEARANCE
 
-template<typename First, typename ...Rest>
-class Movement : public System<First,Rest...>
+class Movement : public System<Controller, Velocity, Acceleration, EntityFlag, Appearance>
 {
 public:
     Movement(World& world);
@@ -30,7 +34,5 @@ private:
     void MoveTo(const World& world, const unsigned long entityIndex, float x, float y);
     bool PosValid(const World& world, const unsigned long entityIndex, float x, float y);
 };
-
-#include "Movement.tpp"
 
 #endif /* _MOVEMENT_HPP_ */

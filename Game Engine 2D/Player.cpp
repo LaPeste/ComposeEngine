@@ -9,7 +9,7 @@
 #include "Player.hpp"
 #include "EntityManager.hpp"
 #include "Engine.hpp"
-#include "TransforUtils.hpp"
+#include "TransformUtils.hpp"
 #include "Appearance.hpp"
 #include "Acceleration.hpp"
 #include "Animation.hpp"
@@ -25,7 +25,7 @@ Player::Player()
     const unsigned long entityIndex = EntityManager::CreateEntity(world);
     EntityManager::SetPlayerId(entityIndex); //TODO: this should be automated in the EntityManager...
 
-    EntityManager::AddComponent(world, entityIndex, new Appearance(Constants::PLAYER_SPRITE_PATH));
+    EntityManager::AddComponent(world, entityIndex, new Appearance(Constants::RESOURCE_PATH + Constants::PLAYER_SPRITE_PATH));
     TransformUtils::SetPosition(world, entityIndex, sf::Vector2f(Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y));
     
     EntityManager::AddComponent(world, entityIndex, new Acceleration(Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y));
