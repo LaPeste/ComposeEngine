@@ -4,6 +4,7 @@ ComposeEngine
 
 
 /*********************************************************************
+
 Andrea Catalini 2016-2017
 Game Engine 2D - https://github.com/LaPeste/ComposeEngine
 
@@ -38,4 +39,4 @@ sfml-tmxloader (included)
 pugixml (included)  
 zlib (http://zlib.net/)  
 SFML 2.x (http://sfml-dev.org)  
-Minimal C++11 compiler support (tested with VS11 and GCC4.7)
+Minimal C++11 compiler support (tested with VS14 and clang-800.0.38)
