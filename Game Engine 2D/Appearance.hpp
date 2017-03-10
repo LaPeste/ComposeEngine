@@ -12,6 +12,8 @@
 #include "stdafx.h"
 #include "Component.hpp"
 
+//Since it holds the sprite it holds the position, so it can be seen as holding the transformer as well
+
 class Appearance : public Component<Appearance>
 {
 public:

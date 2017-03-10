@@ -11,15 +11,17 @@
 #include "Engine.hpp"
 #include "Appearance.hpp"
 #include "Collider.hpp"
-#include "TransformUtils.hpp"
+#include "Transform.hpp"
 #include "tmx/MapObject.hpp"
 #include "EntityManager.hpp"
 
-bool CollisionDetectionUtils::Collides(const World& world, const unsigned long index)
+//TODO theoretically here world should be constant since we are just checking for collision and not modifying world, but... I can't get the code to work if it is set to be const
+bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
 {
-    std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[index];
+    std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[index];
     Appearance* appearance = static_cast<Appearance*>(entity[Component<Appearance>::Id]);
-    Collider* collider = static_cast<Collider*>(entity[Component<Collider>::Id]);
+	Collider* collider = static_cast<Collider*>(entity[Component<Collider>::Id]);
+	Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
     
     sf::FloatRect rootNode(Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Camera::GetInstance()->GetWidth(), Camera::GetInstance()->GetHeight());
     Engine::GetInstance().GetMapLoader().updateQuadTree(rootNode); //update quadtree's rootnode to what's visible in the screen
@@ -50,7 +52,7 @@ bool CollisionDetectionUtils::Collides(const World& world, const unsigned long i
         {
             for(int i = 0; i < 4; i++) //where 4 is the amount of collisionPoints we have. Those are the 4 corners of the sprite of a gameObject.
             {
-                collision = (*object)->contains(TransformUtils::GetPosition(world, index) + collisionPoints[i]);
+                collision = (*object)->contains(transform->GetPosition(world, index) + collisionPoints[i]);
 
                 if(collision) break;
             }

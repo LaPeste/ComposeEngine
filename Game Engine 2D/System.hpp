@@ -34,6 +34,17 @@ public:
     const unsigned long int GetComponentBitMask() const;
 
 	static unsigned long int Id;
+
+	void OnStart() override;
+	void OnInput(const sf::Event& event) override;
+	void OnUpdate() override;
+	void OnLateUpdate() override;
+	void OnRender() override;
+	void OnExit() override;
+
+protected:
+	World& world;
+
     
 private:
     unsigned long int componentsBitMask;
@@ -43,7 +54,16 @@ private:
     
     template <typename LastInternal>
     void CalculateComponentsBitMask();
-    
+
+
+	virtual void Start(World& world, const unsigned long int entityIndex);
+	virtual void Input(World& world, const unsigned long int entityIndex, const sf::Event& event);
+	virtual void Update(World& world, const unsigned long int entityIndex);
+	virtual void LateUpdate(World& world, const unsigned long int entityIndex);
+	virtual void Render(World& world, const unsigned long int entityIndex);
+	virtual void Exit(World& world, const unsigned long int entityIndex);
+
+	void SetIfUpdateMapObject(World& world, const unsigned long int entityIndex);
     
 };
 

@@ -9,7 +9,7 @@
 #include "System.hpp"
 #include "Movement.hpp"
 #include "Renderer.hpp"
-#include "Input.hpp"
+#include "InputSystem.hpp"
 #include "Animator.hpp"
 
 void SystemManager::Init(World& world)
@@ -55,6 +55,14 @@ void SystemManager::RenderAll(World& world)
     {
         system.second->OnRender();
     }
+}
+
+void SystemManager::LateUpdateAll(World& world)
+{
+	for (auto const & system : world.Systems)
+	{
+		system.second->OnLateUpdate();
+	}
 }
 
 void SystemManager::ExitAll(World& world)

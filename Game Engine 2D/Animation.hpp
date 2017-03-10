@@ -18,6 +18,7 @@ struct AnimationData
 public:
 //    AnimationData(const World& world, const unsigned long int entityIndex);
     AnimationData(const sf::Vector2f& startingPos, const sf::Vector2f& spaceBetweenSprite, bool verticalMovement, bool reverseAnimation, float spriteWidth, float spriteHeight, int maxFrame, int frameRate);
+
     sf::Vector2f StartingPos;
     sf::Vector2f SpaceBetweenSprite;
     bool VerticalMovement; //if true the sprite sequence develops vertically, horizzontaly otherwise.

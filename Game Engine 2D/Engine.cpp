@@ -9,7 +9,7 @@
 #include "Movement.hpp"
 #include "Renderer.hpp"
 #include "Animator.hpp"
-#include "Input.hpp"
+#include "InputSystem.hpp"
 
 #include "Controller.hpp"
 #include "Velocity.hpp"
@@ -78,9 +78,12 @@ bool Engine::Init()
     SystemManager::AddSystem(World, new Movement(World));
     SystemManager::AddSystem(World, new Renderer(World));
     SystemManager::AddSystem(World, new Animator(World));
-    SystemManager::AddSystem(World, new Input(World));
+    SystemManager::AddSystem(World, new InputSystem(World));
     
     Camera::CreateInstance(Constants::CAMERA_ZOOM_WIDTH ,Constants::CAMERA_ZOOM_HEIGHT);
+
+	SystemManager::StartAll(World);
+
     return true;
 
 }
@@ -115,6 +118,7 @@ void Engine::Update()
     Camera::GetInstance()->Update();
 //    GameObjectManager::UpdateAll();
     SystemManager::UpdateAll(World);
+	SystemManager::LateUpdateAll(World);
 }
 
 void Engine::RenderFrame()
@@ -126,8 +130,6 @@ void Engine::RenderFrame()
     SystemManager::RenderAll(World); //draw all entities
 	mainWindow->display();
 }
-
-
 
 bool Engine::IsExiting()
 {

@@ -8,10 +8,8 @@
 
 #include "Camera.hpp"
 #include "Engine.hpp"
-#include "TransformUtils.hpp"
+#include "Transform.hpp"
 #include "EntityManager.hpp"
-
-using namespace sf;
 
 Camera* Camera::instance;
 
@@ -60,7 +58,16 @@ void Camera::Update()
     {
 //        Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
         World& world = Engine::GetInstance().World;
-        Vector2f playerPos = TransformUtils::GetPosition(world, EntityManager::GetPlayerId());
+		Transform* transform = static_cast<Transform*>(world.EntitiesComponentsMatrix[EntityManager::GetPlayerId()][Transform::Id]);
+		if (transform == nullptr)
+		{
+			std::string methodName = _FUNCION_NAME_;
+			Utils::PrintDebugError(methodName,"player does'not have a Transform component!");
+			throw 1;
+		}
+
+
+		sf::Vector2f playerPos = transform->GetPosition(world, EntityManager::GetPlayerId());
         float newPosX = playerPos.x - GetWidth()/2 + Constants::PLAYER_WIDTH/2;
         float newPosY = playerPos.y - GetHeight()/2 + Constants::PLAYER_HEIGHT/2;
 
@@ -96,7 +103,7 @@ void Camera::Draw()
 // GETTERS AND SETTERS
 //******************
 
-const Vector2f & Camera::GetPosition() const
+const sf::Vector2f & Camera::GetPosition() const
 {
     if(mode == CameraMode::FOLLOW_PLAYER) return cameraTargetPos;
     
@@ -138,7 +145,7 @@ void Camera::SetCameraMode(CameraMode mode)
     Camera::mode = mode;
 }
 
-const Vector2f & Camera::GetModePosition(CameraMode whichPositionToSet) const
+const sf::Vector2f & Camera::GetModePosition(CameraMode whichPositionToSet) const
 {
     if(whichPositionToSet == CameraMode::FREE) return cameraFreePos;
     

@@ -35,3 +35,8 @@ std::vector<sf::Vector2f> Collider::GetCollisionPoints() const
     
     return collisionPoints;
 }
+
+//bool Collider::CopyDataToMapObject(World& world, const unsigned long int entityIndex)
+//{
+//
+//}

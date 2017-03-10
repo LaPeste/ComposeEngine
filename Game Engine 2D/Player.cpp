@@ -18,6 +18,7 @@
 #include "Velocity.hpp"
 #include "Collider.hpp"
 #include "Collider.hpp"
+#include "Transform.hpp"
 
 Player::Player()
 {
@@ -25,8 +26,9 @@ Player::Player()
     const unsigned long entityIndex = EntityManager::CreateEntity(world);
     EntityManager::SetPlayerId(entityIndex); //TODO: this should be automated in the EntityManager...
 
-    EntityManager::AddComponent(world, entityIndex, new Appearance(Constants::RESOURCE_PATH + Constants::PLAYER_SPRITE_PATH));
-    TransformUtils::SetPosition(world, entityIndex, sf::Vector2f(Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y));
+	EntityManager::AddComponent(world, entityIndex, new Appearance(Constants::RESOURCE_PATH + Constants::PLAYER_SPRITE_PATH));
+	EntityManager::AddComponent(world, entityIndex, new Transform());
+    (static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]))->SetPosition(world, entityIndex, sf::Vector2f(Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y));
     
     EntityManager::AddComponent(world, entityIndex, new Acceleration(Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y));
     EntityManager::AddComponent(world, entityIndex, new Controller());

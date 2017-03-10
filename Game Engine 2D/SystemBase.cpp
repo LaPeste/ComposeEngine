@@ -15,32 +15,37 @@ SystemBase::SystemBase()
     
 }
 
-void SystemBase::OnStart()
-{
-    
-}
-
-void SystemBase::OnInput(const sf::Event& event)
-{
-    
-}
-
-void SystemBase::OnUpdate()
-{
-    
-}
-
-void SystemBase::OnRender()
-{
-    
-}
-
-//bool System::OnCollision(GameObject* otherEntity)
+//void SystemBase::OnStart()
+//{
+//    
+//}
+//
+//void SystemBase::OnInput(const sf::Event& event)
+//{
+//    
+//}
+//
+//void SystemBase::OnUpdate()
+//{
+//    
+//}
+//
+//void SystemBase::OnLateUpdate()
 //{
 //
 //}
-
-void SystemBase::OnExit()
-{
-    
-}
+//
+//void SystemBase::OnRender()
+//{
+//    
+//}
+//
+////bool System::OnCollision(GameObject* otherEntity)
+////{
+////
+////}
+//
+//void SystemBase::OnExit()
+//{
+//    
+//}

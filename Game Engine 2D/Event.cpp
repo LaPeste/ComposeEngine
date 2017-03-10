@@ -11,7 +11,7 @@ Event::~Event()
 
 }
 
-void Event::OnEvent(const sf::Event& e, const World& world, const unsigned long entityIndex)
+void Event::OnEvent(const sf::Event& e, World& world, const unsigned long entityIndex)
 {
 	switch (e.type)
 	{
@@ -47,12 +47,12 @@ void Event::OnExit()
 
 }
 
-void Event::OnKeyDown(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex)
+void Event::OnKeyDown(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex)
 {
     
 }
 
-void Event::OnKeyUp(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex)
+void Event::OnKeyUp(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex)
 {
     
 }

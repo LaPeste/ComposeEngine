@@ -15,24 +15,25 @@
 #include "Velocity.hpp"
 #include "Acceleration.hpp"
 #include "EntityFlag.hpp"
-#include "Appearance.hpp"
+#include "Transform.hpp"
 
 #define MOVEMENT_MASK Components::CONTROLLER | Components::VELOCITY | Components::ACCELERATION | Components::FLAG | Components::APPEARANCE
 
-class Movement : public System<Controller, Velocity, Acceleration, EntityFlag, Appearance>
+class Movement : public System<Controller, Velocity, Acceleration, EntityFlag, Transform>
 {
 public:
     Movement(World& world);
     ~Movement();
     
-    void OnUpdate() override;
-    bool Jump(const World& world, const unsigned long entityIndex);
+    bool Jump(World& world, const unsigned long entityIndex);
     
 private:
-    void MoveEntity(const World& world, const unsigned long entityIndex);
-    void StopMove(const World& world, const unsigned long entityIndex);
-    void MoveTo(const World& world, const unsigned long entityIndex, float x, float y);
-    bool PosValid(const World& world, const unsigned long entityIndex, float x, float y);
+    void MoveEntity(World& world, const unsigned long entityIndex);
+    void StopMove(World& world, const unsigned long entityIndex);
+    void MoveTo(World& world, const unsigned long entityIndex, float x, float y);
+    bool PosValid(World& world, const unsigned long entityIndex, float x, float y);
+
+	void Update(World& world, const unsigned long entityIndex) override;
 };
 
 #endif /* _MOVEMENT_HPP_ */

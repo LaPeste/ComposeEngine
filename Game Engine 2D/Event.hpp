@@ -9,11 +9,11 @@ class Event
 public:
 	Event();
 	virtual ~Event();
-	virtual void OnEvent(const sf::Event& e, const World& world, const unsigned long entityIndex);
+	virtual void OnEvent(const sf::Event& e, World& world, const unsigned long entityIndex);
 
 protected:
-	virtual void OnKeyDown(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex);
-	virtual void OnKeyUp(const sf::Event::KeyEvent& input, const World& world, const unsigned long entityIndex);
+	virtual void OnKeyDown(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex);
+	virtual void OnKeyUp(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex);
 
 	virtual void OnMinimize();
 	virtual void OnRestore();

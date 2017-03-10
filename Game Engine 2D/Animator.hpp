@@ -21,11 +21,11 @@ class Animator : public System<Appearance, Animation, Controller>
 public:
     Animator(World& world);
     ~Animator();
-    
-    void OnUpdate() override;
-    
+        
 private:
-    void Animate(const World& world, const unsigned long entityIndex);
+    void Animate(World& world, const unsigned long entityIndex);
+
+	void Update(World& world, const unsigned long entityIndex) override;
 };
 
 #endif /* _ANIMATOR_HPP_ */

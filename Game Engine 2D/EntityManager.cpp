@@ -10,7 +10,9 @@
 #include "tmx/MapLoader.hpp"
 #include "Engine.hpp"
 #include "Collider.hpp"
+#include "Transform.hpp"
 #include "EntityFlag.hpp"
+#include "MapObjectComponent.hpp"
 
 unsigned long int EntityManager::playerId(99999); //defaulted to a very big number
 std::vector<CollisionEvent> EntityManager::collisionEvents;
@@ -28,8 +30,11 @@ void EntityManager::Init(World& world)
                 //TODO most likely here I need to do more checks, because I may not want to add all the objects in this layer
                 const unsigned long indexNewEntity = CreateEntity(world);
                 AddComponent(world, indexNewEntity, new Collider(sf::Vector2f(0,0)));
+				AddComponent(world, indexNewEntity, new Transform());
+				(static_cast<Transform*>(world.EntitiesComponentsMatrix[indexNewEntity][Transform::Id]))->SetPosition(world, indexNewEntity, object->getPosition());
 //                world.Appearance[indexNewEntity] = new Appearance(nullptr); //TODO strange that I can't get the sprite from the mapObject
                 AddComponent(world, indexNewEntity, new EntityFlag(GameObjectFlag::MAP_OBJECT));
+				AddComponent(world, indexNewEntity, new MapObjectComponent());
                 object->setProperty(Constants::ENTITY_INDEX_PROPERTY, std::to_string(indexNewEntity));
             }
 

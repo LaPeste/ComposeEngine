@@ -131,8 +131,10 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="FPS.cpp" />
-    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapObjectComponent.cpp" />
+    <ClCompile Include="MapObjectSystem.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -148,7 +150,7 @@
     <ClCompile Include="tmx\miniz.c" />
     <ClCompile Include="tmx\pugixml\pugixml.cpp" />
     <ClCompile Include="tmx\QuadTreeNode.cpp" />
-    <ClCompile Include="TransformUtils.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UtilConstants.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Velocity.cpp" />
@@ -173,7 +175,9 @@
     <ClInclude Include="Event.hpp" />
     <ClInclude Include="FPS.hpp" />
     <ClInclude Include="GameObjectType.hpp" />
-    <ClInclude Include="Input.hpp" />
+    <ClInclude Include="InputSystem.hpp" />
+    <ClInclude Include="MapObjectComponent.hpp" />
+    <ClInclude Include="MapObjectSystem.hpp" />
     <ClInclude Include="Movement.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Renderer.hpp" />
@@ -193,7 +197,7 @@
     <ClInclude Include="tmx\pugixml\pugiconfig.hpp" />
     <ClInclude Include="tmx\pugixml\pugixml.hpp" />
     <ClInclude Include="tmx\QuadTreeNode.hpp" />
-    <ClInclude Include="TransformUtils.hpp" />
+    <ClInclude Include="Transform.hpp" />
     <ClInclude Include="UtilConstants.hpp" />
     <ClInclude Include="Utils.hpp" />
     <ClInclude Include="Velocity.hpp" />

@@ -24,6 +24,7 @@ public:
     static void ProcessAllInput(World& world, const sf::Event& event);
     static void UpdateAll(World& world);
     static void RenderAll(World& world);
+	static void LateUpdateAll(World& world);
     static void ExitAll(World& world); // TODO THIS SHOULD BE REMOVED, because the world should take care of deleting the refertences to the system objects
     
 	template<typename First, typename ...Rest>

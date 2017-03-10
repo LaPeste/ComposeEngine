@@ -17,31 +17,15 @@ Renderer::Renderer(World& world) : System<Appearance>(world)
 
 Renderer::~Renderer(){}
 
-void Renderer::OnStart()
+void Renderer::Render(World& world, const unsigned long int entityIndex)
 {
-    
+	Draw(world, entityIndex, *Engine::GetInstance().GetWindow());
 }
 
-void Renderer::OnRender()
-{
-    Engine& engine = Engine::GetInstance();
-    for(int i = 0; i < engine.World.EntitiesComponentsMasks.size(); ++i)
-    {
-        if((engine.World.EntitiesComponentsMasks[i] & this->GetComponentBitMask()) == this->GetComponentBitMask())
-        {
-            Draw(engine.World, i, *engine.GetWindow());
-        }
-    }
-}
 
-void Renderer::OnExit()
+void Renderer::Draw(World& world, const unsigned long entityIndex, sf::RenderWindow& window)
 {
-    
-}
-
-void Renderer::Draw(const World& world, const unsigned long entityIndex, sf::RenderWindow& window)
-{
-    std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
+    std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
     Appearance* appearance = static_cast<Appearance*>(entity[Component<Appearance>::Id]);
     
     if (appearance->IsSpriteLoaded())

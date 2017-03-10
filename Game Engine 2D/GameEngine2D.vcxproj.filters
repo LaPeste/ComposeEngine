@@ -71,9 +71,6 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EntityFlag.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Event.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -152,16 +149,10 @@
     <ClCompile Include="EntityManager.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="TransformUtils.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionDetectionUtils.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
-      <Filter>Source Files\Entities\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
       <Filter>Source Files\Entities\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Movement.cpp">
@@ -171,6 +162,21 @@
       <Filter>Source Files\Entities\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Controller.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObjectSystem.cpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityFlag.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObjectComponent.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Entities\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -259,9 +265,6 @@
     <ClInclude Include="Animator.hpp">
       <Filter>Header Files\Entities\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Input.hpp">
-      <Filter>Header Files\Entities\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Movement.hpp">
       <Filter>Header Files\Entities\Systems</Filter>
     </ClInclude>
@@ -283,9 +286,6 @@
     <ClInclude Include="UtilConstants.hpp">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="EntityFlag.hpp">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="World.hpp">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
@@ -295,14 +295,26 @@
     <ClInclude Include="Player.hpp">
       <Filter>Header Files\Entities\Player</Filter>
     </ClInclude>
-    <ClInclude Include="TransformUtils.hpp">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="SystemManager.hpp">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="CollisionDetectionUtils.hpp">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObjectSystem.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObjectComponent.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityFlag.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

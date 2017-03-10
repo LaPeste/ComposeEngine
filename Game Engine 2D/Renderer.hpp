@@ -20,12 +20,10 @@ public:
     Renderer(World& world);
     ~Renderer();
     
-    void OnStart() override;
-    void OnRender() override;
-    void OnExit() override;
-    
 private:
-    void Draw(const World& world, const unsigned long entityIndex, sf::RenderWindow& window);
+	void Render(World& world, const unsigned long int entityIndex) override;
+
+    void Draw(World& world, const unsigned long entityIndex, sf::RenderWindow& window);
     
 };
 

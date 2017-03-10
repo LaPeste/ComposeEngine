@@ -17,9 +17,12 @@ class Collider : public Component<Collider>
 {
 public:
     Collider(const sf::Vector2f& offset);
+	~Collider();
     
     std::vector<sf::Vector2f> GetCollisionPoints(const Appearance& appearance) const; //returns a set of points big as the sprite bounds plus the offset
     std::vector<sf::Vector2f> GetCollisionPoints() const; //returns a set of points as big as the offset
+
+	//bool CopyDataToMapObject(World& world, const unsigned long int entityIndex) override;
 
 private:
     sf::Vector2f offset;

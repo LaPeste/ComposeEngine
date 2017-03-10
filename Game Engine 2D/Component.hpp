@@ -10,7 +10,6 @@
 #define _COMPONET_HPP_
 
 #include "stdafx.h"
-#include "ComponentBase.hpp"
 #include "World.hpp"
 
 template<typename T>
@@ -21,6 +20,11 @@ public:
     Component();
     
     static unsigned long int Id;
+
+	// Needed to be defined when modified data in code needs to be reflected on MapObject entities
+	// Returns true if success, false otherwise.
+	//TODO if possible world should be const but I am having problems when trying to access a component from a const World&
+	virtual bool CopyDataToMapObject(World& world, const unsigned long int entityIndex);
 };
 
 template<typename T>

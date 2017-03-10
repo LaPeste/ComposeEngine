@@ -15,7 +15,7 @@
 class CollisionDetectionUtils
 {
 public:
-    static bool Collides(const World& world, const unsigned long entityIndex);
+    static bool Collides(World& world, const unsigned long entityIndex);
 private:
 //    static const std::vector<const sf::Vector2f&>* const CalculateCollisionPoint(const World& world, const unsigned long entityIndex);
 };

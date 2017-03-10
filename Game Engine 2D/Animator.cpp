@@ -15,24 +15,14 @@ Animator::Animator(World& world) : System<Appearance, Animation, Controller>(wor
 
 Animator::~Animator(){}
 
-void Animator::OnUpdate()
+void Animator::Update(World& world, const unsigned long entityIndex)
 {
-    
-    World& world = Engine::GetInstance().World;
-    
-    for(int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
-    {
-        unsigned long int filteredComponentsMask = world.EntitiesComponentsMasks[i] & this->GetComponentBitMask();
-        if(filteredComponentsMask == this->GetComponentBitMask())
-        {
-            Animate(world, i);
-        }
-    }
+	Animate(world, entityIndex);
 }
 
-void Animator::Animate(const World& world, const unsigned long entityIndex)
+void Animator::Animate(World& world, const unsigned long entityIndex)
 {
-    std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
+    std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
     Animation* animation = static_cast<Animation*>(entity[Component<Animation>::Id]);
     Appearance* appearance = static_cast<Appearance*>(entity[Component<Appearance>::Id]);
 

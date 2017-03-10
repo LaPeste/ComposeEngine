@@ -17,6 +17,7 @@ class ComponentBase
 {
 public:
     ComponentBase();
+	~ComponentBase();
     
 //    virtual ComponentBase* GetComponent() = 0; //pure virtual class
     

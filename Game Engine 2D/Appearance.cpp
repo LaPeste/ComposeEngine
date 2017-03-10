@@ -7,6 +7,9 @@
 //
 
 #include "Appearance.hpp"
+#include "Transform.hpp"
+#include "tmx/MapLoader.hpp"
+#include "Engine.hpp"
 
 Appearance::Appearance(std::string spritePath) : Component()
 {

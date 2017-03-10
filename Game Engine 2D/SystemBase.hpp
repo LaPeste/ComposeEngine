@@ -18,11 +18,12 @@ public:
     
 //    virtual SystemBase* GetSystem() const = 0;
     
-    virtual void OnStart();
-    virtual void OnInput(const sf::Event& event);
-    virtual void OnUpdate();
-    virtual void OnRender();
-    virtual void OnExit();
+    virtual void OnStart() = 0;
+    virtual void OnInput(const sf::Event& event) = 0;
+    virtual void OnUpdate() = 0;
+    virtual void OnRender() = 0;
+	virtual void OnLateUpdate() = 0;
+    virtual void OnExit() = 0;
 
 protected:
     static unsigned long int SystemCounter; //used for assigning a unique id to a system
