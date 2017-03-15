@@ -28,12 +28,11 @@ void EntityManager::Init(World& world)
             for(std::vector<tmx::MapObject>::iterator object = layer->objects.begin(); object != layer->objects.end(); ++object)
             {
                 //TODO most likely here I need to do more checks, because I may not want to add all the objects in this layer
-                const unsigned long indexNewEntity = CreateEntity(world);
+                const unsigned long indexNewEntity = CreateEntity(world, GameObjectFlag::MAP_OBJECT);
                 AddComponent(world, indexNewEntity, new Collider(sf::Vector2f(0,0)));
 				AddComponent(world, indexNewEntity, new Transform());
 				(static_cast<Transform*>(world.EntitiesComponentsMatrix[indexNewEntity][Transform::Id]))->SetPosition(world, indexNewEntity, object->getPosition());
 //                world.Appearance[indexNewEntity] = new Appearance(nullptr); //TODO strange that I can't get the sprite from the mapObject
-                AddComponent(world, indexNewEntity, new EntityFlag(GameObjectFlag::MAP_OBJECT));
 				AddComponent(world, indexNewEntity, new MapObjectComponent());
                 object->setProperty(Constants::ENTITY_INDEX_PROPERTY, std::to_string(indexNewEntity));
             }
@@ -42,7 +41,7 @@ void EntityManager::Init(World& world)
     }
 }
 
-const unsigned long EntityManager::CreateEntity(World& world)
+const unsigned long EntityManager::CreateEntity(World& world, const GameObjectFlag& flags)
 {
     for(int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
     {
@@ -55,8 +54,11 @@ const unsigned long EntityManager::CreateEntity(World& world)
     
     world.EntitiesComponentsMasks.push_back(UtilConstants::NO_COMPONENTS);
     world.EntitiesComponentsMatrix.push_back(std::map<unsigned long int, ComponentBase*>());
+
+	unsigned long int indexNewEntity = world.EntitiesComponentsMasks.size() - 1;
+	AddComponent(world, indexNewEntity, new EntityFlag(flags));
     
-    return world.EntitiesComponentsMasks.size() - 1; //return size because you want to return an index that points to a newest entity
+    return indexNewEntity; //return size because you want to return an index that points to a newest entity
 }
 
 void EntityManager::DestroyEntity(World& world, const unsigned long index)

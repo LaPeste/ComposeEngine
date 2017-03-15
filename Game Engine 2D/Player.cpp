@@ -9,7 +9,6 @@
 #include "Player.hpp"
 #include "EntityManager.hpp"
 #include "Engine.hpp"
-#include "TransformUtils.hpp"
 #include "Appearance.hpp"
 #include "Acceleration.hpp"
 #include "Animation.hpp"
@@ -23,7 +22,7 @@
 Player::Player()
 {
     World& world = Engine::GetInstance().World;
-    const unsigned long entityIndex = EntityManager::CreateEntity(world);
+    const unsigned long entityIndex = EntityManager::CreateEntity(world, GameObjectFlag::GRAVITY);
     EntityManager::SetPlayerId(entityIndex); //TODO: this should be automated in the EntityManager...
 
 	EntityManager::AddComponent(world, entityIndex, new Appearance(Constants::RESOURCE_PATH + Constants::PLAYER_SPRITE_PATH));
@@ -32,7 +31,6 @@ Player::Player()
     
     EntityManager::AddComponent(world, entityIndex, new Acceleration(Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y));
     EntityManager::AddComponent(world, entityIndex, new Controller());
-    EntityManager::AddComponent(world, entityIndex, new EntityFlag(GameObjectFlag::GRAVITY));
     EntityManager::AddComponent(world, entityIndex, new Velocity());
     EntityManager::AddComponent(world, entityIndex, new Collider(sf::Vector2f(0,0)));
 //    world.EntitiesComponentsMasks[entityIndex] = ;

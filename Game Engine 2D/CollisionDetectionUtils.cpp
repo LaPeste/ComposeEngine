@@ -24,8 +24,10 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
 	Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
     
     sf::FloatRect rootNode(Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Camera::GetInstance()->GetWidth(), Camera::GetInstance()->GetHeight());
-    Engine::GetInstance().GetMapLoader().updateQuadTree(rootNode); //update quadtree's rootnode to what's visible in the screen
-    std::vector<tmx::MapObject*> objects = Engine::GetInstance().GetMapLoader().queryQuadTree(appearance->GetSprite()->getGlobalBounds()); // grab all the MapObjects contained in the quads intersected by the bounds of sprite
+    Engine::GetInstance().GetMapLoader().updateQuadTree(rootNode); //update quadtree's rootnode to what's visible on the screen
+	
+	//grab all the MapObjects contained in the quads intersected by the bounds of sprite
+    std::vector<tmx::MapObject*> mapObjects = Engine::GetInstance().GetMapLoader().queryQuadTree(appearance->GetSprite()->getGlobalBounds());
     if(!Engine::GetInstance().GetMapLoader().quadTreeAvailable())
     {
 		std::string methodName = _FUNCION_NAME_;
@@ -45,7 +47,7 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
     }
     
     unsigned long searchId;
-    for(auto object = objects.begin(); object != objects.end(); ++object)
+    for(auto object = mapObjects.begin(); object != mapObjects.end(); ++object)
     {
         searchId = std::stol((*object)->getPropertyString(Constants::ENTITY_INDEX_PROPERTY));
         if((*object)->getParent() == Constants::COLLISION_LAYER && (world.EntitiesComponentsMasks[searchId] & Component<Collider>::Id) == Component<Collider>::Id)

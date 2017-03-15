@@ -29,14 +29,14 @@ World::World() /*:
 
 World::~World()
 {
-    for(auto const & system : Systems)
+    for(const auto& system : Systems)
     {
         delete system.second;
     }
     
     for(std::map<unsigned long int, ComponentBase*>& entity : EntitiesComponentsMatrix)
     {
-        for(auto& component : entity)
+        for(const auto& component : entity)
         {
             delete component.second;
         }
