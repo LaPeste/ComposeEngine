@@ -7,15 +7,16 @@
 class Transform : public Component<Transform>
 {
 public:
-	Transform();
+	Transform(World& world, const unsigned long int entityIndex);
+	~Transform();
 
-	const sf::Vector2f& GetPosition(World& world, unsigned const long entityIndex) const;
-	void SetPosition(World& world, unsigned const long entityIndex, const sf::Vector2f& pos);
-
-	bool CopyDataToMapObject(World& world, const unsigned long int entityIndex) override;
+	const sf::Vector2f& GetPosition() const;
+	void SetPosition(const sf::Vector2f& pos);
+	const sf::Transform& GetTransform() const;
+	//TODO add functions for getting and setting rotation, scale etc...
 
 private:
-	sf::Vector2f position;
+	sf::Transformable transformable;
 };
 
 #endif

@@ -16,16 +16,17 @@
 class Collider : public Component<Collider>
 {
 public:
-    Collider(const sf::Vector2f& offset);
+    Collider(World& world, const unsigned long int entityIndex, const sf::Vector2f& offset = sf::Vector2f(0, 0), const sf::FloatRect& colliderRect = sf::FloatRect());
 	~Collider();
     
-    std::vector<sf::Vector2f> GetCollisionPoints(const Appearance& appearance) const; //returns a set of points big as the sprite bounds plus the offset
-    std::vector<sf::Vector2f> GetCollisionPoints() const; //returns a set of points as big as the offset
+	const sf::FloatRect& GetColliderRect() const;
 
-	//bool CopyDataToMapObject(World& world, const unsigned long int entityIndex) override;
+	//returns a set of points in world space defining the borders of the collider
+    std::vector<sf::Vector2f> GetCollisionPoints() const;
 
 private:
     sf::Vector2f offset;
+	sf::FloatRect colliderRect;
 };
 
 #endif /* _COLLIDER_HPP_ */

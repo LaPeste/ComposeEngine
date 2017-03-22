@@ -8,13 +8,15 @@
 
 #include "Acceleration.hpp"
 
-Acceleration::Acceleration(const float accelerationPerFrameX, const float accelerationPerFrameY) :
-    AccelerationX(0), AccelerationY(0),
+Acceleration::Acceleration(World& world, const unsigned long int entityIndex, const float accelerationPerFrameX, const float accelerationPerFrameY) :
+	AccelerationX(0), AccelerationY(0),
     AccelerationPerFrameX(accelerationPerFrameX), AccelerationPerFrameY(accelerationPerFrameY),
-    Component()
+    Component(world, entityIndex)
 {
     
 }
+
+Acceleration::~Acceleration() {}
 //
 //float Acceleration::GetAccelerationX() const
 //{

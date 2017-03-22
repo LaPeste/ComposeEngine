@@ -23,7 +23,9 @@ class EntityManager
 {
 public:
     static void Init(World& world);
-    static const unsigned long CreateEntity(World& world, const GameObjectFlag& flags = GameObjectFlag::NONE); //returns index to entity with no components, if found, otherwise the list will be extended and the latest index returned
+
+	//returns index to entity with no components, if found, otherwise the list will be extended and the latest index returned
+    static const unsigned long CreateEntity(World& world, const GameObjectFlag& flags = GameObjectFlag::NONE);
     static void DestroyEntity(World& world, const unsigned long index);
     
     static const unsigned long GetPlayerId();
@@ -37,7 +39,9 @@ public:
     
 private:
     static unsigned long int playerId;
-    static void FreeWorldFields(World& world, const int worldIndex); //free memory of column matrix
+
+	//free memory of column matrix
+    static void FreeWorldFields(World& world, const int worldIndex);
     static std::vector<CollisionEvent> collisionEvents;
 };
 

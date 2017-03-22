@@ -12,10 +12,6 @@
 #include "stdafx.h"
 #include "System.hpp"
 
-#define ANIMATION_MASK Components::APPEARANCE | Components::ANIMATION | Components::CONTROLLER
-
-//This class assumes that the sprite set is horizontally developed
-
 class Animator : public System<Appearance, Animation, Controller>
 {
 public:

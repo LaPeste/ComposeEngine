@@ -16,8 +16,8 @@
 class EntityFlag : public Component<EntityFlag>
 {
 public:
-//    EntityFlag(const World& world, const unsigned long int entityIndex);
-    EntityFlag(GameObjectFlag flags);
+    EntityFlag(World& world, const unsigned long int entityIndex, GameObjectFlag flags);
+	~EntityFlag();
     
     const GameObjectFlag& GetEntityFlag() const;
     void SetNewEntityFlag(const GameObjectFlag& flag);

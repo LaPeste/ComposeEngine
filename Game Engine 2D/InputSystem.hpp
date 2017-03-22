@@ -13,9 +13,7 @@
 #include "System.hpp"
 #include "Event.hpp"
 
-#define INPUT_MASK Components::POSITION, Components::VELOCITY, Components::ACCELERATION, Components::CONTROLLER //not used anymore
-
-class InputSystem : public System<Controller, Velocity, Acceleration, Appearance>, public Event
+class InputSystem : public System<Controller, Velocity>, public Event
 {
 public:
     InputSystem(World& world);

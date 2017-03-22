@@ -18,9 +18,7 @@ class ComponentBase
 public:
     ComponentBase();
 	~ComponentBase();
-    
-//    virtual ComponentBase* GetComponent() = 0; //pure virtual class
-    
+        
 protected:
     static unsigned long int ComponentCounter; //used for assigning a unique id to a component
     

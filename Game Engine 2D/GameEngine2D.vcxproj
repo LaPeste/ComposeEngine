@@ -108,10 +108,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\SFML-2.4.1_x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SFML-2.4.1_x64\include; C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\SFML-2.4.1_x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\SFML-2.4.1_x64\lib; C:\Program Files (x86)\Visual Leak Detector\lib\Win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s.lib; sfml-audio-s.lib; sfml-window-s.lib; sfml-system-s.lib; opengl32.lib; freetype.lib; jpeg.lib; winmm.lib; gdi32.lib; openal32.lib; flac.lib; vorbisenc.lib; vorbisfile.lib; vorbis.lib; ogg.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -129,12 +131,11 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EntityFlag.cpp" />
     <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="EntityUtils.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MapObjectComponent.cpp" />
-    <ClCompile Include="MapObjectSystem.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -172,12 +173,11 @@
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="EntityFlag.hpp" />
     <ClInclude Include="EntityManager.hpp" />
+    <ClInclude Include="EntityUtils.hpp" />
     <ClInclude Include="Event.hpp" />
     <ClInclude Include="FPS.hpp" />
     <ClInclude Include="GameObjectType.hpp" />
     <ClInclude Include="InputSystem.hpp" />
-    <ClInclude Include="MapObjectComponent.hpp" />
-    <ClInclude Include="MapObjectSystem.hpp" />
     <ClInclude Include="Movement.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Renderer.hpp" />

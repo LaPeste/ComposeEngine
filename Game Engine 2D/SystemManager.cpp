@@ -13,20 +13,10 @@
 #include "Animator.hpp"
 
 void SystemManager::Init(World& world)
-{
-//    Movement* m = new Movement;
-//    systems.push_back(m);
-//    Renderer* r = new Renderer;
-//    systems.push_back(r);
-//    Input* i = new Input;
-//    systems.push_back(i);
-//    Animator* a = new Animator();
-//    systems.push_back(a);
-}
+{}
 
 void SystemManager::StartAll(World& world)
 {
-//    for(std::vector<System*>::iterator system = systems.begin(); system != systems.end(); ++system)
     for (auto const & system : world.Systems)
     {
         system.second->OnStart();
@@ -72,17 +62,6 @@ void SystemManager::ExitAll(World& world)
         system.second->OnExit();
     }
 }
-
-//void SystemManager::DeleteSystems()
-//{
-//    for(std::vector<System>::iterator system = systems.begin(); system != systems.end(); ++ system)
-//}
-
-/*
- void AddSystem(const System* const system);
- const System* const GetSystemAtIndex(const int position) const;
- const std::vector<System>* const GetAllSystems() const;
-*/
 
 
 

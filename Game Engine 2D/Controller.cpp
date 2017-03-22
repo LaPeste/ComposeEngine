@@ -8,9 +8,10 @@
 
 #include "Controller.hpp"
 
-Controller::Controller() : MoveRight(false), MoveLeft(false), Crouch(false),
-Component()
+Controller::Controller(World& world, const unsigned long int entityIndex) : MoveRight(false), MoveLeft(false), Crouch(false),
+Component(world, entityIndex)
 {
     
 }
 
+Controller::~Controller() {}

@@ -15,7 +15,7 @@
 class Controller : public Component<Controller>
 {
 public:
-    Controller();
+    Controller(World& world, const unsigned long int entityIndex);
 	~Controller();
     
     bool MoveRight;

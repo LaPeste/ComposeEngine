@@ -29,6 +29,7 @@
 #include "Utils.hpp"
 #include "Constants.hpp"
 #include "UtilConstants.hpp"
+#include "EntityUtils.hpp"
 
 #if __APPLE__ && __MACH__
 // Here is a small helper for you ! Have a look.
@@ -38,5 +39,5 @@
 #ifdef __GNUC__ || __GNUG__
 #define _FUNCION_NAME_ __PRETTY_FUNCTION__;
 #else // _MSC_VER
-#define _FUNCION_NAME_ __FUNCSIG__;
+#define _FUNCION_NAME_ __FUNCTION__;
 #endif

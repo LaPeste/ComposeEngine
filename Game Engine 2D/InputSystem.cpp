@@ -10,7 +10,7 @@
 #include "Engine.hpp"
 #include "InputSystem.hpp"
 
-InputSystem::InputSystem(World& world) : System<Controller, Velocity, Acceleration, Appearance>(world)
+InputSystem::InputSystem(World& world) : System<Controller, Velocity>(world)
 {
     
 }

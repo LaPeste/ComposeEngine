@@ -8,7 +8,7 @@
 
 #include "System.hpp"
 #include "Component.hpp"
-#include "MapObjectComponent.hpp"
+#include "EntityManager.hpp"
 
 template<typename First, typename ...Rest>
 unsigned long int System<First, Rest...>::Id(0);
@@ -23,14 +23,6 @@ System<First,Rest...>::System(World& world) : componentsBitMask(0), System::worl
     
     CalculateComponentsBitMask<First, Rest...>();
 }
-
-//template<typename First, typename ...Rest>
-//System* const System::Create()
-//{
-//    System* system = new System();
-//    CalculateComponentsBitMask<First,Rest...>();
-//    return system;
-//}
 
 template<typename First, typename ...Rest>
 template<typename FirstInternal, typename SecondInternal, typename ...RestInternal>
@@ -61,7 +53,7 @@ void System<First, Rest...>::OnStart()
 {
 	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
-		if ((world.EntitiesComponentsMasks[i] & this->GetComponentBitMask()) == this->GetComponentBitMask())
+		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			Start(world, i);
 		}
@@ -71,12 +63,18 @@ void System<First, Rest...>::OnStart()
 template<typename First, typename ...Rest>
 void System<First, Rest...>::OnInput(const sf::Event& event)
 {
-	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
+	/*for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
-		if ((world.EntitiesComponentsMasks[i] & this->GetComponentBitMask()) == this->GetComponentBitMask())
+		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			Input(world, i, event);
 		}
+	}*/
+
+	//only the player is subjected to input
+	if (Entity::HasComponent(world, EntityManager::GetPlayerId(), this->GetComponentBitMask()))
+	{
+		Input(world, EntityManager::GetPlayerId(), event);
 	}
 }
 
@@ -85,7 +83,7 @@ void System<First, Rest...>::OnUpdate()
 {
 	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
-		if ((world.EntitiesComponentsMasks[i] & this->GetComponentBitMask()) == this->GetComponentBitMask())
+		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			Update(world, i);
 		}
@@ -97,7 +95,7 @@ void System<First, Rest...>::OnRender()
 {
 	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
-		if ((world.EntitiesComponentsMasks[i] & this->GetComponentBitMask()) == this->GetComponentBitMask())
+		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			Render(world, i);
 		}
@@ -109,7 +107,7 @@ void System<First, Rest...>::OnLateUpdate()
 {
 	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
-		if ((world.EntitiesComponentsMasks[i] & this->GetComponentBitMask()) == this->GetComponentBitMask())
+		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			LateUpdate(world, i);
 		}
@@ -121,7 +119,7 @@ void System<First, Rest...>::OnExit()
 {
 	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
-		if ((world.EntitiesComponentsMasks[i] & this->GetComponentBitMask()) == this->GetComponentBitMask())
+		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			Exit(world, i);
 		}
@@ -162,13 +160,4 @@ template<typename First, typename ...Rest>
 void System<First, Rest...>::Exit(World& world, const unsigned long int entityIndex)
 {
 
-}
-
-template<typename First, typename ...Rest>
-void System<First, Rest...>::SetIfUpdateMapObject(World& world, const unsigned long int entityIndex)
-{
-	if (world.EntitiesComponentsMatrix[entityIndex][MapObjectComponent::Id] != nullptr) //if it's a MapObject
-	{
-		world.EntitiesComponentsMatrix[entityIndex][MapObjectComponent::Id].SetToUpdate(true);
-	}
 }

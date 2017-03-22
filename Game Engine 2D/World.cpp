@@ -7,24 +7,10 @@
 //
 
 #include "World.hpp"
-//#include "Acceleration.hpp"
-//#include "Appearance.hpp"
-//#include "Controller.hpp"
-//#include "Position.hpp"
-//#include "Velocity.hpp"
 
-
-World::World() /*:
-    EntitiesComponentsMasks(),
-    Acceleration(),
-    Appearance(),
-    Controller(),
-    Position(),
-    Velocity(),
-    EntityFlag() */
+World::World()
 {
-//    EntitiesComponentsMasks;
-//    EntitiesComponentsMatrix;
+
 }
 
 World::~World()
@@ -33,12 +19,18 @@ World::~World()
     {
         delete system.second;
     }
-    
-    for(std::map<unsigned long int, ComponentBase*>& entity : EntitiesComponentsMatrix)
-    {
-        for(const auto& component : entity)
-        {
-            delete component.second;
-        }
-    }
+
+
+	//TODO I don't know why this corrupts the heap https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/9797950/
+   // for(std::map<unsigned long int, ComponentBase*>& componentMap : EntitiesComponentsMatrix)
+   // {
+   //     for (auto it = componentMap.begin(); it != componentMap.end(); ++it)
+   //     {
+			//if (it->second != nullptr)
+			//{
+			//	delete it->second;
+			//	it = componentMap.erase(it); //returning the iterator from the erase allows not to have it invalidate but pointing to the next elem
+			//}
+   //     }
+   // }
 }

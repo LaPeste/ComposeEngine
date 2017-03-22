@@ -20,13 +20,11 @@ public:
 		return instance;
 	}
 
-	//delete methods that you don't want. The following methods could create duplicates of the singleton instance!!
+	//Delete operators. The following methods could create duplicates of the singleton instance!!
 	Engine(Engine const&) = delete; //copy constructor
 	void operator=(Engine const&) = delete; //copy assignment operator
 
 	void Launch(sf::RenderWindow* createdWindow); //Starts the engine
-//	void OnKeyDown(const sf::Event::KeyEvent& input) override;
-//	void OnKeyUp(const sf::Event::KeyEvent& input) override;
 
 	//Utils
 	sf::RenderWindow* GetWindow() const;
@@ -45,10 +43,8 @@ private:
 	//variables
 	sf::RenderWindow* mainWindow; //SFML Render Window
 	GameState gameState;
-//	GameObjectManager gameObjectManager;
     
     tmx::MapLoader ml;
-	//tmx::Logger logger;
 
 	//methods
 	bool Init(); //Initializes the engine

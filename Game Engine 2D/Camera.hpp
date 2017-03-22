@@ -26,7 +26,7 @@ public:
     ~Camera();
     static Camera* GetInstance();
     
-    //delete methods that you don't want. The following methods could create duplicates of the singleton instance!!
+    //Delete operators. The following methods could create duplicates of the singleton instance!!
     Camera(Camera const&) = delete; //copy constructor
     void operator=(Camera const&) = delete; //copy assignment operator
     

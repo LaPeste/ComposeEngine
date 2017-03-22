@@ -2,7 +2,9 @@
 #define _ENTITY_UTILS_HPP_
 
 #include "stdafx.h"
-#include "World.hpp"
+//#include "World.hpp" THIS DESTROYES THE PROJECT... I HAVE NO IDEA WHAT'S WRONG WITH IT!!!
+
+class World;
 
 namespace Entity
 {

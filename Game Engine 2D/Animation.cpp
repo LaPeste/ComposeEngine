@@ -9,14 +9,8 @@
 #include "Animation.hpp"
 
 
-AnimationData::AnimationData(const sf::Vector2f& startingPos,
-                             const sf::Vector2f& spaceBetweenSprite, bool verticalMovement, bool reverseAnimation,
-                             float spriteWidth, float spriteHeight, int maxFrame, int frameRate) :
-StartingPos(startingPos), SpaceBetweenSprite(spaceBetweenSprite), VerticalMovement(verticalMovement), FlipSprite(false), ReverseAnimation(reverseAnimation), CurrentFrame(0),
-SpriteWidth(spriteWidth), SpriteHeight(spriteHeight), MaxFrame(maxFrame), Ahead(false), FrameRate(frameRate) {}
-
-Animation::Animation(const AnimationState& animationInitialState, std::map<AnimationState, AnimationData*>& animationMap, bool toAnimate) :
-    AnimationMap(animationMap), CurrentAnimationState(animationInitialState), ToAnimate(toAnimate), Clock(), Component()
+Animation::Animation(World& world, const unsigned long int entityIndex, const AnimationState& intialAnimationState, std::map<AnimationState, AnimationData*>& animationMap, bool toAnimate) :
+    AnimationMap(animationMap), CurrentAnimationState(intialAnimationState), ToAnimate(toAnimate), Clock(), Component(world, entityIndex)
 {
 
 }
@@ -28,3 +22,9 @@ Animation::~Animation()
         delete animationEntry.second;
     }
 }
+
+AnimationData::AnimationData(const sf::Vector2f& startingPos,
+                             const sf::Vector2f& spaceBetweenSprite, bool verticalMovement, bool reverseAnimation,
+                             float spriteWidth, float spriteHeight, int maxFrame, int frameRate) :
+StartingPos(startingPos), SpaceBetweenSprite(spaceBetweenSprite), VerticalMovement(verticalMovement), FlipSprite(false), ReverseAnimation(reverseAnimation), CurrentFrame(0),
+SpriteWidth(spriteWidth), SpriteHeight(spriteHeight), MaxFrame(maxFrame), Ahead(false), FrameRate(frameRate) {}

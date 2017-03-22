@@ -21,7 +21,7 @@ void Event::OnEvent(const sf::Event& e, World& world, const unsigned long entity
 		case sf::Event::KeyReleased:
 			OnKeyUp(e.key, world, entityIndex);
 			break;
-		case sf::Event::JoystickButtonPressed: //this is wrong, it should be arranged like above
+		case sf::Event::JoystickButtonPressed:
 			switch (e.JoystickButtonPressed)
 			{
 				case sf::Joystick::Axis::X :

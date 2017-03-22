@@ -3,12 +3,6 @@
 //************************
 // Technical settings
 //************************
-//#ifdef __GNUC__ || __GNUG__
-//const std::string Constants::SIGNATURE_METHOD_LOGS = "__PRETTY_FUNCTION__";
-//#else // _MSC_VER
-//const std::string Constants::SIGNATURE_METHOD_LOGS = "__FUNCSIG__";
-//#endif
-
 #ifdef _WIN32
 const std::string Constants::RESOURCE_PATH = "resources/";
 #elif __APPLE__ && __MACH__
@@ -31,7 +25,7 @@ const float Constants::CAMERA_ZOOM_HEIGHT = 400;
 const std::string Constants::PLAYER_NAME = "Mario";
 
 //Sprite variables --> animation assumes that the sprite-set is horizontally developed
-const std::string Constants::PLAYER_SPRITE_PATH = "characters/SNES - Super Mario World - Mario.png";
+const std::string Constants::PLAYER_SPRITE_PATH = "characters/Mario.png";
 
 const int Constants::PLAYER_SPRITE_STARTING_X = 48;
 const int Constants::PLAYER_SPRITE_STARTING_Y = 10;
@@ -64,12 +58,7 @@ const float Constants::IN_GAME_GRAVITY = 0.75f;
 //************************
 // Maps
 //************************
-//const std::string Constants::TEST_MAP;
-//#ifdef _WIN32
 const std::string  Constants::MAP_DIRECTORY = "maps/";
-//#elif __APPLE__ && __MACH__
-//const std::string  Constants::MAP_DIRECTORY = resourcePath();
-//#endif
 const std::string  Constants::TEST_MAP = "Test_Level.tmx";
 
 //************************

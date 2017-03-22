@@ -13,13 +13,12 @@
 #include "System.hpp"
 #include "Controller.hpp"
 #include "Velocity.hpp"
+#include "Collider.hpp"
 #include "Acceleration.hpp"
 #include "EntityFlag.hpp"
 #include "Transform.hpp"
 
-#define MOVEMENT_MASK Components::CONTROLLER | Components::VELOCITY | Components::ACCELERATION | Components::FLAG | Components::APPEARANCE
-
-class Movement : public System<Controller, Velocity, Acceleration, EntityFlag, Transform>
+class Movement : public System<Controller, Velocity, Acceleration, EntityFlag, Transform, Collider>
 {
 public:
     Movement(World& world);

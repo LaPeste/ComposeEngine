@@ -16,8 +16,21 @@ class CollisionDetectionUtils
 {
 public:
     static bool Collides(World& world, const unsigned long entityIndex);
+
+
 private:
-//    static const std::vector<const sf::Vector2f&>* const CalculateCollisionPoint(const World& world, const unsigned long entityIndex);
+	/* BoundingBoxTest adapted from work of
+	* Authors : Nick Koirala(original version), ahnonay(SFML2 compatibility)
+	*
+	* Collision Detection and handling class
+	* For SFML2.
+	*/
+
+	//////
+	/// Test for bounding box collision using the Seperating Axis Theorem
+	/// Supports scaling and rotation
+	//////
+	static bool BoundingBoxTest(World& world, unsigned long int entity1, unsigned long int entity2);
 };
 
 #endif /* _COLLISION_DETECTION_UTILS_HPP_ */

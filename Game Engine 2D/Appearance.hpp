@@ -12,13 +12,10 @@
 #include "stdafx.h"
 #include "Component.hpp"
 
-//Since it holds the sprite it holds the position, so it can be seen as holding the transformer as well
-
 class Appearance : public Component<Appearance>
 {
 public:
-//    Appearance(const World& world, const unsigned long int entityIndex, sf::Sprite* const sprite); //dummy appearance, needed to make initialization of world faster
-    Appearance(std::string spritePath);
+    Appearance(World& world, const unsigned long int entityIndex, std::string spritePath);
     ~Appearance();
     
     //TODO maybe make them private and make them setable only from constructor?
@@ -26,7 +23,7 @@ public:
     
     sf::Sprite* const GetSprite() const; //returns null if not loaded
     void SetSprite(sf::Sprite* const sprite);
-    bool IsSpriteLoaded() const;
+    bool IsTextureLoaded() const;
     
 private:
     sf::Sprite* sprite;

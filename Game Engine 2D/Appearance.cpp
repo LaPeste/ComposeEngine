@@ -11,15 +11,15 @@
 #include "tmx/MapLoader.hpp"
 #include "Engine.hpp"
 
-Appearance::Appearance(std::string spritePath) : Component()
+Appearance::Appearance(World& world, const unsigned long int entityIndex, std::string spritePath) : Component(world, entityIndex)
 {
 	std::string methodName = _FUNCION_NAME_;
     Appearance::SpritePath = spritePath;
     texture = new sf::Texture;
-    if (!texture->loadFromFile(Appearance::SpritePath)) //TODO load only a subretangle of the whole sprite. Check method signature to see how
+    if (!texture->loadFromFile(Appearance::SpritePath))
     {
         Utils::PrintDebugError(methodName, "impossible to load texture from " + spritePath + "!");
-        assert(IsSpriteLoaded()); //you do this because you can't return a value from a constructor!!
+        assert(IsTextureLoaded()); //you do this because you can't return a value from a constructor!!
     }
     else
     {
@@ -28,18 +28,28 @@ Appearance::Appearance(std::string spritePath) : Component()
         
         if(sprite->getTexture() != nullptr)
         {
-//            isLoaded = true;
 #ifdef DEBUG
             Utils::PrintDebugLog(methodName, "texture " + SpritePath + " correctly loaded!");
 #endif
         }
         else
         {
-//            isLoaded = false;
             Utils::PrintDebugError(methodName, "texture " + SpritePath + " not correctly loaded!");
             
         }
     }
+
+	//set position written in a Transform Component if it exists
+	if (Entity::HasComponent(world, entityIndex, Transform::Id))
+	{
+		std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
+		Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
+
+		if (transform != nullptr)
+		{
+			sprite->setPosition(transform->GetPosition());
+		}
+	}
 }
 
 Appearance::~Appearance()
@@ -55,7 +65,7 @@ Appearance::~Appearance()
 
 sf::Sprite* const Appearance::GetSprite() const
 {
-    if(IsSpriteLoaded())
+    if(sprite != nullptr)
     {
         return sprite;
     }
@@ -69,7 +79,7 @@ void Appearance::SetSprite(sf::Sprite* const sprite)
     Appearance::sprite = sprite;
 }
 
-bool Appearance::IsSpriteLoaded() const
+bool Appearance::IsTextureLoaded() const
 {
-    return sprite->getTexture() != nullptr;
+	return sprite->getTexture() != nullptr;
 }

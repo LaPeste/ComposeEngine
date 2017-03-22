@@ -7,36 +7,57 @@
 //
 
 #include "Collider.hpp"
+#include "Transform.hpp"
 
-Collider::Collider(const sf::Vector2f& offset) : offset(offset), 
-Component()
+Collider::Collider(World& world, const unsigned long int entityIndex, const sf::Vector2f& offset, const sf::FloatRect& colliderRect) :
+	offset(offset), colliderRect(colliderRect),
+	Component(world, entityIndex)
 {
     
 }
 
-std::vector<sf::Vector2f> Collider::GetCollisionPoints(const Appearance& appearance) const
+Collider::~Collider() {}
+
+
+const sf::FloatRect& Collider::GetColliderRect() const
 {
-    std::vector<sf::Vector2f> collisionPoints;
-    collisionPoints.push_back(sf::Vector2f{ 0 - offset.x, 0 - offset.y });
-    collisionPoints.push_back(sf::Vector2f{ appearance.GetSprite()->getLocalBounds().width + offset.x, 0 - offset.y });
-    collisionPoints.push_back(sf::Vector2f{ 0 - offset.x, appearance.GetSprite()->getLocalBounds().height + offset.y });
-    collisionPoints.push_back(sf::Vector2f{ appearance.GetSprite()->getLocalBounds().width + offset.x, appearance.GetSprite()->getLocalBounds().height + offset.y });
-    
-    return collisionPoints;
+	if (Entity::HasComponent(world, entityIndex, Appearance::Id))
+	{
+		Appearance* appearance = static_cast<Appearance*>(world.EntitiesComponentsMatrix[entityIndex][Appearance::Id]);
+		if (appearance->IsTextureLoaded())
+		{
+			return appearance->GetSprite()->getGlobalBounds();
+		}
+		else
+		{
+			std::string methodName = _FUNCION_NAME_;
+			std::ostringstream oss;
+			oss << "Texture isn't loaded so there's no Collider Rectangle to obtain for unit " << entityIndex;
+			Utils::PrintDebugError(methodName, oss.str());
+		}
+	}
+	return colliderRect;
 }
 
 std::vector<sf::Vector2f> Collider::GetCollisionPoints() const
 {
     std::vector<sf::Vector2f> collisionPoints;
-    collisionPoints.push_back(sf::Vector2f{ -offset.x, -offset.y });
-    collisionPoints.push_back(sf::Vector2f{ offset.x, -offset.y });
-    collisionPoints.push_back(sf::Vector2f{ -offset.x, offset.y });
-    collisionPoints.push_back(sf::Vector2f{ offset.x, offset.y });
+	if (Entity::HasComponent(world, entityIndex, Transform::Id))
+	{
+		const sf::Transform& trans = (static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]))->GetTransform();
+		sf::FloatRect local = GetColliderRect();
+		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(0.f - offset.x, 0.f - offset.y) });
+		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(local.width + offset.x, 0 - offset.y) });
+		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(local.width + offset.x, local.height + offset.y) });
+		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(0 - offset.x, local.height + offset.y) });
+	}
+	else    //I don't see how there could not be a transform... but just in case
+	{
+		collisionPoints.push_back(sf::Vector2f{ -offset.x, -offset.y });
+		collisionPoints.push_back(sf::Vector2f{ offset.x, -offset.y });
+		collisionPoints.push_back(sf::Vector2f{ -offset.x, offset.y });
+		collisionPoints.push_back(sf::Vector2f{ offset.x, offset.y });
+	}
     
     return collisionPoints;
 }
-
-//bool Collider::CopyDataToMapObject(World& world, const unsigned long int entityIndex)
-//{
-//
-//}

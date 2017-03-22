@@ -164,20 +164,17 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Source Files\Entities\Components</Filter>
     </ClCompile>
-    <ClCompile Include="MapObjectSystem.cpp">
-      <Filter>Source Files\Entities\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="EntityFlag.cpp">
       <Filter>Source Files\Entities\Components</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
       <Filter>Source Files\Entities\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="MapObjectComponent.cpp">
-      <Filter>Source Files\Entities\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,12 +298,6 @@
     <ClInclude Include="CollisionDetectionUtils.hpp">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="MapObjectSystem.hpp">
-      <Filter>Header Files\Entities\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="MapObjectComponent.hpp">
-      <Filter>Header Files\Entities\Components</Filter>
-    </ClInclude>
     <ClInclude Include="EntityFlag.hpp">
       <Filter>Header Files\Entities\Components</Filter>
     </ClInclude>
@@ -315,6 +306,9 @@
     </ClInclude>
     <ClInclude Include="Transform.hpp">
       <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityUtils.hpp">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

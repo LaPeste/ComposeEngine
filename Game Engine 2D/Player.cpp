@@ -25,27 +25,14 @@ Player::Player()
     const unsigned long entityIndex = EntityManager::CreateEntity(world, GameObjectFlag::GRAVITY);
     EntityManager::SetPlayerId(entityIndex); //TODO: this should be automated in the EntityManager...
 
-	EntityManager::AddComponent(world, entityIndex, new Appearance(Constants::RESOURCE_PATH + Constants::PLAYER_SPRITE_PATH));
-	EntityManager::AddComponent(world, entityIndex, new Transform());
-    (static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]))->SetPosition(world, entityIndex, sf::Vector2f(Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y));
+	EntityManager::AddComponent(world, entityIndex, new Appearance(world, entityIndex, Constants::RESOURCE_PATH + Constants::PLAYER_SPRITE_PATH));
+	EntityManager::AddComponent(world, entityIndex, new Transform(world, entityIndex));
+    (static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]))->SetPosition(sf::Vector2f(Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y));
     
-    EntityManager::AddComponent(world, entityIndex, new Acceleration(Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y));
-    EntityManager::AddComponent(world, entityIndex, new Controller());
-    EntityManager::AddComponent(world, entityIndex, new Velocity());
-    EntityManager::AddComponent(world, entityIndex, new Collider(sf::Vector2f(0,0)));
-//    world.EntitiesComponentsMasks[entityIndex] = ;
-//    world.ComponentMap[entityIndex] = ;
-    
-    //world.EntitiesComponentsMasks[entityIndex] | Components::APPEARANCE | Components::ACCELERATION | Components::CONTROLLER | Components::FLAG |
-    //Components::POSITION | Components::VELOCITY | Components::ANIMATION | Components::COLLIDER;
-    
-//    world.Appearance[entityIndex] = new Appearance(Constants::PLAYER_SPRITE_PATH);
-//    TransformUtils::SetPosition(world, entityIndex, sf::Vector2f(Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y));
-//    world.Acceleration[entityIndex] = new Acceleration(Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y);
-//    world.Controller[entityIndex] = new Controller;
-//    world.EntityFlag[entityIndex] = new EntityFlag(GameObjectFlag::GRAVITY);
-//    world.Velocity[entityIndex] = new Velocity;
-//    world.Collider[entityIndex] = new Collider(sf::Vector2f(0,0));
+    EntityManager::AddComponent(world, entityIndex, new Acceleration(world, entityIndex, Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y));
+    EntityManager::AddComponent(world, entityIndex, new Controller(world, entityIndex));
+    EntityManager::AddComponent(world, entityIndex, new Velocity(world, entityIndex));
+    EntityManager::AddComponent(world, entityIndex, new Collider(world, entityIndex));
     
     std::map<AnimationState, AnimationData*> animationMap;
     AnimationData* animData = new AnimationData(sf::Vector2f(Constants::PLAYER_SPRITE_STARTING_X, Constants::PLAYER_SPRITE_STARTING_Y),
@@ -54,7 +41,6 @@ Player::Player()
     
     animationMap.insert( std::pair<AnimationState, AnimationData*>(AnimationState::IDLE, animData) );
     
-    EntityManager::AddComponent(world, entityIndex, new Animation(AnimationState::IDLE , animationMap, true));
+    EntityManager::AddComponent(world, entityIndex, new Animation(world, entityIndex, AnimationState::IDLE , animationMap, true));
     
-//    world.Collision[entityIndex] = new Collision;
 }

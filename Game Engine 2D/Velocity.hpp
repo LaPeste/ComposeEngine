@@ -15,7 +15,7 @@
 class Velocity : public Component<Velocity>
 {
 public:
-    Velocity();
+    Velocity(World& world, const unsigned long int entityIndex);
     ~Velocity();
     
 //    float GetSpeedX() const;

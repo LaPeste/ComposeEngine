@@ -56,7 +56,6 @@ void Camera::Update()
 {
     if(mode == CameraMode::FOLLOW_PLAYER && EntityManager::GetPlayerId() != 99999) //99999 is the defaulted value that I am using
     {
-//        Vector2f playerPos = GameObjectManager::GetPlayer()->GetPosition();
         World& world = Engine::GetInstance().World;
 		Transform* transform = static_cast<Transform*>(world.EntitiesComponentsMatrix[EntityManager::GetPlayerId()][Transform::Id]);
 		if (transform == nullptr)
@@ -67,18 +66,18 @@ void Camera::Update()
 		}
 
 
-		sf::Vector2f playerPos = transform->GetPosition(world, EntityManager::GetPlayerId());
+		sf::Vector2f playerPos = transform->GetPosition();
         float newPosX = playerPos.x - GetWidth()/2 + Constants::PLAYER_WIDTH/2;
         float newPosY = playerPos.y - GetHeight()/2 + Constants::PLAYER_HEIGHT/2;
 
         //if the camera doesn't reach the left or right limit of the map
-        if( ( playerPos.x + Constants::PLAYER_WIDTH/2 > GetWidth()/2 /*- Constants::PLAYER_WIDTH/2*/ ) &&
+        if( ( playerPos.x + Constants::PLAYER_WIDTH/2 > GetWidth()/2 ) &&
            ( playerPos.x + Constants::PLAYER_WIDTH/2 + GetWidth()/2 < Engine::GetInstance().GetMapLoader().getMapSize().x ) )
         {
             cameraTargetPos.x = newPosX;
         }
         
-        if( ( playerPos.y + Constants::PLAYER_HEIGHT/2 > GetHeight()/2 /*- Constants::PLAYER_HEIGHT/2*/ ) &&
+        if( ( playerPos.y + Constants::PLAYER_HEIGHT/2 > GetHeight()/2 ) &&
            ( playerPos.y + Constants::PLAYER_WIDTH/2 + GetHeight()/2 < Engine::GetInstance().GetMapLoader().getMapSize().y ) )
         {
             cameraTargetPos.y = newPosY;
@@ -86,7 +85,7 @@ void Camera::Update()
     }
     else
     {
-        //...TODO when we introduce a proper free camera mode
+        //...TODO when we introduce a proper free camera mode https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/9988728/
     }
 }
 

@@ -67,7 +67,7 @@ void Animator::Animate(World& world, const unsigned long entityIndex)
                             currentAnimData->Ahead = false;
                         }
                     }
-                    else //if(!animation.Ahead)
+                    else
                     {
                         currentAnimData->CurrentFrame--;
                         if(currentAnimData->CurrentFrame < 0)

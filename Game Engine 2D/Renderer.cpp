@@ -28,7 +28,7 @@ void Renderer::Draw(World& world, const unsigned long entityIndex, sf::RenderWin
     std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
     Appearance* appearance = static_cast<Appearance*>(entity[Component<Appearance>::Id]);
     
-    if (appearance->IsSpriteLoaded())
+    if (appearance->IsTextureLoaded())
     {
         window.draw(*appearance->GetSprite());
     }

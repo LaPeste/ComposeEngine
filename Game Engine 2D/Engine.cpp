@@ -55,22 +55,14 @@ bool Engine::Init()
 {
 	mainWindow->create(sf::VideoMode(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT, Constants::SCREEN_DEPTH), Constants::GAME_NAME);
 	gameState = Playing;
-//    world; // trying to initialize the object world, not sure though
     
 	if (!mainWindow->isOpen())
 		return false;
     
-    //logger.setLogLevel(tmx::Logger::Warning | tmx::Logger::Error);
     ml.load(Constants::TEST_MAP);
-    
-    //init gameobject manager and its objects
-//    GameObjectManager::Init();
-//    Player* player = new Player();
-//    GameObjectManager::Add(player);
     
     SystemManager::Init(World);
     
-    //introduce factories for characters and systems
     Player();
     
     EntityManager::Init(World);
@@ -112,11 +104,8 @@ void Engine::ProcessInput()
 
 void Engine::Update()
 {
-//    sf::FloatRect rootNode(Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Camera::GetInstance()->GetWidth(), Camera::GetInstance()->GetHeight());
-//    ml.UpdateQuadTree(rootNode); //update quadtree's rootnode to what's visible in the screen
     FPS::Update();
     Camera::GetInstance()->Update();
-//    GameObjectManager::UpdateAll();
     SystemManager::UpdateAll(World);
 	SystemManager::LateUpdateAll(World);
 }
@@ -126,7 +115,6 @@ void Engine::RenderFrame()
 	mainWindow->clear();
     mainWindow->draw(ml); //draw map loaded in mapLoader
     Camera::GetInstance()->Draw(); //draw only the camera view
-//    GameObjectManager::DrawAll(*mainWindow);
     SystemManager::RenderAll(World); //draw all entities
 	mainWindow->display();
 }

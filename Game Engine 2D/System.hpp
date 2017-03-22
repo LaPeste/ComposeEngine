@@ -28,9 +28,7 @@ class System : public SystemBase
 public:
     
     System(World& world);
-    
-//    static System* const Create();
-    
+        
     const unsigned long int GetComponentBitMask() const;
 
 	static unsigned long int Id;
@@ -61,10 +59,7 @@ private:
 	virtual void Update(World& world, const unsigned long int entityIndex);
 	virtual void LateUpdate(World& world, const unsigned long int entityIndex);
 	virtual void Render(World& world, const unsigned long int entityIndex);
-	virtual void Exit(World& world, const unsigned long int entityIndex);
-
-	void SetIfUpdateMapObject(World& world, const unsigned long int entityIndex);
-    
+	virtual void Exit(World& world, const unsigned long int entityIndex);    
 };
 
 #include "System.tpp"

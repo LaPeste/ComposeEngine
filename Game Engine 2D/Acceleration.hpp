@@ -15,7 +15,7 @@
 class Acceleration : public Component<Acceleration>
 {
 public:
-    Acceleration(const float accelerationPerFrameX, const float accelerationPerFrameY);
+    Acceleration(World& world, const unsigned long int entityIndex, const float accelerationPerFrameX, const float accelerationPerFrameY);
 	~Acceleration();
     
 //    float GetAccelerationX() const;
@@ -30,7 +30,6 @@ public:
     
 //private:
     float AccelerationX, AccelerationY;
-//    float maxAccelerationX, maxAccelerationY;
     float AccelerationPerFrameX, AccelerationPerFrameY; //amount at which the acceleration can increase or decrease each frame
     
 };

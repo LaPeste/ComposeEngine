@@ -8,12 +8,13 @@
 
 #include "Velocity.hpp"
 
-Velocity::Velocity() :
-    SpeedX(0), SpeedY(0), MaxSpeedX(Constants::PLAYER_MAXSPEED_X), MaxSpeedY(Constants::PLAYER_MAXSPEED_Y), Component()
+Velocity::Velocity(World& world, const unsigned long int entityIndex) :
+    SpeedX(0), SpeedY(0), MaxSpeedX(Constants::PLAYER_MAXSPEED_X), MaxSpeedY(Constants::PLAYER_MAXSPEED_Y),
+	Component(world, entityIndex)
 {
     
 }
-//Component(World& world, const unsigned long int entityIndex)
+
 Velocity::~Velocity()
 {
     

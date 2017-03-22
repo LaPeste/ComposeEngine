@@ -12,8 +12,6 @@
 #include "stdafx.h"
 #include "System.hpp"
 
-#define RENDERER_MASK Components::APPEARANCE
-
 class Renderer : public System<Appearance>
 {
 public:

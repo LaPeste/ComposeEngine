@@ -8,11 +8,13 @@
 
 #include "EntityFlag.hpp"
 
-EntityFlag::EntityFlag(GameObjectFlag flags) : flag(flags), 
-Component()
+EntityFlag::EntityFlag(World& world, const unsigned long int entityIndex, GameObjectFlag flags) : flag(flags),
+Component(world, entityIndex)
 {
     
 }
+
+EntityFlag::~EntityFlag() { }
 
 const GameObjectFlag& EntityFlag::GetEntityFlag() const
 {

@@ -16,7 +16,6 @@
 struct AnimationData
 {
 public:
-//    AnimationData(const World& world, const unsigned long int entityIndex);
     AnimationData(const sf::Vector2f& startingPos, const sf::Vector2f& spaceBetweenSprite, bool verticalMovement, bool reverseAnimation, float spriteWidth, float spriteHeight, int maxFrame, int frameRate);
 
     sf::Vector2f StartingPos;
@@ -47,7 +46,7 @@ enum class AnimationState : char
 class Animation : public Component<Animation>
 {
 public:
-    Animation(const AnimationState& intialAnimationState, std::map<AnimationState, AnimationData*>& animationMap, bool toAnimate);
+    Animation(World& world, const unsigned long int entityIndex, const AnimationState& intialAnimationState, std::map<AnimationState, AnimationData*>& animationMap, bool toAnimate);
     ~Animation();
     
     sf::Clock Clock;
