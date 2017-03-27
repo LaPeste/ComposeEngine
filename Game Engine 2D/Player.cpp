@@ -8,7 +8,6 @@
 
 #include "Player.hpp"
 #include "EntityManager.hpp"
-#include "Engine.hpp"
 #include "Appearance.hpp"
 #include "Acceleration.hpp"
 #include "Animation.hpp"
@@ -16,15 +15,12 @@
 #include "EntityFlag.hpp"
 #include "Velocity.hpp"
 #include "Collider.hpp"
-#include "Collider.hpp"
 #include "Transform.hpp"
 
-Player::Player()
+void Player::Init()
 {
-    World& world = Engine::GetInstance().World;
-    const unsigned long entityIndex = EntityManager::CreateEntity(world, GameObjectFlag::GRAVITY);
-    EntityManager::SetPlayerId(entityIndex); //TODO: this should be automated in the EntityManager...
-
+	World& world = GetWorld();
+	const unsigned long int entityIndex = GetEntityIndex();
 	EntityManager::AddComponent(world, entityIndex, new Appearance(world, entityIndex, Constants::RESOURCE_PATH + Constants::PLAYER_SPRITE_PATH));
 	EntityManager::AddComponent(world, entityIndex, new Transform(world, entityIndex));
     (static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]))->SetPosition(sf::Vector2f(Constants::PLAYER_PHYSICAL_STARTING_X, Constants::PLAYER_PHYSICAL_STARTING_Y));
@@ -42,5 +38,4 @@ Player::Player()
     animationMap.insert( std::pair<AnimationState, AnimationData*>(AnimationState::IDLE, animData) );
     
     EntityManager::AddComponent(world, entityIndex, new Animation(world, entityIndex, AnimationState::IDLE , animationMap, true));
-    
 }

@@ -40,6 +40,9 @@ public:
 	void OnRender() override;
 	void OnExit() override;
 
+	//TODO get the right name of systems https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/10066918/
+	//virtual const std::string& GetSystemName() const; //implement if you want a more accurate debug logging
+
 protected:
 	World& world;
 
@@ -53,7 +56,9 @@ private:
     template <typename LastInternal>
     void CalculateComponentsBitMask();
 
-
+	//The methods below are virtual and not abstract otherwise I am forced to define a body for each function in every subclass even if I don't need that specific function.
+	//The problem is that if a subclass doesn't override an abstract method of a superclass then it can't be instantiated because it remains an abstract class.
+	//Making them virtual allows a subclass not to be forced to define methods not needed and still not being abstract, hence instantiable.
 	virtual void Start(World& world, const unsigned long int entityIndex);
 	virtual void Input(World& world, const unsigned long int entityIndex, const sf::Event& event);
 	virtual void Update(World& world, const unsigned long int entityIndex);

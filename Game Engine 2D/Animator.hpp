@@ -17,7 +17,7 @@ class Animator : public System<Appearance, Animation, Controller>
 public:
     Animator(World& world);
     ~Animator();
-        
+	
 private:
     void Animate(World& world, const unsigned long entityIndex);
 

@@ -9,6 +9,8 @@
 #include "EntityManager.hpp"
 #include "tmx/MapLoader.hpp"
 #include "Engine.hpp"
+
+//TODO this has to go away as soon as an standard way of creating gameobjects is done
 #include "Collider.hpp"
 #include "Acceleration.hpp"
 #include "Controller.hpp"
@@ -16,45 +18,63 @@
 #include "Transform.hpp"
 #include "EntityFlag.hpp"
 
+#include "Luigi.hpp"
+#include "Door.hpp"
+
 unsigned long int EntityManager::playerId(99999); //defaulted to a very big number
 std::vector<CollisionEvent> EntityManager::collisionEvents;
 
 void EntityManager::Init(World& world)
 {
-	//test entity for collision test purpose
-	const unsigned long entityIndex = EntityManager::CreateEntity(world, GameObjectFlag::GRAVITY);
-	EntityManager::AddComponent(world, entityIndex, new Appearance(world, entityIndex, Constants::RESOURCE_PATH + Constants::PLAYER_SPRITE_PATH));
-	Appearance* appearance = static_cast<Appearance*>(world.EntitiesComponentsMatrix[entityIndex][Appearance::Id]);
-	sf::IntRect spriteRect(498, 12, Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT);
-	appearance->GetSprite()->setTextureRect(spriteRect);
-	EntityManager::AddComponent(world, entityIndex, new Transform(world, entityIndex));
-	Transform* trans = static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]);
-	trans->SetPosition(sf::Vector2f(Constants::PLAYER_PHYSICAL_STARTING_X + 30, Constants::PLAYER_PHYSICAL_STARTING_Y + 87 ));
-	EntityManager::AddComponent(world, entityIndex, new Collider(world, entityIndex, sf::Vector2f(0, 0), sf::FloatRect(trans->GetPosition().x, trans->GetPosition().y, 20, 20)));
-	EntityManager::AddComponent(world, entityIndex, new Acceleration(world, entityIndex, Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y));
-	EntityManager::AddComponent(world, entityIndex, new Controller(world, entityIndex));
-	EntityManager::AddComponent(world, entityIndex, new Velocity(world, entityIndex));
+	Player p;
+	p.Instantiate(&world);
+	Luigi l;
+	l.Instantiate(&world);
+
+	Door d;
+	world.ReflectionMap.insert(std::make_pair("Door", std::bind(&Door::Instantiate, &d, &world)));
 	
     //populates the list of objects with objects coming from the map (tmx file)
-//    std::vector<tmx::MapLayer>& layers = Engine::GetInstance().GetMapLoader().getLayers();
-//    for(std::vector<tmx::MapLayer>::iterator layer = layers.begin(); layer != layers.end(); ++layer)
-//    {
-//        if(layer->name == Constants::COLLISION_LAYER)
-//        {
-//            for(std::vector<tmx::MapObject>::iterator object = layer->objects.begin(); object != layer->objects.end(); ++object)
-//            {
+	Engine& engine = Engine::GetInstance();
+    std::vector<tmx::MapLayer>& layers = engine.GetMapLoader().getLayers();
+	//for (std::vector<tmx::MapLayer>::iterator layer = layers.begin(); layer != layers.end(); ++layer)
+	for(int layerIndex = 0; layerIndex < layers.size(); ++layerIndex)
+    {
+		tmx::MapLayer& layer = layers[layerIndex];
+        if(layer.name == Constants::COLLISION_LAYER)
+        {
+			std::vector<tmx::MapObject>::iterator objectIter = layer.objects.begin();
+            while(objectIter != layer.objects.end())
+            {
 //                //TODO most likely here I need to do more checks, because I may not want to add all the objects in this layer
 //                const unsigned long indexNewEntity = CreateEntity(world, GameObjectFlag::MAP_OBJECT);
 //                AddComponent(world, indexNewEntity, new Collider(sf::Vector2f(0,0)));
 //				AddComponent(world, indexNewEntity, new Transform());
-//				(static_cast<Transform*>(world.EntitiesComponentsMatrix[indexNewEntity][Transform::Id]))->SetPosition(world, indexNewEntity, object->getPosition());
+//				(static_cast<Transform*>(world.EntitiesComponentsMatrix[indexNewEntity][Transform::Id]))->SetPosition(world, indexNewEntity, objectIter->getPosition());
 ////                world.Appearance[indexNewEntity] = new Appearance(nullptr); //TODO strange that I can't get the sprite from the mapObject
 //				AddComponent(world, indexNewEntity, new MapObjectComponent());
-//                object->setProperty(Constants::ENTITY_INDEX_PROPERTY, std::to_string(indexNewEntity));
-//            }
-//
-//        }
-//    }
+//                objectIter->setProperty(Constants::ENTITY_INDEX_PROPERTY, std::to_string(indexNewEntity));
+				std::string objName = objectIter->getName();
+				if (world.ReflectionMap.find(objName) != world.ReflectionMap.end())
+				{
+					unsigned long int entityIndex = world.ReflectionMap[objName](&world);
+					//*********** TEST ***********
+					//just some test! To removeeee!!!
+					objectIter->setVisible(false); //for now invisible, if possible, completely deleted
+					Transform* transform = static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]);
+					transform->SetPosition(objectIter->getPosition());
+					objectIter = layer.objects.erase(objectIter);
+					//************
+				}
+				else
+				{
+					++objectIter;
+				}
+            }
+			//very confused why this doesn't do what I was expecting https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/10074378/
+			engine.GetMapLoader().drawLayer(*engine.GetWindow(), layerIndex); //I was hoping for a redraw of the layer without the objects removed during the layer parsing... but it isn't so
+        }
+    }
 }
 
 const unsigned long EntityManager::CreateEntity(World& world, const GameObjectFlag& flags)

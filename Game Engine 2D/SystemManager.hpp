@@ -34,6 +34,15 @@ private:
         
 };
 
+
+
+
+/*
+*
+*      TEMPLATED METHODS IMPLEMENTATIONS
+*
+*/
+
 template<typename First, typename ...Rest>
 void SystemManager::AddSystem(World& world, System<First, Rest...>* systemToAdd)
 {
@@ -43,7 +52,7 @@ void SystemManager::AddSystem(World& world, System<First, Rest...>* systemToAdd)
 
 #ifdef LOG_OUTPUT_CONSOLE
 		std::stringstream ss;
-		ss << "System: " << typeid(systemToAdd).name() << " added with Id: " << systemToAdd->Id << std::endl;
+		ss << "System: " << typeid(systemToAdd).name() << " added with Id: " << systemToAdd->Id;
 		std::string s = ss.str();
 		std::string methodName = _FUNCION_NAME_;
 		Utils::PrintDebugLog(methodName, s);

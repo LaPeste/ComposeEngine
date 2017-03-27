@@ -39,9 +39,6 @@
     <Filter Include="Header Files\Entities\Systems">
       <UniqueIdentifier>{83bd2132-b49f-41a3-b483-d14e638ddaad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Entities\Player">
-      <UniqueIdentifier>{905ec410-f38f-4c04-8d22-94d40ef2f339}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{85d41c4c-58ea-4708-a05f-d4889ace103e}</UniqueIdentifier>
     </Filter>
@@ -54,8 +51,11 @@
     <Filter Include="Source Files\Entities\Systems">
       <UniqueIdentifier>{491495fc-1955-4dec-b2f0-bc817f7c65c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Entities\Player">
-      <UniqueIdentifier>{058e8033-45e7-4f8c-89bb-027310c82374}</UniqueIdentifier>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{b17000d4-31cd-4dce-b9db-b48ce8a1c880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{80e5c6cc-a914-478a-b7b2-1c4cd5beba36}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -131,9 +131,6 @@
     <ClCompile Include="Velocity.cpp">
       <Filter>Source Files\Entities\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Entities\Player</Filter>
-    </ClCompile>
     <ClCompile Include="UtilConstants.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -175,6 +172,18 @@
     </ClCompile>
     <ClCompile Include="EntityUtils.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Luigi.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,9 +298,6 @@
     <ClInclude Include="EntityManager.hpp">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Player.hpp">
-      <Filter>Header Files\Entities\Player</Filter>
-    </ClInclude>
     <ClInclude Include="SystemManager.hpp">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
@@ -309,6 +315,18 @@
     </ClInclude>
     <ClInclude Include="EntityUtils.hpp">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Luigi.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.hpp">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

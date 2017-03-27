@@ -63,8 +63,6 @@ bool Engine::Init()
     
     SystemManager::Init(World);
     
-    Player();
-    
     EntityManager::Init(World);
     
     SystemManager::AddSystem(World, new Movement(World));

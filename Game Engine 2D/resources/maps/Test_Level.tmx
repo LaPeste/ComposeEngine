@@ -46,9 +46,9 @@
   <object id="22" name="Box1" x="640" y="482" width="95" height="28"/>
   <object id="23" name="Box2" x="768" y="419" width="95" height="28"/>
   <object id="24" name="Ground" x="-56" y="607.667" width="2671.15" height="22.303"/>
-  <object id="38" name="FlowerRed" gid="259" x="447" y="608" width="32" height="32"/>
+  <object id="38" name="FlowerRed" gid="259" x="240.333" y="606.667" width="32" height="32"/>
   <object id="39" name="FlowerBlue" gid="296" x="576.125" y="601.875" width="32" height="32"/>
-  <object id="44" gid="231" x="224.667" y="607.333" width="32" height="32"/>
+  <object id="44" name="Door" gid="231" x="10.0003" y="608" width="32" height="32"/>
  </objectgroup>
  <layer name="Nature Layer" width="80" height="24">
   <data encoding="csv">

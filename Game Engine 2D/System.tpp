@@ -126,6 +126,12 @@ void System<First, Rest...>::OnExit()
 	}
 }
 
+//template<typename First, typename ...Rest>
+//const std::string & System<First, Rest...>::GetSystemName() const
+//{
+//	return typeid(*this).name();
+//}
+
 template<typename First, typename ...Rest>
 void System<First, Rest...>::Start(World& world, const unsigned long int entityIndex)
 {

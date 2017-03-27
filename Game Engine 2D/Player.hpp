@@ -10,12 +10,13 @@
 #define _PLAYER_HPP_
 
 #include "stdafx.h"
+#include "GameObject.hpp"
 
-class Player
+class Player : public GameObject
 {
 public:
-    Player();
-    
+	void Init() override;
+
 private:
 };
 

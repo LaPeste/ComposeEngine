@@ -15,7 +15,6 @@
 #include "CollisionEvent.hpp"
 #include "Component.hpp"
 #include "GameObjectType.hpp"
-#include <utility>
 
 // Entities represent a game object as an aggregation of components
 
@@ -25,9 +24,9 @@ public:
     static void Init(World& world);
 
 	//returns index to entity with no components, if found, otherwise the list will be extended and the latest index returned
-    static const unsigned long CreateEntity(World& world, const GameObjectFlag& flags = GameObjectFlag::NONE);
+static const unsigned long CreateEntity(World& world, const GameObjectFlag& flags = GameObjectFlag::NONE);
     static void DestroyEntity(World& world, const unsigned long index);
-    
+
     static const unsigned long GetPlayerId();
     static void SetPlayerId(const unsigned long index);
     
@@ -44,6 +43,8 @@ private:
     static void FreeWorldFields(World& world, const int worldIndex);
     static std::vector<CollisionEvent> collisionEvents;
 };
+
+
 
 
 /*
