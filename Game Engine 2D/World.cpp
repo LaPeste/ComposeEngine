@@ -8,7 +8,12 @@
 
 #include "World.hpp"
 
-World::World()
+World::World() :
+	EntitiesComponentsMasks(),
+	EntitiesComponentsMatrix(),
+	Systems(),
+	EntitiesRegistry(),
+	EntitiesHandles()
 {
 
 }
@@ -20,7 +25,12 @@ World::~World()
         delete system.second;
     }
 
+	for (const auto& gameObject : EntitiesHandles)
+	{
+		delete gameObject;
+	}
 
+	//!!! maybe explanation to this problem is http://stackoverflow.com/questions/19157946/does-stdmap-destructor-call-key-destructors-as-well-as-value-destructors ??????
 	//TODO I don't know why this corrupts the heap https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/9797950/
    // for(std::map<unsigned long int, ComponentBase*>& componentMap : EntitiesComponentsMatrix)
    // {

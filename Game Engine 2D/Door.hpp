@@ -6,6 +6,7 @@
 
 class Door : public GameObject
 {
+public:
 	void Init() override; //add all the components that define the entity, like a prefab in Unity
 };
 

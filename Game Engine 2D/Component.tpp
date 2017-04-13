@@ -19,4 +19,10 @@ Component<T>::Component(World& world, const unsigned long int entityIndex) : wor
 }
 
 template<typename T>
-Component<T>::~Component() { }
+Component<T>::~Component()
+{ 
+#ifdef LOG_OUTPUT_CONSOLE
+	std::string methodName = _FUNCION_NAME_;
+	Utils::PrintDebugLog(methodName, "dctr called");
+#endif
+}

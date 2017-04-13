@@ -11,10 +11,10 @@
 #include "Engine.hpp"
 
 //TODO this has to go away as soon as an standard way of creating gameobjects is done
-#include "Collider.hpp"
-#include "Acceleration.hpp"
-#include "Controller.hpp"
-#include "Velocity.hpp"
+//#include "Collider.hpp"
+//#include "Acceleration.hpp"
+//#include "Controller.hpp"
+//#include "Velocity.hpp"
 #include "Transform.hpp"
 #include "EntityFlag.hpp"
 
@@ -26,13 +26,10 @@ std::vector<CollisionEvent> EntityManager::collisionEvents;
 
 void EntityManager::Init(World& world)
 {
-	Player p;
-	p.Instantiate(&world);
-	Luigi l;
-	l.Instantiate(&world);
+	Instantiate<Player>(world);
+	Instantiate<Luigi>(world);
 
-	Door d;
-	world.ReflectionMap.insert(std::make_pair("Door", std::bind(&Door::Instantiate, &d, &world)));
+	world.EntitiesRegistry.insert(std::make_pair("Door", std::bind(&Instantiate<Door>, std::ref(world)))); //std::ref is crucial since without we're passing a copy of world, which will be destroyed (with destructor) right after the std::bind ends. For better info check this out  http://stackoverflow.com/questions/19859288/why-will-stdfunction-call-destructor-when-an-object-was-bound-to-a-member-func
 	
     //populates the list of objects with objects coming from the map (tmx file)
 	Engine& engine = Engine::GetInstance();
@@ -46,25 +43,14 @@ void EntityManager::Init(World& world)
 			std::vector<tmx::MapObject>::iterator objectIter = layer.objects.begin();
             while(objectIter != layer.objects.end())
             {
-//                //TODO most likely here I need to do more checks, because I may not want to add all the objects in this layer
-//                const unsigned long indexNewEntity = CreateEntity(world, GameObjectFlag::MAP_OBJECT);
-//                AddComponent(world, indexNewEntity, new Collider(sf::Vector2f(0,0)));
-//				AddComponent(world, indexNewEntity, new Transform());
-//				(static_cast<Transform*>(world.EntitiesComponentsMatrix[indexNewEntity][Transform::Id]))->SetPosition(world, indexNewEntity, objectIter->getPosition());
-////                world.Appearance[indexNewEntity] = new Appearance(nullptr); //TODO strange that I can't get the sprite from the mapObject
-//				AddComponent(world, indexNewEntity, new MapObjectComponent());
-//                objectIter->setProperty(Constants::ENTITY_INDEX_PROPERTY, std::to_string(indexNewEntity));
 				std::string objName = objectIter->getName();
-				if (world.ReflectionMap.find(objName) != world.ReflectionMap.end())
+				if (world.EntitiesRegistry.find(objName) != world.EntitiesRegistry.end())
 				{
-					unsigned long int entityIndex = world.ReflectionMap[objName](&world);
-					//*********** TEST ***********
-					//just some test! To removeeee!!!
+					GameObject* gameObject = world.EntitiesRegistry[objName](world);
 					objectIter->setVisible(false); //for now invisible, if possible, completely deleted
-					Transform* transform = static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]);
+					Transform* transform = static_cast<Transform*>(world.EntitiesComponentsMatrix[gameObject->GetEntityIndex()][Transform::Id]);
 					transform->SetPosition(objectIter->getPosition());
 					objectIter = layer.objects.erase(objectIter);
-					//************
 				}
 				else
 				{

@@ -16,7 +16,7 @@
 #include "Component.hpp"
 #include "GameObjectType.hpp"
 
-// Entities represent a game object as an aggregation of components
+// Entities represent a game objects as an aggregation of components
 
 class EntityManager
 {
@@ -24,8 +24,13 @@ public:
     static void Init(World& world);
 
 	//returns index to entity with no components, if found, otherwise the list will be extended and the latest index returned
-static const unsigned long CreateEntity(World& world, const GameObjectFlag& flags = GameObjectFlag::NONE);
+	static const unsigned long CreateEntity(World& world, const GameObjectFlag& flags = GameObjectFlag::NONE);
     static void DestroyEntity(World& world, const unsigned long index);
+
+	template<typename GAME_OBJECT_TYPE>
+	static GAME_OBJECT_TYPE* const Instantiate(World& world); //world is a pointer here cause otherwise I'd have had to define the constructor in all subclasses of gameobject. because a reference can never be null at any time while a pointer can.
+	//void Delete();
+
 
     static const unsigned long GetPlayerId();
     static void SetPlayerId(const unsigned long index);
@@ -81,6 +86,29 @@ void EntityManager::AddComponent(World& world, const unsigned long int entityInd
         Utils::PrintDebugWarning(methodName, s);
 
     }
+}
+
+template<typename GAME_OBJECT_TYPE>
+GAME_OBJECT_TYPE* const EntityManager::Instantiate(World& world)
+{
+	unsigned long int entityIndex = CreateEntity(world, GameObjectFlag::GRAVITY);
+	if (typeid(GAME_OBJECT_TYPE) == typeid(Player)) EntityManager::SetPlayerId(entityIndex);
+	
+	GAME_OBJECT_TYPE* gameObject = new GAME_OBJECT_TYPE;
+	gameObject->entityIndex = entityIndex;
+	gameObject->world = &world;
+	world.EntitiesHandles.push_back(gameObject);
+	gameObject->Init();
+
+#ifdef LOG_OUTPUT_CONSOLE
+	std::stringstream ss;
+	ss << "GameObject " << typeid(GAME_OBJECT_TYPE).name() << " with id " << entityIndex << " has been instantiated!";
+	std::string s = ss.str();
+	std::string methodName = _FUNCION_NAME_;
+	Utils::PrintDebugLog(methodName, s);
+#endif
+
+	return gameObject;
 }
 
 #endif /* _ENTITY_MANAGER_HPP_ */
