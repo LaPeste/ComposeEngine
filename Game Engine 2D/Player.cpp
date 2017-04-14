@@ -31,11 +31,11 @@ void Player::Init()
     EntityManager::AddComponent(world, entityIndex, new Collider(world, entityIndex));
     
     std::map<AnimationState, AnimationData*> animationMap;
-    AnimationData* animData = new AnimationData(sf::Vector2f(Constants::PLAYER_SPRITE_STARTING_X, Constants::PLAYER_SPRITE_STARTING_Y),
+    AnimationData* walkingAnim = new AnimationData(sf::Vector2f(Constants::PLAYER_SPRITE_STARTING_X, Constants::PLAYER_SPRITE_STARTING_Y),
                            sf::Vector2f(Constants::SPACE_BETWEEN_SPRITE_X, Constants::SPACE_BETWEEN_SPRITE_Y), false,
                            false, Constants::PLAYER_WIDTH, Constants::PLAYER_HEIGHT, Constants::PLAYER_SPRITE_MAX_FRAME, Constants::ANIMATION_FRAMERATE);
     
-    animationMap.insert( std::pair<AnimationState, AnimationData*>(AnimationState::IDLE, animData) );
+    animationMap.insert( std::pair<AnimationState, AnimationData*>(AnimationState::IDLE, walkingAnim) );
     
     EntityManager::AddComponent(world, entityIndex, new Animation(world, entityIndex, AnimationState::IDLE , animationMap, true));
 }

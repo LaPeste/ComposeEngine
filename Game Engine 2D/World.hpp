@@ -13,8 +13,8 @@
 #include <functional>
 
 #include "ComponentBase.hpp"
-#include "SystemBase.hpp";
-#include "GameObject.hpp";
+#include "SystemBase.hpp"
+#include "GameObject.hpp"
 
 //Data holder for entities, components and systems. It can be seen as a level data holder.
 

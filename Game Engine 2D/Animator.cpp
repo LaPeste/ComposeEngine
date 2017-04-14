@@ -1,4 +1,3 @@
-
 //
 //  Animator.cpp
 //  GameEngine2D
