@@ -11,9 +11,6 @@ public:
 	void Init() override; //add all the components that define the entity, like a prefab in Unity
 };
 
-namespace Registry
-{
-	GAMEOBJECT_REGISTER(Door, "Door", Engine::World)
-}
+GAMEOBJECT_REGISTER(Door, "Door", Engine::World)
 
 #endif

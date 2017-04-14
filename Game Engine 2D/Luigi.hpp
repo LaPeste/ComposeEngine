@@ -11,9 +11,6 @@ public:
 	void Init() override;
 };
 
-namespace Registry
-{
-	GAMEOBJECT_REGISTER(Luigi, "Luigi", Engine::World)
-}
+GAMEOBJECT_REGISTER(Luigi, "Luigi", Engine::World)
 
 #endif

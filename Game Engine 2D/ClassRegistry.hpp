@@ -38,7 +38,7 @@ namespace Registry
 #ifdef LOG_OUTPUT_CONSOLE
 				std::string methodName = _FUNCION_NAME_;
 				std::ostringstream oss;
-				oss << typeid(TYPE).name() << " added with string " << name;
+				oss << typeid(TYPE).name() << " added with string \"" << name << "\"";
 				Utils::PrintDebugLog(methodName, oss.str());
 #endif
 			}
@@ -70,6 +70,7 @@ namespace												\
 	template<>											\
 	class GameObjectRegistration<TYPE>					\
 	{													\
+	private:											\
 		static const RegistryEntry<TYPE>& reg;			\
 	};													\
 														\
@@ -79,7 +80,8 @@ namespace												\
 }
 
 /************* THEORY *********
-nameless templates (Anonymous Namespace) allow same named variable in multiple cpp
+Nameless templates (Anonymous Namespace) allow same named variable in multiple cpp. In our example, without an anonymous namespace
+the definition of reg would appear multiple times in the same namespace which is clearly not allowed.
 
 */
 #endif

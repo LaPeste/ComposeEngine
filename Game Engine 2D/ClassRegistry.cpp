@@ -7,6 +7,4 @@ namespace Registry
 		static EntitiesRegistry GameObjectsRegistry;
 		return GameObjectsRegistry;
 	}
-
-	//const RegistryEntry<TYPE>& GameObjectRegistration<TYPE>::reg = RegistryEntry<TYPE>::Instance(NAME, WORLD);			
 }

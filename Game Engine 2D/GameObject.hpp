@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "ClassRegistry.hpp"
 
+using namespace Registry;
+
 //Static classes can't have virtual or abstract methods, so I can't make this class static.
 
 //Classes that inherit from GameObjects are not supposed to be instantiated by new!
