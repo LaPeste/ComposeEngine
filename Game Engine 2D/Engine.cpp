@@ -17,6 +17,8 @@
 #include "EntityFlag.hpp"
 #include "Appearance.hpp"
 
+World Engine::World;
+Engine Engine::instance;
 
 Engine::~Engine()
 {

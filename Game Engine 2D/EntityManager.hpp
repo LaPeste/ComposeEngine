@@ -18,6 +18,7 @@
 
 // Entities represent a game objects as an aggregation of components
 
+
 class EntityManager
 {
 public:

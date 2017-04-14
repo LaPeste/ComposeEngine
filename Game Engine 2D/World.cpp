@@ -12,7 +12,6 @@ World::World() :
 	EntitiesComponentsMasks(),
 	EntitiesComponentsMatrix(),
 	Systems(),
-	EntitiesRegistry(),
 	EntitiesHandles()
 {
 

@@ -15,8 +15,6 @@ public:
 	~Engine();
 	static Engine& GetInstance()
 	{
-		static Engine instance;// Guaranteed to be destroyed.
-                               // Instantiated on first use.
 		return instance;
 	}
 
@@ -29,10 +27,11 @@ public:
 	//Utils
 	sf::RenderWindow* GetWindow() const;
     tmx::MapLoader& GetMapLoader();
-    
-    World World; //TODO maybe getter and setter?
+
+    static World World; //TODO this will become a vector of worlds to support any level of granularity you like
 
 private:
+	static Engine instance; // lazy initialization can't be done because I need a reference to World on application loading for the ClassRegistry.
 	Engine();
 	enum GameState
 	{

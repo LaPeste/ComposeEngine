@@ -27,9 +27,8 @@ std::vector<CollisionEvent> EntityManager::collisionEvents;
 void EntityManager::Init(World& world)
 {
 	Instantiate<Player>(world);
-	Instantiate<Luigi>(world);
 
-	world.EntitiesRegistry.insert(std::make_pair("Door", std::bind(&Instantiate<Door>, std::ref(world)))); //std::ref is crucial since without we're passing a copy of world, which will be destroyed (with destructor) right after the std::bind ends. For better info check this out  http://stackoverflow.com/questions/19859288/why-will-stdfunction-call-destructor-when-an-object-was-bound-to-a-member-func
+	//world.EntitiesRegistry.insert(std::make_pair("Door", std::bind(&Instantiate<Door>, std::ref(world)))); //std::ref is crucial since without we're passing a copy of world, which will be destroyed (with destructor) right after the std::bind ends. For better info check this out  http://stackoverflow.com/questions/19859288/why-will-stdfunction-call-destructor-when-an-object-was-bound-to-a-member-func
 	
     //populates the list of objects with objects coming from the map (tmx file)
 	Engine& engine = Engine::GetInstance();
@@ -44,9 +43,10 @@ void EntityManager::Init(World& world)
             while(objectIter != layer.objects.end())
             {
 				std::string objName = objectIter->getName();
-				if (world.EntitiesRegistry.find(objName) != world.EntitiesRegistry.end())
+				//if (world.EntSitiesRegistry.find(objName) != world.EntitiesRegistry.end())
+				if (Registry::GetGameObjectsRegistry().find(objName) != Registry::GetGameObjectsRegistry().end())
 				{
-					GameObject* gameObject = world.EntitiesRegistry[objName](world);
+					GameObject* gameObject = Registry::GetGameObjectsRegistry()[objName](world);
 					objectIter->setVisible(false); //for now invisible, if possible, completely deleted
 					Transform* transform = static_cast<Transform*>(world.EntitiesComponentsMatrix[gameObject->GetEntityIndex()][Transform::Id]);
 					transform->SetPosition(objectIter->getPosition());

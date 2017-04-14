@@ -2,6 +2,7 @@
 #define _GAMEOBJECT_HPP_
 
 #include "stdafx.h"
+#include "ClassRegistry.hpp"
 
 //Static classes can't have virtual or abstract methods, so I can't make this class static.
 
@@ -26,11 +27,8 @@ private:
 
 	unsigned long int entityIndex;
 	World* world; //I'd have preferred to have this const :(
-
-	/*void static RegisterClassForReflection();
-
-	void AddClassForReflection(World& world);*/
-
 };
+
+
 
 #endif

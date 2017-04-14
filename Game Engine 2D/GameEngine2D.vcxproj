@@ -122,6 +122,7 @@
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Appearance.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ClassRegistry.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionDetectionUtils.cpp" />
     <ClCompile Include="CollisionEvent.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Luigi.hpp" />
     <ClInclude Include="Movement.hpp" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="ClassRegistry.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="ResourcePath.hpp" />
     <ClInclude Include="stdafx.h" />

@@ -23,6 +23,9 @@ class World
 public:
     World();
     ~World();
+
+	World(const World&) = delete; // C++11 feature
+	World& operator=(const World&) = delete;
     
 //private: TODO maybe make them private and use properties?
     std::vector<unsigned long int> EntitiesComponentsMasks; //defines components held by each entity
@@ -30,7 +33,6 @@ public:
     std::vector<std::map<unsigned long int, ComponentBase*>> EntitiesComponentsMatrix;
     
     std::map<unsigned long int, SystemBase*> Systems;
-	std::map<std::string, std::function<GameObject* (World&)>> EntitiesRegistry; //used to simulate something like reflection, at each string corresponds the type of it
 	std::vector<GameObject*> EntitiesHandles;
 };
 
