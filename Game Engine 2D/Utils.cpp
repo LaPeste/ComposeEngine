@@ -8,7 +8,6 @@
 
 #include "stdafx.h"
 #include "Utils.hpp"
-#include <sstream>
 #include <windows.h>
 
 void Utils::PrintDebugLog(const std::string& methodName, const std::string& message)

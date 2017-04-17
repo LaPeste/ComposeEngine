@@ -5,6 +5,7 @@
 #include "tmx/Log.hpp"
 #include "SystemManager.hpp"
 #include "EntityManager.hpp"
+#include "EventManager.hpp"
 
 #include "Movement.hpp"
 #include "Renderer.hpp"
@@ -106,6 +107,7 @@ void Engine::Update()
 {
     FPS::Update();
     Camera::GetInstance()->Update();
+	EventManager::ProcessEvents();
     SystemManager::UpdateAll(World);
 	SystemManager::LateUpdateAll(World);
 }

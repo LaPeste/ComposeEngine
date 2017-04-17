@@ -7,7 +7,6 @@
 //
 
 #include "Component.hpp"
-#include <sstream>
 
 template<typename T>
 Component<T>::Component(World& world, const unsigned long int entityIndex) : world(world), entityIndex(entityIndex)

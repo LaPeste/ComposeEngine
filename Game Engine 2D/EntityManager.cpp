@@ -43,7 +43,6 @@ void EntityManager::Init(World& world)
             while(objectIter != layer.objects.end())
             {
 				std::string objName = objectIter->getName();
-				//if (world.EntSitiesRegistry.find(objName) != world.EntitiesRegistry.end())
 				if (Registry::GetGameObjectsRegistry().find(objName) != Registry::GetGameObjectsRegistry().end())
 				{
 					GameObject* gameObject = Registry::GetGameObjectsRegistry()[objName](world);

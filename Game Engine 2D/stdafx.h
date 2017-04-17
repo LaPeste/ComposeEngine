@@ -24,6 +24,7 @@
 #include <iostream>
 #include <cassert> //to enable assert
 #include <string>
+#include <sstream>
 #include <vector>
 
 #include "Utils.hpp"

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Engine.hpp"
-#include <sstream>
+
 //#include <vld.h>
 
 int main(int argc, char* argv[])
@@ -29,6 +29,14 @@ int main(int argc, char* argv[])
 		std::string methodName = _FUNCION_NAME_;
 		std::ostringstream oss;
 		oss << "it was not possible to instantiate a new object. The program is being termianted!";
+		Utils::PrintDebugError(methodName, oss.str());
+		return EXIT_FAILURE;
+	}
+	catch (std::out_of_range)
+	{
+		std::string methodName = _FUNCION_NAME_;
+		std::ostringstream oss;
+		oss << "Silly man, you were trying to access something out of the memory range of your container! You have crashed the application, well done!";
 		Utils::PrintDebugError(methodName, oss.str());
 		return EXIT_FAILURE;
 	}

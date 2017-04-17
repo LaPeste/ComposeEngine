@@ -135,8 +135,12 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="EntityUtils.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventBase.cpp" />
+    <ClCompile Include="EventListener.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="InputEvent.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Luigi.cpp" />
     <ClCompile Include="main.cpp" />
@@ -180,9 +184,13 @@
     <ClInclude Include="EntityManager.hpp" />
     <ClInclude Include="EntityUtils.hpp" />
     <ClInclude Include="Event.hpp" />
+    <ClInclude Include="EventBase.hpp" />
+    <ClInclude Include="EventListener.hpp" />
+    <ClInclude Include="EventManager.hpp" />
     <ClInclude Include="FPS.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectType.hpp" />
+    <ClInclude Include="InputEvent.hpp" />
     <ClInclude Include="InputSystem.hpp" />
     <ClInclude Include="Luigi.hpp" />
     <ClInclude Include="Movement.hpp" />

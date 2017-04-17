@@ -57,6 +57,18 @@
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{80e5c6cc-a914-478a-b7b2-1c4cd5beba36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Events">
+      <UniqueIdentifier>{ccd89afd-3dd2-44cf-9a86-d82533b17c7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Events">
+      <UniqueIdentifier>{f16942d9-edfa-4b15-a349-cabf5ea0b68a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Events\CustomEvents">
+      <UniqueIdentifier>{1c260a08-1ddc-4338-88cd-a1c66eac1a3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Events\CustomEvents">
+      <UniqueIdentifier>{b9b419b3-0b5f-489c-8e20-0d2239a7273c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -187,6 +199,18 @@
     </ClCompile>
     <ClCompile Include="ClassRegistry.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventBase.cpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="EventListener.cpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="InputEvent.cpp">
+      <Filter>Source Files\Events\CustomEvents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -333,6 +357,18 @@
     </ClInclude>
     <ClInclude Include="ClassRegistry.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventBase.hpp">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.hpp">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventListener.hpp">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="InputEvent.hpp">
+      <Filter>Header Files\Events\CustomEvents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
