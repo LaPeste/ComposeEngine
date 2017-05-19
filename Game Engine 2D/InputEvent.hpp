@@ -4,14 +4,26 @@
 #include "stdafx.h"
 #include "EventBase.hpp"
 
+enum class InputEventType
+{
+	LEFT_DOWN = 0,
+	LEFT_UP,
+	RIGHT_DOWN,
+	RIGHT_UP,
+	JUMP_START,
+	JUMP_STOP,
+	CROUCH_DOWN,
+	CROUCH_UP
+};
+
 class InputEvent : public EventBase
 {
 public:
-	InputEvent(const std::string& message);
-	const std::string& GetMessage() const;
+	InputEvent(InputEventType message);
+	InputEventType GetContent() const;
 
 private:
-	std::string message;
+	InputEventType event;
 };
 
 #endif

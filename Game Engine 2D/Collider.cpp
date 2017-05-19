@@ -8,6 +8,7 @@
 
 #include "Collider.hpp"
 #include "Transform.hpp"
+#include "Appearance.hpp"
 
 Collider::Collider(World& world, const unsigned long int entityIndex, const sf::Vector2f& offset, const sf::FloatRect& colliderRect) :
 	offset(offset), colliderRect(colliderRect),

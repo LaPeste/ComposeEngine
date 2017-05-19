@@ -69,6 +69,12 @@
     <Filter Include="Source Files\Events\CustomEvents">
       <UniqueIdentifier>{b9b419b3-0b5f-489c-8e20-0d2239a7273c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entities\Animations">
+      <UniqueIdentifier>{81a7e962-68f4-4951-a28c-d5db3da2c11a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Animations">
+      <UniqueIdentifier>{39f7bbe4-9c2c-4880-aeac-9efc192fc67a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -211,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="InputEvent.cpp">
       <Filter>Source Files\Events\CustomEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations.cpp">
+      <Filter>Source Files\Entities\Animations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -369,6 +378,9 @@
     </ClInclude>
     <ClInclude Include="InputEvent.hpp">
       <Filter>Header Files\Events\CustomEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations.hpp">
+      <Filter>Header Files\Entities\Animations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@
 #include "Player.hpp"
 #include "EntityManager.hpp"
 
-GameObject::GameObject() : world(nullptr), entityIndex(-1)
+GameObject::GameObject() : world(nullptr), entityIndex(-1), EventListener()
 {
 }
 

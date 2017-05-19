@@ -4,6 +4,10 @@
 #include "stdafx.h"
 #include "Component.hpp"
 
+/*
+ If an Appearance component exists, then the sf::Sprite transform is returned, otherwise the private sf::Transformable of this class is return.
+*/
+
 class Transform : public Component<Transform>
 {
 public:

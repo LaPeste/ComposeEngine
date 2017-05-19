@@ -18,10 +18,28 @@ public:
     Controller(World& world, const unsigned long int entityIndex);
 	~Controller();
     
-    bool MoveRight;
-    bool MoveLeft;
-    bool Crouch;
-    bool CanJump; //used to check conditions like: touching the ground etc etc
+	bool GetMoveRight() const;
+	bool GetMoveLeft() const;
+	bool GetCrouch() const;
+	bool GetCanJump() const;
+	bool IsJumping() const;
+
+	void SetMoveRight(bool moveRight);
+	void SetMoveLeft(bool moveLight);
+	void SetCrouch(bool crouch);
+	void SetCanJump(bool canJump);
+
+	//ATTENTION: You should never ever use this method, unless you really know what you are doing!!!!
+	void SetIfJumping(bool jumping);
+
+	bool Jump(World& world, const unsigned long entityIndex);
+
+private:
+    bool moveRight;
+    bool moveLeft;
+    bool crouch;
+    bool canJump; //used to check conditions like: touching the ground etc etc
+	bool currentlyInTheAir;
 
 };
 

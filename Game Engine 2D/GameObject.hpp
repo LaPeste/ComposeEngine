@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "ClassRegistry.hpp"
+#include "EventListener.hpp"
 
 using namespace Registry;
 
@@ -14,7 +15,7 @@ using namespace Registry;
 
 
 
-class GameObject
+class GameObject : public EventListener
 {
 public:
 	GameObject();

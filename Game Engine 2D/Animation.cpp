@@ -10,7 +10,7 @@
 
 
 Animation::Animation(World& world, const unsigned long int entityIndex, const AnimationState& intialAnimationState, std::map<AnimationState, AnimationData*>& animationMap, bool toAnimate) :
-    AnimationMap(animationMap), CurrentAnimationState(intialAnimationState), ToAnimate(toAnimate), Clock(), Component(world, entityIndex)
+    AnimationMap(animationMap), CurrentAnimationState(intialAnimationState), ToAnimate(toAnimate), FlipAnimation(false), Clock(), Component(world, entityIndex)
 {
 
 }

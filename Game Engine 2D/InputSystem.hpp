@@ -23,8 +23,6 @@ public:
     void OnKeyDown(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex) override;
 
 private:
-    bool Jump(World& world, const unsigned long entityIndex);
-
 	void Input(World& world, const unsigned long entityIndex, const sf::Event& event) override;
 };
 

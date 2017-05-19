@@ -10,7 +10,6 @@
 #define _COLLIDER_HPP_
 
 #include "stdafx.h"
-#include "Appearance.hpp"
 #include "Component.hpp"
 
 class Collider : public Component<Collider>

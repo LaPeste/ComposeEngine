@@ -23,9 +23,7 @@ class Movement : public System<Controller, Velocity, Acceleration, EntityFlag, T
 public:
     Movement(World& world);
     ~Movement();
-    
-    bool Jump(World& world, const unsigned long entityIndex);
-    
+        
 private:
     void MoveEntity(World& world, const unsigned long entityIndex);
     void StopMove(World& world, const unsigned long entityIndex);
@@ -33,6 +31,7 @@ private:
     bool PosValid(World& world, const unsigned long entityIndex, float x, float y);
 
 	void Update(World& world, const unsigned long entityIndex) override;
+
 };
 
 #endif /* _MOVEMENT_HPP_ */

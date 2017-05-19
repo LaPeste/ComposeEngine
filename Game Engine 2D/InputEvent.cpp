@@ -1,11 +1,11 @@
 #include "InputEvent.hpp"
 
-InputEvent::InputEvent(const std::string& message) : message(message)
+InputEvent::InputEvent(InputEventType message) : event(message)
 {
 
 }
 
-const std::string& InputEvent::GetMessage() const
+InputEventType InputEvent::GetContent() const
 {
-	return message;
+	return event;
 }

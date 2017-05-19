@@ -86,7 +86,7 @@ void Animator::Animate(World& world, const unsigned long entityIndex)
                 }
             }
 
-            if(currentAnimData->FlipSprite)
+            if(animation->FlipAnimation)
             {
                 appearance->GetSprite()->setOrigin({ appearance->GetSprite()->getLocalBounds().width, 0 });
                 appearance->GetSprite()->setScale({-1, 1 });

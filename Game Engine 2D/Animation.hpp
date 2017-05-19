@@ -32,8 +32,8 @@ public:
 enum class AnimationState : char
 {
     IDLE = 0,
-    WALKING,
-    RUNNING,
+	WALKING,
+	RUNNING,
     JUMPING,
     ATTACKING
 };
@@ -52,6 +52,7 @@ public:
     sf::Clock Clock;
     bool ToAnimate; //when to animate if pressed a direction
     AnimationState CurrentAnimationState;
+	bool FlipAnimation;
     std::map<AnimationState, AnimationData*> AnimationMap;
     
 private:

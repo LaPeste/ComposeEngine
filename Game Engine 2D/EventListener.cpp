@@ -6,6 +6,10 @@ The help comes from the fact that you don't have to take care of removing delega
 since ~EventListener takes already care of this for you.
 */
 
+EventListener::EventListener()
+{
+}
+
 EventListener::~EventListener()
 {
 #if LOG_OUTPUT_CONSOLE

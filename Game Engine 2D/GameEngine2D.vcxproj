@@ -119,6 +119,7 @@
   <ItemGroup>
     <ClCompile Include="Acceleration.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Appearance.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="FPS.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectType.hpp" />
+    <ClInclude Include="Animations.hpp" />
     <ClInclude Include="InputEvent.hpp" />
     <ClInclude Include="InputSystem.hpp" />
     <ClInclude Include="Luigi.hpp" />

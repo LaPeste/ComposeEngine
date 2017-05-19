@@ -10,6 +10,7 @@
 #include "Engine.hpp"
 #include "InputSystem.hpp"
 
+
 InputSystem::InputSystem(World& world) : System<Controller, Velocity>(world)
 {
     
@@ -30,16 +31,15 @@ void InputSystem::OnKeyUp(const sf::Event::KeyEvent& input, World& world, const 
     switch (input.code)
     {
         case sf::Keyboard::Key::A:
-            controller->MoveLeft = false;
+            controller->SetMoveLeft(false);
             break;
         case sf::Keyboard::Key::D:
-            controller->MoveRight = false;
+            controller->SetMoveRight(false);
             break;
         case sf::Keyboard::Key::S:
-            controller->Crouch = false;
+            controller->SetCrouch(false);
             break;
         case sf::Keyboard::Key::Space:
-            
             break;
             //Add the cases that you need
         default:
@@ -56,31 +56,20 @@ void InputSystem::OnKeyDown(const sf::Event::KeyEvent& input, World& world, cons
     switch (input.code)
     {
         case sf::Keyboard::Key::A:
-            controller->MoveLeft = true;
+            controller->SetMoveLeft(true);
+			
             break;
         case sf::Keyboard::Key::D:
-            controller->MoveRight = true;
+            controller->SetMoveRight(true);
             break;
         case sf::Keyboard::Key::S:
-            controller->Crouch = true;
+            controller->SetCrouch(true);
             break;
         case sf::Keyboard::Key::Space:
-            Jump(world, entityIndex);
+            controller->Jump(world, entityIndex);
             break;
             //Add the cases that you need
         default:
             break;
     }
-}
-
-bool InputSystem::Jump(World& world, const unsigned long entityIndex)
-{
-    std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
-    Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
-    Velocity* velocity = static_cast<Velocity*>(entity[Component<Velocity>::Id]);
-
-    if(!controller->CanJump) return false;
-    
-    velocity->SpeedY = -velocity->MaxSpeedY;
-    return true;
 }

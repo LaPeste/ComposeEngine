@@ -31,16 +31,16 @@ void Movement::Update(World& world, const unsigned long entityIndex)
     EntityFlag* entityFlag = static_cast<EntityFlag*>(entity[Component<EntityFlag>::Id]);
 
         
-    if(!controller->MoveLeft && !controller->MoveRight)
+    if(!controller->GetMoveLeft() && !controller->GetMoveRight())
     {
         StopMove(world, entityIndex);
     }
             
-    if(controller->MoveLeft)
+    if(controller->GetMoveLeft())
     {
         acceleration->AccelerationX = -acceleration->AccelerationPerFrameX;
     }
-    else if(controller->MoveRight)
+    else if(controller->GetMoveRight())
     {
         acceleration->AccelerationX = acceleration->AccelerationPerFrameX;
     }
@@ -158,7 +158,8 @@ void Movement::MoveTo(World& world, const unsigned long entityIndex, float x, fl
             {
                 velocity->SpeedY = 0;
             }
-            controller->CanJump = velocity->SpeedY == 0;
+            controller->SetCanJump(velocity->SpeedY == 0); //avoid double, triple, ... n jump. Jump allowed only when the ground is reached.
+			controller->SetIfJumping(velocity->SpeedY != 0); //this is used to stop the jumping animation or any other animation triggered from a free fall
         }
         
         x -= stepX;
