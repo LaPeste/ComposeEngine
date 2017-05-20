@@ -45,25 +45,34 @@ bool Controller::IsJumping() const
 
 void Controller::SetMoveLeft(bool moveLeft)
 {
-	if(moveLeft) EventManager::QueueEvent(new InputEvent(InputEventType::LEFT_DOWN));
-	else EventManager::QueueEvent(new InputEvent(InputEventType::LEFT_UP));
+	if (this->moveLeft != moveLeft)	//avoid to trigger events if nothing has changed
+	{
+		if (moveLeft) EventManager::QueueEvent(new InputEvent(InputEventType::LEFT_DOWN));
+		else EventManager::QueueEvent(new InputEvent(InputEventType::LEFT_UP));
 
-	this->moveLeft = moveLeft;
+		this->moveLeft = moveLeft;
+	}
 }
 
 void Controller::SetMoveRight(bool moveRight)
 {
-	if (moveRight) EventManager::QueueEvent(new InputEvent(InputEventType::RIGHT_DOWN));
-	else EventManager::QueueEvent(new InputEvent(InputEventType::RIGHT_UP));
+	if (this->moveRight != moveRight) //avoid to trigger events if nothing has changed
+	{
+		if (moveRight) EventManager::QueueEvent(new InputEvent(InputEventType::RIGHT_DOWN));
+		else EventManager::QueueEvent(new InputEvent(InputEventType::RIGHT_UP));
 
-	this->moveRight = moveRight;
+		this->moveRight = moveRight;
+	}
 }
 
 void Controller::SetCrouch(bool crouch)
 {
-	if (crouch) EventManager::QueueEvent(new InputEvent(InputEventType::CROUCH_DOWN));
-	else EventManager::QueueEvent(new InputEvent(InputEventType::CROUCH_UP));
-	this->crouch = crouch;
+	if (this->crouch != crouch)	//avoid to trigger events if nothing has changed
+	{
+		if (crouch) EventManager::QueueEvent(new InputEvent(InputEventType::CROUCH_DOWN));
+		else EventManager::QueueEvent(new InputEvent(InputEventType::CROUCH_UP));
+		this->crouch = crouch;
+	}
 }
 
 void Controller::SetCanJump(bool canJump)

@@ -33,7 +33,7 @@ public:
     std::vector<std::map<unsigned long int, ComponentBase*>> EntitiesComponentsMatrix;
     
     std::map<unsigned long int, SystemBase*> Systems;
-	std::vector<GameObject*> EntitiesHandles;
+	std::map<unsigned long int, GameObject*> EntitiesHandles;
 };
 
 

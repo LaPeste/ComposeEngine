@@ -18,15 +18,19 @@ using namespace Registry;
 class GameObject : public EventListener
 {
 public:
-	GameObject();
 
 protected:
+	GameObject();
+	~GameObject();
+
 	virtual void Init() = 0; //add all the components that define the entity, like a prefab in Unity
 	const unsigned long int GetEntityIndex() const;
 	World& GetWorld() const;
 
 private:
+	//Friend classes are needed to access ~GameObject(). This allows me to keep the destructor protected, hence not callable by the user.
 	friend class EntityManager;
+	friend class World;
 
 	unsigned long int entityIndex;
 	World* world; //I'd have preferred to have this const :(

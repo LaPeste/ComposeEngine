@@ -11,7 +11,7 @@ enum class InputEventType
 	RIGHT_DOWN,
 	RIGHT_UP,
 	JUMP_START,
-	JUMP_STOP,
+	JUMP_STOP, //raised when not falling anymore from a previous free falling (jump included)
 	CROUCH_DOWN,
 	CROUCH_UP
 };

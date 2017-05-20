@@ -7,6 +7,14 @@ GameObject::GameObject() : world(nullptr), entityIndex(-1), EventListener()
 {
 }
 
+GameObject::~GameObject()
+{
+#ifdef LOG_OUTPUT_CONSOLE
+	std::string methodName = _FUNCION_NAME_;
+	Utils::PrintDebugLog(methodName, "dctr called");
+#endif
+}
+
 const unsigned long int GameObject::GetEntityIndex() const
 {
 	return entityIndex;

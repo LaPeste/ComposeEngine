@@ -38,16 +38,19 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 		throw 1;
 	}
 
+	//create list for eventId, if never created before
 	if (listeners.find(eventId) == listeners.end())
 	{
 		auto delegatesList = std::list<const EventDelegate*>();
-		listeners.insert(std::make_pair(eventId, delegatesList)); //I hope delegatesList is passed by value, so it won't be lost at the exit of the scope
+		listeners.insert(std::make_pair(eventId, delegatesList)); //std::make_pair passes by value, so no worries about delegateList being destroyed at the exit of the method
 	}
 
 	std::list<const EventDelegate*> delegateList = listeners.at(eventId);
+
+	//avoid to add the same EventDelegate for the same eventId
 	for (std::list<const EventDelegate*>::iterator it = delegateList.begin(); it != delegateList.end(); ++it)
 	{
-		auto& delegateFunc = *it;
+		const EventDelegate* delegateFunc = *it;
 		if (delegateFunc->target<EventDelegate*>() == eventDelegate->target<EventDelegate*>())
 		{
 			std::string methodName = _FUNCION_NAME_;
@@ -73,6 +76,14 @@ bool EventManager::RemoveListener(EventBase::UID eventId, const EventDelegate* e
 {
 	std::string methodName = _FUNCION_NAME_;
 	std::ostringstream oss;
+
+	if (listeners.size() == 0) //I'm not sure why this happens...
+	{
+		oss << "You have tried to remove a delegate for the event=" << eventId << " but there is not a single eventId in the listeners map.";
+		Utils::PrintDebugError(methodName, oss.str());
+		return false;
+	}
+
 	if (eventDelegate == nullptr)
 	{
 		oss << "You have tried to remove a null delegate for event=" << eventId;
@@ -111,6 +122,13 @@ bool EventManager::RemoveListener(EventBase::UID eventId, const EventDelegate* e
 
 void EventManager::QueueEvent(EventBase* event)
 {
+//#if LOG_OUTPUT_CONSOLE
+//	std::string methodName = _FUNCION_NAME_;
+//	std::ostringstream oss;
+//	oss << "Queued event with id " << event->GetId();
+//	Utils::PrintDebugLog(methodName, oss.str());
+//#endif
+
 	eventQueue.push_back(event);
 }
 

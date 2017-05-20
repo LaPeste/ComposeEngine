@@ -7,6 +7,7 @@
 //
 
 #include "World.hpp"
+#include "EventManager.hpp"
 
 World::World() :
 	EntitiesComponentsMasks(),
@@ -24,10 +25,11 @@ World::~World()
         delete system.second;
     }
 
-	for (const auto& gameObject : EntitiesHandles)
+	for (const auto& pair : EntitiesHandles)
 	{
-		delete gameObject;
+		delete(pair.second);
 	}
+	EntitiesHandles.clear();
 
     for(std::map<unsigned long int, ComponentBase*>& componentMap : EntitiesComponentsMatrix)
     {

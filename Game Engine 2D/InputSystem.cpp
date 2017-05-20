@@ -34,7 +34,7 @@ void InputSystem::OnKeyUp(const sf::Event::KeyEvent& input, World& world, const 
             controller->SetMoveLeft(false);
             break;
         case sf::Keyboard::Key::D:
-            controller->SetMoveRight(false);
+			controller->SetMoveRight(false);
             break;
         case sf::Keyboard::Key::S:
             controller->SetCrouch(false);
@@ -50,16 +50,16 @@ void InputSystem::OnKeyUp(const sf::Event::KeyEvent& input, World& world, const 
 void InputSystem::OnKeyDown(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex)
 {
     std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
-    std::cout << "id of controller= " << Component<Controller>::Id << std::endl;
     Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
 
     switch (input.code)
     {
         case sf::Keyboard::Key::A:
+			controller->SetMoveRight(false); //to simulate that only one direction button is pressed at a time
             controller->SetMoveLeft(true);
-			
             break;
         case sf::Keyboard::Key::D:
+			controller->SetMoveLeft(false); //to simulate that only one direction button is pressed at a time
             controller->SetMoveRight(true);
             break;
         case sf::Keyboard::Key::S:

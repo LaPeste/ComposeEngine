@@ -24,14 +24,11 @@ class EntityManager
 public:
     static void Init(World& world);
 
-	//returns index to entity with no components, if found, otherwise the list will be extended and the latest index returned
-	static const unsigned long CreateEntity(World& world, const GameObjectFlag& flags = GameObjectFlag::NONE);
-    static void DestroyEntity(World& world, const unsigned long index);
 
 	template<typename GAME_OBJECT_TYPE>
 	static GAME_OBJECT_TYPE* const Instantiate(World& world); //world is a pointer here cause otherwise I'd have had to define the constructor in all subclasses of gameobject. because a reference can never be null at any time while a pointer can.
-	//void Delete();
 
+    static void DestroyGameObject(GameObject* gameObject);
 
     static const unsigned long GetPlayerId();
     static void SetPlayerId(const unsigned long index);
@@ -45,9 +42,15 @@ public:
 private:
     static unsigned long int playerId;
 
-	//free memory of column matrix
+	//Returns index to entity with no components, if found, otherwise the list will be extended and the latest index returned
+	static const unsigned long CreateEntity(World& world, const GameObjectFlag& flags = GameObjectFlag::NONE);
+
+	//Free memory of column matrix
     static void FreeWorldFields(World& world, const int worldIndex);
     static std::vector<CollisionEvent> collisionEvents;
+
+	static void DeleteAllComponentsForEntity(World& world, unsigned long int entityIndex);
+	static void DeleteEntityHandle(World& world, unsigned long int entityIndex);
 };
 
 
@@ -98,7 +101,7 @@ GAME_OBJECT_TYPE* const EntityManager::Instantiate(World& world)
 	GAME_OBJECT_TYPE* gameObject = new GAME_OBJECT_TYPE;
 	gameObject->entityIndex = entityIndex;
 	gameObject->world = &world;
-	world.EntitiesHandles.push_back(gameObject);
+	world.EntitiesHandles.insert(std::make_pair(entityIndex, gameObject));
 	gameObject->Init();
 
 #ifdef LOG_OUTPUT_CONSOLE

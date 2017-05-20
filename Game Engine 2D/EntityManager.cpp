@@ -82,10 +82,14 @@ const unsigned long EntityManager::CreateEntity(World& world, const GameObjectFl
     return indexNewEntity; //return size because you want to return an index that points to a newest entity
 }
 
-void EntityManager::DestroyEntity(World& world, const unsigned long index)
+void EntityManager::DestroyGameObject(GameObject* gameObject)
 {
-//    *world.EntitiesComponentsMasks[index] = Components::NONE;
+	unsigned long int index = gameObject->GetEntityIndex();
+	World& world = gameObject->GetWorld();
+	DeleteAllComponentsForEntity(world, index);
+	DeleteEntityHandle(world, index);
     world.EntitiesComponentsMasks[index] = UtilConstants::NO_COMPONENTS;
+	delete(gameObject);
 }
 
 const unsigned long EntityManager::GetPlayerId()
@@ -111,4 +115,31 @@ const std::vector<CollisionEvent>& EntityManager::GetCollisionEvents()
 void EntityManager::AddCollisionEvent(const CollisionEvent& event)
 {
     collisionEvents.push_back(event);
+}
+
+void EntityManager::DeleteAllComponentsForEntity(World& world, unsigned long int entityIndex)
+{
+	std::map<unsigned long int, ComponentBase*>& entityMap = world.EntitiesComponentsMatrix[entityIndex];
+	auto& iterComp = entityMap.begin();
+	while (iterComp != entityMap.end())
+	{
+		delete(iterComp->second);
+		++iterComp;
+	}
+	entityMap.clear();
+}
+
+void EntityManager::DeleteEntityHandle(World& world, unsigned long int entityIndex)
+{
+	if (world.EntitiesHandles.find(entityIndex) == world.EntitiesHandles.end())
+	{
+		std::string methodName = _FUNCION_NAME_;
+		std::ostringstream oss;
+		oss << "you're trying to delete a handle that doesn't exist, since entityIndex=" << entityIndex << " could not be found!";
+		Utils::PrintDebugLog(methodName, oss.str());
+
+		throw 1;
+	}
+
+	world.EntitiesHandles.erase(entityIndex);
 }

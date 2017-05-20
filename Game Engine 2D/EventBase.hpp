@@ -17,5 +17,4 @@ private:
 	static UID id;
 };
 
-
 #endif

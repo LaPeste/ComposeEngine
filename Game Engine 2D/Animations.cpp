@@ -5,6 +5,7 @@
 
 //in this class I could avoid to use controller rasing an event when the entity touches the ground. I'll see if I'll have the will of doing this.
 
+//FMS(sort of) for animation, basically listening for events will trigger changes in AnimationState
 void Animations::BasicInputAnimation(World& world, unsigned long int entityIndex, const InputEvent& event)
 {
 	std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
@@ -46,8 +47,15 @@ void Animations::BasicInputAnimation(World& world, unsigned long int entityIndex
 	{
 		animation->CurrentAnimationState = AnimationState::JUMPING;
 	}
-	else
+	else if (e == InputEventType::JUMP_STOP)
 	{
-		animation->CurrentAnimationState = AnimationState::IDLE;
+		if (!controller->GetMoveRight() && !controller->GetMoveLeft())
+		{
+			animation->CurrentAnimationState = AnimationState::IDLE;
+		}
+		else
+		{
+			animation->CurrentAnimationState = AnimationState::WALKING;
+		}
 	}
 }

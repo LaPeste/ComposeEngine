@@ -62,10 +62,16 @@ void Player::Init()
 	Animation* animationComp = new Animation(world, entityIndex, AnimationState::IDLE, animationMap, true);
     EntityManager::AddComponent(world, entityIndex, animationComp);
 	
-	//std::function<void(InputEvent*)> leftMethod = [&animationComp](InputEvent* i) { if(i->GetMessage() == InputEventType::RIGHT_DOWN) animationComp->CurrentAnimationState = AnimationState::WALKING; };
-	//FMS(sort of) for animation, basically listening for events will trigger changes in AnimationState
 	OnGameEvent<InputEvent>([&world, entityIndex](InputEvent* i) {
-		if(i != nullptr) Animations::BasicInputAnimation(world, entityIndex, *i);
+		if (i != nullptr)
+		{
+			Animations::BasicInputAnimation(world, entityIndex, *i);
+		}
+		else
+		{
+			std::string methodName = _FUNCION_NAME_;
+			Utils::PrintDebugLog(methodName, "The event passed was null!");
+		}
 	});
     
 }
