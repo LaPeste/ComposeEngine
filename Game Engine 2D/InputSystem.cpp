@@ -10,6 +10,9 @@
 #include "Engine.hpp"
 #include "InputSystem.hpp"
 
+//DEBUG to remove
+#include "Transform.hpp"
+
 
 InputSystem::InputSystem(World& world) : System<Controller, Velocity>(world)
 {
@@ -50,7 +53,10 @@ void InputSystem::OnKeyUp(const sf::Event::KeyEvent& input, World& world, const 
 void InputSystem::OnKeyDown(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex)
 {
     std::map<unsigned long int, ComponentBase*> entity = world.EntitiesComponentsMatrix[entityIndex];
-    Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
+	Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
+
+	//DEBUG to put mario where it was
+	Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
 
     switch (input.code)
     {
@@ -65,8 +71,12 @@ void InputSystem::OnKeyDown(const sf::Event::KeyEvent& input, World& world, cons
         case sf::Keyboard::Key::S:
             controller->SetCrouch(true);
             break;
+		case sf::Keyboard::Key::R:
+			//DEBUG to unstick mario where it was
+			transform->SetPosition(sf::Vector2f(1088, 321));
+			break;
         case sf::Keyboard::Key::Space:
-            controller->Jump(world, entityIndex);
+            controller->SetWantToJump(true);
             break;
             //Add the cases that you need
         default:

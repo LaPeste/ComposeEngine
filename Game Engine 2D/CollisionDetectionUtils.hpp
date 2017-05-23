@@ -12,6 +12,7 @@
 #include "stdafx.h"
 #include "World.hpp"
 
+//if left as it is, it should become a namespace and not a class. Being a class is pointless. It'd become relevant if, for example, it starts holding data about collisions that have hanneped.
 class CollisionDetectionUtils
 {
 public:

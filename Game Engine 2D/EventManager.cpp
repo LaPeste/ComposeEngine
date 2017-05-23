@@ -77,7 +77,7 @@ bool EventManager::RemoveListener(EventBase::UID eventId, const EventDelegate* e
 	std::string methodName = _FUNCION_NAME_;
 	std::ostringstream oss;
 
-	if (listeners.size() == 0) //I'm not sure why this happens...
+	if (listeners.size() == 0) //I'm not sure why this happens... https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/10940586/
 	{
 		oss << "You have tried to remove a delegate for the event=" << eventId << " but there is not a single eventId in the listeners map.";
 		Utils::PrintDebugError(methodName, oss.str());

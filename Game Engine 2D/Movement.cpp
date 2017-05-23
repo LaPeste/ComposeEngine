@@ -12,6 +12,8 @@
 #include "FPS.hpp"
 #include "CollisionDetectionUtils.hpp"
 
+#include "InputEvent.hpp"
+
 Movement::Movement(World& world) : System<Controller, Velocity, Acceleration, EntityFlag, Transform, Collider>(world)
 {
 
@@ -44,6 +46,12 @@ void Movement::Update(World& world, const unsigned long entityIndex)
     {
         acceleration->AccelerationX = acceleration->AccelerationPerFrameX;
     }
+
+	if (controller->WantToJump())
+	{
+		Jump(world, entityIndex);
+		controller->SetWantToJump(false);
+	}
             
     if((entityFlag->GetEntityFlag() & GameObjectFlag::GRAVITY) == GameObjectFlag::GRAVITY)
     {
@@ -158,8 +166,8 @@ void Movement::MoveTo(World& world, const unsigned long entityIndex, float x, fl
             {
                 velocity->SpeedY = 0;
             }
-            controller->SetCanJump(velocity->SpeedY == 0); //avoid double, triple, ... n jump. Jump allowed only when the ground is reached.
-			controller->SetIfJumping(velocity->SpeedY != 0); //this is used to stop the jumping animation or any other animation triggered from a free fall
+            //controller->SetCanJump(velocity->SpeedY == 0); //avoid double, triple, ... n jump. Jump allowed only when the ground is reached.
+			controller->SetFreeFalling(velocity->SpeedY != 0); //this is used to stop the jumping animation or any other animation triggered from a free fall
         }
         
         x -= stepX;
@@ -200,4 +208,19 @@ bool Movement::PosValid(World& world, const unsigned long entityIndex, float x, 
     }
 	transform->SetPosition(originalPosition);
     return posValid;
+}
+
+bool Movement::Jump(World& world, const unsigned long entityIndex)
+{
+	std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
+	Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
+	Velocity* velocity = static_cast<Velocity*>(entity[Component<Velocity>::Id]);
+
+	if (!controller->CanJump()) return false;
+
+	controller->SetJumping(true);
+	EventManager::QueueEvent(new InputEvent(InputEventType::JUMP_START));
+
+	velocity->SpeedY = -velocity->MaxSpeedY;
+	return true;
 }

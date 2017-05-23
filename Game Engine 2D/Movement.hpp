@@ -25,12 +25,13 @@ public:
     ~Movement();
         
 private:
-    void MoveEntity(World& world, const unsigned long entityIndex);
     void StopMove(World& world, const unsigned long entityIndex);
     void MoveTo(World& world, const unsigned long entityIndex, float x, float y);
     bool PosValid(World& world, const unsigned long entityIndex, float x, float y);
 
 	void Update(World& world, const unsigned long entityIndex) override;
+
+	bool Jump(World& world, const unsigned long entityIndex);
 
 };
 

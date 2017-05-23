@@ -21,25 +21,28 @@ public:
 	bool GetMoveRight() const;
 	bool GetMoveLeft() const;
 	bool GetCrouch() const;
-	bool GetCanJump() const;
+	bool CanJump() const;
 	bool IsJumping() const;
+	bool IsFreeFalling() const;
+	bool WantToJump() const;
 
 	void SetMoveRight(bool moveRight);
 	void SetMoveLeft(bool moveLight);
 	void SetCrouch(bool crouch);
-	void SetCanJump(bool canJump);
+	void SetJumping(bool jumping);
+	void SetWantToJump(bool wantToJump);
 
 	//ATTENTION: You should never ever use this method, unless you really know what you are doing!!!!
-	void SetIfJumping(bool jumping);
-
-	bool Jump(World& world, const unsigned long entityIndex);
+	void SetFreeFalling(bool freeFalling);
 
 private:
     bool moveRight;
     bool moveLeft;
     bool crouch;
-    bool canJump; //used to check conditions like: touching the ground etc etc
-	bool currentlyInTheAir;
+    //bool canJump; //used to check conditions like: touching the ground etc etc
+	bool wantToJump;
+	bool jumping;
+	bool freeFalling;
 
 };
 

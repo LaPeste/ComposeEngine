@@ -10,10 +10,12 @@ enum class InputEventType
 	LEFT_UP,
 	RIGHT_DOWN,
 	RIGHT_UP,
+	JUMP_PRESSED,
 	JUMP_START,
-	JUMP_STOP, //raised when not falling anymore from a previous free falling (jump included)
+	FREE_FALLING_STOP, //raised when not falling anymore from a previous free falling (jump included)
 	CROUCH_DOWN,
-	CROUCH_UP
+	CROUCH_UP,
+	FREE_FALLING_START //when falling but not for a jump
 };
 
 class InputEvent : public EventBase

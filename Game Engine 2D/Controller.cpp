@@ -10,7 +10,7 @@
 #include "InputEvent.hpp"
 #include "Velocity.hpp"
 
-Controller::Controller(World& world, const unsigned long int entityIndex) : moveRight(false), moveLeft(false), crouch(false), currentlyInTheAir(false), canJump(false),
+Controller::Controller(World& world, const unsigned long int entityIndex) : moveRight(false), moveLeft(false), crouch(false), wantToJump(false), jumping(false), freeFalling(false),
 Component(world, entityIndex)
 {
     
@@ -33,14 +33,41 @@ bool Controller::GetCrouch() const
 	return crouch;
 }
 
-bool Controller::GetCanJump() const
+bool Controller::CanJump() const
 {
-	return canJump;
+	return !IsJumping();
+}
+
+bool Controller::WantToJump() const
+{
+	return wantToJump;
 }
 
 bool Controller::IsJumping() const
 {
-	return currentlyInTheAir;
+	return jumping;
+}
+
+bool Controller::IsFreeFalling() const
+{
+	return freeFalling;
+}
+
+void Controller::SetWantToJump(bool wantToJump)
+{
+	if (!wantToJump || (wantToJump && !CanJump()))	//to avoid weird behaviours
+	{
+		this->wantToJump = false;
+	}
+	else
+	{
+		this->wantToJump = true;
+	}
+}
+
+void Controller::SetJumping(bool jumping)
+{
+	this->jumping = jumping;
 }
 
 void Controller::SetMoveLeft(bool moveLeft)
@@ -75,30 +102,23 @@ void Controller::SetCrouch(bool crouch)
 	}
 }
 
-void Controller::SetCanJump(bool canJump)
-{
-	this->canJump = canJump;
-}
+//void Controller::SetCanJump(bool canJump)
+//{
+//	this->canJump = canJump;
+//}
 
-void Controller::SetIfJumping(bool jumping)
+void Controller::SetFreeFalling(bool freeFalling)
 {
-	if (currentlyInTheAir && !jumping)
+	if (!IsJumping() && !this->freeFalling && freeFalling) //free falling starts if not jumping
 	{
-		EventManager::QueueEvent(new InputEvent(InputEventType::JUMP_STOP));
+		EventManager::QueueEvent(new InputEvent(InputEventType::FREE_FALLING_START));
 	}
-	currentlyInTheAir = jumping;
-}
+	else if(this->freeFalling && !freeFalling)
+	{
+		EventManager::QueueEvent(new InputEvent(InputEventType::FREE_FALLING_STOP));
+	}
 
-bool Controller::Jump(World& world, const unsigned long entityIndex)
-{
-	std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
-	Controller* controller = static_cast<Controller*>(entity[Component<Controller>::Id]);
-	Velocity* velocity = static_cast<Velocity*>(entity[Component<Velocity>::Id]);
+	if (!freeFalling) SetJumping(false); //a jump, if started, ends when free falling ends
 
-	if (!controller->GetCanJump()) return false;
-	
-	EventManager::QueueEvent(new InputEvent(InputEventType::JUMP_START));
-
-	velocity->SpeedY = -velocity->MaxSpeedY;
-	return true;
+	this->freeFalling = freeFalling;
 }

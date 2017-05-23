@@ -47,7 +47,7 @@ void Animations::BasicInputAnimation(World& world, unsigned long int entityIndex
 	{
 		animation->CurrentAnimationState = AnimationState::JUMPING;
 	}
-	else if (e == InputEventType::JUMP_STOP)
+	else if (e == InputEventType::FREE_FALLING_STOP)
 	{
 		if (!controller->GetMoveRight() && !controller->GetMoveLeft())
 		{
@@ -57,5 +57,9 @@ void Animations::BasicInputAnimation(World& world, unsigned long int entityIndex
 		{
 			animation->CurrentAnimationState = AnimationState::WALKING;
 		}
+	}
+	else if (e == InputEventType::FREE_FALLING_START)
+	{
+		animation->CurrentAnimationState = AnimationState::IDLE;
 	}
 }
