@@ -14,7 +14,7 @@
 #include "Transform.hpp"
 
 
-InputSystem::InputSystem(World& world) : System<Controller, Velocity>(world)
+InputSystem::InputSystem(World& world) : System<Controller>(world)
 {
     
 }

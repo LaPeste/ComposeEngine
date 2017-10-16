@@ -22,6 +22,10 @@
 #include "Velocity.hpp"
 #include "Controller.hpp"
 
+/*!
+ * In the template it's expected to go all needed Components for the current System to work properly.
+ */
+
 template<typename First, typename ...Rest> //variadic template
 class System : public SystemBase
 {

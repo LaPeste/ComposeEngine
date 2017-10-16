@@ -75,6 +75,18 @@
     <Filter Include="Source Files\Entities\Animations">
       <UniqueIdentifier>{39f7bbe4-9c2c-4880-aeac-9efc192fc67a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entities\BT basic nodes">
+      <UniqueIdentifier>{73d83455-5f87-426e-8caa-6ae7bf841aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\BTs">
+      <UniqueIdentifier>{155e56e8-3ab0-41ba-9691-504f69768f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\BT basic nodes\Composite">
+      <UniqueIdentifier>{e47e5b84-15bc-463b-8529-577662296a72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\BT basic nodes">
+      <UniqueIdentifier>{e99c8222-7c57-46cc-8ca8-c32d67491ada}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -220,6 +232,18 @@
     </ClCompile>
     <ClCompile Include="Animations.cpp">
       <Filter>Source Files\Entities\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourTree.cpp">
+      <Filter>Source Files\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BTEngine.cpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Sequence.cpp">
+      <Filter>Source Files\Entities\BT basic nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Selector.cpp">
+      <Filter>Source Files\Entities\BT basic nodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -381,6 +405,18 @@
     </ClInclude>
     <ClInclude Include="Animations.hpp">
       <Filter>Header Files\Entities\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourTree.hpp">
+      <Filter>Header Files\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BTEngine.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequence.hpp">
+      <Filter>Header Files\Entities\BT basic nodes\Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="Selector.hpp">
+      <Filter>Header Files\Entities\BT basic nodes\Composite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

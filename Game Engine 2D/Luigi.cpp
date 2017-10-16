@@ -8,6 +8,7 @@
 #include "Velocity.hpp"
 #include "Collider.hpp"
 #include "Transform.hpp"
+#include "BehaviourTree.hpp"
 
 void Luigi::Init()
 {
@@ -24,4 +25,5 @@ void Luigi::Init()
 	EntityManager::AddComponent(world, entityIndex, new Acceleration(world, entityIndex, Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y));
 	EntityManager::AddComponent(world, entityIndex, new Controller(world, entityIndex));
 	EntityManager::AddComponent(world, entityIndex, new Velocity(world, entityIndex));
+	//EntityManager::AddComponent(world, entityIndex, new BT::BehaviourTree(world, entityIndex, /*pass test tree*/));
 }

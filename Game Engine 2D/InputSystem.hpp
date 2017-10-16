@@ -13,7 +13,7 @@
 #include "System.hpp"
 #include "Event.hpp"
 
-class InputSystem : public System<Controller, Velocity>, public Event
+class InputSystem : public System<Controller>, public Event
 {
 public:
     InputSystem(World& world);

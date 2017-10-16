@@ -122,6 +122,8 @@
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Appearance.cpp" />
+    <ClCompile Include="BehaviourTree.cpp" />
+    <ClCompile Include="BTEngine.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ClassRegistry.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -148,6 +150,8 @@
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Selector.cpp" />
+    <ClCompile Include="Sequence.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="SystemBase.cpp" />
     <ClCompile Include="SystemManager.cpp" />
@@ -171,6 +175,8 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Animator.hpp" />
     <ClInclude Include="Appearance.hpp" />
+    <ClInclude Include="BehaviourTree.hpp" />
+    <ClInclude Include="BTEngine.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Collider.hpp" />
     <ClInclude Include="CollisionDetectionUtils.hpp" />
@@ -200,6 +206,8 @@
     <ClInclude Include="ClassRegistry.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="ResourcePath.hpp" />
+    <ClInclude Include="Selector.hpp" />
+    <ClInclude Include="Sequence.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="System.hpp" />
     <ClInclude Include="SystemBase.hpp" />
