@@ -12,7 +12,7 @@ class Transform : public Component<Transform>
 {
 public:
 	Transform(World& world, const unsigned long int entityIndex);
-	~Transform();
+	~Transform() override;
 
 	const sf::Vector2f& GetPosition() const;
 	void SetPosition(const sf::Vector2f& pos);

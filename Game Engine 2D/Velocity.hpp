@@ -16,7 +16,7 @@ class Velocity : public Component<Velocity>
 {
 public:
     Velocity(World& world, const unsigned long int entityIndex);
-    ~Velocity();
+    ~Velocity() override;
     
 //    float GetSpeedX() const;
 //    void SetSpeedX(float speedX);

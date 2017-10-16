@@ -15,7 +15,8 @@ Renderer::Renderer(World& world) : System<Appearance>(world)
 
 }
 
-Renderer::~Renderer(){}
+Renderer::~Renderer()
+{}
 
 void Renderer::Render(World& world, const unsigned long int entityIndex)
 {

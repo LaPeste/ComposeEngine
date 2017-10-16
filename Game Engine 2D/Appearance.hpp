@@ -16,7 +16,7 @@ class Appearance : public Component<Appearance>
 {
 public:
     Appearance(World& world, const unsigned long int entityIndex, std::string spritePath);
-    ~Appearance();
+    ~Appearance() override;
     
     //TODO maybe make them private and make them setable only from constructor?
     std::string SpritePath;

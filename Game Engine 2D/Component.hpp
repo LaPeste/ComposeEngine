@@ -18,7 +18,7 @@ class Component : public ComponentBase
     
 public:
     Component(World& world, const unsigned long int entityIndex);
-	~Component();
+	~Component() override;
     
     static unsigned long int Id;
 

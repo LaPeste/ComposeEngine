@@ -22,7 +22,7 @@ class Movement : public System<Controller, Velocity, Acceleration, EntityFlag, T
 {
 public:
     Movement(World& world);
-    ~Movement();
+    ~Movement() override;
         
 private:
     void StopMove(World& world, const unsigned long entityIndex);

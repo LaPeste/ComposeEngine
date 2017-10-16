@@ -16,7 +16,7 @@ class Controller : public Component<Controller>
 {
 public:
     Controller(World& world, const unsigned long int entityIndex);
-	~Controller();
+	~Controller() override;
     
 	bool GetMoveRight() const;
 	bool GetMoveLeft() const;

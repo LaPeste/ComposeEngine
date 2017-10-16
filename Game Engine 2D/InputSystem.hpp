@@ -17,7 +17,7 @@ class InputSystem : public System<Controller>, public Event
 {
 public:
     InputSystem(World& world);
-    ~InputSystem();
+    ~InputSystem() override;
         
     void OnKeyUp(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex) override;
     void OnKeyDown(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex) override;

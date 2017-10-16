@@ -32,7 +32,8 @@ class System : public SystemBase
 public:
     
     System(World& world);
-        
+	~System() override;
+
     const unsigned long int GetComponentBitMask() const;
 
 	static unsigned long int Id;

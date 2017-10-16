@@ -15,7 +15,8 @@ class SystemBase
 {
 public:
     SystemBase();
-        
+	virtual ~SystemBase();
+
     virtual void OnStart() = 0;
     virtual void OnInput(const sf::Event& event) = 0;
     virtual void OnUpdate() = 0;

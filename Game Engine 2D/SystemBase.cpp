@@ -14,3 +14,8 @@ SystemBase::SystemBase()
 {
     
 }
+
+SystemBase::~SystemBase()
+{
+
+}

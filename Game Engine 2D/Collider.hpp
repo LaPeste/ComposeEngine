@@ -16,7 +16,7 @@ class Collider : public Component<Collider>
 {
 public:
     Collider(World& world, const unsigned long int entityIndex, const sf::Vector2f& offset = sf::Vector2f(0, 0), const sf::FloatRect& colliderRect = sf::FloatRect());
-	~Collider();
+	~Collider() override;
     
 	const sf::FloatRect& GetColliderRect() const;
 

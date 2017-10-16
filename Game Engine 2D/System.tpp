@@ -25,6 +25,9 @@ System<First,Rest...>::System(World& world) : componentsBitMask(0), System::worl
 }
 
 template<typename First, typename ...Rest>
+System<First, Rest...>::~System() {}
+
+template<typename First, typename ...Rest>
 template<typename FirstInternal, typename SecondInternal, typename ...RestInternal>
 void System<First,Rest...>::CalculateComponentsBitMask()
 {

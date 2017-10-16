@@ -48,7 +48,7 @@ namespace BT
 	{
 	public:
 		BehaviourTree(World& world, const unsigned long int entityIndex, Node* root);
-		~BehaviourTree();
+		~BehaviourTree() override;
 		BehaviourTree(const BehaviourTree &) = delete;
 		BehaviourTree& operator=(const BehaviourTree &) = delete;
 
@@ -74,6 +74,8 @@ namespace BT
 Virtual destructor are needed when deleting a derived class throught a poiter to base class.
 If the destructor of the base class is not defined as virtual then undefined behaviours may arise.
 
+One more thing: destructors are always called in the reverse order of the class derivation.
+That means derived class destructor will be invoked first & then base class destructor will be called.
 */
 
 #endif _BEHAVIOUR_TREE_HPP_

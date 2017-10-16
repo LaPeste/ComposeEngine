@@ -16,7 +16,7 @@ class Acceleration : public Component<Acceleration>
 {
 public:
     Acceleration(World& world, const unsigned long int entityIndex, const float accelerationPerFrameX, const float accelerationPerFrameY);
-	~Acceleration();
+	~Acceleration() override;
     
 //    float GetAccelerationX() const;
 //    void SetAccelerationX(const float accelerationX);

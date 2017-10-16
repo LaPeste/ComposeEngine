@@ -16,7 +16,7 @@ class Renderer : public System<Appearance>
 {
 public:
     Renderer(World& world);
-    ~Renderer();
+    ~Renderer() override;
     
 private:
 	void Render(World& world, const unsigned long int entityIndex) override;
