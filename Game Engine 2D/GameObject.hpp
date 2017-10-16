@@ -21,7 +21,7 @@ public:
 
 protected:
 	GameObject();
-	~GameObject();
+	virtual ~GameObject();
 
 	virtual void Init() = 0; //add all the components that define the entity, like a prefab in Unity
 	const unsigned long int GetEntityIndex() const;
