@@ -11,8 +11,9 @@ public:
 	EventListener();
 	~EventListener();
 
-	EventListener(const EventListener&) = delete;
-	EventListener& operator=(const EventListener&) = delete;
+	// TODO https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/13064327/
+	/*EventListener(const EventListener&) = delete;
+	EventListener& operator=(const EventListener&) = delete;*/
 
 	template<typename EVENT_TYPE>
 	bool OnGameEvent(std::function<void(EVENT_TYPE*)> delegateEvent);

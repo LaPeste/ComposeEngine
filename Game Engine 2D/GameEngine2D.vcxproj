@@ -148,6 +148,7 @@
     <ClCompile Include="Luigi.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="Patrolling.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Selector.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="InputSystem.hpp" />
     <ClInclude Include="Luigi.hpp" />
     <ClInclude Include="Movement.hpp" />
+    <ClInclude Include="Patrolling.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="ClassRegistry.hpp" />
     <ClInclude Include="Renderer.hpp" />

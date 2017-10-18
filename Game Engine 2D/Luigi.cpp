@@ -9,6 +9,7 @@
 #include "Collider.hpp"
 #include "Transform.hpp"
 #include "BehaviourTree.hpp"
+#include "Patrolling.hpp"
 
 void Luigi::Init()
 {
@@ -25,5 +26,15 @@ void Luigi::Init()
 	EntityManager::AddComponent(world, entityIndex, new Acceleration(world, entityIndex, Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y));
 	EntityManager::AddComponent(world, entityIndex, new Controller(world, entityIndex));
 	EntityManager::AddComponent(world, entityIndex, new Velocity(world, entityIndex));
-	//EntityManager::AddComponent(world, entityIndex, new BT::BehaviourTree(world, entityIndex, /*pass test tree*/));
+
+	std::unique_ptr<BT::Patrolling> patrNode = std::make_unique<BT::Patrolling>(nullptr, std::vector<std::unique_ptr<BT::Node>>());
+	/*std::unique_ptr<BT::BehaviourTree> bt = std::make_unique<BT::BehaviourTree>(
+		world, entityIndex,
+		std::move(patrNode),
+		*this);*/
+	BT::BehaviourTree* bt = new BT::BehaviourTree(
+		world, entityIndex,
+		std::move(patrNode),
+		*this);
+	EntityManager::AddComponent(world, entityIndex, bt);
 }

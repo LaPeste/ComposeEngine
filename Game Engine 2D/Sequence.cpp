@@ -2,8 +2,8 @@
 
 namespace BT
 {
-	Sequence::Sequence(Node* parent, std::vector<Node> children) :
-		currentChildIndex(0), Node(parent, children)
+	Sequence::Sequence(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children, Context& context) :
+		currentChildIndex(0), Node(std::move(parent), std::move(children), context)
 	{}
 
 	Status Sequence::Init()
@@ -48,7 +48,7 @@ namespace BT
 	{
 		int childrenIndexSize = GetChildren().size() - 1;
 		Status childResult;
-		Node currChild = GetChild(currentChildIndex);
+		Node& currChild = GetChild(currentChildIndex);
 
 		// Init or continue running current child
 		if (currChild.GetStatus() == Status::NONE)

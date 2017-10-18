@@ -12,7 +12,7 @@ namespace BT
 	class Selector : public Node
 	{
 	public:
-		Selector(Node* parent, std::vector<Node> children);
+		Selector(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children, Context& context);
 		Status Init() override;
 		Status Process() override;
 

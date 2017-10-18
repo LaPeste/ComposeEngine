@@ -87,6 +87,9 @@
     <Filter Include="Source Files\Entities\BT basic nodes">
       <UniqueIdentifier>{e99c8222-7c57-46cc-8ca8-c32d67491ada}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects\BTs">
+      <UniqueIdentifier>{78d23b0f-4d27-4203-9bc6-ec62a09d39fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -244,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="Selector.cpp">
       <Filter>Source Files\Entities\BT basic nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Patrolling.cpp">
+      <Filter>Source Files\GameObjects\BTs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -417,6 +423,9 @@
     </ClInclude>
     <ClInclude Include="Selector.hpp">
       <Filter>Header Files\Entities\BT basic nodes\Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="Patrolling.hpp">
+      <Filter>Header Files\GameObjects\BTs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

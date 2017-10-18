@@ -15,7 +15,7 @@ namespace BT
 	class Sequence : public Node
 	{
 	public:
-		Sequence(Node* parent, std::vector<Node> children);
+		Sequence(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children, Context& context);
 		Status Init() override;
 		Status Process() override;
 

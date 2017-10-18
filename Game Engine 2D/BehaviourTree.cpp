@@ -4,9 +4,11 @@
 namespace BT
 {
 	//BehaviourTree class
-	BehaviourTree::BehaviourTree(World& world, const unsigned long int entityIndex, Node* root) : root(root), currentNode(*root), Component(world, entityIndex)
+	BehaviourTree::BehaviourTree(World& world, const unsigned long int entityIndex, std::unique_ptr<Node> root, GameObject& gameObjectAssociated) :
+		root(std::move(root)), currentNode(this->root.get()), gameObjectAssociated(gameObjectAssociated),
+		Component(world, entityIndex)
 	{
-		if (root == nullptr)
+		if (!this->root)
 		{
 			std::string methodName = _FUNCION_NAME_;
 			std::ostringstream oss;
@@ -14,33 +16,42 @@ namespace BT
 			Utils::PrintDebugError(methodName, oss.str());
 			throw 1;
 		}
+		this->root->SetContext(context);
+		context.insert(std::make_pair("gameObject", std::shared_ptr<void>(&this->gameObjectAssociated)));
 	}
 
 	BehaviourTree::~BehaviourTree()
 	{
-		delete root;
 	}
 	
-	/*
-	BehaviourTree::BehaviourTree(const BehaviourTree &other) : Component<BehaviourTree>(other), context(other.context)
+	//BehaviourTree::BehaviourTree(const BehaviourTree& other, const GameObject& gameObjectAssosicated) :
+	//	Component<BehaviourTree>(other), context(),
+	//	gameObjectAssociated(const_cast<GameObject&>(gameObjectAssosicated))
+	//{
+	//	Node* newRoot = new Node(nullptr, other.GetRoot()->GetChildren(), const_cast<Context&>(other.context));
+	//	root = newRoot;
+	//	currentNode = *newRoot;
+	//}
+	//
+
+	//BehaviourTree& BehaviourTree::operator=(const BehaviourTree& other)
+	//{
+	//	// TODO this is pretty questionable. Why would you make a second BT that is "linked" to a gameobject that has already a BT???
+	//	gameObjectAssociated = other.gameObjectAssociated;
+	//	Node* newRoot = new Node(nullptr, other.GetRoot()->GetChildren(), const_cast<Context&>(other.context));
+	//	root = newRoot;
+	//	currentNode = *newRoot;
+	//}
+	
+
+	Context& BehaviourTree::GetContext() const
 	{
-		delete root;
-		Node* newRoot = new Node(other.GetRoot());
-		root = newRoot;
+		return const_cast<Context&>(context);
 	}
 
-	BehaviourTree& BehaviourTree::operator=(const BehaviourTree &other)
+	void* BehaviourTree::GetContextValue(const std::string& search) const
 	{
-		context = other.context;
-		delete root;
-		Node* newRoot = new Node(other.GetRoot());
-		root = newRoot;
-	}
-	*/
-
-	std::shared_ptr<void> BehaviourTree::GetContextValue(const std::string& search) const
-	{
-		return context.at(search);
+		return context.at(search).get();
 	}
 
 	void BehaviourTree::SetContextValue(const std::string& key, std::shared_ptr<void> value)
@@ -48,9 +59,9 @@ namespace BT
 		context.insert(std::make_pair(key, value));
 	}
 
-	Node* BehaviourTree::GetRoot() const
+	Node& BehaviourTree::GetRoot() const
 	{
-		return root;
+		return *root;
 	}
 
 	/*void BehaviourTree::SetRoot(Node * const root)
@@ -64,24 +75,60 @@ namespace BT
 
 	Node& BehaviourTree::GetCurrentNode() const
 	{
-		return currentNode;
+		return *currentNode;
 	}
 
-	void BehaviourTree::SetCurrentNode(Node& currNode)
+	void BehaviourTree::SetCurrentNode(const Node& currNode)
 	{
-		currentNode = currNode;
+		currentNode = const_cast<Node*>(&currNode);
 	}
 
-
+	GameObject& BehaviourTree::GetGameObjectAssociated() const
+	{
+		return gameObjectAssociated;
+	}
 
 	// Node class
-	Node::Node(Node* parent, std::vector<Node> children) :
-		parent(parent), children(children), status(Status::NONE)
+	Node::Node(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children, const Context& context) :
+		parent(std::move(parent)), children(std::move(children)), context(const_cast<Context*>(&context)),
+		status(Status::NONE)
+	{ }
+
+	Node::Node(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children) :
+		parent(std::move(parent)), children(std::move(children)),
+		status(Status::NONE)
 	{ }
 
 	Node::~Node()
 	{
 
+	}
+
+	/*Node::Node(const Node& other) :
+		status(Status::NONE)
+	{
+		std::copy(other.GetChildren().begin(), other.GetChildren().end(), children);
+		context
+		parent = new Node(nullptr, Context(), const_cast<Context&>(other.context));
+
+	}*/
+
+	Node::Node(Node&& other) :
+		parent(std::move(other.parent)), children(std::move(other.children)),
+		status(other.status), context(other.context)
+	{
+	}
+
+	Node& Node::operator=(Node&& other)
+	{
+		if (&other != this)
+		{
+			parent = std::move(other.parent);
+			children = std::move(other.children);
+			status = other.status;
+			context = other.context;
+		}
+		return *this;
 	}
 
 	Status Node::Init()
@@ -102,29 +149,34 @@ namespace BT
 		throw 2;
 	}
 
-	Node* Node::GetParent() const
+	Node& Node::GetParent() const
 	{
-		return parent;
+		return *parent;
 	}
 
-	void Node::SetParent(Node* parent)
+	void Node::SetParent(std::unique_ptr<Node> parent)
 	{
-		this->parent = parent;
+		this->parent = std::move(parent);
 	}
 
-	std::vector<Node> Node::GetChildren() const
+	std::vector<std::unique_ptr<Node>>& Node::GetChildren() const
 	{
-		return children;
+		return const_cast<std::vector<std::unique_ptr<Node>>&>(children);
 	}
 
 	Node& Node::GetChild(int childIndex)
 	{
-		return children[childIndex];
+		return *children[childIndex];
 	}
 
-	void Node::AddChild(Node& child)
+	void Node::AddChild(std::unique_ptr<Node> child)
 	{
-		children.push_back(child);
+		children.push_back(std::move(child));
+	}
+
+	void Node::SetContext(const Context& context)
+	{
+		this->context = const_cast<Context*>(&context);
 	}
 
 	/*void Node::RemoveChild(Node& child)
