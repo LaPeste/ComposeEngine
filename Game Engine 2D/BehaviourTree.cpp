@@ -17,7 +17,7 @@ namespace BT
 			throw 1;
 		}
 		this->root->SetContext(context);
-		context.insert(std::make_pair("gameObject", std::shared_ptr<void>(&this->gameObjectAssociated)));
+		SetContextValue("gameObject", std::make_unique<void>(&this->gameObjectAssociated));
 	}
 
 	BehaviourTree::~BehaviourTree()
@@ -54,9 +54,9 @@ namespace BT
 		return context.at(search).get();
 	}
 
-	void BehaviourTree::SetContextValue(const std::string& key, std::shared_ptr<void> value)
+	void BehaviourTree::SetContextValue(const std::string& key, std::unique_ptr<void> value)
 	{
-		context.insert(std::make_pair(key, value));
+		context.insert(std::make_pair(key, std::move(value)));
 	}
 
 	Node& BehaviourTree::GetRoot() const

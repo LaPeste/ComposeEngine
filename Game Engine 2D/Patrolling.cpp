@@ -31,7 +31,7 @@ namespace BT
 		Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
 
 		originalPosition = transform->GetPosition();
-		finalPosition.x = originalPosition.x + 5.0f;
+		finalPosition.x = originalPosition.x + 100.0f;
 		controller->SetMoveLeft(false);
 		controller->SetMoveRight(true);
 
@@ -47,12 +47,13 @@ namespace BT
 		Controller* controller = static_cast<Controller*>(entity[Controller::Id]);
 		Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
 
-		if (transform->GetPosition().x != originalPosition.x)
+		if (transform->GetPosition().x > originalPosition.x)
 		{
 			if (!turnBack)
 			{
 				controller->SetMoveLeft(false);
 				controller->SetMoveRight(true);
+				controller->SetWantToJump(true);
 				turnBack = transform->GetPosition().x > finalPosition.x;
 			}
 			else
@@ -63,6 +64,10 @@ namespace BT
 			SetStatus(Status::RUNNING);
 			return Status::RUNNING;
 		}
+
+		controller->SetMoveRight(false);
+		controller->SetMoveLeft(false);
+
 		SetStatus(Status::SUCCESS);
 		return Status::SUCCESS;
 	}

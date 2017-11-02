@@ -7,7 +7,7 @@
 
 namespace BT
 {
-	typedef std::map<std::string, std::shared_ptr<void>> Context;
+	using Context = std::map<std::string, std::unique_ptr<void>>;
 
 	enum class Status
 	{
@@ -78,14 +78,14 @@ namespace BT
 		~BehaviourTree() override;
 
 		//! context won't be copied since there may be pointers and references to object that should not be copied
-		BehaviourTree(const BehaviourTree& other, const GameObject& gameObjectAssosicated) = delete;
+		BehaviourTree(const BehaviourTree& other) = delete;
 
 		//! context won't be copied since there may be pointers and references to object that should not be copied
 		BehaviourTree& operator=(const BehaviourTree& other) = delete;
 
 		Context& GetContext() const;
 		void* GetContextValue(const std::string& search) const;
-		void SetContextValue(const std::string& key, std::shared_ptr<void> value);
+		void SetContextValue(const std::string& key, std::unique_ptr<void> value);
 		Node& GetRoot() const;
 		//void SetRoot(Node * const root);
 		Node& GetCurrentNode() const;

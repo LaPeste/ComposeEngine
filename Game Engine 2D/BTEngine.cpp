@@ -11,6 +11,13 @@ namespace BT
 		BehaviourTree* bt = static_cast<BehaviourTree*>(entity[BehaviourTree::Id]);
 
 		Node& currNode = bt->GetCurrentNode();
+
+		// if tree has already run, then do nothing. No reason to go any further.
+		if (currNode.GetStatus() == Status::SUCCESS)
+		{
+			return;
+		}
+
 		if (currNode.GetStatus() == Status::NONE)
 		{
 			currNode.Init();
