@@ -17,14 +17,17 @@ namespace BT
 		RUNNING
 	};
 
+
+	class BehaviourTree;
+
 	class Node
 	{
 	public:
 		//!This constructor is supposed to be used for the root when you don't have a context.
-		Node(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children);
+		Node(Node* parent, std::vector<std::unique_ptr<Node>> children);
 
 		//! Usually the context in this constructor is coming from an existing BehaviourTree
-		Node(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children, const Context& context);
+		Node(Node* parent, std::vector<std::unique_ptr<Node>> children, const BehaviourTree& bt);
 		virtual ~Node();
 
 		/*! 
@@ -49,11 +52,11 @@ namespace BT
 
 		// Parent can be null, think about tree root
 		Node& GetParent() const;
-		void SetParent(std::unique_ptr<Node> parent);
+		void SetParent(Node* parent);
 		std::vector<std::unique_ptr<Node>>& GetChildren() const;
 		Node& GetChild(int childIndex);
 		void AddChild(std::unique_ptr<Node> child); //maybe useless
-		void SetContext(const Context& context);
+		void SetBehaviourTree(const BehaviourTree& bt);
 
 		/*!
 		 * It will remove ALL nodes that are identical to child.
@@ -64,12 +67,11 @@ namespace BT
 		void SetStatus(Status status);
 
 	protected:
-		std::unique_ptr<Node> parent; // must be pointer since it could not have a parent. This way it can be null
+		Node* parent; // must be pointer since it could not have a parent. This way it can be null
 		std::vector<std::unique_ptr<Node>> children;
 		Status status;
-		// context is owned by the behaviour tree, this is just a ref to that of the BT
-		Context* context;
-		//BehaviourTree* bt;
+		// the bt is used mainly to give a standardized interface to BehaviourTree::context
+		BehaviourTree* bt;
 	};
 
 	class BehaviourTree : public Component<BehaviourTree>
@@ -85,6 +87,7 @@ namespace BT
 		BehaviourTree& operator=(const BehaviourTree& other) = delete;
 
 		Context& GetContext() const;
+		bool ContextValueExist(const std::string& search) const;
 		void* GetContextValue(const std::string& search) const;
 		void SetContextValue(const std::string& key, void* value);
 		Node& GetRoot() const;

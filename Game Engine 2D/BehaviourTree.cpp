@@ -16,7 +16,8 @@ namespace BT
 			Utils::PrintDebugError(methodName, oss.str());
 			throw 1;
 		}
-		this->root->SetContext(context);
+		//set context to root, since it could not have one at the creation moment.
+		this->root->SetBehaviourTree(*this);
 		SetContextValue("gameObject", &this->gameObjectAssociated);
 	}
 
@@ -49,8 +50,19 @@ namespace BT
 		return const_cast<Context&>(context);
 	}
 
+	bool BehaviourTree::ContextValueExist(const std::string& search) const
+	{
+		return !(context.find(search) == context.end());
+	}
+
 	void* BehaviourTree::GetContextValue(const std::string& search) const
 	{
+		if (!ContextValueExist(search))
+		{
+			std::string methodName = _FUNCION_NAME_;
+			Utils::PrintDebugError(methodName, "Context does not have the field " + search + ". Abort!");
+			throw 1;
+		}
 		return context.at(search);
 	}
 
@@ -89,13 +101,13 @@ namespace BT
 	}
 
 	// Node class
-	Node::Node(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children, const Context& context) :
-		parent(std::move(parent)), children(std::move(children)), context(const_cast<Context*>(&context)),
+	Node::Node(Node* parent, std::vector<std::unique_ptr<Node>> children, const BehaviourTree& bt) :
+		parent(parent), children(std::move(children)), bt(const_cast<BehaviourTree*>(&bt)),
 		status(Status::NONE)
 	{ }
 
-	Node::Node(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children) :
-		parent(std::move(parent)), children(std::move(children)),
+	Node::Node(Node* parent, std::vector<std::unique_ptr<Node>> children) :
+		parent(parent), children(std::move(children)),
 		status(Status::NONE)
 	{ }
 
@@ -114,8 +126,8 @@ namespace BT
 	}*/
 
 	Node::Node(Node&& other) :
-		parent(std::move(other.parent)), children(std::move(other.children)),
-		status(other.status), context(other.context)
+		parent(other.parent), children(std::move(other.children)),
+		status(other.status), bt(other.bt)
 	{
 	}
 
@@ -123,10 +135,10 @@ namespace BT
 	{
 		if (&other != this)
 		{
-			parent = std::move(other.parent);
+			parent = other.parent;
 			children = std::move(other.children);
 			status = other.status;
-			context = other.context;
+			bt = other.bt;
 		}
 		return *this;
 	}
@@ -154,9 +166,9 @@ namespace BT
 		return *parent;
 	}
 
-	void Node::SetParent(std::unique_ptr<Node> parent)
+	void Node::SetParent(Node* parent)
 	{
-		this->parent = std::move(parent);
+		this->parent = parent;
 	}
 
 	std::vector<std::unique_ptr<Node>>& Node::GetChildren() const
@@ -174,9 +186,9 @@ namespace BT
 		children.push_back(std::move(child));
 	}
 
-	void Node::SetContext(const Context& context)
+	void Node::SetBehaviourTree(const BehaviourTree& bt)
 	{
-		this->context = const_cast<Context*>(&context);
+		this->bt = const_cast<BehaviourTree*>(&bt);
 	}
 
 	/*void Node::RemoveChild(Node& child)

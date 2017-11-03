@@ -6,25 +6,25 @@
 
 namespace BT
 {
-	Patrolling::Patrolling(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children, Context& context) :
+	Patrolling::Patrolling(Node* parent, std::vector<std::unique_ptr<Node>> children, BehaviourTree& bt) :
 		originalPosition(0.0f, 0.0f), finalPosition(0.0f, 0.0f), turnBack(false),
-		Node(std::move(parent), std::move(children), context)
+		Node(parent, std::move(children), bt)
 	{}
 
-	Patrolling::Patrolling(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children) :
+	Patrolling::Patrolling(Node* parent, std::vector<std::unique_ptr<Node>> children) :
 		originalPosition(0.0f, 0.0f), finalPosition(0.0f, 0.0f), turnBack(false),
-		Node(std::move(parent), std::move(children))
+		Node(parent, std::move(children))
 	{}
 
 	Status Patrolling::Init()
 	{
-		if (context->find("gameObject") == context->end())
+		if (!bt->ContextValueExist("gameObject"))
 		{
 			std::string methodName = _FUNCION_NAME_;
 			Utils::PrintDebugError(methodName, "Context does not have the field gameObject. Abort!");
 			throw 1;
 		}
-		GameObject* gameObject = static_cast<GameObject*>(context->at("gameObject"));
+		GameObject* gameObject = static_cast<GameObject*>(bt->GetContextValue("gameObject"));
 		//GameObject& gameObject = static_cast<GameObject>(*(context->at("gameObject").get()));
 		const uint32_t entityIndex = gameObject->GetEntityIndex();
 		std::map<unsigned long int, ComponentBase*>& entity = gameObject->GetWorld().EntitiesComponentsMatrix[entityIndex];
@@ -42,8 +42,7 @@ namespace BT
 
 	Status Patrolling::Process()
 	{
-		GameObject* gameObject = static_cast<GameObject*>(context->at("gameObject"));
-		//GameObject& gameObject = *(reinterpret_cast<GameObject>(context->at("gameObject")));
+		GameObject* gameObject = static_cast<GameObject*>(bt->GetContextValue("gameObject"));
 		const uint32_t entityIndex = gameObject->GetEntityIndex();
 		std::map<unsigned long int, ComponentBase*>& entity = gameObject->GetWorld().EntitiesComponentsMatrix[entityIndex];
 		Controller* controller = static_cast<Controller*>(entity[Controller::Id]);

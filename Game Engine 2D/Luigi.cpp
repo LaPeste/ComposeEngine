@@ -8,7 +8,6 @@
 #include "Velocity.hpp"
 #include "Collider.hpp"
 #include "Transform.hpp"
-#include "BehaviourTree.hpp"
 #include "Patrolling.hpp"
 
 void Luigi::Init()

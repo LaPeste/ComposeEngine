@@ -2,8 +2,8 @@
 
 namespace BT
 {
-	Sequence::Sequence(std::unique_ptr<Node> parent, std::vector<std::unique_ptr<Node>> children, Context& context) :
-		currentChildIndex(0), Node(std::move(parent), std::move(children), context)
+	Sequence::Sequence(Node* parent, std::vector<std::unique_ptr<Node>> children, BehaviourTree& bt) :
+		currentChildIndex(0), Node(parent, std::move(children), bt)
 	{}
 
 	Status Sequence::Init()
