@@ -18,7 +18,6 @@ namespace BT
 		}
 		//set context to root, since it could not have one at the creation moment.
 		this->root->SetBehaviourTree(*this);
-		SetContextValue("gameObject", &this->gameObjectAssociated);
 	}
 
 	BehaviourTree::~BehaviourTree()

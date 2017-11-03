@@ -18,16 +18,9 @@ namespace BT
 
 	Status Patrolling::Init()
 	{
-		if (!bt->ContextValueExist("gameObject"))
-		{
-			std::string methodName = _FUNCION_NAME_;
-			Utils::PrintDebugError(methodName, "Context does not have the field gameObject. Abort!");
-			throw 1;
-		}
-		GameObject* gameObject = static_cast<GameObject*>(bt->GetContextValue("gameObject"));
-		//GameObject& gameObject = static_cast<GameObject>(*(context->at("gameObject").get()));
-		const uint32_t entityIndex = gameObject->GetEntityIndex();
-		std::map<unsigned long int, ComponentBase*>& entity = gameObject->GetWorld().EntitiesComponentsMatrix[entityIndex];
+		GameObject& gameObject = bt->GetGameObjectAssociated();;
+		const uint32_t entityIndex = gameObject.GetEntityIndex();
+		std::map<unsigned long int, ComponentBase*>& entity = gameObject.GetWorld().EntitiesComponentsMatrix[entityIndex];
 		Controller* controller = static_cast<Controller*>(entity[Controller::Id]);
 		Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
 
@@ -42,9 +35,9 @@ namespace BT
 
 	Status Patrolling::Process()
 	{
-		GameObject* gameObject = static_cast<GameObject*>(bt->GetContextValue("gameObject"));
-		const uint32_t entityIndex = gameObject->GetEntityIndex();
-		std::map<unsigned long int, ComponentBase*>& entity = gameObject->GetWorld().EntitiesComponentsMatrix[entityIndex];
+		GameObject& gameObject = bt->GetGameObjectAssociated();;
+		const uint32_t entityIndex = gameObject.GetEntityIndex();
+		std::map<unsigned long int, ComponentBase*>& entity = gameObject.GetWorld().EntitiesComponentsMatrix[entityIndex];
 		Controller* controller = static_cast<Controller*>(entity[Controller::Id]);
 		Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
 
