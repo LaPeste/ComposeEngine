@@ -7,7 +7,7 @@
 
 namespace BT
 {
-	using Context = std::map<std::string, std::unique_ptr<void>>;
+	using Context = std::map<std::string, void*>;
 
 	enum class Status
 	{
@@ -69,6 +69,7 @@ namespace BT
 		Status status;
 		// context is owned by the behaviour tree, this is just a ref to that of the BT
 		Context* context;
+		//BehaviourTree* bt;
 	};
 
 	class BehaviourTree : public Component<BehaviourTree>
@@ -85,7 +86,7 @@ namespace BT
 
 		Context& GetContext() const;
 		void* GetContextValue(const std::string& search) const;
-		void SetContextValue(const std::string& key, std::unique_ptr<void> value);
+		void SetContextValue(const std::string& key, void* value);
 		Node& GetRoot() const;
 		//void SetRoot(Node * const root);
 		Node& GetCurrentNode() const;

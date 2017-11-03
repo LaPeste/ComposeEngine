@@ -17,7 +17,7 @@ namespace BT
 			throw 1;
 		}
 		this->root->SetContext(context);
-		SetContextValue("gameObject", std::make_unique<void>(&this->gameObjectAssociated));
+		SetContextValue("gameObject", &this->gameObjectAssociated);
 	}
 
 	BehaviourTree::~BehaviourTree()
@@ -51,12 +51,12 @@ namespace BT
 
 	void* BehaviourTree::GetContextValue(const std::string& search) const
 	{
-		return context.at(search).get();
+		return context.at(search);
 	}
 
-	void BehaviourTree::SetContextValue(const std::string& key, std::unique_ptr<void> value)
+	void BehaviourTree::SetContextValue(const std::string& key, void* value)
 	{
-		context.insert(std::make_pair(key, std::move(value)));
+		context.insert(std::make_pair(key, value));
 	}
 
 	Node& BehaviourTree::GetRoot() const
