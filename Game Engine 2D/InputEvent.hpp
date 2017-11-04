@@ -21,11 +21,15 @@ enum class InputEventType
 class InputEvent : public EventBase
 {
 public:
-	InputEvent(InputEventType message);
+	InputEvent(InputEventType message, unsigned long int targetedGameObject);
 	InputEventType GetContent() const;
+	unsigned long int GetTargetedGameObject() const;
 
 private:
 	InputEventType event;
+	
+	// gameObject targeted by this event
+	unsigned long int targetedGameObject;
 };
 
 #endif

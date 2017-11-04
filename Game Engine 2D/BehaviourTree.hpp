@@ -27,7 +27,7 @@ namespace BT
 		Node(Node* parent, std::vector<std::unique_ptr<Node>> children);
 
 		//! Usually the context in this constructor is coming from an existing BehaviourTree
-		Node(Node* parent, std::vector<std::unique_ptr<Node>> children, const BehaviourTree& bt);
+		Node(Node* parent, std::vector<std::unique_ptr<Node>> children, BehaviourTree& bt);
 		virtual ~Node();
 
 		/*! 
@@ -52,17 +52,11 @@ namespace BT
 
 		// Parent can be null, think about tree root
 		Node& GetParent() const;
-		void SetParent(Node* parent);
-		std::vector<std::unique_ptr<Node>>& GetChildren() const;
+		//void SetParent(Node* parent);
+		std::vector<std::unique_ptr<Node>>& GetChildren();
 		Node& GetChild(int childIndex);
 		void AddChild(std::unique_ptr<Node> child); //maybe useless
-		void SetBehaviourTree(const BehaviourTree& bt);
-
-		/*!
-		 * It will remove ALL nodes that are identical to child.
-		 * Beware, costly operation! O(n) with n number of children.
-		 */
-		//void RemoveChild(Node& child);
+		void SetBehaviourTree(BehaviourTree& bt);
 		Status GetStatus() const;
 		void SetStatus(Status status);
 
@@ -77,23 +71,20 @@ namespace BT
 	class BehaviourTree : public Component<BehaviourTree>
 	{
 	public:
-		BehaviourTree(World& world, const unsigned long int entityIndex, std::unique_ptr<Node> root, GameObject& gameObjectAssociated);
+		BehaviourTree(World& world, const unsigned long int entityIndex, GameObject& gameObjectAssociated);
 		~BehaviourTree() override;
 
-		//! context won't be copied since there may be pointers and references to object that should not be copied
 		BehaviourTree(const BehaviourTree& other) = delete;
-
-		//! context won't be copied since there may be pointers and references to object that should not be copied
 		BehaviourTree& operator=(const BehaviourTree& other) = delete;
 
-		Context& GetContext() const;
+		Context& GetContext();
 		bool ContextValueExist(const std::string& search) const;
 		void* GetContextValue(const std::string& search) const;
 		void SetContextValue(const std::string& key, void* value);
 		Node& GetRoot() const;
-		//void SetRoot(Node * const root);
+		void SetRoot(std::unique_ptr<Node> root);
 		Node& GetCurrentNode() const;
-		void SetCurrentNode(const Node& currNode);
+		void SetCurrentNode(Node& currNode);
 
 		GameObject& GetGameObjectAssociated() const;
 

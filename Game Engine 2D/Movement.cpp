@@ -219,7 +219,7 @@ bool Movement::Jump(World& world, const unsigned long entityIndex)
 	if (!controller->CanJump()) return false;
 
 	controller->SetJumping(true);
-	EventManager::QueueEvent(new InputEvent(InputEventType::JUMP_START));
+	EventManager::QueueEvent(new InputEvent(InputEventType::JUMP_START, entityIndex));
 
 	velocity->SpeedY = -velocity->MaxSpeedY;
 	return true;

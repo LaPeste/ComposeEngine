@@ -9,7 +9,6 @@ namespace BT
 	{
 	public:
 		Patrolling(Node* parent, std::vector<std::unique_ptr<Node>> children, BehaviourTree& bt);
-		Patrolling(Node* parent, std::vector<std::unique_ptr<Node>> children);
 
 		Status Init() override;
 		Status Process() override;

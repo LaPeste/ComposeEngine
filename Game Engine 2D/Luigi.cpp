@@ -9,6 +9,7 @@
 #include "Collider.hpp"
 #include "Transform.hpp"
 #include "Patrolling.hpp"
+#include "Repeater.hpp"
 
 void Luigi::Init()
 {
@@ -26,14 +27,10 @@ void Luigi::Init()
 	EntityManager::AddComponent(world, entityIndex, new Controller(world, entityIndex));
 	EntityManager::AddComponent(world, entityIndex, new Velocity(world, entityIndex));
 
-	std::unique_ptr<BT::Patrolling> patrNode = std::make_unique<BT::Patrolling>(nullptr, std::vector<std::unique_ptr<BT::Node>>());
-	/*std::unique_ptr<BT::BehaviourTree> bt = std::make_unique<BT::BehaviourTree>(
-		world, entityIndex,
-		std::move(patrNode),
-		*this);*/
-	BT::BehaviourTree* bt = new BT::BehaviourTree(
-		world, entityIndex,
-		std::move(patrNode),
-		*this);
+	BT::BehaviourTree* bt = new BT::BehaviourTree(world, entityIndex, *this);
+	std::unique_ptr<BT::Repeater> rootRepeater = std::make_unique<BT::Repeater>(nullptr, std::vector<std::unique_ptr<BT::Node>>(), *bt);
+	std::unique_ptr<BT::Patrolling> patrNode = std::make_unique<BT::Patrolling>(rootRepeater.get(), std::vector<std::unique_ptr<BT::Node>>(), *bt);
+	rootRepeater->AddChild(std::move(patrNode));
+	bt->SetRoot(std::move(rootRepeater));
 	EntityManager::AddComponent(world, entityIndex, bt);
 }

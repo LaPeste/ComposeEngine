@@ -3,11 +3,17 @@
 #include "Animation.hpp"
 #include "Controller.hpp"
 
-//in this class I could avoid to use controller rasing an event when the entity touches the ground. I'll see if I'll have the will of doing this.
+//in this class I could avoid to use controller raising an event when the entity touches the ground. I'll see if I'll have the will of doing this.
 
 //FMS(sort of) for animation, basically listening for events will trigger changes in AnimationState
 void Animations::BasicInputAnimation(World& world, unsigned long int entityIndex, const InputEvent& event)
 {
+	// if the event is not for this gameObject
+	if (entityIndex != event.GetTargetedGameObject())
+	{
+		return;
+	}
+
 	std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
 	Animation* animation = static_cast<Animation*>(entity[Animation::Id]);
 	Controller* controller = static_cast<Controller*>(entity[Controller::Id]);

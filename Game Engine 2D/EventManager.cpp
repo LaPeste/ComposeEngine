@@ -137,12 +137,14 @@ void EventManager::ProcessEvents()
 	auto iterEvent = eventQueue.begin();
 	while (iterEvent != eventQueue.end())
 	{
+		// check who's listening for this event
 		if (listeners.find((*iterEvent)->GetId()) == listeners.end())
 		{
 			++iterEvent;
 			continue;
 		}
 
+		// execute the delegate from the listener of the event
 		auto& delegateList = listeners.at((*iterEvent)->GetId());
 		for (auto iterDelegate = delegateList.begin(); iterDelegate != delegateList.end(); ++iterDelegate)
 		{

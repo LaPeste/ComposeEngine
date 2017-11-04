@@ -251,6 +251,9 @@
     <ClCompile Include="Patrolling.cpp">
       <Filter>Source Files\GameObjects\BTs</Filter>
     </ClCompile>
+    <ClCompile Include="Repeater.cpp">
+      <Filter>Source Files\Entities\BT basic nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -426,6 +429,9 @@
     </ClInclude>
     <ClInclude Include="Patrolling.hpp">
       <Filter>Header Files\GameObjects\BTs</Filter>
+    </ClInclude>
+    <ClInclude Include="Repeater.hpp">
+      <Filter>Header Files\Entities\BT basic nodes\Composite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

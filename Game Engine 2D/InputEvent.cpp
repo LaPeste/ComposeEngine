@@ -1,6 +1,7 @@
 #include "InputEvent.hpp"
 
-InputEvent::InputEvent(InputEventType message) : event(message)
+InputEvent::InputEvent(InputEventType message, unsigned long int targetedGameObject) :
+	event(message), targetedGameObject(targetedGameObject)
 {
 
 }
@@ -8,4 +9,9 @@ InputEvent::InputEvent(InputEventType message) : event(message)
 InputEventType InputEvent::GetContent() const
 {
 	return event;
+}
+
+unsigned long int InputEvent::GetTargetedGameObject() const
+{
+	return targetedGameObject;
 }

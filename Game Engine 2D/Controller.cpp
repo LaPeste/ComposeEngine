@@ -74,8 +74,8 @@ void Controller::SetMoveLeft(bool moveLeft)
 {
 	if (this->moveLeft != moveLeft)	//avoid to trigger events if nothing has changed
 	{
-		if (moveLeft) EventManager::QueueEvent(new InputEvent(InputEventType::LEFT_DOWN));
-		else EventManager::QueueEvent(new InputEvent(InputEventType::LEFT_UP));
+		if (moveLeft) EventManager::QueueEvent(new InputEvent(InputEventType::LEFT_DOWN, entityIndex));
+		else EventManager::QueueEvent(new InputEvent(InputEventType::LEFT_UP, entityIndex));
 
 		this->moveLeft = moveLeft;
 	}
@@ -85,8 +85,8 @@ void Controller::SetMoveRight(bool moveRight)
 {
 	if (this->moveRight != moveRight) //avoid to trigger events if nothing has changed
 	{
-		if (moveRight) EventManager::QueueEvent(new InputEvent(InputEventType::RIGHT_DOWN));
-		else EventManager::QueueEvent(new InputEvent(InputEventType::RIGHT_UP));
+		if (moveRight) EventManager::QueueEvent(new InputEvent(InputEventType::RIGHT_DOWN, entityIndex));
+		else EventManager::QueueEvent(new InputEvent(InputEventType::RIGHT_UP, entityIndex));
 
 		this->moveRight = moveRight;
 	}
@@ -96,8 +96,8 @@ void Controller::SetCrouch(bool crouch)
 {
 	if (this->crouch != crouch)	//avoid to trigger events if nothing has changed
 	{
-		if (crouch) EventManager::QueueEvent(new InputEvent(InputEventType::CROUCH_DOWN));
-		else EventManager::QueueEvent(new InputEvent(InputEventType::CROUCH_UP));
+		if (crouch) EventManager::QueueEvent(new InputEvent(InputEventType::CROUCH_DOWN, entityIndex));
+		else EventManager::QueueEvent(new InputEvent(InputEventType::CROUCH_UP, entityIndex));
 		this->crouch = crouch;
 	}
 }
@@ -111,11 +111,11 @@ void Controller::SetFreeFalling(bool freeFalling)
 {
 	if (!IsJumping() && !this->freeFalling && freeFalling) //free falling starts if not jumping
 	{
-		EventManager::QueueEvent(new InputEvent(InputEventType::FREE_FALLING_START));
+		EventManager::QueueEvent(new InputEvent(InputEventType::FREE_FALLING_START, entityIndex));
 	}
 	else if(this->freeFalling && !freeFalling)
 	{
-		EventManager::QueueEvent(new InputEvent(InputEventType::FREE_FALLING_STOP));
+		EventManager::QueueEvent(new InputEvent(InputEventType::FREE_FALLING_STOP, entityIndex));
 	}
 
 	if (!freeFalling) SetJumping(false); //a jump, if started, ends when free falling ends

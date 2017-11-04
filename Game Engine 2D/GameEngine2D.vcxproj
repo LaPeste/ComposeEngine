@@ -151,6 +151,7 @@
     <ClCompile Include="Patrolling.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Repeater.cpp" />
     <ClCompile Include="Selector.cpp" />
     <ClCompile Include="Sequence.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="ClassRegistry.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="ResourcePath.hpp" />
+    <ClInclude Include="Repeater.hpp" />
     <ClInclude Include="Selector.hpp" />
     <ClInclude Include="Sequence.hpp" />
     <ClInclude Include="stdafx.h" />

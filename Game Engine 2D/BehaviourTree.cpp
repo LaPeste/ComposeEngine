@@ -4,21 +4,10 @@
 namespace BT
 {
 	//BehaviourTree class
-	BehaviourTree::BehaviourTree(World& world, const unsigned long int entityIndex, std::unique_ptr<Node> root, GameObject& gameObjectAssociated) :
-		root(std::move(root)), currentNode(this->root.get()), gameObjectAssociated(gameObjectAssociated),
+	BehaviourTree::BehaviourTree(World& world, const unsigned long int entityIndex, GameObject& gameObjectAssociated) :
+		root(nullptr), currentNode(this->root.get()), gameObjectAssociated(gameObjectAssociated),
 		Component(world, entityIndex)
-	{
-		if (!this->root)
-		{
-			std::string methodName = _FUNCION_NAME_;
-			std::ostringstream oss;
-			oss << "The passed root node pointer was null";
-			Utils::PrintDebugError(methodName, oss.str());
-			throw 1;
-		}
-		//set context to root, since it could not have one at the creation moment.
-		this->root->SetBehaviourTree(*this);
-	}
+	{}
 
 	BehaviourTree::~BehaviourTree()
 	{
@@ -44,9 +33,9 @@ namespace BT
 	//}
 	
 
-	Context& BehaviourTree::GetContext() const
+	Context& BehaviourTree::GetContext()
 	{
-		return const_cast<Context&>(context);
+		return context;
 	}
 
 	bool BehaviourTree::ContextValueExist(const std::string& search) const
@@ -75,23 +64,20 @@ namespace BT
 		return *root;
 	}
 
-	/*void BehaviourTree::SetRoot(Node * const root)
+	void BehaviourTree::SetRoot(std::unique_ptr<Node> root)
 	{
-		if (root != nullptr)
-		{
-			delete root;
-		}
-		this->root = root;
-	}*/
+		this->root = std::move(root);
+		currentNode = this->root.get();
+	}
 
 	Node& BehaviourTree::GetCurrentNode() const
 	{
 		return *currentNode;
 	}
 
-	void BehaviourTree::SetCurrentNode(const Node& currNode)
+	void BehaviourTree::SetCurrentNode(Node& currNode)
 	{
-		currentNode = const_cast<Node*>(&currNode);
+		currentNode = &currNode;
 	}
 
 	GameObject& BehaviourTree::GetGameObjectAssociated() const
@@ -100,14 +86,14 @@ namespace BT
 	}
 
 	// Node class
-	Node::Node(Node* parent, std::vector<std::unique_ptr<Node>> children, const BehaviourTree& bt) :
-		parent(parent), children(std::move(children)), bt(const_cast<BehaviourTree*>(&bt)),
+	Node::Node(Node* parent, std::vector<std::unique_ptr<Node>> children, BehaviourTree& bt) :
+		parent(parent), children(std::move(children)), bt(&bt),
 		status(Status::NONE)
 	{ }
 
 	Node::Node(Node* parent, std::vector<std::unique_ptr<Node>> children) :
 		parent(parent), children(std::move(children)),
-		status(Status::NONE)
+		status(Status::NONE), bt(nullptr)
 	{ }
 
 	Node::~Node()
@@ -165,14 +151,9 @@ namespace BT
 		return *parent;
 	}
 
-	void Node::SetParent(Node* parent)
+	std::vector<std::unique_ptr<Node>>& Node::GetChildren()
 	{
-		this->parent = parent;
-	}
-
-	std::vector<std::unique_ptr<Node>>& Node::GetChildren() const
-	{
-		return const_cast<std::vector<std::unique_ptr<Node>>&>(children);
+		return children;
 	}
 
 	Node& Node::GetChild(int childIndex)
@@ -185,15 +166,10 @@ namespace BT
 		children.push_back(std::move(child));
 	}
 
-	void Node::SetBehaviourTree(const BehaviourTree& bt)
+	void Node::SetBehaviourTree(BehaviourTree& bt)
 	{
-		this->bt = const_cast<BehaviourTree*>(&bt);
+		this->bt = &bt;
 	}
-
-	/*void Node::RemoveChild(Node& child)
-	{
-		children.erase(std::remove(children.begin(), children.end(), child), children.end());
-	}*/
 
 	Status Node::GetStatus() const
 	{

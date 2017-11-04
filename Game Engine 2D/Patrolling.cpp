@@ -11,11 +11,6 @@ namespace BT
 		Node(parent, std::move(children), bt)
 	{}
 
-	Patrolling::Patrolling(Node* parent, std::vector<std::unique_ptr<Node>> children) :
-		originalPosition(0.0f, 0.0f), finalPosition(0.0f, 0.0f), turnBack(false),
-		Node(parent, std::move(children))
-	{}
-
 	Status Patrolling::Init()
 	{
 		GameObject& gameObject = bt->GetGameObjectAssociated();;
@@ -26,6 +21,7 @@ namespace BT
 
 		originalPosition = transform->GetPosition();
 		finalPosition.x = originalPosition.x + 100.0f;
+		turnBack = false;
 		controller->SetMoveLeft(false);
 		controller->SetMoveRight(true);
 
@@ -47,7 +43,6 @@ namespace BT
 			{
 				controller->SetMoveLeft(false);
 				controller->SetMoveRight(true);
-				controller->SetWantToJump(true);
 				turnBack = transform->GetPosition().x > finalPosition.x;
 			}
 			else
