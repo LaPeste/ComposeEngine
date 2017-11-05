@@ -25,7 +25,7 @@ namespace BT
 		controller->SetMoveLeft(false);
 		controller->SetMoveRight(true);
 
-		SetStatus(Status::RUNNING);
+		status = Status::RUNNING;
 		return Status::RUNNING;
 	}
 
@@ -50,14 +50,14 @@ namespace BT
 				controller->SetMoveRight(false);
 				controller->SetMoveLeft(true);
 			}
-			SetStatus(Status::RUNNING);
+			status = Status::RUNNING;
 			return Status::RUNNING;
 		}
 
 		controller->SetMoveRight(false);
 		controller->SetMoveLeft(false);
 
-		SetStatus(Status::SUCCESS);
+		status = Status::SUCCESS;
 		return Status::SUCCESS;
 	}
 }

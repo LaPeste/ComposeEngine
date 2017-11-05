@@ -22,22 +22,22 @@ namespace BT
 		Status childResult = GetChild(currentChildIndex).Init();
 		if (childResult == Status::SUCCESS)
 		{
-			SetStatus(Status::SUCCESS);
+			status = Status::SUCCESS;
 		}
 		else if (childResult == Status::RUNNING)
 		{
-			SetStatus(Status::RUNNING);
+			status = Status::RUNNING;
 		}
 		else // failure
 		{
 			if (childrenSize == 1)
 			{
-				SetStatus(Status::FAILURE);
+				status = Status::FAILURE;
 			}
 			else
 			{
 				currentChildIndex++;
-				SetStatus(Status::RUNNING);
+				status = Status::RUNNING;
 			}
 		}
 		return GetStatus();
@@ -63,22 +63,22 @@ namespace BT
 
 		if (childResult == Status::SUCCESS)
 		{
-			SetStatus(Status::SUCCESS);
+			status = Status::SUCCESS;
 		}
 		else if (childResult == Status::RUNNING)
 		{
-			SetStatus(Status::RUNNING);
+			status = Status::RUNNING;
 		}
 		else //failure
 		{
 			if (currentChildIndex == childrenIndexSize)
 			{
-				SetStatus(Status::FAILURE);
+				status = Status::FAILURE;
 			}
 			else
 			{
 				currentChildIndex++;
-				SetStatus(Status::RUNNING);
+				status = Status::RUNNING;
 			}
 		}
 		return GetStatus();

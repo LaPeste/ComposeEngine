@@ -23,27 +23,13 @@ namespace BT
 	class Node
 	{
 	public:
-		//!This constructor is supposed to be used for the root when you don't have a context.
-		Node(Node* parent, std::vector<std::unique_ptr<Node>> children);
-
-		//! Usually the context in this constructor is coming from an existing BehaviourTree
 		Node(Node* parent, std::vector<std::unique_ptr<Node>> children, BehaviourTree& bt);
 		virtual ~Node();
 
-		/*! 
-		 * context won't be copied since there may be pointers and references to object that should not be copied
-		 * It won't copy parent since otherwise the whole subtree above such node will be copied. Same goes for children.
-		 * Only the current node is copied, setting parent to null.
-		 */
 		Node(const Node& other) = delete;
-
-		/*!
-		* context won't be copied since there may be pointers and references to object that should not be copied
-		* It won't copy parent since otherwise the whole subtree above such node will be copied. Same goes for children.
-		* Only the current node is copied, setting parent to null.
-		*/
 		Node& operator=(const Node& other) = delete;
-
+		bool operator==(const Node& other);
+		bool operator!=(const Node& other);
 		Node(Node&& other);
 		Node& operator=(Node&& other);
 
@@ -52,16 +38,14 @@ namespace BT
 
 		// Parent can be null, think about tree root
 		Node& GetParent() const;
-		//void SetParent(Node* parent);
 		std::vector<std::unique_ptr<Node>>& GetChildren();
 		Node& GetChild(int childIndex);
 		void AddChild(std::unique_ptr<Node> child); //maybe useless
-		void SetBehaviourTree(BehaviourTree& bt);
 		Status GetStatus() const;
-		void SetStatus(Status status);
 
 	protected:
-		Node* parent; // must be pointer since it could not have a parent. This way it can be null
+		// must be pointer since it could not have a parent. This way it can be null
+		Node* parent;
 		std::vector<std::unique_ptr<Node>> children;
 		Status status;
 		// the bt is used mainly to give a standardized interface to BehaviourTree::context
@@ -85,7 +69,6 @@ namespace BT
 		void SetRoot(std::unique_ptr<Node> root);
 		Node& GetCurrentNode() const;
 		void SetCurrentNode(Node& currNode);
-
 		GameObject& GetGameObjectAssociated() const;
 
 	private:

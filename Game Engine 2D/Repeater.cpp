@@ -26,7 +26,7 @@ namespace BT
 		}
 
 		Status childResult = GetChild(0).Init();
-		SetStatus(Status::RUNNING);
+		status = Status::RUNNING;
 		return GetStatus();
 	}
 

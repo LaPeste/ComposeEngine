@@ -13,18 +13,29 @@ namespace BT
 		Node& currNode = bt->GetCurrentNode();
 
 		// if tree has already run, then do nothing. No reason to go any further.
-		if (currNode.GetStatus() == Status::SUCCESS)
+		if ((bt->GetRoot().GetStatus() == Status::SUCCESS) || (bt->GetRoot().GetStatus() == Status::FAILURE))
 		{
 			return;
 		}
 
+		Status nodeResult;
 		if (currNode.GetStatus() == Status::NONE)
 		{
-			currNode.Init();
+			nodeResult = currNode.Init();
+
 		}
 		else
 		{
-			currNode.Process();
+			nodeResult = currNode.Process();
+		}
+
+		if (nodeResult != Status::RUNNING)
+		{
+			//  if it was the root then there would be no parent to look for
+			if (currNode != bt->GetRoot())
+			{
+				bt->SetCurrentNode(currNode.GetParent());
+			}
 		}
 	}
 }

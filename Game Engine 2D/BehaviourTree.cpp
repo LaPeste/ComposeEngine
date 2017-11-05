@@ -11,27 +11,7 @@ namespace BT
 
 	BehaviourTree::~BehaviourTree()
 	{
-	}
-	
-	//BehaviourTree::BehaviourTree(const BehaviourTree& other, const GameObject& gameObjectAssosicated) :
-	//	Component<BehaviourTree>(other), context(),
-	//	gameObjectAssociated(const_cast<GameObject&>(gameObjectAssosicated))
-	//{
-	//	Node* newRoot = new Node(nullptr, other.GetRoot()->GetChildren(), const_cast<Context&>(other.context));
-	//	root = newRoot;
-	//	currentNode = *newRoot;
-	//}
-	//
-
-	//BehaviourTree& BehaviourTree::operator=(const BehaviourTree& other)
-	//{
-	//	// TODO this is pretty questionable. Why would you make a second BT that is "linked" to a gameobject that has already a BT???
-	//	gameObjectAssociated = other.gameObjectAssociated;
-	//	Node* newRoot = new Node(nullptr, other.GetRoot()->GetChildren(), const_cast<Context&>(other.context));
-	//	root = newRoot;
-	//	currentNode = *newRoot;
-	//}
-	
+	}	
 
 	Context& BehaviourTree::GetContext()
 	{
@@ -89,31 +69,28 @@ namespace BT
 	Node::Node(Node* parent, std::vector<std::unique_ptr<Node>> children, BehaviourTree& bt) :
 		parent(parent), children(std::move(children)), bt(&bt),
 		status(Status::NONE)
-	{ }
-
-	Node::Node(Node* parent, std::vector<std::unique_ptr<Node>> children) :
-		parent(parent), children(std::move(children)),
-		status(Status::NONE), bt(nullptr)
-	{ }
+	{}
 
 	Node::~Node()
-	{
-
-	}
-
-	/*Node::Node(const Node& other) :
-		status(Status::NONE)
-	{
-		std::copy(other.GetChildren().begin(), other.GetChildren().end(), children);
-		context
-		parent = new Node(nullptr, Context(), const_cast<Context&>(other.context));
-
-	}*/
+	{}
 
 	Node::Node(Node&& other) :
 		parent(other.parent), children(std::move(other.children)),
 		status(other.status), bt(other.bt)
+	{}
+
+	bool Node::operator==(const Node& other)
 	{
+		if (parent != other.parent) return false;
+		if (children != other.children) return false;
+		if (bt != other.bt) return false;
+
+		return true;
+	}
+
+	bool Node::operator!=(const Node& other)
+	{
+		return !(*this == other);
 	}
 
 	Node& Node::operator=(Node&& other)
@@ -166,19 +143,9 @@ namespace BT
 		children.push_back(std::move(child));
 	}
 
-	void Node::SetBehaviourTree(BehaviourTree& bt)
-	{
-		this->bt = &bt;
-	}
-
 	Status Node::GetStatus() const
 	{
 		return status;
-	}
-
-	void Node::SetStatus(Status status)
-	{
-		this->status = status;
 	}
 }
 
