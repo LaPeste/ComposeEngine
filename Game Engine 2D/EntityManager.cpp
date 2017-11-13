@@ -27,19 +27,17 @@ std::vector<CollisionEvent> EntityManager::collisionEvents;
 void EntityManager::Init(World& world)
 {
 	Instantiate<Player>(world);
-
-	//world.EntitiesRegistry.insert(std::make_pair("Door", std::bind(&Instantiate<Door>, std::ref(world)))); //std::ref is crucial since without we're passing a copy of world, which will be destroyed (with destructor) right after the std::bind ends. For better info check this out  http://stackoverflow.com/questions/19859288/why-will-stdfunction-call-destructor-when-an-object-was-bound-to-a-member-func
 	
     //populates the list of objects with objects coming from the map (tmx file)
 	Engine& engine = Engine::GetInstance();
     std::vector<tmx::MapLayer>& layers = engine.GetMapLoader().getLayers();
-	//for (std::vector<tmx::MapLayer>::iterator layer = layers.begin(); layer != layers.end(); ++layer)
 	for(int layerIndex = 0; layerIndex < layers.size(); ++layerIndex)
     {
 		tmx::MapLayer& layer = layers[layerIndex];
         if(layer.name == Constants::COLLISION_LAYER)
         {
 			std::vector<tmx::MapObject>::iterator objectIter = layer.objects.begin();
+			//check every object name in the layers, if exists in registry instantiate an object of that class
             while(objectIter != layer.objects.end())
             {
 				std::string objName = objectIter->getName();
@@ -57,7 +55,7 @@ void EntityManager::Init(World& world)
 				}
             }
 			//very confused why this doesn't do what I was expecting https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/10074378/
-			engine.GetMapLoader().drawLayer(*engine.GetWindow(), layerIndex); //I was hoping for a redraw of the layer without the objects removed during the layer parsing... but it isn't so
+			engine.GetMapLoader().drawLayer(*engine.GetWindow(), layerIndex); //I was hoping for a redraw of the layer without the objects that were removed during the layer parsing... but it isn't so
         }
     }
 }

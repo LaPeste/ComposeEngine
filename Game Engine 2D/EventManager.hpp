@@ -5,7 +5,7 @@
 #include <list>
 #include "EventBase.hpp"
 
-typedef std::function<void(EventBase*)> EventDelegate;
+using EventDelegate = std::function<void(EventBase*)>;
 
 class EventManager
 {

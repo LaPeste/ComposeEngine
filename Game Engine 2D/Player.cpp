@@ -55,7 +55,7 @@ void Player::Init()
 
 	AnimationData* jumpAnim = new AnimationData(sf::Vector2f(115, 7),
 		sf::Vector2f(Constants::SPACE_BETWEEN_SPRITE_X, Constants::SPACE_BETWEEN_SPRITE_Y), false,
-		false, 16, /*22*/Constants::PLAYER_HEIGHT, 1, Constants::ANIMATION_FRAMERATE);
+		false, 16, Constants::PLAYER_HEIGHT, 1, Constants::ANIMATION_FRAMERATE);
 
 	animationMap.insert(std::pair<AnimationState, AnimationData*>(AnimationState::JUMPING, jumpAnim));
 
@@ -70,7 +70,7 @@ void Player::Init()
 		else
 		{
 			std::string methodName = _FUNCION_NAME_;
-			Utils::PrintDebugLog(methodName, "The event passed was null!");
+			Utils::PrintDebugWarning(methodName, "The event passed was null!");
 		}
 	});
     

@@ -46,7 +46,8 @@ private:
 template<typename First, typename ...Rest>
 void SystemManager::AddSystem(World& world, System<First, Rest...>* systemToAdd)
 {
-	if (world.Systems.find(systemToAdd->Id) == world.Systems.end())  //if system never added before
+	//if system never added before, then add it
+	if (world.Systems.find(systemToAdd->Id) == world.Systems.end())
 	{
 		world.Systems.insert(std::make_pair(systemToAdd->Id, static_cast<SystemBase*>(systemToAdd)));
 

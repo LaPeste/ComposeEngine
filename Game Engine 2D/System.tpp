@@ -32,6 +32,7 @@ template<typename FirstInternal, typename SecondInternal, typename ...RestIntern
 void System<First,Rest...>::CalculateComponentsBitMask()
 {
     componentsBitMask |= Component<FirstInternal>::Id;
+	//Type... = pack expansion, which is: the name of the parameter pack is replaced by each of the elements from the pack, in order
     CalculateComponentsBitMask<SecondInternal, RestInternal...>();
 }
 

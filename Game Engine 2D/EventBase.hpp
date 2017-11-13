@@ -7,7 +7,7 @@
 class EventBase
 {
 public:
-	typedef unsigned int UID;
+	using UID = unsigned int;
 
 	EventBase();
 
