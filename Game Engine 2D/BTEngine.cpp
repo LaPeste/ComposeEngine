@@ -18,23 +18,23 @@ namespace BT
 			return;
 		}
 
-		Status nodeResult;
+		// this should be a case only for the first node
 		if (currNode.GetStatus() == Status::NONE)
 		{
-			nodeResult = currNode.Init();
-
+			currNode.Init();
+			currNode.Process();
 		}
-		else
+		else if (currNode.GetStatus() == Status::RUNNING)
 		{
-			nodeResult = currNode.Process();
+			currNode.Process();
 		}
-
-		if (nodeResult != Status::RUNNING)
+		else // success or failure
 		{
-			//  if it was the root then there would be no parent to look for
+			// if it was the root then there would be no parent to look for
 			if (currNode != bt->GetRoot())
 			{
 				bt->SetCurrentNode(currNode.GetParent());
+				bt->GetCurrentNode().Process();
 			}
 		}
 	}

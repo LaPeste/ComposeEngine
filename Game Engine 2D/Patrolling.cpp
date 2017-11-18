@@ -11,7 +11,7 @@ namespace BT
 		Node(parent, std::move(children), bt)
 	{}
 
-	Status Patrolling::Init()
+	void Patrolling::Init()
 	{
 		GameObject& gameObject = bt->GetGameObjectAssociated();;
 		const uint32_t entityIndex = gameObject.GetEntityIndex();
@@ -22,14 +22,9 @@ namespace BT
 		originalPosition = transform->GetPosition();
 		finalPosition.x = originalPosition.x + 100.0f;
 		turnBack = false;
-		controller->SetMoveLeft(false);
-		controller->SetMoveRight(true);
-
-		status = Status::RUNNING;
-		return Status::RUNNING;
 	}
 
-	Status Patrolling::Process()
+	void Patrolling::OnProcess()
 	{
 		GameObject& gameObject = bt->GetGameObjectAssociated();;
 		const uint32_t entityIndex = gameObject.GetEntityIndex();
@@ -37,7 +32,12 @@ namespace BT
 		Controller* controller = static_cast<Controller*>(entity[Controller::Id]);
 		Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
 
-		if (transform->GetPosition().x > originalPosition.x)
+		if (!turnBack && transform->GetPosition().x == originalPosition.x)
+		{
+			controller->SetMoveLeft(false);
+			controller->SetMoveRight(true);
+		}
+		else if (transform->GetPosition().x > originalPosition.x)
 		{
 			if (!turnBack)
 			{
@@ -50,14 +50,12 @@ namespace BT
 				controller->SetMoveRight(false);
 				controller->SetMoveLeft(true);
 			}
-			status = Status::RUNNING;
-			return Status::RUNNING;
 		}
-
-		controller->SetMoveRight(false);
-		controller->SetMoveLeft(false);
-
-		status = Status::SUCCESS;
-		return Status::SUCCESS;
+		else if (turnBack && transform->GetPosition().x <= originalPosition.x)
+		{
+			controller->SetMoveRight(false);
+			controller->SetMoveLeft(false);
+			status = Status::SUCCESS;
+		}
 	}
 }

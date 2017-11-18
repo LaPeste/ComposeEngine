@@ -6,7 +6,7 @@ namespace BT
 		currentChildIndex(0), Node(parent, std::move(children), bt)
 	{}
 
-	Status Sequence::Init()
+	void Sequence::Init()
 	{
 		int childrenSize = GetChildren().size();
 		if (childrenSize == 0)
@@ -16,71 +16,37 @@ namespace BT
 			oss << "There are no children for the selected sequence. Nothing to init.";
 			Utils::PrintDebugWarning(methodName, oss.str());
 			//TODO not sure it should be like this in case of no children https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/13027290/
-			return Status::SUCCESS;
 		}
-
-		Status childResult = GetChild(currentChildIndex).Init();
-		if (childResult == Status::FAILURE)
-		{
-			status = Status::FAILURE;
-		}
-		else if (childResult == Status::RUNNING)
-		{
-			status = Status::RUNNING;
-		}
-		else // success
-		{
-			if (childrenSize == 1)
-			{
-				status = Status::SUCCESS;
-			}
-			else
-			{
-				currentChildIndex++;
-				status = Status::RUNNING;
-			}
-		}
-		return GetStatus();
 	}
 
 
-	Status Sequence::Process()
+	void Sequence::OnProcess()
 	{
 		int childrenIndexSize = GetChildren().size() - 1;
-		Status childResult;
 		Node& currChild = GetChild(currentChildIndex);
 
 		// Init or continue running current child
 		if (currChild.GetStatus() == Status::NONE)
 		{
-			childResult = currChild.Init();
+			currChild.Init();
+			currChild.Process();
 		}
-		else
-		{
-			childResult = currChild.Process();
-		}
-
-		
-		if (childResult == Status::FAILURE)
+		else if (currChild.GetStatus() == Status::FAILURE)
 		{
 			status = Status::FAILURE;
 		}
-		else if (childResult == Status::RUNNING)
+		else if (currChild.GetStatus() == Status::SUCCESS)
 		{
-			status = Status::RUNNING;
-		}
-		else //if SUCCESS
-		{
+			// if last child
 			if (currentChildIndex == childrenIndexSize)
 			{
 				status = Status::SUCCESS;
 			}
 			else
 			{
-				currentChildIndex++;
-				status = Status::RUNNING;
+				GetChild(++currentChildIndex).Process();
 			}
 		}
-		return GetStatus();
+		//the running case is not needed since it will always be taken care by the BTEngine, through currentNode
 	}
 }

@@ -16,8 +16,8 @@ namespace BT
 	{
 	public:
 		Sequence(Node* parent, std::vector<std::unique_ptr<Node>> children, BehaviourTree& bt);
-		Status Init() override;
-		Status Process() override;
+		void Init() override;
+		void OnProcess() override;
 
 	private:
 		int currentChildIndex;

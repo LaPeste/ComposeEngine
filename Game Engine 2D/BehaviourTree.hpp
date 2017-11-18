@@ -33,8 +33,16 @@ namespace BT
 		Node(Node&& other);
 		Node& operator=(Node&& other);
 
-		virtual Status Init();
-		virtual Status Process();
+		virtual void Init() = 0;
+		Status Process();
+		virtual void OnProcess() = 0;
+
+		/*!  
+		 *	This method is called internally on all children of a node, if any, every time the node itself succeeds or fails.
+		 *	Useful for example in a sub-tree rooted to a repeater where you don't want to re-instantiate the full node 
+		 *	but you may want to simply reuse all the structures created in the Init. So you need to clean the structures up.
+		*/
+		virtual void ResetNode();
 
 		// Parent can be null, think about tree root
 		Node& GetParent() const;
@@ -42,6 +50,7 @@ namespace BT
 		Node& GetChild(int childIndex);
 		void AddChild(std::unique_ptr<Node> child); //maybe useless
 		Status GetStatus() const;
+		void SetStatus(Status status);
 
 	protected:
 		// must be pointer since it could not have a parent. This way it can be null
@@ -51,6 +60,8 @@ namespace BT
 		// the bt is used mainly to give a standardized interface to BehaviourTree::context
 		BehaviourTree* bt;
 	};
+
+
 
 	class BehaviourTree : public Component<BehaviourTree>
 	{

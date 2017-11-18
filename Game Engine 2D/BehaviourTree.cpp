@@ -105,23 +105,24 @@ namespace BT
 		return *this;
 	}
 
-	Status Node::Init()
-	{
-		std::string methodName = _FUNCION_NAME_;
-		std::ostringstream oss;
-		oss << "Init method was not implemented, while you should have!";
-		Utils::PrintDebugError(methodName, oss.str());
-		throw 2;
-	}
-
 	Status Node::Process()
 	{
-		std::string methodName = _FUNCION_NAME_;
-		std::ostringstream oss;
-		oss << "Process method was not implemented, while you should have!";
-		Utils::PrintDebugError(methodName, oss.str());
-		throw 2;
+		bt->SetCurrentNode(*this);
+		status = Status::RUNNING;
+		OnProcess();
+		// if after the real processing SUCCESS, set all children to Status::NONE
+		if (status == Status::SUCCESS)
+		{
+			for (auto& child : GetChildren())
+			{
+				child->status = Status::NONE;
+				child->ResetNode();
+			}
+		}
+		return status;
 	}
+
+	void Node::ResetNode() {}
 
 	Node& Node::GetParent() const
 	{
@@ -146,6 +147,11 @@ namespace BT
 	Status Node::GetStatus() const
 	{
 		return status;
+	}
+
+	void Node::SetStatus(Status status)
+	{
+		this->status = status;
 	}
 }
 

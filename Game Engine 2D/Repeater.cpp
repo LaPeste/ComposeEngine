@@ -6,7 +6,7 @@ namespace BT
 		Node(parent, std::move(children), bt)
 	{}
 
-	Status Repeater::Init()
+	void Repeater::Init()
 	{
 		std::string methodName = _FUNCION_NAME_;
 		std::ostringstream logText;
@@ -16,22 +16,17 @@ namespace BT
 			logText << "There are no children for the selected sequence. Nothing to init.";
 			Utils::PrintDebugWarning(methodName, logText.str());
 			//TODO not sure it should be like this in case of no children https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/13027290/
-			return Status::SUCCESS;
 		}
-
-		if (childrenSize > 1)
+		else if (childrenSize > 1)
 		{
 			logText << "This type of node is not supposed to have more than 1 child. It currently has" << childrenSize << ". The additional children won't be repeated. This looks like a mistake";
 			Utils::PrintDebugWarning(methodName, logText.str());
 		}
-
-		Status childResult = GetChild(0).Init();
-		status = Status::RUNNING;
-		return GetStatus();
 	}
 
-	Status Repeater::Process()
+	void Repeater::OnProcess()
 	{
+		// just in case children are added during processing, which thing that should never be done!
 		if (GetChildren().size() > 1)
 		{
 			std::string methodName = _FUNCION_NAME_;
@@ -40,15 +35,12 @@ namespace BT
 			Utils::PrintDebugWarning(methodName, logText.str());
 		}
 
-		Node& curChild = GetChild(0);
-		if (curChild.GetStatus() == Status::RUNNING)
-		{
-			curChild.Process();
-		}
-		else //success or fail
-		{
-			curChild.Init();
-		}
-		return GetStatus();
+		/*  Special case of using ResetNode, since this node never terminates I have to reset myself its child.
+			Differently from the other nodes, where the Process does it for them.
+		*/
+		GetChild(0).SetStatus(Status::NONE);
+		GetChild(0).ResetNode();
+		GetChild(0).Init();
+		GetChild(0).Process();
 	}
 }
