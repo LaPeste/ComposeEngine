@@ -69,7 +69,7 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
 		if (entityCollision)
 		{
 			CollisionEvent coll(index, i);
-			EntityManager::AddCollisionEvent(coll);
+			world.AddCollisionEvent(coll);
 
 			break; //TODO what if collides with more objects? When the todo tasks right above is fixed then
 				   // we can leave it check for all possible collisions with the subset of possible (close) collider entites

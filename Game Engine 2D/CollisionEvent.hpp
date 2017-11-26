@@ -15,10 +15,12 @@ class CollisionEvent
 {
 public:
     CollisionEvent(unsigned long indexEntityA, unsigned long indexEntityB);
-    const sf::Vector2<unsigned long>& GetCollidingEntities() const;
+	unsigned long int GetEntityA() const;
+	unsigned long int GetEntityB() const;
     
 private:
-    sf::Vector2<unsigned long> indexCollidingEntities;
+	unsigned long int indexEntityA;
+	unsigned long int indexEntityB;
     
 };
 

@@ -22,7 +22,6 @@
 #include "Door.hpp"
 
 unsigned long int EntityManager::playerId(99999); //defaulted to a very big number
-std::vector<CollisionEvent> EntityManager::collisionEvents;
 
 void EntityManager::Init(World& world)
 {
@@ -103,16 +102,6 @@ void EntityManager::SetPlayerId(const unsigned long index)
 void EntityManager::FreeWorldFields(World& world, const int index)
 {
     world.EntitiesComponentsMasks[index] = UtilConstants::NO_COMPONENTS;
-}
-
-const std::vector<CollisionEvent>& EntityManager::GetCollisionEvents()
-{
-    return collisionEvents;
-}
-
-void EntityManager::AddCollisionEvent(const CollisionEvent& event)
-{
-    collisionEvents.push_back(event);
 }
 
 void EntityManager::DeleteAllComponentsForEntity(World& world, unsigned long int entityIndex)

@@ -45,3 +45,13 @@ World::~World()
         }
     }
 }
+
+const std::vector<CollisionEvent>& World::GetCollisionEvents() const
+{
+	return collisionEvents;
+}
+
+void World::AddCollisionEvent(const CollisionEvent& event)
+{
+	collisionEvents.push_back(event);
+}

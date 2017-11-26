@@ -8,13 +8,16 @@
 
 #include "CollisionEvent.hpp"
 
-CollisionEvent::CollisionEvent(unsigned long indexEntityA, unsigned long indexEntityB)
+CollisionEvent::CollisionEvent(unsigned long indexEntityA, unsigned long indexEntityB) :
+	indexEntityA(indexEntityA), indexEntityB(indexEntityB)
+{}
+
+unsigned long int CollisionEvent::GetEntityA() const
 {
-    indexCollidingEntities.x = indexEntityA;
-    indexCollidingEntities.y = indexEntityB;
+	return indexEntityA;
 }
 
-const sf::Vector2<unsigned long>& CollisionEvent::GetCollidingEntities() const
+unsigned long int CollisionEvent::GetEntityB() const
 {
-    return indexCollidingEntities;
+	return indexEntityB;
 }

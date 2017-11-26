@@ -12,7 +12,6 @@
 #include "stdafx.h"
 #include "World.hpp"
 #include "Player.hpp"
-#include "CollisionEvent.hpp"
 #include "Component.hpp"
 #include "GameObjectType.hpp"
 
@@ -33,9 +32,6 @@ public:
     static const unsigned long GetPlayerId();
     static void SetPlayerId(const unsigned long index);
     
-    static const std::vector<CollisionEvent>& GetCollisionEvents();
-    static void AddCollisionEvent(const CollisionEvent& event);
-    
     template<typename T>
     static void AddComponent(World& world, const unsigned long int entityIndex, Component<T>* componentToAdd);
     
@@ -47,7 +43,6 @@ private:
 
 	//Free memory of column matrix
     static void FreeWorldFields(World& world, const int worldIndex);
-    static std::vector<CollisionEvent> collisionEvents;
 
 	static void DeleteAllComponentsForEntity(World& world, unsigned long int entityIndex);
 	static void DeleteEntityHandle(World& world, unsigned long int entityIndex);
