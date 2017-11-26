@@ -11,6 +11,10 @@
 
 #include "stdafx.h"
 
+/*!
+ * Class needed in order to give a common base class to systems when called by SystemManager
+ */
+
 class SystemBase
 {
 public:
@@ -22,6 +26,7 @@ public:
     virtual void OnUpdate() = 0;
     virtual void OnRender() = 0;
 	virtual void OnLateUpdate() = 0;
+	virtual void OnCollision() = 0;
     virtual void OnExit() = 0;
 
 protected:

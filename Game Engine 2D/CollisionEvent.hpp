@@ -15,8 +15,8 @@ class CollisionEvent
 {
 public:
     CollisionEvent(unsigned long indexEntityA, unsigned long indexEntityB);
-	unsigned long int GetEntityA() const;
-	unsigned long int GetEntityB() const;
+	const unsigned long int GetEntityA() const;
+	const unsigned long int GetEntityB() const;
     
 private:
 	unsigned long int indexEntityA;

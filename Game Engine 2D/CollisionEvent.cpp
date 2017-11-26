@@ -12,12 +12,12 @@ CollisionEvent::CollisionEvent(unsigned long indexEntityA, unsigned long indexEn
 	indexEntityA(indexEntityA), indexEntityB(indexEntityB)
 {}
 
-unsigned long int CollisionEvent::GetEntityA() const
+const unsigned long int CollisionEvent::GetEntityA() const
 {
 	return indexEntityA;
 }
 
-unsigned long int CollisionEvent::GetEntityB() const
+const unsigned long int CollisionEvent::GetEntityB() const
 {
 	return indexEntityB;
 }

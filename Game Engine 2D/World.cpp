@@ -55,3 +55,8 @@ void World::AddCollisionEvent(const CollisionEvent& event)
 {
 	collisionEvents.push_back(event);
 }
+
+void World::DeleteAllCollisionEvents()
+{
+	collisionEvents.clear();
+}

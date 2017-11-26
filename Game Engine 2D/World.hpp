@@ -33,12 +33,14 @@ public:
     std::vector<std::map<unsigned long int, ComponentBase*>> EntitiesComponentsMatrix;
     std::map<unsigned long int, SystemBase*> Systems;
 	std::map<unsigned long int, GameObject*> EntitiesHandles;
-	std::vector<CollisionEvent> collisionEvents;
 
 	// Methods
 	const std::vector<CollisionEvent>& GetCollisionEvents() const;
 	void AddCollisionEvent(const CollisionEvent& event);
+	void DeleteAllCollisionEvents();
 
+private:
+	std::vector<CollisionEvent> collisionEvents;
 };
 
 

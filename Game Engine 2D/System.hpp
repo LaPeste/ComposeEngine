@@ -42,6 +42,7 @@ public:
 	void OnInput(const sf::Event& event) override;
 	void OnUpdate() override;
 	void OnLateUpdate() override;
+	void OnCollision() override;
 	void OnRender() override;
 	void OnExit() override;
 
@@ -68,8 +69,9 @@ private:
 	virtual void Input(World& world, const unsigned long int entityIndex, const sf::Event& event);
 	virtual void Update(World& world, const unsigned long int entityIndex);
 	virtual void LateUpdate(World& world, const unsigned long int entityIndex);
+	virtual void Collision(World& world, const unsigned long int entityIndexA, const unsigned long int entityIndexB);
 	virtual void Render(World& world, const unsigned long int entityIndex);
-	virtual void Exit(World& world, const unsigned long int entityIndex);    
+	virtual void Exit(World& world, const unsigned long int entityIndex);
 };
 
 #include "System.tpp"
