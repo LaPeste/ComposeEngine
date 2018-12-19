@@ -30,9 +30,6 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
     sf::FloatRect rootNode(Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Camera::GetInstance()->GetWidth(), Camera::GetInstance()->GetHeight());
 	//update quadtree's rootnode to what's visible on the screen
     Engine::GetInstance().GetMapLoader().updateQuadTree(rootNode);
-	
-	//grab all the MapObjects contained in the quads intersected by the bounds of sprite
-    std::vector<tmx::MapObject*> mapObjects = Engine::GetInstance().GetMapLoader().queryQuadTree(collider->GetColliderRect());
     if(!Engine::GetInstance().GetMapLoader().quadTreeAvailable())
     {
 		std::string methodName = _FUNCION_NAME_;
@@ -43,20 +40,46 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
     std::vector<sf::Vector2f> collisionPoints = collider->GetCollisionPoints();
     
     bool mapCollision = false;
+	//grab all the MapObjects contained in the quads intersected by the bounds of sprite
+    std::vector<tmx::MapObject*> mapObjects = Engine::GetInstance().GetMapLoader().queryQuadTree(collider->GetColliderRect());
 
-    for(auto mapObject = mapObjects.begin(); mapObject != mapObjects.end(); ++mapObject)
-    {
-        if((*mapObject)->getParent() == Constants::COLLISION_LAYER)
-        {
-            for(int i = 0; i < 4; i++) //where 4 is the amount of collisionPoints we have. Those are the 4 corners of the sprite of a gameObject.
-            {
-                mapCollision = (*mapObject)->contains(collisionPoints[i]);
+	// N.B. the contains method on the mapObject doesn't work well so I started using my bouding box collision detection
+   // for(auto mapObjectItr = mapObjects.begin(); mapObjectItr != mapObjects.end(); ++mapObjectItr)
+   // {
+   //     if((*mapObjectItr)->getParent() == Constants::COLLISION_LAYER)
+   //     {
+   //         for(int i = 0; i < 4; i++) //where 4 is the amount of collisionPoints we have. Those are the 4 corners of the sprite of a gameObject.
+   //         {
+   //             mapCollision = (*mapObjectItr)->contains(collisionPoints[i]);
 
-                if(mapCollision) break;
-            }
-			if (mapCollision) break;
-        }
-    }
+   //             if(mapCollision) break;
+   //         }
+			//if (mapCollision) break;
+   //     }
+   // }
+	for (auto mapObjectItr = mapObjects.begin(); mapObjectItr != mapObjects.end(); ++mapObjectItr)
+	{
+		auto& mapObj = *mapObjectItr;
+		if (mapObj->getParent() == Constants::COLLISION_LAYER)
+		{
+			auto& currentObjectPoints = static_cast<Collider*>(world.EntitiesComponentsMatrix[index][Collider::Id])->GetCollisionPoints();
+			/*const auto& transform = mapObj->getTransform();
+
+			std::vector<sf::Vector2f> mapObjCollisionPoints = */
+			auto& objAABB = mapObj->getAABB();
+			std::vector<sf::Vector2f> mapObjCollisionPoints;
+			mapObjCollisionPoints.push_back(sf::Vector2f(objAABB.left, objAABB.top));
+			mapObjCollisionPoints.push_back(sf::Vector2f(objAABB.left + objAABB.width, objAABB.top));
+			mapObjCollisionPoints.push_back(sf::Vector2f(objAABB.left, objAABB.top + objAABB.height));
+			mapObjCollisionPoints.push_back(sf::Vector2f(objAABB.left + objAABB.width, objAABB.top + objAABB.height));
+				
+			if (BoundingBoxTest(currentObjectPoints, mapObjCollisionPoints))
+			{
+				mapCollision = true;
+				break;
+			}
+		}
+	}
 
 	bool entityCollision = false;
 	//Engine entities
@@ -65,7 +88,7 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
 		//TODO	check freedcamp task for improving collision detection https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/9943624/
 		if (i == index) continue;
 
-		entityCollision = BoundingBoxTest(world, index, i);
+		entityCollision = BoundingBoxTestEngineEntities(world, index, i);
 		if (entityCollision)
 		{
 			CollisionEvent coll(index, i);
@@ -107,22 +130,29 @@ public:
 		{
 			float Projection = (CollisionPoints[j].x*Axis.x + CollisionPoints[j].y*Axis.y);
 
-			if (Projection<Min)
-				Min = Projection;
-			if (Projection>Max)
-				Max = Projection;
+			if (Projection < Min)	Min = Projection;
+			if (Projection > Max)	Max = Projection;
 		}
 	}
 };
 
-bool CollisionDetectionUtils::BoundingBoxTest(World& world, unsigned long int entity1, unsigned long int entity2) {
+bool CollisionDetectionUtils::BoundingBoxTestEngineEntities(World& world, unsigned long int entity1, unsigned long int entity2)
+{
 	if ((((world.EntitiesComponentsMasks[entity1] & Collider::Id) != Collider::Id) || ((world.EntitiesComponentsMasks[entity1] & Transform::Id) != Transform::Id)) ||
 		(((world.EntitiesComponentsMasks[entity2] & Collider::Id) != Collider::Id) || ((world.EntitiesComponentsMasks[entity2] & Transform::Id) != Transform::Id)))
 	{
 		return false;
 	}
-	OrientedBoundingBox OBB1((static_cast<Collider*>(world.EntitiesComponentsMatrix[entity1][Collider::Id]))->GetCollisionPoints());
-	OrientedBoundingBox OBB2((static_cast<Collider*>(world.EntitiesComponentsMatrix[entity2][Collider::Id]))->GetCollisionPoints());
+	auto entity1Points = static_cast<Collider*>(world.EntitiesComponentsMatrix[entity1][Collider::Id])->GetCollisionPoints();
+	auto entity2Points = static_cast<Collider*>(world.EntitiesComponentsMatrix[entity2][Collider::Id])->GetCollisionPoints();
+
+	return BoundingBoxTest(entity1Points, entity2Points);
+}
+
+bool CollisionDetectionUtils::BoundingBoxTest(std::vector<sf::Vector2f> obj1AABBCoord, std::vector<sf::Vector2f> obj2AABBCoord)
+{	
+	OrientedBoundingBox OBB1(obj1AABBCoord);
+	OrientedBoundingBox OBB2(obj2AABBCoord);
 
 	// Create the four distinct axes that are perpendicular to the edges of the two rectangles
 	sf::Vector2f Axes[4] = {

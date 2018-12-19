@@ -72,9 +72,6 @@
     <Filter Include="Source Files\Entities\Animations">
       <UniqueIdentifier>{39f7bbe4-9c2c-4880-aeac-9efc192fc67a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Entities\BT basic nodes">
-      <UniqueIdentifier>{e99c8222-7c57-46cc-8ca8-c32d67491ada}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{80e5c6cc-a914-478a-b7b2-1c4cd5beba36}</UniqueIdentifier>
     </Filter>
@@ -104,6 +101,9 @@
     </Filter>
     <Filter Include="Game Test\Source Files\GameObjects\BTs">
       <UniqueIdentifier>{78d23b0f-4d27-4203-9bc6-ec62a09d39fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\BT_BasicNodes">
+      <UniqueIdentifier>{e99c8222-7c57-46cc-8ca8-c32d67491ada}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -249,16 +249,16 @@
       <Filter>Source Files\Entities\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Sequence.cpp">
-      <Filter>Source Files\Entities\BT basic nodes</Filter>
+      <Filter>Source Files\Entities\BT_BasicNodes</Filter>
     </ClCompile>
     <ClCompile Include="Selector.cpp">
-      <Filter>Source Files\Entities\BT basic nodes</Filter>
+      <Filter>Source Files\Entities\BT_BasicNodes</Filter>
     </ClCompile>
     <ClCompile Include="Patrolling.cpp">
       <Filter>Game Test\Source Files\GameObjects\BTs</Filter>
     </ClCompile>
     <ClCompile Include="Repeater.cpp">
-      <Filter>Source Files\Entities\BT basic nodes</Filter>
+      <Filter>Source Files\Entities\BT_BasicNodes</Filter>
     </ClCompile>
     <ClCompile Include="Door.cpp">
       <Filter>Game Test\Source Files\GameObjects</Filter>

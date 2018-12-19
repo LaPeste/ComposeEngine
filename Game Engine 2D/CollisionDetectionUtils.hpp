@@ -31,7 +31,9 @@ private:
 	/// Test for bounding box collision using the Seperating Axis Theorem
 	/// Supports scaling and rotation
 	//////
-	static bool BoundingBoxTest(World& world, unsigned long int entity1, unsigned long int entity2);
+	static bool BoundingBoxTest(std::vector<sf::Vector2f> obj1AABBCoord, std::vector<sf::Vector2f> obj2AABBCoord);
+
+	static bool BoundingBoxTestEngineEntities(World& world, unsigned long int entity1, unsigned long int entity2);
 };
 
 #endif /* _COLLISION_DETECTION_UTILS_HPP_ */
