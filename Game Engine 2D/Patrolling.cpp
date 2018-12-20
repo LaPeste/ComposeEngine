@@ -7,54 +7,49 @@
 namespace BT
 {
 	Patrolling::Patrolling(Node* parent, std::vector<std::unique_ptr<Node>> children, BehaviourTree& bt) :
-		originalPosition(0.0f, 0.0f), finalPosition(0.0f, 0.0f), turnBack(false),
+		m_originalPosition(0.0f, 0.0f), m_finalPosition(0.0f, 0.0f), m_turnBack(false),
+		m_entity(nullptr), m_controller(nullptr), m_transform(nullptr),
 		Node(parent, std::move(children), bt)
-	{}
+	{
+		GameObject& gameObject = bt.GetGameObjectAssociated();
+		const uint32_t entityIndex = gameObject.GetEntityIndex();
+		m_entity = &(gameObject.GetWorld().EntitiesComponentsMatrix[entityIndex]);
+		m_controller = static_cast<Controller*>((*m_entity)[Controller::Id]);
+		m_transform = static_cast<Transform*>((*m_entity)[Transform::Id]);
+	}
 
 	void Patrolling::Init()
 	{
-		GameObject& gameObject = bt->GetGameObjectAssociated();;
-		const uint32_t entityIndex = gameObject.GetEntityIndex();
-		std::map<unsigned long int, ComponentBase*>& entity = gameObject.GetWorld().EntitiesComponentsMatrix[entityIndex];
-		Controller* controller = static_cast<Controller*>(entity[Controller::Id]);
-		Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
-
-		originalPosition = transform->GetPosition();
-		finalPosition.x = originalPosition.x + 100.0f;
-		turnBack = false;
+		m_originalPosition = m_transform->GetPosition();
+		m_finalPosition.x = m_originalPosition.x + 100.0f;
+		m_turnBack = false;
 	}
 
 	void Patrolling::OnProcess()
 	{
-		GameObject& gameObject = bt->GetGameObjectAssociated();
-		const uint32_t entityIndex = gameObject.GetEntityIndex();
-		std::map<unsigned long int, ComponentBase*>& entity = gameObject.GetWorld().EntitiesComponentsMatrix[entityIndex];
-		Controller* controller = static_cast<Controller*>(entity[Controller::Id]);
-		Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
-
-		if (!turnBack && transform->GetPosition().x == originalPosition.x)
+		if (!m_turnBack && m_transform->GetPosition().x == m_originalPosition.x)
 		{
-			controller->SetMoveLeft(false);
-			controller->SetMoveRight(true);
+			m_controller->SetMoveLeft(false);
+			m_controller->SetMoveRight(true);
 		}
-		else if (transform->GetPosition().x > originalPosition.x)
+		else if (m_transform->GetPosition().x > m_originalPosition.x)
 		{
-			if (!turnBack)
+			if (!m_turnBack)
 			{
-				controller->SetMoveLeft(false);
-				controller->SetMoveRight(true);
-				turnBack = transform->GetPosition().x > finalPosition.x;
+				m_controller->SetMoveLeft(false);
+				m_controller->SetMoveRight(true);
+				m_turnBack = m_transform->GetPosition().x > m_finalPosition.x;
 			}
 			else
 			{
-				controller->SetMoveRight(false);
-				controller->SetMoveLeft(true);
+				m_controller->SetMoveRight(false);
+				m_controller->SetMoveLeft(true);
 			}
 		}
-		else if (turnBack && transform->GetPosition().x <= originalPosition.x)
+		else if (m_turnBack && m_transform->GetPosition().x <= m_originalPosition.x)
 		{
-			controller->SetMoveRight(false);
-			controller->SetMoveLeft(false);
+			m_controller->SetMoveRight(false);
+			m_controller->SetMoveLeft(false);
 			status = Status::SUCCESS;
 		}
 	}
