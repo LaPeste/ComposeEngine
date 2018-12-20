@@ -192,7 +192,7 @@ bool Movement::PosValid(World& world, const unsigned long entityIndex, float x, 
 	Collider* collider = static_cast<Collider*>(entity[Collider::Id]);
 
 
-    sf::Vector2f originalPosition = transform->GetPosition();
+    sf::Vector2f m_originalPosition = transform->GetPosition();
 	transform->SetPosition(sf::Vector2f(x, y));
     bool posValid = false;
     
@@ -206,7 +206,7 @@ bool Movement::PosValid(World& world, const unsigned long entityIndex, float x, 
     {
 		posValid = CollisionDetectionUtils::Collides(world, entityIndex) ? false : true;
     }
-	transform->SetPosition(originalPosition);
+	transform->SetPosition(m_originalPosition);
     return posValid;
 }
 

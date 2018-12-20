@@ -18,6 +18,7 @@
 #include "GameObject.hpp"
 
 //Data holder for entities, components and systems. It can be seen as a level data holder.
+using ComponentsMap = std::map<unsigned long int, ComponentBase*>;
 
 class World
 {
@@ -30,7 +31,7 @@ public:
     
 //private: TODO maybe make them private and use properties?
     std::vector<unsigned long int> EntitiesComponentsMasks; //defines components held by each entity
-    std::vector<std::map<unsigned long int, ComponentBase*>> EntitiesComponentsMatrix;
+    std::vector<ComponentsMap> EntitiesComponentsMatrix;
     std::map<unsigned long int, SystemBase*> Systems;
 	std::map<unsigned long int, GameObject*> EntitiesHandles;
 
