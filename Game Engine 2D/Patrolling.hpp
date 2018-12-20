@@ -1,7 +1,6 @@
 #ifndef _PATROLLING_HPP_
 #define _PATROLLING_HPP_
 
-#include "stdafx.h"
 #include "BehaviourTree.hpp"
 
 class Controller;
