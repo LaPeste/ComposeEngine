@@ -11,7 +11,7 @@
 
 #include "stdafx.h"
 
-//Class needed to give a common base to templated components when they need to be fit in the same world component matrix
+//! Class needed to give a common base to templated components when they need to be fit in the same world component matrix
 
 class ComponentBase
 {

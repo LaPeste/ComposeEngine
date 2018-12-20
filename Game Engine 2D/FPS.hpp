@@ -3,6 +3,8 @@
 
 #include "stdafx.h"
 
+//#define FRAME_RATE
+
 class FPS
 {
 public:
