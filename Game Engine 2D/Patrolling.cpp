@@ -26,7 +26,7 @@ namespace BT
 
 	void Patrolling::OnProcess()
 	{
-		GameObject& gameObject = bt->GetGameObjectAssociated();;
+		GameObject& gameObject = bt->GetGameObjectAssociated();
 		const uint32_t entityIndex = gameObject.GetEntityIndex();
 		std::map<unsigned long int, ComponentBase*>& entity = gameObject.GetWorld().EntitiesComponentsMatrix[entityIndex];
 		Controller* controller = static_cast<Controller*>(entity[Controller::Id]);
