@@ -88,10 +88,20 @@ void Engine::MainLoop()
 	switch (gameState)
 	{
 		case GameState::Playing:
-            ProcessInput();
-            Update();
-            RenderFrame();
-            break;
+		{
+			ProcessInput();
+			Update();
+			RenderFrame();
+			break;
+		}
+		default:
+		{
+			std::string methodName = _FUNCION_NAME_;
+			std::ostringstream oss;
+			oss << "GameState= " << gameState << " not recognized";
+			Utils::PrintDebugLog(methodName, oss.str());
+			break;
+		}
 	}
 }
 
@@ -100,7 +110,7 @@ void Engine::ProcessInput()
     sf::Event event;
     while (mainWindow->pollEvent(event))
     {
-        OnEvent(event, World, 0);
+        //OnEvent(event, World, 0);
         SystemManager::ProcessAllInput(World, event);
     }
 }
@@ -120,6 +130,7 @@ void Engine::RenderFrame()
     mainWindow->draw(ml); //draw map loaded in mapLoader
     Camera::GetInstance()->Draw(); //draw only the camera view
     SystemManager::RenderAll(World); //draw all entities
+
 	mainWindow->display();
 }
 
@@ -131,7 +142,7 @@ bool Engine::IsExiting()
 	return true;
 }
 
-void Engine::OnExit()
+void Engine::Exit()
 {
     gameState = GameState::Exiting;
 }

@@ -21,6 +21,7 @@ public:
         
     void OnKeyUp(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex) override;
     void OnKeyDown(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex) override;
+	void OnExit() override;
 
 private:
 	void Input(World& world, const unsigned long entityIndex, const sf::Event& event) override;

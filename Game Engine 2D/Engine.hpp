@@ -8,7 +8,7 @@
 #include "tmx/MapLoader.hpp"
 #include "World.hpp"
 
-class Engine : public Event
+class Engine
 {
 
 public:
@@ -29,6 +29,7 @@ public:
     tmx::MapLoader& GetMapLoader();
 
     static World World; //TODO this will become a vector of worlds to support any level of granularity you like
+	void Exit();
 
 private:
 	static Engine instance; // lazy initialization can't be done because I need a reference to World on application loading for the ClassRegistry.
@@ -51,7 +52,6 @@ private:
 	void ProcessInput(); //Processes user input
 	void Update(); //Updates all Engine internals
     void RenderFrame(); //Renders one frame
-	void OnExit() override; //from events
     void Terminate();
 	bool IsExiting();
 };

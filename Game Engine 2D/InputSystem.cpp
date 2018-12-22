@@ -83,3 +83,8 @@ void InputSystem::OnKeyDown(const sf::Event::KeyEvent& input, World& world, cons
             break;
     }
 }
+
+void InputSystem::OnExit()
+{
+	Engine::GetInstance().Exit();
+}
