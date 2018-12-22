@@ -51,7 +51,6 @@
   <object id="88" x="895.625" y="383.75" width="32" height="32.375"/>
   <object id="89" x="953.875" y="352.375" width="32.125" height="31.875"/>
   <object id="90" x="1055.5" y="351.75" width="96" height="64.25"/>
-  <object id="94" gid="242" x="464.5" y="595.125" width="32" height="32"/>
  </objectgroup>
  <layer id="3" name="Nature Layer" width="80" height="24" offsetx="-0.5" offsety="0">
   <data encoding="csv">
