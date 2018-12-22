@@ -39,7 +39,7 @@ void EntityManager::Init(World& world)
 			//check every object name in the layers, if exists in registry instantiate an object of that class
             while(objectIter != layer.objects.end())
             {
-				std::string objName = objectIter->getName();
+				std::string& objName = objectIter->getName();
 				if (Registry::GetGameObjectsRegistry().find(objName) != Registry::GetGameObjectsRegistry().end())
 				{
 					GameObject* gameObject = Registry::GetGameObjectsRegistry()[objName](world);
@@ -53,14 +53,15 @@ void EntityManager::Init(World& world)
 					++objectIter;
 				}
             }
-			//very confused why this doesn't do what I was expecting https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/10074378/
-			engine.GetMapLoader().drawLayer(*engine.GetWindow(), layerIndex); //I was hoping for a redraw of the layer without the objects that were removed during the layer parsing... but it isn't so
+			// TODO put in rendering part of the engine
+			//engine.GetMapLoader().drawLayer(*engine.GetWindow(), layerIndex);
         }
     }
 }
 
 const unsigned long EntityManager::CreateEntity(World& world, const GameObjectFlag& flags)
 {
+	// if found entity not used anymore, clean it and return that as "new"
     for(int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
     {
         if(world.EntitiesComponentsMasks[i] == UtilConstants::NO_COMPONENTS) //then a corrispondent position in the components array already exist
@@ -70,6 +71,7 @@ const unsigned long EntityManager::CreateEntity(World& world, const GameObjectFl
         }
     }
     
+	// else create a new one
     world.EntitiesComponentsMasks.push_back(UtilConstants::NO_COMPONENTS);
     world.EntitiesComponentsMatrix.push_back(std::map<unsigned long int, ComponentBase*>());
 

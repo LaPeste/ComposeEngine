@@ -38,10 +38,10 @@ public:
 private:
     static unsigned long int playerId;
 
-	//Returns index to entity with no components, if found, otherwise the list will be extended and the latest index returned
+	//! Returns index to entity with no components, if found, otherwise the list will be extended and the latest index returned
 	static const unsigned long CreateEntity(World& world, const GameObjectFlag& flags = GameObjectFlag::NONE);
 
-	//Free memory of column matrix
+	//! Free memory of column matrix
     static void FreeWorldFields(World& world, const int worldIndex);
 
 	static void DeleteAllComponentsForEntity(World& world, unsigned long int entityIndex);
