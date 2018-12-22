@@ -110,7 +110,6 @@ void Engine::ProcessInput()
     sf::Event event;
     while (mainWindow->pollEvent(event))
     {
-        //OnEvent(event, World, 0);
         SystemManager::ProcessAllInput(World, event);
     }
 }
