@@ -7,6 +7,10 @@
 
 using EventDelegate = std::function<void(EventBase*)>;
 
+/*!
+ * EventManager is an implementation of the Observer pattern.
+ */
+
 class EventManager
 {
 public:	

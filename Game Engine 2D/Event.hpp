@@ -4,6 +4,10 @@
 #include "stdafx.h"
 #include "World.hpp"
 
+/*
+  Protected methods are't made pure virtual simply not to force the implementer to implement not needed methods.
+  It's more a shortcut than anything else.
+*/
 class Event
 {
 public:
