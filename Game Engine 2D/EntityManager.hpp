@@ -72,7 +72,7 @@ void EntityManager::AddComponent(World& world, const unsigned long int entityInd
     Utils::PrintDebugLog(methodName, s);
 #endif
     
-    if(entityComponentsMap.find(Component<T>::Id) == entityComponentsMap.end())    //if key found
+    if(entityComponentsMap.find(Component<T>::Id) == entityComponentsMap.end())    //if not key found
     {
         entityComponentsMap.insert(std::make_pair(Component<T>::Id, componentToAdd));
     }

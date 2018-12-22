@@ -30,9 +30,17 @@ public:
 	World& operator=(const World&) = delete;
     
 //private: TODO maybe make them private and use properties?
-    std::vector<unsigned long int> EntitiesComponentsMasks; //defines components held by each entity
+
+	//! To quickly query what components an entity at a certain index has.
+    std::vector<unsigned long int> EntitiesComponentsMasks;
+
+	//! It holds components per each entity. Each component can be quickly obtained by its id from the map of each entity.
     std::vector<ComponentsMap> EntitiesComponentsMatrix;
+
+	//! All available systems in this world
     std::map<unsigned long int, SystemBase*> Systems;
+
+	//! Connection between an entityIndex and the gameobject abstraction connected to it.
 	std::map<unsigned long int, GameObject*> EntitiesHandles;
 
 	// Methods
