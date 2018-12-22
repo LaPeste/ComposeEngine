@@ -17,7 +17,7 @@ public:
 	static const unsigned int SCREEN_WIDTH;
 	static const unsigned int SCREEN_HEIGHT;
 	static const unsigned int SCREEN_DEPTH;
-    static const int GAME_FRAMERATE_TARGET;
+    static const int FPS_TARGET;
     static const std::string GAME_NAME;
 	static const std::string RESOURCE_PATH;
     

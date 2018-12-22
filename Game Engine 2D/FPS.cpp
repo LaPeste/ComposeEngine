@@ -26,7 +26,7 @@ void FPS::Update()
 	{
 		frames++;
 		double timeFrame = clock.getElapsedTime().asMilliseconds() - lastTime;
-		speedFactor = timeFrame / 1000 * Constants::GAME_FRAMERATE_TARGET;
+		speedFactor = timeFrame / 1000 * Constants::FPS_TARGET;
 		lastTime = clock.getElapsedTime().asMilliseconds();
 	}
 	else

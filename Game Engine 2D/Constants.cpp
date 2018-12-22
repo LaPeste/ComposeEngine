@@ -37,7 +37,7 @@ const int Constants::SPACE_BETWEEN_SPRITE_Y = 0;
 const int Constants::PLAYER_SPRITE_MAX_FRAME = 2;
 const int Constants::ANIMATION_FRAMERATE = 200; //in millisecond
 const bool Constants::REVERSE_ANIMATION = false;
-const int Constants::GAME_FRAMERATE_TARGET = 32;
+const int Constants::FPS_TARGET = 32;
 const float Constants::OFFSET_COL_X = 2; //this should be used for offsetting the bounding box collider on the x axis
 const float Constants::OFFSET_COL_Y = 2; //this is the same but for the y axis
 
