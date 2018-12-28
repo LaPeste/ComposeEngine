@@ -14,15 +14,7 @@ GameObject::~GameObject()
 	Utils::PrintDebugLog(methodName, "dctr called");
 #endif
 
-	if (!world) return;
-
-	auto& entityComponents = world->EntitiesComponentsMatrix[entityIndex];
-	auto& iter = entityComponents.begin();
-	while (iter != entityComponents.end()) 
-	{
-		delete(iter->second);
-		iter = entityComponents.erase(iter);
-	}
+	EntityManager::DestroyGameObject(this);
 }
 
 const unsigned long int GameObject::GetEntityIndex() const
