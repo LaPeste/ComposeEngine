@@ -18,10 +18,10 @@ class GameObject : public EventListener
 public:
 	const unsigned long int GetEntityIndex() const;
 	World& GetWorld() const;
-	virtual ~GameObject();
 
 protected:
 	GameObject();
+	virtual ~GameObject();
 
 	//! Add here all the components that define the entity, like a prefab in Unity
 	virtual void Init() = 0;

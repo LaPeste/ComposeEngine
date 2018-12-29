@@ -13,8 +13,6 @@ GameObject::~GameObject()
 	std::string methodName = _FUNCION_NAME_;
 	Utils::PrintDebugLog(methodName, "dctr called");
 #endif
-
-	EntityManager::DestroyGameObject(this);
 }
 
 const unsigned long int GameObject::GetEntityIndex() const
