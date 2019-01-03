@@ -5,7 +5,7 @@ unsigned int EventBase::id = 0;
 EventBase::EventBase()
 {}
 
-unsigned int EventBase::GetId()
+EventBase::UID EventBase::GetId()
 {
 	if (id == 0)
 	{

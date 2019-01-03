@@ -11,7 +11,7 @@ public:
 
 	EventBase();
 
-	static unsigned int GetId();
+	static UID GetId();
 
 private:
 	static UID id;
