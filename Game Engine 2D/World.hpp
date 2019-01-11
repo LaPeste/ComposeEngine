@@ -16,6 +16,7 @@
 #include "SystemBase.hpp"
 #include "CollisionEvent.hpp"
 #include "GameObject.hpp"
+#include "Component.hpp"
 
 //Data holder for entities, components and systems. It can be seen as a level data holder.
 using ComponentsMap = std::map<unsigned long int, ComponentBase*>;
@@ -48,10 +49,30 @@ public:
 	void AddCollisionEvent(const CollisionEvent& event);
 	void DeleteAllCollisionEvents();
 
+	template<typename T>
+	T* GetComponent(unsigned long int entityIndex);
+
 private:
 	std::vector<CollisionEvent> collisionEvents;
 };
 
 
+template<typename T>
+T* World::GetComponent(unsigned long int entityIndex)
+{
+	if (EntitiesHandles.find(entityIndex) == EntitiesHandles.end())
+	{
+		DEBUG_ERROR("Something went very wrong. There was no index " + std::to_string(entityIndex) + " in this world");
+		return nullptr;
+	}
+	auto componentId = Component<T>::Id;
+	if (!EntitiesComponentsMasks[entityIndex] & componentId)
+	{
+		DEBUG_WARNING("No component " + std::string(typeid(T).name()) + " was found.");
+		return nullptr;
+	}
+
+	return static_cast<T*>(EntitiesComponentsMatrix[entityIndex][componentId]);
+}
 
 #endif /* _WORLD_HPP_ */

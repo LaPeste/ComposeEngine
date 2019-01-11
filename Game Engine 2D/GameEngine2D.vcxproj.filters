@@ -105,6 +105,12 @@
     <Filter Include="Source Files\Entities\BT_BasicNodes">
       <UniqueIdentifier>{e99c8222-7c57-46cc-8ca8-c32d67491ada}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Debug">
+      <UniqueIdentifier>{e5a029a9-0b5c-4cbb-a05b-ffbb038418dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Debug">
+      <UniqueIdentifier>{c7fccae8-316c-47c8-af0b-77d4df12eb14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -271,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="AttackWhenInRange.cpp">
       <Filter>Game Test\Source Files\GameObjects\BTs</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryDebugger.cpp">
+      <Filter>Source Files\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -453,6 +462,9 @@
     </ClInclude>
     <ClInclude Include="AttackWhenInRange.h">
       <Filter>Game Test\Header Files\GameObjects\BTs</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryDebugger.h">
+      <Filter>Header Files\Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

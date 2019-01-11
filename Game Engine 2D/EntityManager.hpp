@@ -17,7 +17,6 @@
 
 // Entities represent a game objects as an aggregation of components
 
-
 class EntityManager
 {
 public:
@@ -34,7 +33,7 @@ public:
     
     template<typename T>
     static void AddComponent(World& world, const unsigned long int entityIndex, Component<T>* componentToAdd);
-    
+
 private:
     static unsigned long int playerId;
 

@@ -144,6 +144,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GeometryDebugger.cpp" />
     <ClCompile Include="InputEvent.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Luigi.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectType.hpp" />
     <ClInclude Include="Animations.hpp" />
+    <ClInclude Include="GeometryDebugger.h" />
     <ClInclude Include="InputEvent.hpp" />
     <ClInclude Include="InputSystem.hpp" />
     <ClInclude Include="Luigi.hpp" />

@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ClassRegistry.hpp"
 #include "EventListener.hpp"
+#include "Component.hpp"
 
 using namespace Registry;
 
@@ -18,6 +19,9 @@ class GameObject : public EventListener
 public:
 	const unsigned long int GetEntityIndex() const;
 	World& GetWorld() const;
+	
+	template<typename T>
+	T* GetComponent();
 
 protected:
 	GameObject();
@@ -35,6 +39,16 @@ private:
 	World* world; //I'd have preferred to have this const :(
 };
 
+template<typename T>
+T* GameObject::GetComponent()
+{
+	if (world->EntitiesHandles.find(entityIndex) == world->EntitiesHandles.end())
+	{
+		throw("Something went very wrong. There was no index " + std::to_string(entityIndex) + " for the this gameObject.");
+	}
+
+	return world->GetComponent<T>(entityIndex);
+}
 
 
 #endif

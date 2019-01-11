@@ -129,7 +129,7 @@ void Engine::RenderFrame()
     mainWindow->draw(ml); //draw map loaded in mapLoader
     Camera::GetInstance()->Draw(); //draw only the camera view
     SystemManager::RenderAll(World); //draw all entities
-
+	GeometryDebugger::DrawAllShapes();
 	mainWindow->display();
 }
 

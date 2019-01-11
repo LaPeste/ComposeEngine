@@ -28,9 +28,11 @@
 #include <vector>
 
 #include "Utils.hpp"
+#include "GeometryDebugger.h"
 #include "Constants.hpp"
 #include "UtilConstants.hpp"
 #include "EntityUtils.hpp"
+
 
 #if __APPLE__ && __MACH__
 /* Here is a small helper for you ! Have a look. */
