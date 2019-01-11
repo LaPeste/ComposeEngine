@@ -122,6 +122,7 @@
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Appearance.cpp" />
+    <ClCompile Include="AttackWhenInRange.cpp" />
     <ClCompile Include="BehaviourTree.cpp" />
     <ClCompile Include="BTEngine.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Animator.hpp" />
     <ClInclude Include="Appearance.hpp" />
+    <ClInclude Include="AttackWhenInRange.h" />
     <ClInclude Include="BehaviourTree.hpp" />
     <ClInclude Include="BTEngine.hpp" />
     <ClInclude Include="Camera.hpp" />

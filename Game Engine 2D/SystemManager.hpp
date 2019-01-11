@@ -55,7 +55,7 @@ void SystemManager::AddSystem(World& world, System<First, Rest...>* systemToAdd)
 		std::stringstream ss;
 		ss << "System: " << typeid(systemToAdd).name() << " added with Id: " << systemToAdd->Id;
 		std::string s = ss.str();
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
 		Utils::PrintDebugLog(methodName, s);
 #endif
 	}
@@ -64,7 +64,7 @@ void SystemManager::AddSystem(World& world, System<First, Rest...>* systemToAdd)
 		std::stringstream ss;
 		ss << "system " << typeid(systemToAdd).name() << " already added to the selected world!";
 		std::string s = ss.str();
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
 		Utils::PrintDebugWarning(methodName, s);
 	}
 

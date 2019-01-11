@@ -38,7 +38,7 @@
 #endif
 
 #if __GNUC__ || __GNUG__
-#define _FUNCION_NAME_ __PRETTY_FUNCTION__;
+#define _FUNCTION_NAME_ __PRETTY_FUNCTION__
 #else /* _MSC_VER */
-#define _FUNCION_NAME_ __FUNCTION__;
+#define _FUNCTION_NAME_ __FUNCTION__
 #endif

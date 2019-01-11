@@ -35,8 +35,9 @@ void FPS::Update()
 		frameRate = frames;
 		frames = 0;
 		lastTime = 0;
+
 #ifdef FRAME_RATE
-        std::cout << "FPS --> " << frameRate << "\n";
+		DEBUG_LOG("FPS --> " + std::to_string(frameRate) + "\n");
 #endif
 	}
 }

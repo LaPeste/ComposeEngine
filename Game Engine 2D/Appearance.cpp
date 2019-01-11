@@ -13,7 +13,7 @@
 
 Appearance::Appearance(World& world, const unsigned long int entityIndex, std::string spritePath) : Component(world, entityIndex)
 {
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
     Appearance::SpritePath = spritePath;
     texture = new sf::Texture;
     if (!texture->loadFromFile(Appearance::SpritePath))
@@ -58,7 +58,7 @@ Appearance::~Appearance()
     delete sprite;
     
 #if DEBUG
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
     Utils::PrintDebugLog(methodName, "sprite and texture memory freed");
 #endif
 }
@@ -69,7 +69,7 @@ sf::Sprite* const Appearance::GetSprite() const
     {
         return sprite;
     }
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
     Utils::PrintDebugError(methodName, "you are trying to get the sprite, but it is not loaded yet!");
     return nullptr;
 }

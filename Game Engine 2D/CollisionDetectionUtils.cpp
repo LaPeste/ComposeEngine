@@ -32,7 +32,7 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
     Engine::GetInstance().GetMapLoader().updateQuadTree(rootNode);
     if(!Engine::GetInstance().GetMapLoader().quadTreeAvailable())
     {
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
         Utils::PrintDebugError(methodName, "No MapTree to query is available");
         return false;
     }

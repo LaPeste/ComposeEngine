@@ -29,7 +29,7 @@ void Animator::Animate(World& world, const unsigned long entityIndex)
     {
         if(animation->AnimationMap.find(animation->CurrentAnimationState) == animation->AnimationMap.end())
         {
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
             Utils::PrintDebugWarning(methodName, "No found for the current animation state, setting the whole sprite as to be rendered");
         }
         else

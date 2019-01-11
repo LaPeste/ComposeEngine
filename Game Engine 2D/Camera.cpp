@@ -25,7 +25,7 @@ Camera::Camera(float cameraZoomWidth, float cameraZoomHeight) :
 Camera::~Camera()
 {
 #ifdef LOG_OUTPUT_CONSOLE
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
     Utils::PrintDebugLog(methodName, "dctr called");
 #endif
 }
@@ -34,7 +34,7 @@ void Camera::CreateInstance(float cameraZoomWidth, float cameraZoomHeight)
 {
     if(instance != nullptr)
     {
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
         Utils::PrintDebugError(methodName, "You're trying to instantiate the camera twice!");
         return;
     }
@@ -45,7 +45,7 @@ Camera * Camera::GetInstance()
 {
     if(instance == nullptr)
     {
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
         Utils::PrintDebugError(methodName, "Trying to get a camera, but an instance is not created yet!");
         return nullptr;
     }
@@ -60,7 +60,7 @@ void Camera::Update()
 		Transform* transform = static_cast<Transform*>(world.EntitiesComponentsMatrix[EntityManager::GetPlayerId()][Transform::Id]);
 		if (transform == nullptr)
 		{
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
 			Utils::PrintDebugError(methodName,"player does'not have a Transform component!");
 			throw 1;
 		}

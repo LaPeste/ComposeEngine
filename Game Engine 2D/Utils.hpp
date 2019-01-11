@@ -11,12 +11,17 @@
 
 #include "stdafx.h"
 
+#define DEBUG_LOG(message) Utils::PrintDebugLog(_FUNCTION_NAME_, message)
+#define DEBUG_WARNING(message) Utils::PrintDebugWarning(_FUNCTION_NAME_, message)
+#define DEBUG_ERROR(message) Utils::PrintDebugError(_FUNCTION_NAME_, message)
+
 class Utils
 {
 public:
     static void PrintDebugLog(const std::string& methodName, const std::string& message);
     static void PrintDebugWarning(const std::string& methodName, const std::string& message);
     static void PrintDebugError(const std::string& methodName, const std::string& message);
+
     
 private:
 };

@@ -8,7 +8,7 @@ namespace BT
 
 	void Repeater::Init()
 	{
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
 		std::ostringstream logText;
 		int childrenSize = GetChildren().size();
 		if (childrenSize == 0)
@@ -29,7 +29,7 @@ namespace BT
 		// just in case children are added during processing, which thing that should never be done!
 		if (GetChildren().size() > 1)
 		{
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
 			std::ostringstream logText;
 			logText << "This type of node is not supposed to have more than 1 child. It currently has" << GetChildren().size() << ". The additional children won't be repeated. This looks like a mistake";
 			Utils::PrintDebugWarning(methodName, logText.str());

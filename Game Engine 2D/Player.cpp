@@ -69,7 +69,7 @@ void Player::Init()
 		}
 		else
 		{
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
 			Utils::PrintDebugWarning(methodName, "The event passed was null!");
 		}
 	});

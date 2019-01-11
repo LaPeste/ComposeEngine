@@ -269,6 +269,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game Test\Source Files\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="AttackWhenInRange.cpp">
+      <Filter>Game Test\Source Files\GameObjects\BTs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -447,6 +450,9 @@
     </ClInclude>
     <ClInclude Include="Player.hpp">
       <Filter>Game Test\Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackWhenInRange.h">
+      <Filter>Game Test\Header Files\GameObjects\BTs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

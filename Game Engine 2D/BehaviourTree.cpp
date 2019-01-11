@@ -27,7 +27,7 @@ namespace BT
 	{
 		if (!ContextValueExist(search))
 		{
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
 			Utils::PrintDebugError(methodName, "Context does not have the field " + search + ". Abort!");
 			throw 1;
 		}

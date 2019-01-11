@@ -122,7 +122,7 @@ void EntityManager::DeleteEntityHandle(World& world, unsigned long int entityInd
 {
 	if (world.EntitiesHandles.find(entityIndex) == world.EntitiesHandles.end())
 	{
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
 		std::ostringstream oss;
 		oss << "you're trying to delete a handle that doesn't exist, since entityIndex=" << entityIndex << " could not be found!";
 		Utils::PrintDebugLog(methodName, oss.str());

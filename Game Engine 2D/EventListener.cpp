@@ -13,7 +13,7 @@ EventListener::EventListener()
 EventListener::~EventListener()
 {
 #if LOG_OUTPUT_CONSOLE
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
 	std::ostringstream oss;
 	oss << "dctr called";
 	Utils::PrintDebugLog(methodName, oss.str());
@@ -29,7 +29,7 @@ bool EventListener::OnGameEvent(EventBase::UID eventId, EventDelegate* delegate)
 {
 	if (delegate == nullptr)
 	{
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
 		std::ostringstream oss;
 		oss << "You have tried to add a null delegate for event=" << eventId;
 		Utils::PrintDebugError(methodName, oss.str());

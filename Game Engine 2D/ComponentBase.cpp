@@ -18,7 +18,7 @@ ComponentBase::ComponentBase()
 ComponentBase::~ComponentBase()
 {
 #ifdef LOG_OUTPUT_CONSOLE
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
 	Utils::PrintDebugLog(methodName, "dctr called");
 #endif
 }

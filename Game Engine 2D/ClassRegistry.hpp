@@ -37,7 +37,7 @@ namespace Registry
 				GetGameObjectsRegistry().insert(std::make_pair(name, std::bind(&EntityManager::Instantiate<TYPE>, std::ref(world)))); //std::ref is crucial since without we're passing a copy of world, which will be destroyed (with destructor) right after the std::bind ends. For better info check this out  http://stackoverflow.com/questions/19859288/why-will-stdfunction-call-destructor-when-an-object-was-bound-to-a-member-func
 
 #ifdef LOG_OUTPUT_CONSOLE
-				std::string methodName = _FUNCION_NAME_;
+				std::string methodName = _FUNCTION_NAME_;
 				std::ostringstream oss;
 				oss << typeid(TYPE).name() << " added with string \"" << name << "\"";
 				Utils::PrintDebugLog(methodName, oss.str());
@@ -45,7 +45,7 @@ namespace Registry
 			}
 			else
 			{
-				std::string methodName = _FUNCION_NAME_;
+				std::string methodName = _FUNCTION_NAME_;
 				std::ostringstream oss;
 				oss << "string= " << name << " for " << typeid(TYPE).name() << " already used. Use a different string!!";
 				Utils::PrintDebugLog(methodName, oss.str());

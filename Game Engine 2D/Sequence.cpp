@@ -11,7 +11,7 @@ namespace BT
 		int childrenSize = GetChildren().size();
 		if (childrenSize == 0)
 		{
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
 			std::ostringstream oss;
 			oss << "There are no children for the selected sequence. Nothing to init.";
 			Utils::PrintDebugWarning(methodName, oss.str());

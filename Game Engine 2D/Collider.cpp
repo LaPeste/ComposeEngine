@@ -31,7 +31,7 @@ const sf::FloatRect& Collider::GetColliderRect() const
 		}
 		else
 		{
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
 			std::ostringstream oss;
 			oss << "Texture isn't loaded so there's no Collider Rectangle to obtain for unit " << entityIndex;
 			Utils::PrintDebugError(methodName, oss.str());

@@ -25,7 +25,7 @@ Engine Engine::instance;
 Engine::~Engine()
 {
 #ifdef LOG_OUTPUT_CONSOLE
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
     Utils::PrintDebugLog(methodName, "dctr called");
 #endif
     delete(Camera::GetInstance());
@@ -96,7 +96,7 @@ void Engine::MainLoop()
 		}
 		default:
 		{
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
 			std::ostringstream oss;
 			oss << "GameState= " << gameState << " not recognized";
 			Utils::PrintDebugLog(methodName, oss.str());
@@ -149,7 +149,7 @@ void Engine::Exit()
 void Engine::Terminate()
 {
 #ifdef LOG_OUTPUT_CONSOLE
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
     Utils::PrintDebugLog(methodName, "terminating the engine and taking care of freeing the allocated memory");
 #endif
     SystemManager::ExitAll(World);

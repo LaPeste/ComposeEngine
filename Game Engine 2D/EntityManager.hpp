@@ -68,7 +68,7 @@ void EntityManager::AddComponent(World& world, const unsigned long int entityInd
     std::stringstream ss;
     ss << "ComponentId: " << Component<T>::Id << " entityIndex: " << entityIndex << " component: " << typeid(T).name();
     std::string s = ss.str();
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
     Utils::PrintDebugLog(methodName, s);
 #endif
     
@@ -81,7 +81,7 @@ void EntityManager::AddComponent(World& world, const unsigned long int entityInd
         std::stringstream ss;
         ss << "component " << typeid(T).name() << " already added to entity " << entityIndex << ".";
         std::string s = ss.str();
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
         Utils::PrintDebugWarning(methodName, s);
 
     }
@@ -103,7 +103,7 @@ GAME_OBJECT_TYPE* const EntityManager::Instantiate(World& world)
 	std::stringstream ss;
 	ss << "GameObject " << typeid(GAME_OBJECT_TYPE).name() << " with id " << entityIndex << " has been instantiated!";
 	std::string s = ss.str();
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
 	Utils::PrintDebugLog(methodName, s);
 #endif
 

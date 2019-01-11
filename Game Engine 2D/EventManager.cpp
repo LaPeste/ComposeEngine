@@ -7,7 +7,7 @@ std::map<EventBase::UID, std::list<const EventDelegate*>> EventManager::listener
 EventManager::~EventManager()
 {
 #if LOG_OUTPUT_CONSOLE
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
 	std::ostringstream oss;
 	oss << "dctr called";
 	Utils::PrintDebugLog(methodName, oss.str());
@@ -31,7 +31,7 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 {
 	if (eventDelegate == nullptr)
 	{
-		std::string methodName = _FUNCION_NAME_;
+		std::string methodName = _FUNCTION_NAME_;
 		std::ostringstream oss;
 		oss << "You have tried to add a null delegate for event=" << eventId;
 		Utils::PrintDebugError(methodName, oss.str());
@@ -53,7 +53,7 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 		const EventDelegate* delegateFunc = *it;
 		if (delegateFunc->target<EventDelegate*>() == eventDelegate->target<EventDelegate*>())
 		{
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
 			std::ostringstream oss;
 			oss << "You have tried to add the same EventDelegate for the eventId= " << eventId;
 			Utils::PrintDebugWarning(methodName, oss.str());
@@ -62,7 +62,7 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 	}
 
 #if LOG_OUTPUT_CONSOLE
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
 	std::ostringstream oss;
 	oss << "EventDelegate for the eventId " << eventId << " added";
 	Utils::PrintDebugLog(methodName, oss.str());
@@ -74,7 +74,7 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 
 bool EventManager::RemoveListener(EventBase::UID eventId, const EventDelegate* eventDelegate)
 {
-	std::string methodName = _FUNCION_NAME_;
+	std::string methodName = _FUNCTION_NAME_;
 	std::ostringstream oss;
 
 	if (listeners.size() == 0) //I'm not sure why this happens... https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/10940586/
@@ -108,7 +108,7 @@ bool EventManager::RemoveListener(EventBase::UID eventId, const EventDelegate* e
 			delegateList.erase(it);
 
 #if LOG_OUTPUT_CONSOLE
-			std::string methodName = _FUNCION_NAME_;
+			std::string methodName = _FUNCTION_NAME_;
 			std::ostringstream oss;
 			oss << "EventDelegate for the eventId " << eventId << " removed!";
 			Utils::PrintDebugError(methodName, oss.str());
