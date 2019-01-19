@@ -129,6 +129,7 @@
     <ClCompile Include="ClassRegistry.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionDetectionUtils.cpp" />
+    <ClCompile Include="CollisionDetector.cpp" />
     <ClCompile Include="CollisionEvent.cpp" />
     <ClCompile Include="ComponentBase.cpp" />
     <ClCompile Include="Constants.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="EventBase.cpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="FieldOfView.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GeometryDebugger.cpp" />
@@ -185,6 +187,7 @@
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Collider.hpp" />
     <ClInclude Include="CollisionDetectionUtils.hpp" />
+    <ClInclude Include="CollisionDetector.hpp" />
     <ClInclude Include="CollisionEvent.hpp" />
     <ClInclude Include="Component.hpp" />
     <ClInclude Include="ComponentBase.hpp" />
@@ -199,6 +202,7 @@
     <ClInclude Include="EventBase.hpp" />
     <ClInclude Include="EventListener.hpp" />
     <ClInclude Include="EventManager.hpp" />
+    <ClInclude Include="FieldOfView.hpp" />
     <ClInclude Include="FPS.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectType.hpp" />

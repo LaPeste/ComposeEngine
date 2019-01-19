@@ -204,7 +204,7 @@ bool Movement::PosValid(World& world, const unsigned long entityIndex, float x, 
 	//prevent player from falling from map's limits, thanks to the posValid initialized to false
     if(insideXLimitMap && insideYLimitMap)
     {
-		posValid = CollisionDetectionUtils::Collides(world, entityIndex) ? false : true;
+		posValid = CollisionDetectionUtils::PhysicsCollides(world, entityIndex) ? false : true;
     }
 	transform->SetPosition(m_originalPosition);
     return posValid;

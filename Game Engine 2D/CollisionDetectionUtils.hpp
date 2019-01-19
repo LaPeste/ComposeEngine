@@ -12,12 +12,12 @@
 #include "stdafx.h"
 #include "World.hpp"
 
-//if left as it is, it should become a namespace and not a class. Being a class is pointless. It'd become relevant if, for example, it starts holding data about collisions that have hanneped.
 class CollisionDetectionUtils
 {
 public:
-    static bool Collides(World& world, const unsigned long entityIndex);
+    static bool PhysicsCollides(World& world, const unsigned long entityIndex);
 
+	static bool BoundingBoxTestEngineEntities(World& world, unsigned long int entity1, unsigned long int entity2, bool physics = false);
 
 private:
 	/* BoundingBoxTest adapted from work of
@@ -33,7 +33,6 @@ private:
 	//////
 	static bool BoundingBoxTest(std::vector<sf::Vector2f> obj1AABBCoord, std::vector<sf::Vector2f> obj2AABBCoord);
 
-	static bool BoundingBoxTestEngineEntities(World& world, unsigned long int entity1, unsigned long int entity2);
 };
 
 #endif /* _COLLISION_DETECTION_UTILS_HPP_ */

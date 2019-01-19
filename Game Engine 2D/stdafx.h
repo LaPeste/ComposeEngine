@@ -26,6 +26,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <unordered_set>
 
 #include "Utils.hpp"
 #include "GeometryDebugger.h"

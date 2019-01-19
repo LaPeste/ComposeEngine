@@ -36,7 +36,7 @@ void Player::Init()
 	Controller* controllerComp = new Controller(world, entityIndex);
     EntityManager::AddComponent(world, entityIndex, controllerComp);
     EntityManager::AddComponent(world, entityIndex, new Velocity(world, entityIndex));
-    EntityManager::AddComponent(world, entityIndex, new Collider(world, entityIndex));
+    EntityManager::AddComponent(world, entityIndex, new Collider(world, entityIndex, sf::Vector2f(0.5f, 0.5f)));
     
 
 	//Animation states

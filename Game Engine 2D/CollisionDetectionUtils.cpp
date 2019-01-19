@@ -18,7 +18,7 @@
 #include <cmath>
 
 //TODO try make world a constant reference check task https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/9944030/
-bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
+bool CollisionDetectionUtils::PhysicsCollides(World& world, const unsigned long index)
 {
 	if ((world.EntitiesComponentsMasks[index] & Collider::Id) != Collider::Id) return false;
 
@@ -37,7 +37,7 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
         return false;
     }
 
-    std::vector<sf::Vector2f> collisionPoints = collider->GetCollisionPoints();
+    //std::vector<sf::Vector2f> collisionPoints = collider->GetCollisionPoints();
     
     bool mapCollision = false;
 	//grab all the MapObjects contained in the quads intersected by the bounds of sprite
@@ -63,15 +63,14 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
 		if (mapObj->getParent() == Constants::COLLISION_LAYER)
 		{
 			auto& currentObjectPoints = static_cast<Collider*>(world.EntitiesComponentsMatrix[index][Collider::Id])->GetCollisionPoints();
-			/*const auto& transform = mapObj->getTransform();
-
-			std::vector<sf::Vector2f> mapObjCollisionPoints = */
-			auto& objAABB = mapObj->getAABB();
+			
+			const auto objAABB = mapObj->getAABB();
+			const auto& transform = mapObj->getTransform();
 			std::vector<sf::Vector2f> mapObjCollisionPoints;
-			mapObjCollisionPoints.push_back(sf::Vector2f(objAABB.left, objAABB.top));
-			mapObjCollisionPoints.push_back(sf::Vector2f(objAABB.left + objAABB.width, objAABB.top));
-			mapObjCollisionPoints.push_back(sf::Vector2f(objAABB.left, objAABB.top + objAABB.height));
-			mapObjCollisionPoints.push_back(sf::Vector2f(objAABB.left + objAABB.width, objAABB.top + objAABB.height));
+			mapObjCollisionPoints.push_back(transform.transformPoint(0.f, 0.f));
+			mapObjCollisionPoints.push_back(transform.transformPoint(objAABB.width, 0.f));
+			mapObjCollisionPoints.push_back(transform.transformPoint(0.f, objAABB.height));
+			mapObjCollisionPoints.push_back(transform.transformPoint(objAABB.width, objAABB.height));
 				
 			if (BoundingBoxTest(currentObjectPoints, mapObjCollisionPoints))
 			{
@@ -88,7 +87,7 @@ bool CollisionDetectionUtils::Collides(World& world, const unsigned long index)
 		//TODO	check freedcamp task for improving collision detection https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/9943624/
 		if (i == index) continue;
 
-		entityCollision = BoundingBoxTestEngineEntities(world, index, i);
+		entityCollision = BoundingBoxTestEngineEntities(world, index, i, true);
 		if (entityCollision)
 		{
 			CollisionEvent coll(index, i);
@@ -136,15 +135,26 @@ public:
 	}
 };
 
-bool CollisionDetectionUtils::BoundingBoxTestEngineEntities(World& world, unsigned long int entity1, unsigned long int entity2)
+bool CollisionDetectionUtils::BoundingBoxTestEngineEntities(World& world, unsigned long int entity1, unsigned long int entity2, bool physics)
 {
 	if ((((world.EntitiesComponentsMasks[entity1] & Collider::Id) != Collider::Id) || ((world.EntitiesComponentsMasks[entity1] & Transform::Id) != Transform::Id)) ||
 		(((world.EntitiesComponentsMasks[entity2] & Collider::Id) != Collider::Id) || ((world.EntitiesComponentsMasks[entity2] & Transform::Id) != Transform::Id)))
 	{
 		return false;
 	}
-	auto entity1Points = static_cast<Collider*>(world.EntitiesComponentsMatrix[entity1][Collider::Id])->GetCollisionPoints();
-	auto entity2Points = static_cast<Collider*>(world.EntitiesComponentsMatrix[entity2][Collider::Id])->GetCollisionPoints();
+	std::vector<sf::Vector2f> entity1Points;
+	std::vector<sf::Vector2f> entity2Points;
+
+	if (physics)
+	{
+		entity1Points = static_cast<Collider*>(world.EntitiesComponentsMatrix[entity1][Collider::Id])->GetPhysicsCollisionPoints();
+		entity2Points = static_cast<Collider*>(world.EntitiesComponentsMatrix[entity2][Collider::Id])->GetPhysicsCollisionPoints();
+	}
+	else
+	{
+		entity1Points = static_cast<Collider*>(world.EntitiesComponentsMatrix[entity1][Collider::Id])->GetCollisionPoints();
+		entity2Points = static_cast<Collider*>(world.EntitiesComponentsMatrix[entity2][Collider::Id])->GetCollisionPoints();
+	}
 
 	return BoundingBoxTest(entity1Points, entity2Points);
 }
@@ -176,7 +186,7 @@ bool CollisionDetectionUtils::BoundingBoxTest(std::vector<sf::Vector2f> obj1AABB
 
 		// ... and check whether the outermost projected points of both OBBs overlap.
 		// If this is not the case, the Seperating Axis Theorem states that there can be no collision between the rectangles
-		if (!((MinOBB2 <= MaxOBB1) && (MaxOBB2 >= MinOBB1)))
+		if (!((round(MinOBB2) <= round(MaxOBB1)) && (round(MaxOBB2) >= round(MinOBB1))))
 			return false;
 	}
 	return true;

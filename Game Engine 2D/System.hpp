@@ -21,6 +21,7 @@
 #include "Acceleration.hpp"
 #include "Velocity.hpp"
 #include "Controller.hpp"
+#include "Collider.hpp"
 
 /*!
  * In the template it's expected to go all needed Components for the current System to work properly.
