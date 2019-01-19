@@ -1,5 +1,5 @@
 #ifndef _COLLISION_DETECTOR_HPP_
-#define __COLLISION_DETECTOR_HPP_
+#define _COLLISION_DETECTOR_HPP_
 
 #include "stdafx.h"
 #include "System.hpp"
@@ -13,4 +13,4 @@ private:
 	void LateUpdate(World& world, const unsigned long int  entityIndex) override;
 };
 
-#endif /* __COLLISION_DETECTOR_HPP_ */
+#endif /* _COLLISION_DETECTOR_HPP_ */
