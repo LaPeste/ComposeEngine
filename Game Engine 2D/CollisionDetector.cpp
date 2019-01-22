@@ -1,8 +1,8 @@
 #include "CollisionDetector.hpp"
 #include "EntityUtils.hpp"
 #include "CollisionDetectionUtils.hpp"
-#include "Player.hpp";
-#include "Luigi.hpp";
+#include "Player.hpp"
+#include "Luigi.hpp"
 
 CollisionDetector::CollisionDetector(World& world):
 	System<Collider>(world)
