@@ -45,15 +45,11 @@ public:
 	std::map<unsigned long int, GameObject*> EntitiesHandles;
 
 	// Methods
-	const std::vector<CollisionEvent>& GetCollisionEvents() const;
-	void AddCollisionEvent(const CollisionEvent& event);
-	void DeleteAllCollisionEvents();
 
 	template<typename T>
 	T* GetComponent(unsigned long int entityIndex);
 
 private:
-	std::vector<CollisionEvent> collisionEvents;
 };
 
 

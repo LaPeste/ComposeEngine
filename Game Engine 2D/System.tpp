@@ -118,18 +118,18 @@ void System<First, Rest...>::OnLateUpdate()
 	}
 }
 
-template<typename First, typename ...Rest>
-void System<First, Rest...>::OnCollision()
-{
-	for (const auto& collision : world.GetCollisionEvents())
-	{
-		if (Entity::HasComponent(world, collision.GetEntityA(), this->GetComponentBitMask()) || 
-			Entity::HasComponent(world, collision.GetEntityB(), this->GetComponentBitMask()))
-		{
-			Collision(world, collision.GetEntityA(), collision.GetEntityB());
-		}
-	}
-}
+//template<typename First, typename ...Rest>
+//void System<First, Rest...>::OnCollision()
+//{
+//	for (const auto& collision : world.GetCollisionEvents())
+//	{
+//		if (Entity::HasComponent(world, collision.GetEntityA(), this->GetComponentBitMask()) || 
+//			Entity::HasComponent(world, collision.GetEntityB(), this->GetComponentBitMask()))
+//		{
+//			Collision(world, collision.GetEntityA(), collision.GetEntityB());
+//		}
+//	}
+//}
 
 template<typename First, typename ...Rest>
 void System<First, Rest...>::OnExit()
@@ -167,9 +167,9 @@ void System<First, Rest...>::Update(World& world, const unsigned long int entity
 
 }
 
-template<typename First, typename ...Rest>
-void System<First, Rest...>::Collision(World& world, const unsigned long int entityIndexA, const unsigned long int entityIndexB)
-{}
+//template<typename First, typename ...Rest>
+//void System<First, Rest...>::Collision(World& world, const unsigned long int entityIndexA, const unsigned long int entityIndexB)
+//{}
 
 
 template<typename First, typename ...Rest>

@@ -53,13 +53,6 @@ void SystemManager::LateUpdateAll(World& world)
 	{
 		system.second->OnLateUpdate();
 	}
-
-	for (auto const & system : world.Systems)
-	{
-		system.second->OnCollision();
-	}
-
-	world.DeleteAllCollisionEvents();
 }
 
 void SystemManager::ExitAll(World& world)

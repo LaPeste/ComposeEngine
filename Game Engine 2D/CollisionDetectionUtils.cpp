@@ -90,9 +90,6 @@ bool CollisionDetectionUtils::PhysicsCollides(World& world, const unsigned long 
 		entityCollision = BoundingBoxTestEngineEntities(world, index, i, true);
 		if (entityCollision)
 		{
-			CollisionEvent coll(index, i);
-			world.AddCollisionEvent(coll);
-
 			break; //TODO what if collides with more objects? When the todo tasks right above is fixed then
 				   // we can leave it check for all possible collisions with the subset of possible (close) collider entites
 		}

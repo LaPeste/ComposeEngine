@@ -26,7 +26,7 @@ public:
     virtual void OnUpdate() = 0;
     virtual void OnRender() = 0;
 	virtual void OnLateUpdate() = 0;
-	virtual void OnCollision() = 0;
+	//virtual void OnCollision() = 0;
     virtual void OnExit() = 0;
 
 protected:
