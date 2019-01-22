@@ -34,6 +34,8 @@ public:
     template<typename T>
     static void AddComponent(World& world, const unsigned long int entityIndex, Component<T>* componentToAdd);
 
+	static GameObject& GetGameObject(World& world, unsigned long int entityIndex);
+
 private:
     static unsigned long int playerId;
 

@@ -38,14 +38,14 @@ void Transform::SetPosition(const sf::Vector2f& pos)
 	}
 }
 
-const sf::Transform& Transform::GetTransform() const
+sf::Vector2f Transform::TransformPoint(float x, float y) const
 {
 	if (Entity::HasComponent(world, entityIndex, Appearance::Id))
 	{
 		std::map<unsigned long int, ComponentBase*>& entityComponents = world.EntitiesComponentsMatrix[entityIndex];
 		Appearance* appearance = static_cast<Appearance*>(entityComponents[Appearance::Id]);
-		return appearance->GetSprite()->getTransform();
+		return appearance->GetSprite()->getTransform().transformPoint(x, y);
 	}
 
-	return transformable.getTransform();
+	return transformable.getTransform().transformPoint(x, y);
 }

@@ -19,7 +19,6 @@ public:
 
 	static bool BoundingBoxTestEngineEntities(World& world, unsigned long int entity1, unsigned long int entity2, bool physics = false);
 
-private:
 	/* BoundingBoxTest adapted from work of
 	* Authors : Nick Koirala(original version), ahnonay(SFML2 compatibility)
 	*
@@ -27,10 +26,11 @@ private:
 	* For SFML2.
 	*/
 
-	//////
-	/// Test for bounding box collision using the Seperating Axis Theorem
-	/// Supports scaling and rotation
-	//////
+	/*!
+	 * Test for bounding box collision using the Seperating Axis Theorem
+	 * Supports scaling and rotation.
+	 * All coordinates are supposed to be global!!
+	 */
 	static bool BoundingBoxTest(std::vector<sf::Vector2f> obj1AABBCoord, std::vector<sf::Vector2f> obj2AABBCoord);
 
 };

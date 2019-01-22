@@ -81,6 +81,11 @@ const unsigned long EntityManager::CreateEntity(World& world, const GameObjectFl
     return indexNewEntity; //return size because you want to return an index that points to a newest entity
 }
 
+GameObject& EntityManager::GetGameObject(World& world, unsigned long int entityIndex)
+{
+	return *world.EntitiesHandles[entityIndex];
+}
+
 void EntityManager::DestroyGameObject(GameObject* gameObject)
 {
 	unsigned long int index = gameObject->GetEntityIndex();

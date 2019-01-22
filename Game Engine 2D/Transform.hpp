@@ -16,7 +16,7 @@ public:
 
 	const sf::Vector2f& GetPosition() const;
 	void SetPosition(const sf::Vector2f& pos);
-	const sf::Transform& GetTransform() const;
+	sf::Vector2f TransformPoint(float x, float y) const;
 	//TODO add functions for getting and setting rotation, scale etc...
 
 private:

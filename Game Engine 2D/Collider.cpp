@@ -9,6 +9,7 @@
 #include "Collider.hpp"
 #include "Transform.hpp"
 #include "Appearance.hpp"
+#include "EntityManager.hpp"
 
 Collider::Collider(World& world, const unsigned long int entityIndex, const sf::Vector2f& offset, const sf::FloatRect& colliderRect) :
 	offset(offset), colliderRect(colliderRect),
@@ -45,16 +46,16 @@ std::vector<sf::Vector2f> Collider::GetCollisionPoints() const
     std::vector<sf::Vector2f> collisionPoints;
 	if (Entity::HasComponent(world, entityIndex, Transform::Id))
 	{
-		const sf::Transform& trans = (static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]))->GetTransform();
+		const Transform* trans = EntityManager::GetGameObject(world, entityIndex).GetComponent<Transform>();
 		sf::FloatRect local = GetColliderRect();
 		// top left
-		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(0.f, 0.f) });
+		collisionPoints.push_back(trans->TransformPoint(0.f, 0.f));
 		// top right
-		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(local.width, 0.f) });
+		collisionPoints.push_back(trans->TransformPoint(local.width, 0.f));
 		//right bottom
-		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(local.width, local.height) });
+		collisionPoints.push_back(trans->TransformPoint(local.width, local.height));
 		// left bottom
-		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(0.f, local.height) });
+		collisionPoints.push_back(trans->TransformPoint(0.f, local.height));
 	}
     
     return collisionPoints;
@@ -65,16 +66,16 @@ std::vector<sf::Vector2f> Collider::GetPhysicsCollisionPoints() const
 	std::vector<sf::Vector2f> collisionPoints;
 	if (Entity::HasComponent(world, entityIndex, Transform::Id))
 	{
-		const sf::Transform& trans = (static_cast<Transform*>(world.EntitiesComponentsMatrix[entityIndex][Transform::Id]))->GetTransform();
+		const Transform* trans = EntityManager::GetGameObject(world, entityIndex).GetComponent<Transform>();
 		sf::FloatRect local = GetColliderRect();
 		// top left
-		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(0.f + offset.x, 0.f + offset.y) });
+		collisionPoints.push_back(trans->TransformPoint(0.f + offset.x, 0.f + offset.y));
 		// top right
-		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(local.width - offset.x, 0.f + offset.y) });
+		collisionPoints.push_back(trans->TransformPoint(local.width - offset.x, 0.f + offset.y));
 		//right bottom
-		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(local.width - offset.x, local.height - offset.y) });
+		collisionPoints.push_back(trans->TransformPoint(local.width - offset.x, local.height - offset.y));
 		// left bottom
-		collisionPoints.push_back(sf::Vector2f{ trans.transformPoint(0.f + offset.x, local.height - offset.y) });
+		collisionPoints.push_back(trans->TransformPoint(0.f + offset.x, local.height - offset.y));
 	}
 	else    //I don't see how there could not be a transform... but just in case
 	{
