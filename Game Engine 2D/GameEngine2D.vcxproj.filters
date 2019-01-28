@@ -287,6 +287,9 @@
     <ClCompile Include="FieldOfView.cpp">
       <Filter>Source Files\Entities\Components</Filter>
     </ClCompile>
+    <ClCompile Include="FOVspotter.cpp">
+      <Filter>Source Files\Entities\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -478,6 +481,12 @@
     <ClInclude Include="FieldOfView.hpp">
       <Filter>Header Files\Entities\Components</Filter>
     </ClInclude>
+    <ClInclude Include="FOVspotter.hpp">
+      <Filter>Header Files\Entities\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLib.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Component.tpp">
@@ -485,6 +494,9 @@
     </None>
     <None Include="System.tpp">
       <Filter>Source Files\Entities\Systems</Filter>
+    </None>
+    <None Include="MathLib.tpp">
+      <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
 </Project>

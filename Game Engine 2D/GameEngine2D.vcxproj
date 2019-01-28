@@ -144,6 +144,7 @@
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FieldOfView.cpp" />
+    <ClCompile Include="FOVspotter.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GeometryDebugger.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="EventListener.hpp" />
     <ClInclude Include="EventManager.hpp" />
     <ClInclude Include="FieldOfView.hpp" />
+    <ClInclude Include="FOVspotter.hpp" />
     <ClInclude Include="FPS.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectType.hpp" />
@@ -211,6 +213,7 @@
     <ClInclude Include="InputEvent.hpp" />
     <ClInclude Include="InputSystem.hpp" />
     <ClInclude Include="Luigi.hpp" />
+    <ClInclude Include="MathLib.hpp" />
     <ClInclude Include="Movement.hpp" />
     <ClInclude Include="Patrolling.hpp" />
     <ClInclude Include="Player.hpp" />
@@ -243,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Component.tpp" />
+    <None Include="MathLib.tpp" />
     <None Include="System.tpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

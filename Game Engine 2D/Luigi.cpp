@@ -27,7 +27,7 @@ void Luigi::Init()
 	EntityManager::AddComponent(world, entityIndex, new Acceleration(world, entityIndex, Constants::PLAYER_MAX_ACCELERATION_X, Constants::PLAYER_MAX_ACCELERATION_Y));
 	EntityManager::AddComponent(world, entityIndex, new Controller(world, entityIndex));
 	EntityManager::AddComponent(world, entityIndex, new Velocity(world, entityIndex));
-	EntityManager::AddComponent(world, entityIndex, new FieldOfView(world, entityIndex, 100.f, 15.f, sf::Vector2f(1,0)));
+	EntityManager::AddComponent(world, entityIndex, new FieldOfView(world, entityIndex, 100.f, 45.f, sf::Vector2f(1,0)));
 
 	/*BT::BehaviourTree* bt = new BT::BehaviourTree(world, entityIndex, *this);
 	std::unique_ptr<BT::Repeater> rootRepeater = std::make_unique<BT::Repeater>(nullptr, std::vector<std::unique_ptr<BT::Node>>(), *bt);

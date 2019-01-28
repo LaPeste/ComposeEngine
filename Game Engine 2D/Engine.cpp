@@ -19,6 +19,7 @@
 #include "Appearance.hpp"
 #include "BTEngine.hpp"
 #include "CollisionDetector.hpp"
+#include "FOVspotter.hpp"
 
 World Engine::World;
 Engine Engine::instance;
@@ -76,6 +77,7 @@ bool Engine::Init()
 	SystemManager::AddSystem(World, new InputSystem(World));
 	SystemManager::AddSystem(World, new CollisionDetector(World));
 	SystemManager::AddSystem(World, new BT::BTEngine(World));
+	SystemManager::AddSystem(World, new FOVspotter(World));
     
     Camera::CreateInstance(Constants::CAMERA_ZOOM_WIDTH ,Constants::CAMERA_ZOOM_HEIGHT);
 
