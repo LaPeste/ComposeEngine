@@ -15,7 +15,7 @@ void CollisionDetector::LateUpdate(World& world, const unsigned long int  entity
 	Collider* thisCollider = world.GetComponent<Collider>(entityIndex);
 	if (thisCollider == nullptr) return;
 
-	// clean from previous frame
+	// clear from previous frame
 	thisCollider->GetEnityCollisions().clear();
 
 	for (int i = 0; i < world.EntitiesComponentsMatrix.size(); ++i)
