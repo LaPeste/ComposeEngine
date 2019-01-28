@@ -1,9 +1,10 @@
 #include "GeometryDebugger.h"
 #include "Engine.hpp"
+#include "MathLib.hpp"
 
 std::vector<std::unique_ptr<std::function<void()>>> GeometryDebugger::m_shapesToDraw;
 
-void GeometryDebugger::DrawLine(sf::Vector2f pointA, sf::Vector2f pointB, sf::Color color)
+void GeometryDebugger::DrawLine(const sf::Vector2f& pointA, const sf::Vector2f& pointB, sf::Color color)
 {
 	std::unique_ptr<std::function<void()>> drawingFunction = std::make_unique<std::function<void()>>([=]() // capture list = all by copy
 	{
@@ -21,11 +22,26 @@ void GeometryDebugger::DrawLine(sf::Vector2f pointA, sf::Vector2f pointB, sf::Co
 	m_shapesToDraw.push_back(std::move(drawingFunction));
 }
 
-void GeometryDebugger::DrawRay(sf::Vector2f point, sf::Vector2f dir, sf::Color color)
+void GeometryDebugger::DrawRay(const sf::Vector2f& point, const sf::Vector2f& dir, sf::Color color)
 {
 	DrawLine(point, dir + point, color);
 }
 
+void GeometryDebugger::DrawCircle(const sf::Vector2f& center, float radius, sf::Color color)
+{
+	std::unique_ptr<std::function<void()>> drawingFunction = std::make_unique<std::function<void()>>([=]() // capture list = all by copy
+	{
+		sf::CircleShape shape(radius);
+		shape.setOrigin(radius, radius);
+		shape.setPosition(center);
+		shape.setFillColor(sf::Color::Transparent);
+		shape.setOutlineThickness(1);
+		shape.setOutlineColor(color);
+		auto* engineWindow = Engine::GetInstance().GetWindow();
+		engineWindow->draw(shape);
+	});
+	m_shapesToDraw.push_back(std::move(drawingFunction));
+}
 
 void GeometryDebugger::DrawAllShapes()
 {
