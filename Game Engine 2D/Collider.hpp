@@ -22,7 +22,8 @@ public:
 	~Collider() override;
     
 	// getters
-	const sf::FloatRect& GetColliderRect() const;
+	//! Returns collider of the size of the sprite. Appearance is needed for this to make sense.
+	sf::FloatRect GetColliderRect() const;
 
 	/*! 
 	 * Returns a set of points in world space defining the borders of the collider,

@@ -21,7 +21,7 @@ Collider::Collider(World& world, const unsigned long int entityIndex, const sf::
 Collider::~Collider() {}
 
 
-const sf::FloatRect& Collider::GetColliderRect() const
+sf::FloatRect Collider::GetColliderRect() const
 {
 	if (Entity::HasComponent(world, entityIndex, Appearance::Id))
 	{
@@ -46,7 +46,7 @@ std::vector<sf::Vector2f> Collider::GetCollisionPoints() const
     std::vector<sf::Vector2f> collisionPoints;
 	if (Entity::HasComponent(world, entityIndex, Transform::Id))
 	{
-		const Transform* trans = EntityManager::GetGameObject(world, entityIndex).GetComponent<Transform>();
+		Transform* trans = EntityManager::GetGameObject(world, entityIndex).GetComponent<Transform>();
 		sf::FloatRect local = GetColliderRect();
 		// top left
 		collisionPoints.push_back(trans->TransformPoint(0.f, 0.f));
@@ -66,7 +66,7 @@ std::vector<sf::Vector2f> Collider::GetPhysicsCollisionPoints() const
 	std::vector<sf::Vector2f> collisionPoints;
 	if (Entity::HasComponent(world, entityIndex, Transform::Id))
 	{
-		const Transform* trans = EntityManager::GetGameObject(world, entityIndex).GetComponent<Transform>();
+		Transform* trans = EntityManager::GetGameObject(world, entityIndex).GetComponent<Transform>();
 		sf::FloatRect local = GetColliderRect();
 		// top left
 		collisionPoints.push_back(trans->TransformPoint(0.f + offset.x, 0.f + offset.y));
