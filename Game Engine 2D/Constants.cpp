@@ -16,8 +16,8 @@ const unsigned int Constants::SCREEN_WIDTH = 1024;
 const unsigned int Constants::SCREEN_HEIGHT = 768;
 const unsigned int Constants::SCREEN_DEPTH = 32;
 const std::string Constants::GAME_NAME = "Mario Clone";
-const float Constants::CAMERA_ZOOM_WIDTH = 300;
-const float Constants::CAMERA_ZOOM_HEIGHT = 400;
+const float Constants::CAMERA_ZOOM_WIDTH = 400;
+const float Constants::CAMERA_ZOOM_HEIGHT = 300;
 
 //************************
 // Player data
