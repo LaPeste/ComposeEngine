@@ -12,21 +12,24 @@
 #include "stdafx.h"
 #include "Component.hpp"
 
+class AnimationData;
+
 class Appearance : public Component<Appearance>
 {
 public:
-    Appearance(World& world, const unsigned long int entityIndex, std::string spritePath);
+    Appearance(World& world, const unsigned long int entityIndex, std::string spritePath, sf::IntRect initialAppearance = sf::IntRect());
     ~Appearance() override;
     
     //TODO maybe make them private and make them setable only from constructor?
     std::string SpritePath;
-    
-    sf::Sprite* const GetSprite() const; //returns null if not loaded
-    void SetSprite(sf::Sprite* const sprite);
+
+    //! returns null if not loaded
+    sf::Sprite* const GetSprite() const; 
+    void SetSprite(std::unique_ptr<const sf::Sprite>& m_sprite);
     bool IsTextureLoaded() const;
     
 private:
-    sf::Sprite* sprite;
+    std::unique_ptr<sf::Sprite> m_sprite;
     sf::Texture* texture;
     
 };

@@ -23,8 +23,10 @@ Animation::~Animation()
     }
 }
 
-AnimationData::AnimationData(const sf::Vector2f& startingPos,
+AnimationData::AnimationData(const sf::Sprite* const spriteSheet,
+							 const sf::Vector2f& startingPos,
                              const sf::Vector2f& spaceBetweenSprite, bool verticalMovement, bool reverseAnimation,
                              float spriteWidth, float spriteHeight, int maxFrame, int frameRate) :
-StartingPos(startingPos), SpaceBetweenSprite(spaceBetweenSprite), VerticalMovement(verticalMovement), FlipSprite(false), ReverseAnimation(reverseAnimation), CurrentFrame(0),
-SpriteWidth(spriteWidth), SpriteHeight(spriteHeight), MaxFrame(maxFrame), Ahead(false), FrameRate(frameRate) {}
+	SpriteSheet(spriteSheet),
+	StartingPos(startingPos), SpaceBetweenSprite(spaceBetweenSprite), VerticalMovement(verticalMovement), FlipSprite(false), ReverseAnimation(reverseAnimation), CurrentFrame(0),
+	SpriteWidth(spriteWidth), SpriteHeight(spriteHeight), MaxFrame(maxFrame), Ahead(false), FrameRate(frameRate) {}

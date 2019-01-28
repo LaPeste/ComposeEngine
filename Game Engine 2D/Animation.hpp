@@ -16,8 +16,10 @@
 struct AnimationData
 {
 public:
-    AnimationData(const sf::Vector2f& startingPos, const sf::Vector2f& spaceBetweenSprite, bool verticalMovement, bool reverseAnimation, float spriteWidth, float spriteHeight, int maxFrame, int frameRate);
+    AnimationData(const sf::Sprite* const spriteSheet, const sf::Vector2f& startingPos, const sf::Vector2f& spaceBetweenSprite, bool verticalMovement, bool reverseAnimation, float spriteWidth, float spriteHeight, int maxFrame, int frameRate);
 
+	// AnimationData is not the owner
+	const sf::Sprite* SpriteSheet;
     sf::Vector2f StartingPos;
     sf::Vector2f SpaceBetweenSprite;
     bool VerticalMovement; //if true the sprite sequence develops vertically, horizzontaly otherwise.

@@ -10,8 +10,10 @@
 #include "Transform.hpp"
 #include "tmx/MapLoader.hpp"
 #include "Engine.hpp"
+#include "Animation.hpp"
 
-Appearance::Appearance(World& world, const unsigned long int entityIndex, std::string spritePath) : Component(world, entityIndex)
+Appearance::Appearance(World& world, const unsigned long int entityIndex, std::string spritePath, sf::IntRect initialAppearance) :
+	Component(world, entityIndex), m_sprite(nullptr), texture(nullptr)
 {
 	std::string methodName = _FUNCTION_NAME_;
     Appearance::SpritePath = spritePath;
@@ -23,10 +25,10 @@ Appearance::Appearance(World& world, const unsigned long int entityIndex, std::s
     }
     else
     {
-        sprite = new sf::Sprite;
-        sprite->setTexture(*texture);
+        m_sprite = std::make_unique<sf::Sprite>();
+        m_sprite->setTexture(*texture);
         
-        if(sprite->getTexture() != nullptr)
+        if(m_sprite->getTexture() != nullptr)
         {
 #ifdef DEBUG
             Utils::PrintDebugLog(methodName, "texture " + SpritePath + " correctly loaded!");
@@ -37,6 +39,12 @@ Appearance::Appearance(World& world, const unsigned long int entityIndex, std::s
             Utils::PrintDebugError(methodName, "texture " + SpritePath + " not correctly loaded!");
             
         }
+
+		// if initialAppearance isn't a default rect, apply it to set only a part of the tecture as sprite
+		if (initialAppearance != sf::IntRect())
+		{
+			m_sprite->setTextureRect(initialAppearance);
+		}
     }
 
 	//set position written in a Transform Component if it exists
@@ -47,7 +55,7 @@ Appearance::Appearance(World& world, const unsigned long int entityIndex, std::s
 
 		if (transform != nullptr)
 		{
-			sprite->setPosition(transform->GetPosition());
+			m_sprite->setPosition(transform->GetPosition());
 		}
 	}
 }
@@ -55,7 +63,6 @@ Appearance::Appearance(World& world, const unsigned long int entityIndex, std::s
 Appearance::~Appearance()
 {
     delete texture;
-    delete sprite;
     
 #if DEBUG
 	std::string methodName = _FUNCTION_NAME_;
@@ -65,21 +72,21 @@ Appearance::~Appearance()
 
 sf::Sprite* const Appearance::GetSprite() const
 {
-    if(sprite != nullptr)
+    if(m_sprite != nullptr)
     {
-        return sprite;
+        return m_sprite.get();
     }
 	std::string methodName = _FUNCTION_NAME_;
     Utils::PrintDebugError(methodName, "you are trying to get the sprite, but it is not loaded yet!");
     return nullptr;
 }
 
-void Appearance::SetSprite(sf::Sprite* const sprite)
+void Appearance::SetSprite(std::unique_ptr<const sf::Sprite>& m_sprite)
 {
-    Appearance::sprite = sprite;
+    m_sprite = std::move(m_sprite);
 }
 
 bool Appearance::IsTextureLoaded() const
 {
-	return sprite->getTexture() != nullptr;
+	return m_sprite->getTexture() != nullptr;
 }

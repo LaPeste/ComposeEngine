@@ -88,13 +88,20 @@ void Animator::Animate(World& world, const unsigned long entityIndex)
 
             if(animation->FlipAnimation)
             {
-                appearance->GetSprite()->setOrigin({ appearance->GetSprite()->getLocalBounds().width, 0 });
-                appearance->GetSprite()->setScale({-1, 1 });
+				auto* const sprite = appearance->GetSprite();
+				const auto previousOrigin = sprite->getOrigin();
+				float spriteWidth = sprite->getLocalBounds().width;
+				sprite->setOrigin({ spriteWidth, 0 });
+				sprite->setScale({-1, 1 });
+				sprite->setOrigin(previousOrigin);
             }
             else
             {
-                appearance->GetSprite()->setOrigin({ 0, 0 });
-                appearance->GetSprite()->setScale(1, 1);
+				auto* const sprite = appearance->GetSprite();
+				const auto previousOrigin = sprite->getOrigin();
+				sprite->setOrigin({ 0, 0 });
+				sprite->setScale(1, 1);
+				sprite->setOrigin(previousOrigin);
             }
         }
     }
