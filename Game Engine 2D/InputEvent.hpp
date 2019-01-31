@@ -26,7 +26,7 @@ public:
 	unsigned long int GetTargetedGameObject() const;
 
 private:
-	InputEventType event;
+	InputEventType m_event;
 	
 	// gameObject targeted by this event
 	unsigned long int targetedGameObject;
