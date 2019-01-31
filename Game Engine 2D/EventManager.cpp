@@ -1,8 +1,8 @@
 #include "EventManager.hpp"
 #include <typeinfo>
 
-std::vector<EventBase*> EventManager::eventQueue;
-std::map<EventBase::UID, std::list<const EventDelegate*>> EventManager::listeners;
+std::vector<EventBase*> EventManager::m_eventQueue;
+std::map<EventBase::UID, std::list<const EventDelegate*>> EventManager::m_listeners;
 
 EventManager::~EventManager()
 {
@@ -13,12 +13,12 @@ EventManager::~EventManager()
 	Utils::PrintDebugLog(methodName, oss.str());
 #endif
 
-	for(const auto& elem : eventQueue)
+	for(const auto& elem : m_eventQueue)
 	{
 		delete elem;
 	}
 
-	for (const auto& eventDelegateList : listeners)
+	for (const auto& eventDelegateList : m_listeners)
 	{
 		for (const auto& delegate : eventDelegateList.second)
 		{
@@ -39,13 +39,13 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 	}
 
 	//create list for eventId, if never created before
-	if (listeners.find(eventId) == listeners.end())
+	if (m_listeners.find(eventId) == m_listeners.end())
 	{
 		auto delegatesList = std::list<const EventDelegate*>();
-		listeners.insert(std::make_pair(eventId, delegatesList)); //std::make_pair passes by value, so no worries about delegateList being destroyed at the exit of the method
+		m_listeners.insert(std::make_pair(eventId, delegatesList)); //std::make_pair passes by value, so no worries about delegateList being destroyed at the exit of the method
 	}
 
-	std::list<const EventDelegate*> delegateList = listeners.at(eventId);
+	std::list<const EventDelegate*> delegateList = m_listeners.at(eventId);
 
 	//avoid to add the same EventDelegate for the same eventId
 	for (std::list<const EventDelegate*>::iterator it = delegateList.begin(); it != delegateList.end(); ++it)
@@ -68,7 +68,7 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 	Utils::PrintDebugLog(methodName, oss.str());
 #endif
 
-	listeners.at(eventId).push_back(eventDelegate);
+	m_listeners.at(eventId).push_back(eventDelegate);
 	return true;
 }
 
@@ -77,7 +77,7 @@ bool EventManager::RemoveListener(EventBase::UID eventId, const EventDelegate* e
 	std::string methodName = _FUNCTION_NAME_;
 	std::ostringstream oss;
 
-	if (listeners.size() == 0) //I'm not sure why this happens... https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/10940586/
+	if (m_listeners.size() == 0) //I'm not sure why this happens... https://freedcamp.com/Andreas_Projects_FJu/Compose_Engine_MbDa/todos/10940586/
 	{
 		oss << "You have tried to remove a delegate for the event=" << eventId << " but there is not a single eventId in the listeners map.";
 		Utils::PrintDebugError(methodName, oss.str());
@@ -91,14 +91,14 @@ bool EventManager::RemoveListener(EventBase::UID eventId, const EventDelegate* e
 		throw 1;
 	}
 
-	if (listeners.find(eventId) == listeners.end())
+	if (m_listeners.find(eventId) == m_listeners.end())
 	{
 		oss << "You have tried to remove an EventDelegate for the eventId= " << eventId << " which does not exist.";
 		Utils::PrintDebugError(methodName, oss.str());
 		return false;
 	}
 
-	std::list<const EventDelegate*> delegateList = listeners.at(eventId);
+	std::list<const EventDelegate*> delegateList = m_listeners.at(eventId);
 	for (std::list<const EventDelegate*>::iterator it = delegateList.begin(); it != delegateList.end();)
 	{
 		auto& delegateFunc = *it;
@@ -129,28 +129,28 @@ void EventManager::QueueEvent(EventBase* event)
 //	Utils::PrintDebugLog(methodName, oss.str());
 //#endif
 
-	eventQueue.push_back(event);
+	m_eventQueue.push_back(event);
 }
 
 void EventManager::ProcessEvents()
 {
-	auto iterEvent = eventQueue.begin();
-	while (iterEvent != eventQueue.end())
+	auto iterEvent = m_eventQueue.begin();
+	while (iterEvent != m_eventQueue.end())
 	{
 		// check who's listening for this event
-		if (listeners.find((*iterEvent)->GetId()) == listeners.end())
+		if (m_listeners.find((*iterEvent)->GetId()) == m_listeners.end())
 		{
 			++iterEvent;
 			continue;
 		}
 
 		// execute the delegate from the listener of the event
-		auto& delegateList = listeners.at((*iterEvent)->GetId());
+		auto& delegateList = m_listeners.at((*iterEvent)->GetId());
 		for (auto iterDelegate = delegateList.begin(); iterDelegate != delegateList.end(); ++iterDelegate)
 		{
 			(**iterDelegate)(*iterEvent);
 		}
 		delete *iterEvent;	//delete memory for used event
-		iterEvent = eventQueue.erase(iterEvent);
+		iterEvent = m_eventQueue.erase(iterEvent);
 	}
 }

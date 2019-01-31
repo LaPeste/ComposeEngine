@@ -22,8 +22,8 @@ public:
 	static void ProcessEvents();
 
 private:
-	static std::vector<EventBase*> eventQueue;
-	static std::map<EventBase::UID, std::list<const EventDelegate*>> listeners; //std::list because random removal is O(1), if given the iterator (obviously)
+	static std::vector<EventBase*> m_eventQueue;
+	static std::map<EventBase::UID, std::list<const EventDelegate*>> m_listeners; //std::list because random removal is O(1), if given the iterator (obviously)
 };
 
 #endif
