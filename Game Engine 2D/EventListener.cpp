@@ -19,7 +19,7 @@ EventListener::~EventListener()
 	Utils::PrintDebugLog(methodName, oss.str());
 #endif
 
-	for(const auto& event : registeredEvents)
+	for(const auto& event : m_registeredEvents)
 	{
 		EventManager::RemoveListener(event.first, event.second);
 	}
@@ -36,6 +36,6 @@ bool EventListener::OnGameEvent(EventBase::UID eventId, EventDelegate* delegate)
 		throw 1;
 	}
 
-	registeredEvents.push_back(std::make_pair(eventId, delegate));
+	m_registeredEvents.push_back(std::make_pair(eventId, delegate));
 	return EventManager::AddListener(eventId, delegate);
 }

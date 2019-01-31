@@ -22,7 +22,7 @@ protected:
 	bool OnGameEvent(EventBase::UID eventId, EventDelegate* delegate);
 
 private:
-	std::vector<std::pair<EventBase::UID, EventDelegate*>> registeredEvents;
+	std::vector<std::pair<EventBase::UID, EventDelegate*>> m_registeredEvents;
 };
 
 template<typename T>
