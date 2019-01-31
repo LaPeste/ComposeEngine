@@ -29,7 +29,7 @@ private:
 	InputEventType m_event;
 	
 	// gameObject targeted by this event
-	unsigned long int targetedGameObject;
+	unsigned long int m_targetedGameObject;
 };
 
 #endif
