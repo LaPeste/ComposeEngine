@@ -21,6 +21,7 @@ EventListener::~EventListener()
 
 	for(const auto& event : m_registeredEvents)
 	{
+		delete event.second;
 		EventManager::RemoveListener(event.first, event.second);
 	}
 }
