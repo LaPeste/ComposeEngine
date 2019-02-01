@@ -23,6 +23,9 @@ public:
 	template<typename T>
 	T* GetComponent();
 
+	template<typename T>
+	bool HasComponent();
+
 protected:
 	GameObject();
 	virtual ~GameObject();
@@ -48,6 +51,15 @@ T* GameObject::GetComponent()
 	}
 
 	return world->GetComponent<T>(entityIndex);
+}
+
+template<typename T>
+bool GameObject::HasComponent()
+{
+	auto componentId = Component<T>::Id;
+
+	//0 is the default value for components'Id, if it's zero means the component was never created until now. It's like it doesn't exist, yet.
+	return (componentId != 0 && ((world.EntitiesComponentsMasks[entityIndex] & componentId) == componentId));
 }
 
 
