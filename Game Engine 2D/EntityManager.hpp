@@ -14,6 +14,7 @@
 #include "Player.hpp"
 #include "Component.hpp"
 #include "GameObjectType.hpp"
+#include "AddedComponentEvent.hpp"
 
 // Entities represent a game objects as an aggregation of components
 
@@ -86,6 +87,12 @@ void EntityManager::AddComponent(World& world, const unsigned long int entityInd
         Utils::PrintDebugWarning(methodName, s);
 
     }
+
+	auto gameObject = world.EntitiesHandles.find(entityIndex);
+	if (gameObject != world.EntitiesHandles.end())
+	{
+		EventManager::QueueEvent(new AddedComponentEvent(*gameObject->second));
+	}
 }
 
 template<typename GAME_OBJECT_TYPE>
@@ -97,7 +104,8 @@ GAME_OBJECT_TYPE* const EntityManager::Instantiate(World& world)
 	GAME_OBJECT_TYPE* gameObject = new GAME_OBJECT_TYPE;
 	gameObject->entityIndex = entityIndex;
 	gameObject->world = &world;
-	world.EntitiesHandles.insert(std::make_pair(entityIndex, gameObject));
+	auto pair = std::make_pair(entityIndex, gameObject);
+	world.EntitiesHandles.insert(pair);
 	gameObject->Init();
 
 #ifdef LOG_OUTPUT_CONSOLE

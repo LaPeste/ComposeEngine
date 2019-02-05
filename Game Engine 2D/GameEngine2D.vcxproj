@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Acceleration.cpp" />
+    <ClCompile Include="AddedComponentEvent.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Animator.cpp" />
@@ -179,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acceleration.hpp" />
+    <ClInclude Include="AddedComponentEvent.hpp" />
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Animator.hpp" />
     <ClInclude Include="Appearance.hpp" />

@@ -24,12 +24,14 @@
 #include "Collider.hpp"
 #include "FieldOfView.hpp"
 
+class GameObject;
+
 /*!
  * In the template it's expected to go all needed Components for the current System to work properly.
  */
 
 template<typename First, typename ...Rest> //variadic template
-class System : public SystemBase
+class System : public SystemBase, public EventListener
 {
 public:
     
@@ -56,6 +58,9 @@ protected:
 
     
 private:
+	std::unordered_set<const GameObject*> m_cachedGameObjectTargets;
+
+
     unsigned long int componentsBitMask;
     
     template<typename FirstInternal, typename SecondInternal, typename ...RestInternal>

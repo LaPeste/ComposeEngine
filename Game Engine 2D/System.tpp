@@ -9,6 +9,8 @@
 #include "System.hpp"
 #include "Component.hpp"
 #include "EntityManager.hpp"
+#include "EventListener.hpp"
+#include "AddedComponentEvent.hpp"
 
 template<typename First, typename ...Rest>
 unsigned long int System<First, Rest...>::Id(0);
@@ -22,6 +24,20 @@ System<First,Rest...>::System(World& world) : componentsBitMask(0), System::worl
     }
     
     CalculateComponentsBitMask<First, Rest...>();
+	OnGameEvent<AddedComponentEvent>([&](AddedComponentEvent* event)
+	{
+		const auto& gameObjectModified = event->GetGameObjectTarget();
+		uint32_t entityId = gameObjectModified.GetEntityIndex();
+		auto& world = gameObjectModified.GetWorld();
+		if (Entity::HasComponent(world, entityId, GetComponentBitMask()))
+		{
+			auto searchedObj = m_cachedGameObjectTargets.find(&gameObjectModified);
+			if (searchedObj == m_cachedGameObjectTargets.end())
+			{
+				m_cachedGameObjectTargets.insert(&gameObjectModified);
+			}
+		}
+	});
 }
 
 template<typename First, typename ...Rest>
@@ -55,12 +71,16 @@ const unsigned long int System<First,Rest...>::GetComponentBitMask() const
 template<typename First, typename ...Rest>
 void System<First, Rest...>::OnStart()
 {
-	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
+	/*for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
 		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			Start(world, i);
 		}
+	}*/
+	for (auto* entity : m_cachedGameObjectTargets)
+	{
+		Start(world, entity->GetEntityIndex());
 	}
 }
 
@@ -76,45 +96,61 @@ void System<First, Rest...>::OnInput(const sf::Event& event)
 	}*/
 
 	//only the player is subjected to input
-	if (Entity::HasComponent(world, EntityManager::GetPlayerId(), this->GetComponentBitMask()))
+	/*if (Entity::HasComponent(world, EntityManager::GetPlayerId(), this->GetComponentBitMask()))
 	{
 		Input(world, EntityManager::GetPlayerId(), event);
+	}*/
+	for (auto* entity : m_cachedGameObjectTargets)
+	{
+		Input(world, entity->GetEntityIndex(), event);
 	}
 }
 
 template<typename First, typename ...Rest>
 void System<First, Rest...>::OnUpdate()
 {
-	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
+	/*for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
 		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			Update(world, i);
 		}
+	}*/
+	for (auto* entity : m_cachedGameObjectTargets)
+	{
+		Update(world, entity->GetEntityIndex());
 	}
 }
 
 template<typename First, typename ...Rest>
 void System<First, Rest...>::OnRender()
 {
-	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
+	/*for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
 		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			Render(world, i);
 		}
+	}*/
+	for (auto* entity : m_cachedGameObjectTargets)
+	{
+		Render(world, entity->GetEntityIndex());
 	}
 }
 
 template<typename First, typename ...Rest>
 void System<First, Rest...>::OnLateUpdate()
 {
-	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
+	/*for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
 		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			LateUpdate(world, i);
 		}
+	}*/
+	for (auto* entity : m_cachedGameObjectTargets)
+	{
+		LateUpdate(world, entity->GetEntityIndex());
 	}
 }
 
@@ -134,12 +170,16 @@ void System<First, Rest...>::OnLateUpdate()
 template<typename First, typename ...Rest>
 void System<First, Rest...>::OnExit()
 {
-	for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
+	/*for (int i = 0; i < world.EntitiesComponentsMasks.size(); ++i)
 	{
 		if (Entity::HasComponent(world, i, this->GetComponentBitMask()))
 		{
 			Exit(world, i);
 		}
+	}*/
+	for (auto* entity : m_cachedGameObjectTargets)
+	{
+		Exit(world, entity->GetEntityIndex());
 	}
 }
 

@@ -39,7 +39,7 @@ private:
 	friend class World;
 
 	unsigned long int entityIndex;
-	World* world; //I'd have preferred to have this const :(
+	World* world;
 };
 
 template<typename T>

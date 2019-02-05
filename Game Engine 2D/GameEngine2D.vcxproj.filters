@@ -290,6 +290,9 @@
     <ClCompile Include="FOVspotter.cpp">
       <Filter>Source Files\Entities\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="AddedComponentEvent.cpp">
+      <Filter>Source Files\Events\CustomEvents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -486,6 +489,9 @@
     </ClInclude>
     <ClInclude Include="MathLib.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddedComponentEvent.hpp">
+      <Filter>Header Files\Events\CustomEvents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
