@@ -48,7 +48,7 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 	std::list<const EventDelegate*> delegateList = m_listeners.at(eventId);
 
 	//avoid to add the same EventDelegate for the same eventId
-	for (std::list<const EventDelegate*>::iterator it = delegateList.begin(); it != delegateList.end(); ++it)
+	/*for (std::list<const EventDelegate*>::iterator it = delegateList.begin(); it != delegateList.end(); ++it)
 	{
 		const EventDelegate* delegateFunc = *it;
 		if (delegateFunc->target<EventDelegate*>() == eventDelegate->target<EventDelegate*>())
@@ -59,7 +59,7 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 			Utils::PrintDebugWarning(methodName, oss.str());
 			return false;
 		}
-	}
+	}*/
 
 #if LOG_OUTPUT_CONSOLE
 	std::string methodName = _FUNCTION_NAME_;
