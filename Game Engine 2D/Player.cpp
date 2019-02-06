@@ -67,16 +67,21 @@ void Player::Init()
 
 	Animation* animationComp = new Animation(world, entityIndex, AnimationState::IDLE, animationMap, true);
     EntityManager::AddComponent(world, entityIndex, animationComp);
-	
-	OnGameEvent<InputEvent>([&world, entityIndex](InputEvent* i) {
+
+	// this has to go away as soon as the id assignment system gets fixed to assign
+	// ids to a static var before the constructor is called.
+	InputEvent t(InputEventType::CROUCH_DOWN, 0);
+
+	OnGameEvent<InputEvent>([&world, entityIndex](Event<InputEvent>* i) {
+
 		if (i != nullptr)
 		{
-			Animations::BasicInputAnimation(world, entityIndex, *i);
+			auto* castedEvent = static_cast<InputEvent*>(i);
+			Animations::BasicInputAnimation(world, entityIndex, *castedEvent);
 		}
 		else
 		{
-			std::string methodName = _FUNCTION_NAME_;
-			Utils::PrintDebugWarning(methodName, "The event passed was null!");
+			DEBUG_WARNING("The event passed was null!");
 		}
 	});
     

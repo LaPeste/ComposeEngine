@@ -24,9 +24,12 @@ System<First,Rest...>::System(World& world) : componentsBitMask(0), System::worl
     }
     
     CalculateComponentsBitMask<First, Rest...>();
-	OnGameEvent<AddedComponentEvent>([&](AddedComponentEvent* event)
+
+	std::function<void(Event<AddedComponentEvent>*)> method(
+		[&](Event<AddedComponentEvent>* event)
 	{
-		const auto& gameObjectModified = event->GetGameObjectTarget();
+		auto* castedEvent = static_cast<AddedComponentEvent*>(event);
+		const auto& gameObjectModified = castedEvent->GetGameObjectTarget();
 		uint32_t entityId = gameObjectModified.GetEntityIndex();
 		auto& world = gameObjectModified.GetWorld();
 		if (Entity::HasComponent(world, entityId, GetComponentBitMask()))
@@ -38,6 +41,8 @@ System<First,Rest...>::System(World& world) : componentsBitMask(0), System::worl
 			}
 		}
 	});
+
+	OnGameEvent<AddedComponentEvent>(method);
 }
 
 template<typename First, typename ...Rest>
@@ -96,14 +101,15 @@ void System<First, Rest...>::OnInput(const sf::Event& event)
 	}*/
 
 	//only the player is subjected to input
-	/*if (Entity::HasComponent(world, EntityManager::GetPlayerId(), this->GetComponentBitMask()))
+	if (Entity::HasComponent(world, EntityManager::GetPlayerId(), this->GetComponentBitMask()))
 	{
 		Input(world, EntityManager::GetPlayerId(), event);
-	}*/
-	for (auto* entity : m_cachedGameObjectTargets)
+	}
+
+	/*for (auto* entity : m_cachedGameObjectTargets)
 	{
 		Input(world, entity->GetEntityIndex(), event);
-	}
+	}*/
 }
 
 template<typename First, typename ...Rest>

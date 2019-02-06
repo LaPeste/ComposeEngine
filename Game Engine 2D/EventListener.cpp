@@ -25,18 +25,3 @@ EventListener::~EventListener()
 		EventManager::RemoveListener(event.first, event.second);
 	}
 }
-
-bool EventListener::OnGameEvent(EventBase::UID eventId, EventDelegate* delegate)
-{
-	if (delegate == nullptr)
-	{
-		std::string methodName = _FUNCTION_NAME_;
-		std::ostringstream oss;
-		oss << "You have tried to add a null delegate for event=" << eventId;
-		Utils::PrintDebugError(methodName, oss.str());
-		throw 1;
-	}
-
-	m_registeredEvents.push_back(std::make_pair(eventId, delegate));
-	return EventManager::AddListener(eventId, delegate);
-}

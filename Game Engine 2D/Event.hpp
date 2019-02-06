@@ -2,31 +2,22 @@
 #define _EVENT_HPP_
 
 #include "stdafx.h"
-#include "World.hpp"
+#include <functional>
 
-/*
-  Protected methods are't made pure virtual simply not to force the implementer to implement not needed methods.
-  It's more a shortcut than anything else.
-*/
-class Event
+#include "EventBase.hpp"
+
+template<typename T>
+class Event : public EventBase
 {
 public:
 	Event();
-	virtual ~Event();
-	virtual void OnEvent(const sf::Event& e, World& world, const unsigned long entityIndex);
+	static const UID& GetId();
+	const UID& GetSubEventId() override;
 
 protected:
-	virtual void OnKeyDown(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex);
-	virtual void OnKeyUp(const sf::Event::KeyEvent& input, World& world, const unsigned long entityIndex);
-
-	virtual void OnMinimize();
-	virtual void OnRestore();
-	virtual void OnResize(int w, int h);
-	virtual void OnExpose();
-	virtual void OnExit();
-
-private:
-
+	static UID m_id;
 };
+
+#include "Event.tpp"
 
 #endif

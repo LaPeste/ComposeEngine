@@ -2,19 +2,21 @@
 #define _EVENT_BASE_HPP_
 
 #include "stdafx.h"
-#include <functional>
+#include <bitset>
+
+constexpr uint32_t eventsLimit{ 1024 };
 
 class EventBase
 {
 public:
-	using UID = unsigned int;
+	using UID = std::bitset<eventsLimit>;
 
-	EventBase();
+	virtual ~EventBase();
 
-	static UID GetId();
+	virtual const UID& GetSubEventId() = 0;
 
-private:
-	static UID id;
+protected:
+	static uint32_t m_eventTypeCounter;
 };
 
 #endif

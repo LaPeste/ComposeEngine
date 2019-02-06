@@ -1,8 +1,10 @@
 #include "EventManager.hpp"
 #include <typeinfo>
 
+#include "Event.hpp"
+
 std::vector<EventBase*> EventManager::m_eventQueue;
-std::map<EventBase::UID, std::list<const EventDelegate*>> EventManager::m_listeners;
+std::unordered_map<EventBase::UID, std::list<const EventDelegate*>> EventManager::m_listeners;
 
 EventManager::~EventManager()
 {
@@ -41,7 +43,7 @@ bool EventManager::AddListener(EventBase::UID eventId, const EventDelegate* even
 	//create list for eventId, if never created before
 	if (m_listeners.find(eventId) == m_listeners.end())
 	{
-		auto delegatesList = std::list<const EventDelegate*>();
+		std::list<const EventDelegate*> delegatesList;
 		m_listeners.insert(std::make_pair(eventId, delegatesList)); //std::make_pair passes by value, so no worries about delegateList being destroyed at the exit of the method
 	}
 
@@ -137,15 +139,17 @@ void EventManager::ProcessEvents()
 	auto iterEvent = m_eventQueue.begin();
 	while (iterEvent != m_eventQueue.end())
 	{
+		EventBase::UID& eventId = const_cast<EventBase::UID&>((*iterEvent)->GetSubEventId());
+
 		// check who's listening for this event
-		if (m_listeners.find((*iterEvent)->GetId()) == m_listeners.end())
+		if (m_listeners.find(eventId) == m_listeners.end())
 		{
 			++iterEvent;
 			continue;
 		}
 
 		// execute the delegate from the listener of the event
-		auto& delegateList = m_listeners.at((*iterEvent)->GetId());
+		auto& delegateList = m_listeners.at(eventId);
 		for (auto iterDelegate = delegateList.begin(); iterDelegate != delegateList.end(); ++iterDelegate)
 		{
 			(**iterDelegate)(*iterEvent);

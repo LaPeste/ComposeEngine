@@ -2,7 +2,7 @@
 #define _INPUT_EVENT_HPP_
 
 #include "stdafx.h"
-#include "EventBase.hpp"
+#include "Event.hpp"
 
 enum class InputEventType
 {
@@ -18,7 +18,7 @@ enum class InputEventType
 	FREE_FALLING_START //when falling but not for a jump
 };
 
-class InputEvent : public EventBase
+class InputEvent : public Event<InputEvent>
 {
 public:
 	InputEvent(InputEventType message, unsigned long int targetedGameObject);

@@ -125,9 +125,6 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FPS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -233,9 +230,6 @@
     <ClCompile Include="ClassRegistry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EventBase.cpp">
-      <Filter>Source Files\Events</Filter>
-    </ClCompile>
     <ClCompile Include="EventManager.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
@@ -293,6 +287,15 @@
     <ClCompile Include="AddedComponentEvent.cpp">
       <Filter>Source Files\Events\CustomEvents</Filter>
     </ClCompile>
+    <ClCompile Include="SfmlInputEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.tpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="EventBase.cpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -308,9 +311,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FPS.hpp">
@@ -430,9 +430,6 @@
     <ClInclude Include="ClassRegistry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EventBase.hpp">
-      <Filter>Header Files\Events</Filter>
-    </ClInclude>
     <ClInclude Include="EventManager.hpp">
       <Filter>Header Files\Events</Filter>
     </ClInclude>
@@ -492,6 +489,15 @@
     </ClInclude>
     <ClInclude Include="AddedComponentEvent.hpp">
       <Filter>Header Files\Events\CustomEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="SfmlInputEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.hpp">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventBase.hpp">
+      <Filter>Header Files\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

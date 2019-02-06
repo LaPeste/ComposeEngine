@@ -11,9 +11,9 @@
 
 #include "stdafx.h"
 #include "System.hpp"
-#include "Event.hpp"
+#include "SfmlInputEvent.hpp"
 
-class InputSystem : public System<Controller>, public Event
+class InputSystem : public System<Controller>, public SfmlInputEvent
 {
 public:
     InputSystem(World& world);

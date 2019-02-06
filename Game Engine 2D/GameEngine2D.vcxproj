@@ -140,8 +140,9 @@
     <ClCompile Include="EntityFlag.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="EntityUtils.cpp" />
-    <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventBase.cpp" />
+    <ClCompile Include="SfmlInputEvent.cpp" />
+    <ClCompile Include="Event.tpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FieldOfView.cpp" />
@@ -201,8 +202,9 @@
     <ClInclude Include="EntityFlag.hpp" />
     <ClInclude Include="EntityManager.hpp" />
     <ClInclude Include="EntityUtils.hpp" />
-    <ClInclude Include="Event.hpp" />
     <ClInclude Include="EventBase.hpp" />
+    <ClInclude Include="SfmlInputEvent.hpp" />
+    <ClInclude Include="Event.hpp" />
     <ClInclude Include="EventListener.hpp" />
     <ClInclude Include="EventManager.hpp" />
     <ClInclude Include="FieldOfView.hpp" />

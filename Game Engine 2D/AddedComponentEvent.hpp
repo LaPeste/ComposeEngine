@@ -2,11 +2,11 @@
 #define _ADDED_COMPONENT_EVENT_HPP_
 
 #include "stdafx.h"
-#include "EventBase.hpp"
+#include "Event.hpp"
 
 class GameObject;
 
-class AddedComponentEvent : public EventBase
+class AddedComponentEvent : public Event<AddedComponentEvent>
 {
 public:
 	AddedComponentEvent(GameObject& m_entityTarget);

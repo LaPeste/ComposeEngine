@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include <list>
+#include <unordered_map>
 #include "EventBase.hpp"
 
 using EventDelegate = std::function<void(EventBase*)>;
@@ -23,7 +24,7 @@ public:
 
 private:
 	static std::vector<EventBase*> m_eventQueue;
-	static std::map<EventBase::UID, std::list<const EventDelegate*>> m_listeners; //std::list because random removal is O(1), if given the iterator (obviously)
+	static std::unordered_map<EventBase::UID, std::list<const EventDelegate*>> m_listeners; //std::list because random removal is O(1), if given the iterator (obviously)
 };
 
 #endif
