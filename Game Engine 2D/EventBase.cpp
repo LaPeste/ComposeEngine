@@ -6,3 +6,13 @@ EventBase::~EventBase()
 {
 
 }
+
+const EventBase::UID EventBase::AssignId()
+{
+	if (m_eventTypeCounter >= eventsLimit)
+	{
+		DEBUG_ERROR("Limit of event types reached. If this isn't a mistake, then increase the amount of allowed types.");
+		throw 5;
+	}
+	return 1 << m_eventTypeCounter++;
+}

@@ -68,10 +68,6 @@ void Player::Init()
 	Animation* animationComp = new Animation(world, entityIndex, AnimationState::IDLE, animationMap, true);
     EntityManager::AddComponent(world, entityIndex, animationComp);
 
-	// this has to go away as soon as the id assignment system gets fixed to assign
-	// ids to a static var before the constructor is called.
-	InputEvent t(InputEventType::CROUCH_DOWN, 0);
-
 	OnGameEvent<InputEvent>([&world, entityIndex](Event<InputEvent>* i) {
 
 		if (i != nullptr)

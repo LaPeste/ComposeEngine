@@ -101,6 +101,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>C:\SFML-2.4.1_x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC; DEBUG=1; LOG_OUTPUT_CONSOLE=1</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\SFML-2.4.1_x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

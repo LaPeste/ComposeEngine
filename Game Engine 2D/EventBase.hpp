@@ -17,6 +17,8 @@ public:
 
 protected:
 	static uint32_t m_eventTypeCounter;
+
+	static const UID AssignId();
 };
 
 #endif
