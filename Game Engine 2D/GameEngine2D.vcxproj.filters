@@ -290,9 +290,6 @@
     <ClCompile Include="SfmlInputEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Event.tpp">
-      <Filter>Source Files\Events</Filter>
-    </ClCompile>
     <ClCompile Include="EventBase.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
@@ -509,6 +506,9 @@
     </None>
     <None Include="MathLib.tpp">
       <Filter>Source Files</Filter>
+    </None>
+    <None Include="Event.tpp">
+      <Filter>Source Files\Events</Filter>
     </None>
   </ItemGroup>
 </Project>

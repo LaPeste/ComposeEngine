@@ -7,6 +7,8 @@
 //
 
 #include "Component.hpp"
+template<typename T>
+unsigned long int Component<T>::Id(0);
 
 template<typename T>
 Component<T>::Component(World& world, const unsigned long int entityIndex) : world(world), entityIndex(entityIndex)

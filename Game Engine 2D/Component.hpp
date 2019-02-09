@@ -27,9 +27,6 @@ protected:
 	const unsigned long int entityIndex;
 };
 
-template<typename T>
-unsigned long int Component<T>::Id(0);
-
 #include "Component.tpp"
 
 #endif /* _COMPONET_HPP_ */

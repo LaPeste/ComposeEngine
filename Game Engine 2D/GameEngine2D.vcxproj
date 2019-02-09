@@ -21,6 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F50CC597-3DFB-4088-BBA4-4DE315E78CCF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -36,7 +37,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -142,7 +143,6 @@
     <ClCompile Include="EntityUtils.cpp" />
     <ClCompile Include="EventBase.cpp" />
     <ClCompile Include="SfmlInputEvent.cpp" />
-    <ClCompile Include="Event.tpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FieldOfView.cpp" />
@@ -250,6 +250,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Component.tpp" />
+    <None Include="Event.tpp" />
     <None Include="MathLib.tpp" />
     <None Include="System.tpp" />
   </ItemGroup>
