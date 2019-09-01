@@ -1,0 +1,2 @@
+/usr/local/build/GameTest
+/usr/local/include/EngineConfig.h
