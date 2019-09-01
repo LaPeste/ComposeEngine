@@ -1,7 +1,0 @@
-/home/andrea/Development/ComposeEngineCMake/build/CMakeFiles/install/strip.dir
-/home/andrea/Development/ComposeEngineCMake/build/CMakeFiles/edit_cache.dir
-/home/andrea/Development/ComposeEngineCMake/build/CMakeFiles/rebuild_cache.dir
-/home/andrea/Development/ComposeEngineCMake/build/CMakeFiles/list_install_components.dir
-/home/andrea/Development/ComposeEngineCMake/build/CMakeFiles/MarioClone.dir
-/home/andrea/Development/ComposeEngineCMake/build/CMakeFiles/install/local.dir
-/home/andrea/Development/ComposeEngineCMake/build/CMakeFiles/install.dir
