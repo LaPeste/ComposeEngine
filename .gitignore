@@ -1,0 +1,5 @@
+.vscode
+/build
+/CMake
+/doc
+/pkgConf
