@@ -5,7 +5,7 @@ ComposeEngine
 
 /*********************************************************************
 
-Andrea Catalini 2016-2017
+Andrea Catalini 2016-2019
 Game Engine 2D - https://github.com/LaPeste/ComposeEngine
 
 Zlib License:  
