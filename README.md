@@ -35,7 +35,8 @@ it freely, subject to the following restrictions:
    Requirements
 ------------
 
-sfml-tmxloader (https://github.com/fallahn/sfml-tmxloader - on linux compile it and install as shared lib)
+sfml-tmxloader (https://github.com/fallahn/sfml-tmxloader - on linux compile it and install as shared lib) 
+
 pugixml (on linux install from your distribution)  
 zlib (http://zlib.net/)  
 SFML 2.x (http://sfml-dev.org)  
