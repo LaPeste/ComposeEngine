@@ -35,8 +35,8 @@ it freely, subject to the following restrictions:
    Requirements
 ------------
 
-sfml-tmxloader (included)
-pugixml (included)  
+sfml-tmxloader (https://github.com/fallahn/sfml-tmxloader - on linux compile it and install as shared lib)
+pugixml (on linux install from your distribution)  
 zlib (http://zlib.net/)  
 SFML 2.x (http://sfml-dev.org)  
-Minimal C++11 compiler support (tested with VS14 and clang-800.0.38)
+Minimal C++11 compiler support (tested with VS14 and clang-800.0.38 and g++ 7.4.0)
