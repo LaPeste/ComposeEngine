@@ -1,5 +1,13 @@
 .vscode
-/build
-/CMake
-/doc
-/pkgConf
+build/
+doc/
+pkgConf/
+
+# CMake stuff
+CMakeCache.txt
+Makefile
+CMakeFiles/
+cmake_install.cmake
+
+# Dependencies
+sfml-tmxloader/*
