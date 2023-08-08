@@ -4,11 +4,7 @@ cmake_minimum_required (VERSION 3.10.2)
 set(CMAKE_BUILD_TYPE Debug)
 
 # set project name
-project (ComposeEngine)
-
-# set project version number
-set (Tutorial_VERSION_MAJOR 1)
-set (Tutorial_VERSION_MINOR 0)
+project (ComposeEngine VERSION 0.1)
 
 # set C++ standard version
 set(CMAKE_CXX_STANDARD 14)
