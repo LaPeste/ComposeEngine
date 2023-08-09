@@ -3,6 +3,7 @@ build/
 doc/
 pkgConf/
 lib/*
+EngineConfig.h
 
 # CMake stuff
 CMakeCache.txt
