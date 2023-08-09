@@ -2,6 +2,7 @@
 build/
 doc/
 pkgConf/
+lib/*
 
 # CMake stuff
 CMakeCache.txt
