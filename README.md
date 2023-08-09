@@ -1,11 +1,11 @@
-ComposeEngine
+# ComposeEngine
 -------------
 
 
 
-/*********************************************************************
+## Copyrights
 
-Andrea Catalini 2016-2019
+Andrea Catalini 2016-2023
 Game Engine 2D - https://github.com/LaPeste/ComposeEngine
 
 Zlib License:  
@@ -29,14 +29,31 @@ it freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any  
    source distribution.
 
-*********************************************************************/
+
+## Requirements
+* Cmake 3.10
+* SFML 2.x (http://sfml-dev.org)  
+* Minimal C++14 compiler support (tested with VS14, clang-800.0.38 and g++ 13.2.0)
 
 
-   Requirements
-------------
-
-sfml-tmxloader (included)
-pugixml (included)  
-zlib (http://zlib.net/)  
-SFML 2.x (http://sfml-dev.org)  
-Minimal C++11 compiler support (tested with VS14, clang-800.0.38 and gcc 7.4.0)
+## Build and Run
+1. From the root of the project go to the `GameEngine` folder:
+   ```bash
+   cd GameEngine
+   ```
+1. Fetch the submodules, which pulls `sfml-tmxloader`:
+   ```bash
+   git submodule update --init --recursive
+   ```
+1. configure cmake:
+   ```bash
+   cmake build .
+   ```
+1. build through cmake:
+   ```bash
+   cmake --build .
+   ```
+1. Run the executable:
+   ```bash
+   ./MarioClone
+   ```
