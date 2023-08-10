@@ -4,6 +4,8 @@ doc/
 pkgConf/
 lib/*
 EngineConfig.h
+*ninja*
+sfml-tmxloader/*
 
 # CMake stuff
 CMakeCache.txt

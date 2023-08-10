@@ -33,7 +33,7 @@ it freely, subject to the following restrictions:
 ## Requirements
 * Cmake 3.10
 * SFML 2.x (http://sfml-dev.org)  
-* Minimal C++14 compiler support (tested with VS14, clang-800.0.38 and g++ 13.2.0)
+* Minimal C++17 compiler support (tested with VS14, clang-800.0.38 and g++ 13.2.0)
 
 
 ## Build and Run
@@ -47,11 +47,17 @@ it freely, subject to the following restrictions:
    ```
 1. configure cmake:
    ```bash
-   cmake build .
+   cmake -G Ninja .
    ```
+   but you need to have the [Ninja](https://ninja-build.org/) build system installed. It's strongly recommened given its performance and its being parallel by default.
+   However, if you still want to use `make` but still have it parallel, when building in the next step use `-j NUMBER_OF_THREADS`
 1. build through cmake:
    ```bash
    cmake --build .
+
+   # or if using make
+
+   cmake --build . -j 8 # replace with the number of threads that you want
    ```
 1. Run the executable:
    ```bash
