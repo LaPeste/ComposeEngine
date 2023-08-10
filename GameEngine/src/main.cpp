@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Engine.hpp"
-#include "../EngineConfig.h"
+#include "EngineConfig.h"
 
 //#include <vld.h>
 
