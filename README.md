@@ -31,7 +31,7 @@ it freely, subject to the following restrictions:
 
 
 ## Requirements
-* Cmake 3.10
+* Cmake 3.10 or higher
 * SFML 2.x (http://sfml-dev.org)  
 * Minimal C++17 compiler support (tested with VS14, clang-800.0.38 and g++ 13.2.0)
 
