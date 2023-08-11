@@ -40,20 +40,51 @@ configure_file (
   COPYONLY
 )
 
+# this applies recursively to all targets and libs, included children
+include_directories(${PROJECT_SOURCE_DIR}/include/ ${PROJECT_SOURCE_DIR}/sfml-tmxloader/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/AI)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/Animations)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/Collisions)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/Components)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/DebugUtils)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/Entities)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/Events)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/GameExample)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/GameObjects)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/Systems)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/Utils)
 
 set(EXECUTABLE_NAME MarioClone)
 
 # Define sources and executable
-file(GLOB_RECURSE SOURCES src/*.cpp)
-add_executable(${EXECUTABLE_NAME} ${SOURCES})
-
-target_include_directories(
-  ${EXECUTABLE_NAME} PUBLIC
-  ${PROJECT_SOURCE_DIR}/include/
-  ${PROJECT_SOURCE_DIR}/sfml-tmxloader/include
+# file(GLOB_RECURSE SOURCES src/*.cpp)
+add_executable(${EXECUTABLE_NAME}
+  src/main.cpp
+  src/Camera.cpp
+  src/ClassRegistry.cpp
+  src/Constants.cpp
+  src/Engine.cpp
+  src/FPS.cpp
+  src/MathLib.tpp
+  src/SfmlInputEvent.cpp
+  src/stdafx.cpp
+  src/World.cpp
+  $<TARGET_OBJECTS:BehaviourTree> 
+  $<TARGET_OBJECTS:Animations>
+  $<TARGET_OBJECTS:Collisions>
+  $<TARGET_OBJECTS:Components>
+  $<TARGET_OBJECTS:DebugUtils>
+  $<TARGET_OBJECTS:Entities>
+  $<TARGET_OBJECTS:Events>
+  $<TARGET_OBJECTS:GameExample>
+  $<TARGET_OBJECTS:GameExample_AI>
+  $<TARGET_OBJECTS:GameExample_Behaviours>
+  $<TARGET_OBJECTS:GameExample_GameObjects>
+  $<TARGET_OBJECTS:GameObjects>
+  $<TARGET_OBJECTS:Systems>
+  $<TARGET_OBJECTS:Utils>
 )
 
   find_package(SFML 2.5 COMPONENTS network audio graphics window system REQUIRED)

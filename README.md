@@ -37,6 +37,7 @@ it freely, subject to the following restrictions:
 
 
 ## Build and Run
+I assume that you use [Ninja](https://ninja-build.org/), if not remember to add the `-j NUMBER_OF_THREADS` when compiling the project
 1. From the root of the project go to the `GameEngine` folder:
    ```bash
    cd GameEngine
@@ -45,21 +46,31 @@ it freely, subject to the following restrictions:
    ```bash
    git submodule update --init --recursive
    ```
-1. configure cmake:
-   ```bash
-   cmake -G Ninja .
-   ```
-   but you need to have the [Ninja](https://ninja-build.org/) build system installed. It's strongly recommened given its performance and its being parallel by default.
-   However, if you still want to use `make` but still have it parallel, when building in the next step use `-j NUMBER_OF_THREADS`
-1. build through cmake:
-   ```bash
-   cmake --build .
+1. Configure and build
+   1. Prefer an out-of-source-build approach for the build
+      1. create `./build/game` and `./build/tmx-loader`
+      1. enter in each folder (first tmx-loader) and configure the build from each
+      1. finally build each project (first the tmx loader)
+      ```bash
+      mkdir -p build/tmx-loader
+      mkdir build/game
+      cd build/tmx-loader
+      cmake -G Ninja ../../sfml-tmxloader
+      cd ../game
+      cmake --build ../..
+      ```
+   1. Otherwise for an in-source-build:
+      1. configure the build
+      1. and compile the project
+      ```bash
+      cmake -G Ninja .
+      cmake --build .
 
-   # or if using make
+      # or if using make
 
-   cmake --build . -j 8 # replace with the number of threads that you want
-   ```
-1. Run the executable:
+      cmake --build . -j 8 # replace with the number of threads that you want
+      ```
+1. Run the executable from the `GameEngine/` folder:
    ```bash
-   ./MarioClone
+   bin/BUILD_TYPE/MarioClone
    ```
