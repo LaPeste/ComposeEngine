@@ -2,10 +2,10 @@ cmake_minimum_required (VERSION 3.10.2)
 
 set(CMAKE_BUILD_TYPE Debug)
 
-project (ComposeEngine VERSION 0.1)
+project(ComposeEngine VERSION 0.1)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_FLAGS -fpermissive)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
@@ -13,6 +13,11 @@ set(CMAKE_INSTALL_PREFIX $ENV{HOME}/MarioClone)
 
 # extend path that the linker is gonna use to search for shared libraries
 set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
+
+OPTION(VERBOSE "Verbose output" OFF)
+if(VERBOSE)
+  add_compile_definitions(LOG_OUTPUT_CONSOLE)  
+endif(VERBOSE)
 
 # build the dependency project (sfml-tmxloader)
 # Here ninja could be used, but I didn't want to bother
@@ -79,9 +84,6 @@ add_executable(${EXECUTABLE_NAME}
   $<TARGET_OBJECTS:Entities>
   $<TARGET_OBJECTS:Events>
   $<TARGET_OBJECTS:GameExample>
-  $<TARGET_OBJECTS:GameExample_AI>
-  $<TARGET_OBJECTS:GameExample_Behaviours>
-  $<TARGET_OBJECTS:GameExample_GameObjects>
   $<TARGET_OBJECTS:GameObjects>
   $<TARGET_OBJECTS:Systems>
   $<TARGET_OBJECTS:Utils>

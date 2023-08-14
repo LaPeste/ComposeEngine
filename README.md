@@ -74,3 +74,11 @@ I assume that you use [Ninja](https://ninja-build.org/), if not remember to add 
    ```bash
    bin/BUILD_TYPE/MarioClone
    ```
+
+   For verbose builds, add `-DVERBOSE=ON` when configuring the build:
+   ```bash
+   cmake -G Ninja . -VERBOSE=ON
+   cmake --build .
+   ```
+   When you want to turn the verbose off, reconfigure the build with `-DVERBOSE=OFF` and rebuild.
+   
