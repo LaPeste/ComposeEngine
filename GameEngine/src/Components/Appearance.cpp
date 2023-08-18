@@ -18,6 +18,7 @@ Appearance::Appearance(World& world, const unsigned long int entityIndex, std::s
 	std::string methodName = _FUNCTION_NAME_;
     Appearance::SpritePath = spritePath;
     texture = new sf::Texture;
+    
     if (!texture->loadFromFile(Appearance::SpritePath))
     {
         Utils::PrintDebugError(methodName, "impossible to load texture from " + spritePath + "!");
@@ -30,7 +31,7 @@ Appearance::Appearance(World& world, const unsigned long int entityIndex, std::s
         
         if(m_sprite->getTexture() != nullptr)
         {
-#ifdef DEBUG
+#ifdef INTERNAL_DEBUG
             Utils::PrintDebugLog(methodName, "texture " + SpritePath + " correctly loaded!");
 #endif
         }
