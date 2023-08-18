@@ -6,7 +6,7 @@ project(ComposeEngine VERSION 0.1)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
-set(CMAKE_CXX_FLAGS -fpermissive)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -fpermissive -DINTERNAL_DEBUG")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
 set(CMAKE_INSTALL_PREFIX $ENV{HOME}/MarioClone)
@@ -17,7 +17,12 @@ set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
 OPTION(VERBOSE "Verbose output" OFF)
 if(VERBOSE)
   add_compile_definitions(LOG_OUTPUT_CONSOLE)  
-endif(VERBOSE)
+endif()
+
+OPTION(FPS_DEBUG "Print FPS" OFF)
+if(FPS_DEBUG)
+  add_compile_definitions(FRAME_RATE)  
+endif()
 
 # build the dependency project (sfml-tmxloader)
 # Here ninja could be used, but I didn't want to bother

@@ -52,7 +52,8 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "*.tpp": "cpp"
     },
     "cmake.sourceDirectory": "/home/andrea/Development/ComposeEngine/GameEngine"
 }
