@@ -40,13 +40,11 @@ private:
 		ShowingMenu, Playing, Exiting
 	};
     
-	//variables
 	sf::RenderWindow* mainWindow; //SFML Render Window
 	GameState gameState;
     
     tmx::MapLoader ml;
 
-	//methods
 	bool Init(); //Initializes the engine
 	void MainLoop(); //Main Game Loop
 	void ProcessInput(); //Processes user input

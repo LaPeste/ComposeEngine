@@ -17,9 +17,10 @@ public:
 	static const unsigned int SCREEN_WIDTH;
 	static const unsigned int SCREEN_HEIGHT;
 	static const unsigned int SCREEN_DEPTH;
-    static const int FPS_TARGET;
+    static const unsigned int UPDATE_FPS_TARGET;
     static const std::string GAME_NAME;
 	static const std::string RESOURCE_PATH;
+	static const unsigned int RENDERING_FPS_TARGET;
     
     //************************
     // Camera settings

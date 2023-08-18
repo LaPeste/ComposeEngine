@@ -121,14 +121,24 @@ void Engine::ProcessInput()
 void Engine::Update()
 {
     FPS::Update();
-    Camera::GetInstance()->Update();
+	if (!FPS::ShouldEngineUpdate())
+	{
+		return; 
+	}
+		
+	Camera::GetInstance()->Update();
 	EventManager::ProcessEvents();
-    SystemManager::UpdateAll(CurrentWorld);
+	SystemManager::UpdateAll(CurrentWorld);
 	SystemManager::LateUpdateAll(CurrentWorld);
 }
 
 void Engine::RenderFrame()
 {
+	if (!FPS::ShouldEngineRender())
+	{ 
+		return;
+	}
+
 	mainWindow->clear();
     mainWindow->draw(ml); //draw map loaded in mapLoader
     Camera::GetInstance()->Draw(); //draw only the camera view

@@ -57,11 +57,6 @@ void Movement::Update(World& world, const unsigned long entityIndex)
     {
         acceleration->AccelerationY = Constants::IN_GAME_GRAVITY;
     }
-            
-//  float speedX = velocity.GetSpeedX();
-//  float speedY = velocity.GetSpeedY();
-//  float maxSpeedX = velocity.GetMaxSpeedX();
-//  float maxSpeedY = velocity.GetMaxSpeedY();
 
     float speedX = velocity->SpeedX;
     float speedY = velocity->SpeedY;
@@ -190,7 +185,6 @@ bool Movement::PosValid(World& world, const unsigned long entityIndex, float x, 
     std::map<unsigned long int, ComponentBase*>& entity = world.EntitiesComponentsMatrix[entityIndex];
 	Transform* transform = static_cast<Transform*>(entity[Transform::Id]);
 	Collider* collider = static_cast<Collider*>(entity[Collider::Id]);
-
 
     sf::Vector2f m_originalPosition = transform->GetPosition();
 	transform->SetPosition(sf::Vector2f(x, y));

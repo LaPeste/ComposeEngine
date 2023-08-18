@@ -11,15 +11,30 @@ public:
 	FPS();
 	~FPS();
 
-	static unsigned int GetFPS();
+	static unsigned int GetUpdateFPS();
+	static unsigned int GetRenderFPS();
 	static float GetSpeedFactor();
 	static void Update();
+	static bool ShouldEngineUpdate();
+	static bool ShouldEngineRender();
+
 
 private:
-	static int frameRate;
-	static int frames;
+
+	static unsigned int updateFrameRate;
+	static float updateFrameTime; // in ms
+	static bool shouldEngineUpdate;
+	static unsigned int tempUpdateFrames;
+	static float updateFrameTimeCounter;
+
+	static unsigned int renderFrameRate;
+	static float renderFrameTime; // in ms
+	static bool shouldEngineRender;
+	static unsigned int tempRenderFrames;
+	static float renderFrameTimeCounter;
+	
 	static double speedFactor;
-	static int lastTime;
+	static int lastFrameTime;
 	static sf::Clock clock;
 };
 #endif

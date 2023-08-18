@@ -5,7 +5,10 @@
 //************************
 #ifdef __APPLE__
 const std::string Constants::RESOURCE_PATH = resourcePath();
-#else
+#elif INTERNAL_DEBUG
+// const std::string Constants::RESOURCE_PATH = std::string{__FILE__}.append("/resources/");
+const std::string Constants::RESOURCE_PATH = "/home/andrea/Development/ComposeEngine/GameEngine/resources/";
+#else // in RELEASE
 const std::string Constants::RESOURCE_PATH = "resources/";
 #endif
 
@@ -18,6 +21,7 @@ const unsigned int Constants::SCREEN_DEPTH = 32;
 const std::string Constants::GAME_NAME = "Mario Clone";
 const float Constants::CAMERA_ZOOM_WIDTH = 400;
 const float Constants::CAMERA_ZOOM_HEIGHT = 300;
+const unsigned int Constants::RENDERING_FPS_TARGET {60};
 
 //************************
 // Player data
@@ -37,7 +41,7 @@ const int Constants::SPACE_BETWEEN_SPRITE_Y = 0;
 const int Constants::PLAYER_SPRITE_MAX_FRAME = 2;
 const int Constants::ANIMATION_FRAMERATE = 200; //in millisecond
 const bool Constants::REVERSE_ANIMATION = false;
-const int Constants::FPS_TARGET = 32;
+const unsigned int Constants::UPDATE_FPS_TARGET = 32;
 const float Constants::OFFSET_COL_X = 2; //this should be used for offsetting the bounding box collider on the x axis
 const float Constants::OFFSET_COL_Y = 2; //this is the same but for the y axis
 
