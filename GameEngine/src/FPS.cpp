@@ -55,7 +55,7 @@ void FPS::Update()
 		updateFrameTimeCounter += timeFrame;
 		renderFrameTimeCounter += timeFrame;
 
-		if (updateFrameTimeCounter >= updateFrameTime)
+		if (updateFrameTimeCounter > updateFrameTime)
 		{
 			speedFactor = updateFrameTimeCounter / 1000 * Constants::UPDATE_FPS_TARGET;
 			++tempUpdateFrames;
@@ -67,7 +67,7 @@ void FPS::Update()
 			shouldEngineUpdate = false;
 		}
 		
-		if (renderFrameTimeCounter >= renderFrameTime)
+		if (renderFrameTimeCounter > renderFrameTime)
 		{
 			++tempRenderFrames;
 			shouldEngineRender = true;
