@@ -45,15 +45,13 @@ sf::Sprite* Transform::GetSprite()
 	{
 		auto& gameObject = EntityManager::GetGameObject(world, entityIndex);
 		auto* appearance = gameObject.GetComponent<Appearance>();
-		if (appearance != nullptr)
-		{
-			m_sprite = appearance->GetSprite();
-			const auto& topLeftPos = m_sprite->getPosition();
-			const float halfWidth = m_sprite->getLocalBounds().width / 2;
-			const float halfHeight = m_sprite->getLocalBounds().height / 2;
-			auto newOrigin = sf::Vector2f(topLeftPos.x + halfWidth, topLeftPos.y + halfHeight);
-			m_sprite->setOrigin(newOrigin);
-		}
+		assert(appearance && "A unit without appearance was found. It's a disaster.");
+		m_sprite = appearance->GetSprite();
+		const auto& topLeftPos = m_sprite->getPosition();
+		const float halfWidth = m_sprite->getLocalBounds().width / 2;
+		const float halfHeight = m_sprite->getLocalBounds().height / 2;
+		auto newOrigin = sf::Vector2f(topLeftPos.x + halfWidth, topLeftPos.y + halfHeight);
+		m_sprite->setOrigin(newOrigin);
 	}
 	return m_sprite;
 }
@@ -61,30 +59,23 @@ sf::Sprite* Transform::GetSprite()
 const sf::Vector2f& Transform::GetPosition()
 {
 	auto* m_sprite = GetSprite();
-	if (!m_sprite)	DEBUG_ERROR("A unit without appearance was found. It's a disaster.");
-	
 	return m_sprite->getPosition();
 }
 
 void Transform::SetPosition(const sf::Vector2f& pos)
 {
 	auto* m_sprite = GetSprite();
-	if (m_sprite)
-		m_sprite->setPosition(pos);
+	m_sprite->setPosition(pos);
 }
 
 sf::Vector2f Transform::TransformPoint(float x, float y)
 {
 	auto* m_sprite = GetSprite();
-	if (m_sprite)
-		return m_sprite->getTransform().transformPoint(x, y);
-	DEBUG_ERROR("A unit without appearance was found. It's a disaster.");
+	return m_sprite->getTransform().transformPoint(x, y);
 }
 
 sf::Vector2f Transform::TransformPoint(const sf::Vector2f& point)
 {
 	auto* m_sprite = GetSprite();
-	if (m_sprite)
-		return m_sprite->getTransform().transformPoint(point);
-	DEBUG_ERROR("A unit without appearance was found. It's a disaster.");
+	return m_sprite->getTransform().transformPoint(point);
 }

@@ -43,6 +43,22 @@ void GeometryDebugger::DrawCircle(const sf::Vector2f& center, float radius, sf::
 	m_shapesToDraw.push_back(std::move(drawingFunction));
 }
 
+void GeometryDebugger::DrawRectangle(const sf::Vector2f & originTopLeft, float width, float height, sf::Color color)
+{
+	auto drawingFunction { std::make_unique<std::function<void()>>([=]()
+	{
+		sf::RectangleShape rect { sf::Vector2f {width, height } };
+		rect.setFillColor(sf::Color::Transparent);
+		rect.setPosition(originTopLeft);
+		rect.setOutlineThickness(1);
+		rect.setOutlineColor(color);
+		auto* engineWindow = Engine::GetInstance().GetWindow();
+		engineWindow->draw(rect);
+	})};
+	m_shapesToDraw.push_back(std::move(drawingFunction));
+}
+
+
 void GeometryDebugger::DrawAllShapes()
 {
 	for (auto& function : m_shapesToDraw)

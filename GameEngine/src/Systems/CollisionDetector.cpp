@@ -3,6 +3,8 @@
 #include "Collisions/CollisionDetectionUtils.hpp"
 #include "GameObjects/Player.hpp"
 #include "GameExample/GameObjects/Luigi.hpp"
+#include "GameObjects/GameObject.hpp"
+#include "Components/Transform.hpp"
 
 CollisionDetector::CollisionDetector(World& world):
 	System<Collider>(world)
@@ -14,6 +16,14 @@ void CollisionDetector::LateUpdate(World& world, const unsigned long int  entity
 {
 	Collider* thisCollider = world.GetComponent<Collider>(entityIndex);
 	if (thisCollider == nullptr) return;
+
+#ifdef VISUAL_DEBUG
+	auto& gameObject = EntityManager::GetGameObject(world, entityIndex);
+	auto* trans = gameObject.GetComponent<Transform>();
+
+	GeometryDebugger::DrawRectangle(sf::Vector2f { trans->GetPosition().x - thisCollider->GetColliderRect().width / 2,
+		trans->GetPosition().y - thisCollider->GetColliderRect().height / 2 }, thisCollider->GetColliderRect().width, thisCollider->GetColliderRect().height, sf::Color::Magenta);
+#endif
 
 	// clear from previous frame
 	thisCollider->GetEnityCollisions().clear();
