@@ -24,6 +24,11 @@ if(FPS_DEBUG)
   add_compile_definitions(FRAME_RATE)  
 endif()
 
+OPTION(VISUAL_DEBUG "Show visual debug geometries" OFF)
+if(VISUAL_DEBUG)
+  add_compile_definitions(VISUAL_DEBUG)  
+endif()
+
 # build the dependency project (sfml-tmxloader)
 # Here ninja could be used, but I didn't want to bother
 # checking if ninja is installed on the user's system.
