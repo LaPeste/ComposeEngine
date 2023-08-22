@@ -5,8 +5,6 @@
 #include <iterator>
 #include "GameObjects/GameObject.hpp"
 
-//#define VISUAL_DEBUG
-
 FOVspotter::FOVspotter(World& world) :
 	System<Collider, FieldOfView>(world)
 {

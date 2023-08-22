@@ -65,22 +65,23 @@ void Camera::Update()
 			throw 1;
 		}
 
-
-		sf::Vector2f playerPos = transform->GetPosition();
-        float newPosX = playerPos.x - GetWidth()/2 + Constants::PLAYER_WIDTH/2;
-        float newPosY = playerPos.y - GetHeight()/2 + Constants::PLAYER_HEIGHT/2;
+		sf::Vector2f playerPos { transform->GetPosition() };
+        const auto halfWidthCamera { GetWidth() / 2 };
+        const auto halfHeightCamera { GetHeight() / 2 };
+        const auto halfWidthPlayer { Constants::PLAYER_WIDTH / 2 };
+        const auto halfHeightPlayer { Constants::PLAYER_HEIGHT / 2 };
 
         //if the camera doesn't reach the left or right limit of the map
-        if( ( playerPos.x + Constants::PLAYER_WIDTH/2 > GetWidth()/2 ) &&
-           ( playerPos.x + Constants::PLAYER_WIDTH/2 + GetWidth()/2 < Engine::GetInstance().GetMapLoader().getMapSize().x ) )
+        if((playerPos.x + halfWidthPlayer > halfWidthCamera) &&
+           (playerPos.x + halfWidthPlayer + halfWidthCamera < Engine::GetInstance().GetMapLoader().getMapSize().x))
         {
-            cameraTargetPos.x = newPosX;
+            cameraTargetPos.x = playerPos.x - halfWidthCamera + halfWidthPlayer;
         }
         
-        if( ( playerPos.y + Constants::PLAYER_HEIGHT/2 > GetHeight()/2 ) &&
-           ( playerPos.y + Constants::PLAYER_WIDTH/2 + GetHeight()/2 < Engine::GetInstance().GetMapLoader().getMapSize().y ) )
+        if((playerPos.y + halfHeightPlayer > halfHeightCamera) &&
+           (playerPos.y + halfHeightPlayer + halfHeightCamera < Engine::GetInstance().GetMapLoader().getMapSize().y))
         {
-            cameraTargetPos.y = newPosY;
+            cameraTargetPos.y = playerPos.y - halfHeightCamera + halfHeightPlayer;
         }
     }
     else
@@ -92,10 +93,9 @@ void Camera::Update()
 void Camera::Draw()
 {
     Engine::GetInstance().GetWindow()->setView(
-                                sf::View {
-                                    sf::FloatRect { Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Constants::CAMERA_ZOOM_WIDTH, Constants::CAMERA_ZOOM_HEIGHT
-                                    }
-                                } );
+        sf::View {
+            sf::FloatRect { Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, Constants::CAMERA_ZOOM_WIDTH, Constants::CAMERA_ZOOM_HEIGHT }
+        });
 }
 
 //******************

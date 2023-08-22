@@ -190,10 +190,14 @@ bool Movement::PosValid(World& world, const unsigned long entityIndex, float x, 
 	transform->SetPosition(sf::Vector2f(x, y));
     bool posValid = false;
     
-    bool insideXLimitMap = !(transform->GetPosition().x <= 0 ||
-		transform->GetPosition().x + collider->GetColliderRect().width >= Engine::GetInstance().GetMapLoader().getMapSize().x);
-    bool insideYLimitMap = !(transform->GetPosition().y <= 0 ||
-		transform->GetPosition().y + collider->GetColliderRect().height >= Engine::GetInstance().GetMapLoader().getMapSize().y);
+    // the transform is always at the center of the collider
+    const auto halfWidthCollider { collider->GetColliderRect().width / 2 };
+    const auto halfHeightCollider { collider->GetColliderRect().height / 2 };
+
+    bool insideXLimitMap = !(transform->GetPosition().x - halfWidthCollider < 0 ||
+		transform->GetPosition().x + halfWidthCollider > Engine::GetInstance().GetMapLoader().getMapSize().x);
+    bool insideYLimitMap = !(transform->GetPosition().y - halfHeightCollider < 0 ||
+		transform->GetPosition().y + halfHeightCollider > Engine::GetInstance().GetMapLoader().getMapSize().y);
     
 	//prevent player from falling from map's limits, thanks to the posValid initialized to false
     if(insideXLimitMap && insideYLimitMap)

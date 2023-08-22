@@ -26,8 +26,6 @@ T MathLib::AngleBetween2Vectors(const sf::Vector2<T>& a, const sf::Vector2<T>& b
 	if (magnA == 0 || magnB == 0) return 0;
 
 	float radiant = std::acos(DotProduct(a, b) / (magnA * magnB));
-	
-	// convert to degrees
 	return ToDegrees(radiant);
 }
 
